@@ -1,0 +1,43 @@
+{
+  "nav_menu": "Menu",
+  "nav_lang": "EN",
+
+  "hero_script": "Set the tone. Stay a while.",
+  "hero_line1": "Olá — Sou o Mauricio Filho, ✌️",
+  "hero_line2": "Designer de Marca & Visual Independente",
+  "hero_link": "Quem é esse cara?",
+
+  "project_enjoei_year": "2023",
+  "project_enjoei_title": "Enjoei",
+  "project_enjoei_desc": "Identidade de marca com estrutura e coerência. Tipografia customizada e ferramentas de design generativo que mantêm a voz irreverente da marca.",
+  "project_enjoei_tag": "Identidade de Marca",
+
+  "project_justos_year": "2024",
+  "project_justos_title": "Justos",
+  "project_justos_desc": "Identidade para marca de seguros. Design bold e otimista com formas inspiradas no trânsito e ícones customizados para uma experiência mais simples e humana.",
+  "project_justos_tag": "Identidade de Marca",
+
+  "project_phlor_year": "2023",
+  "project_phlor_title": "Phlor",
+  "project_phlor_desc": "Identidade para marca de bem-estar. A tipografia se expande com suavidade e os layouts abraçam o silêncio, priorizando escolhas essenciais de design.",
+  "project_phlor_tag": "Identidade de Marca",
+
+  "explore_label": "Explore meu trabalho",
+
+  "project_enjoei_bold": "Identidade de marca com estrutura e coerência.",
+  "project_enjoei_muted": "Tipografia customizada e ferramentas de design generativo que mantêm a voz irreverente da marca.",
+  "project_enjoei_tags": "Identidade de Marca, Tipografia Custom, Design Generativo",
+
+  "project_justos_bold": "Identidade bold e otimista para marca de seguros.",
+  "project_justos_muted": "Formas inspiradas no trânsito e ícones customizados para uma experiência mais simples e humana.",
+  "project_justos_tags": "Identidade de Marca, Formas & Ícones, Experiência",
+
+  "project_phlor_bold": "Identidade para marca de bem-estar.",
+  "project_phlor_muted": "A tipografia se expande com suavidade e os layouts abraçam o silêncio, priorizando o essencial.",
+  "project_phlor_tags": "Identidade de Marca, Tipografia, Wellness",
+
+  "scroll_top": "Voltar ao topo",
+  "footer_tagline": "Fim da página, não das ideias✦",
+  "footer_contact_email": "E-mail",
+  "footer_contact_whatsapp": "WhatsApp"
+}

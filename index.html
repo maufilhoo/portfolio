@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Mauricio Filho — Independent Brand & Visual Designer. São Paulo." />
+  <title>Mauricio Filho — Brand & Visual Designer</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Overlay -->
+  <div id="overlay"></div>
+
+  <!-- Header -->
+  <header>
+    <button class="header-menu" data-i18n="nav_menu">Menu</button>
+    <span class="header-name">Mauricio Filho</span>
+    <nav class="header-lang">
+      <button id="audio-btn" class="audio-btn" aria-label="Play music" title="Set the tone. Stay a while.">▶</button>
+      <span class="lang-dot">●</span>
+      <button id="lang-toggle" class="lang-btn">EN</button>
+      <button class="lang-btn lang-btn--inactive" id="lang-other">PT</button>
+    </nav>
+  </header>
+  <audio id="bg-audio" src="assets/audio/Os-Tincoas---Deixa-A-Gira-Girar-j-g-b-edit---millemon---electronic-_-world-music-youtube.mp3" loop></audio>
+
+  <!-- Hero (full-bleed) -->
+  <section class="hero">
+    <canvas id="hero-canvas"></canvas>
+
+    <div class="hero-content">
+      <p class="hero-script">
+        <span class="hero-play">▶</span>
+        <span data-i18n="hero_script">Set the tone. Stay a while.</span>
+      </p>
+
+      <h1 class="hero-role">
+        <span class="hero-line1" data-i18n="hero_line1">Hello — I'm Mauricio Filho,</span><br>
+        <span class="hero-line2" data-i18n="hero_line2">Independent Brand &amp; Visual Designer</span>
+      </h1>
+
+      <a href="about.html" class="hero-photo-card">
+        <div class="hero-photo-inner">
+          <img src="assets/images/photo.jpg" alt="Mauricio Filho" />
+          <div class="hero-photo-sticky">
+            Senior Brand Designer.<br>
+            São Paulo-based.<br>
+            Works globally.<br>
+            Let's build something.
+          </div>
+        </div>
+        <span class="hero-photo-label" data-i18n="hero_link">→ Who's this guy?</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Slideshow -->
+  <section class="slideshow">
+    <div class="slideshow-header">
+      <span class="slideshow-icon">↓</span>
+      <span class="slideshow-label" data-i18n="explore_label">Explore meu trabalho</span>
+    </div>
+    <div class="slideshow-viewport">
+      <div class="slideshow-track" id="slideshow-track">
+        <div class="slide"><img src="assets/images/feed/feed-01.png" alt="" /></div>
+        <div class="slide"><img src="assets/images/feed/feed-21.gif" alt="" /></div>
+        <div class="slide"><video src="assets/images/feed/feed-23.mp4" autoplay muted loop playsinline></video></div>
+        <div class="slide"><img src="assets/images/feed/feed-03.png" alt="" /></div>
+        <div class="slide"><img src="assets/images/feed/feed-05.png" alt="" /></div>
+        <div class="slide"><img src="assets/images/feed/feed-19.gif" alt="" /></div>
+        <div class="slide"><img src="assets/images/feed/feed-07.png" alt="" /></div>
+        <div class="slide"><img src="assets/images/feed/feed-09.png" alt="" /></div>
+        <div class="slide"><img src="assets/images/feed/feed-11.png" alt="" /></div>
+        <div class="slide"><img src="assets/images/feed/feed-22.gif" alt="" /></div>
+        <div class="slide"><img src="assets/images/feed/feed-06.png" alt="" /></div>
+        <div class="slide"><img src="assets/images/feed/feed-08.png" alt="" /></div>
+        <!-- duplicate for seamless loop -->
+        <div class="slide"><img src="assets/images/feed/feed-01.png" alt="" /></div>
+        <div class="slide"><img src="assets/images/feed/feed-21.gif" alt="" /></div>
+        <div class="slide"><video src="assets/images/feed/feed-23.mp4" autoplay muted loop playsinline></video></div>
+        <div class="slide"><img src="assets/images/feed/feed-03.png" alt="" /></div>
+        <div class="slide"><img src="assets/images/feed/feed-05.png" alt="" /></div>
+        <div class="slide"><img src="assets/images/feed/feed-19.gif" alt="" /></div>
+        <div class="slide"><img src="assets/images/feed/feed-07.png" alt="" /></div>
+        <div class="slide"><img src="assets/images/feed/feed-09.png" alt="" /></div>
+        <div class="slide"><img src="assets/images/feed/feed-11.png" alt="" /></div>
+        <div class="slide"><img src="assets/images/feed/feed-22.gif" alt="" /></div>
+        <div class="slide"><img src="assets/images/feed/feed-06.png" alt="" /></div>
+        <div class="slide"><img src="assets/images/feed/feed-08.png" alt="" /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <main class="projects">
+
+    <!-- Enjoei — left aligned -->
+    <article class="project project--left" id="enjoei">
+      <div class="project-card">
+        <div class="project-image-wrap">
+          <div class="project-image" data-parallax>
+            <img src="assets/images/enjoei/cover.png" alt="Enjoei" loading="lazy" />
+          </div>
+          <div class="project-hover-overlay">
+            <h2 class="project-hover-title" data-i18n="project_enjoei_title">ENJOEI</h2>
+            <div class="project-hover-tags" data-tags="project_enjoei_tags">
+              <span class="project-tag-pill">Brand Identity</span>
+              <span class="project-tag-pill">Custom Type</span>
+              <span class="project-tag-pill">Generative Design</span>
+            </div>
+            <span class="project-hover-year" data-i18n="project_enjoei_year">2023</span>
+          </div>
+        </div>
+        <div class="project-caption">
+          <p class="project-caption-text">
+            <strong data-i18n="project_enjoei_bold">Identidade de marca com estrutura e coerência.</strong>
+            <span class="project-caption-muted" data-i18n="project_enjoei_muted"> Tipografia customizada e ferramentas de design generativo que mantêm a voz irreverente da marca.</span>
+          </p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Justos — right aligned -->
+    <article class="project project--right" id="justos">
+      <div class="project-card">
+        <div class="project-image-wrap">
+          <div class="project-image" data-parallax>
+            <img src="assets/images/justos/cover.png" alt="Justos" loading="lazy" />
+          </div>
+          <div class="project-hover-overlay">
+            <h2 class="project-hover-title" data-i18n="project_justos_title">JUSTOS</h2>
+            <div class="project-hover-tags">
+              <span class="project-tag-pill">Brand Identity</span>
+              <span class="project-tag-pill">Shapes & Icons</span>
+              <span class="project-tag-pill">Experience</span>
+            </div>
+            <span class="project-hover-year" data-i18n="project_justos_year">2024</span>
+          </div>
+        </div>
+        <div class="project-caption">
+          <p class="project-caption-text">
+            <strong data-i18n="project_justos_bold">Identidade bold e otimista para marca de seguros.</strong>
+            <span class="project-caption-muted" data-i18n="project_justos_muted"> Formas inspiradas no trânsito e ícones customizados para uma experiência mais simples e humana.</span>
+          </p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Phlor — left aligned -->
+    <article class="project project--left" id="phlor">
+      <div class="project-card">
+        <div class="project-image-wrap">
+          <div class="project-image" data-parallax>
+            <img src="assets/images/phlor/cover.png" alt="Phlor" loading="lazy" />
+          </div>
+          <div class="project-hover-overlay">
+            <h2 class="project-hover-title" data-i18n="project_phlor_title">PHLOR</h2>
+            <div class="project-hover-tags">
+              <span class="project-tag-pill">Brand Identity</span>
+              <span class="project-tag-pill">Typography</span>
+              <span class="project-tag-pill">Wellness</span>
+            </div>
+            <span class="project-hover-year" data-i18n="project_phlor_year">2023</span>
+          </div>
+        </div>
+        <div class="project-caption">
+          <p class="project-caption-text">
+            <strong data-i18n="project_phlor_bold">Identidade para marca de bem-estar.</strong>
+            <span class="project-caption-muted" data-i18n="project_phlor_muted"> A tipografia se expande com suavidade e os layouts abraçam o silêncio, priorizando o essencial.</span>
+          </p>
+        </div>
+      </div>
+    </article>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p class="footer-tagline" data-i18n="footer_tagline">Fim da página, não das ideias✦</p>
+    <div class="footer-contacts">
+      <a href="mailto:talkmauriciof@gmail.com" data-i18n="footer_contact_email">E-mail</a>
+      <a href="https://api.whatsapp.com/send?phone=5511930780104" target="_blank" rel="noopener noreferrer" data-i18n="footer_contact_whatsapp">WhatsApp</a>
+      <span class="footer-scroll-top" data-i18n="scroll_top">Voltar ao topo</span>
+    </div>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

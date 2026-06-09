@@ -1,0 +1,43 @@
+{
+  "nav_menu": "Menu",
+  "nav_lang": "PT",
+
+  "hero_script": "Set the tone. Stay a while.",
+  "hero_line1": "Hello — I'm Mauricio Filho,",
+  "hero_line2": "Independent Brand & Visual Designer",
+  "hero_link": "Who's this guy?",
+
+  "project_enjoei_year": "2023",
+  "project_enjoei_title": "Enjoei",
+  "project_enjoei_desc": "Brand identity built on structure and coherence. Custom typography and generative design tools that maintain the brand's irreverent voice.",
+  "project_enjoei_tag": "Brand Identity",
+
+  "project_justos_year": "2024",
+  "project_justos_title": "Justos",
+  "project_justos_desc": "Insurance brand identity. Bold, optimistic design with traffic-inspired shapes and custom icons for a simpler, more human experience.",
+  "project_justos_tag": "Brand Identity",
+
+  "project_phlor_year": "2023",
+  "project_phlor_title": "Phlor",
+  "project_phlor_desc": "Wellness brand identity. Typography expands gently and layouts embrace silence, focusing on essential design choices.",
+  "project_phlor_tag": "Brand Identity",
+
+  "explore_label": "Explore my work",
+
+  "project_enjoei_bold": "Brand identity built on structure and coherence.",
+  "project_enjoei_muted": "Custom typography and generative design tools that maintain the brand's irreverent voice.",
+  "project_enjoei_tags": "Brand Identity, Custom Type, Generative Design",
+
+  "project_justos_bold": "Bold, optimistic identity for an insurance brand.",
+  "project_justos_muted": "Traffic-inspired shapes and custom icons for a simpler, more human experience.",
+  "project_justos_tags": "Brand Identity, Shapes & Icons, Experience",
+
+  "project_phlor_bold": "Identity for a wellness brand.",
+  "project_phlor_muted": "Typography expands gently and layouts embrace silence, focusing on the essential.",
+  "project_phlor_tags": "Brand Identity, Typography, Wellness",
+
+  "scroll_top": "Back to top",
+  "footer_tagline": "End of the page, not of ideas✦",
+  "footer_contact_email": "E-mail",
+  "footer_contact_whatsapp": "WhatsApp"
+}
