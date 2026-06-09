@@ -8,194 +8,154 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Color+Emoji&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/responsive.css" />
 
-  <script type="importmap">
-  {
-    "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js"
-    }
-  }
-  </script>
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js"}}</script>
 </head>
 <body>
 
-  <!-- Overlay -->
+  <audio id="bg-audio" src="assets/audio/Os-Tincoas---Deixa-A-Gira-Girar-j-g-b-edit---millemon---electronic-_-world-music-youtube.mp3" loop></audio>
   <div id="overlay"></div>
 
-  <!-- Header -->
-  <header>
-    <button class="header-menu" data-i18n="nav_menu">Menu</button>
-    <span class="header-name">Mauricio Filho</span>
-    <nav class="header-lang">
-      <button id="audio-btn" class="audio-btn" aria-label="Play music" title="Set the tone. Stay a while.">▶</button>
-      <span class="lang-dot">●</span>
-      <button id="lang-toggle" class="lang-btn">EN</button>
-      <button class="lang-btn lang-btn--inactive" id="lang-other">PT</button>
-    </nav>
-  </header>
-  <audio id="bg-audio" src="assets/audio/Os-Tincoas---Deixa-A-Gira-Girar-j-g-b-edit---millemon---electronic-_-world-music-youtube.mp3" loop></audio>
+  <!-- ─── Header ──────────────────────────────────────────────────── -->
+  <header class="site-header">
 
-  <!-- Hero (full-bleed) -->
-  <section class="hero">
-    <canvas id="hero-canvas"></canvas>
+    <!-- Left: audio + lang -->
+    <div class="nav-left">
+      <div class="audio-wrap">
+        <button id="audio-btn" class="audio-btn" aria-label="Play music">
+          <span class="audio-bars"><b></b><b></b><b></b><b></b></span>
+        </button>
+        <span class="audio-label">Set the tone, stay a while.</span>
+      </div>
+      <button class="lang-round" id="lang-round">EN</button>
+    </div>
 
-    <div class="hero-content">
-      <p class="hero-script">
-        <span class="hero-play">▶</span>
-        <span data-i18n="hero_script">Set the tone. Stay a while.</span>
-      </p>
-
-      <h1 class="hero-role">
-        <span class="hero-line1" data-i18n="hero_line1">Hello — I'm Mauricio Filho,</span><br>
-        <span class="hero-line2" data-i18n="hero_line2">Independent Brand &amp; Visual Designer</span>
-      </h1>
-
-      <a href="about.html" class="hero-photo-card">
-        <div class="hero-photo-inner">
-          <img src="assets/images/photo.jpg" alt="Mauricio Filho" />
-          <div class="hero-photo-sticky">
-            Senior Brand Designer.<br>
-            São Paulo-based.<br>
-            Works globally.<br>
-            Let's build something.
-          </div>
+    <!-- Center: photo + intro + nav links -->
+    <nav class="nav-center">
+      <a href="about.html" class="nav-photo-link">
+        <div class="nav-photo-wrap">
+          <img src="assets/images/hero/me.png" alt="Mauricio Filho" />
+          <div class="nav-photo-card">Who's this guy?</div>
         </div>
-        <span class="hero-photo-label" data-i18n="hero_link">→ Who's this guy?</span>
+      </a>
+      <span data-i18n="nav_intro" class="nav-intro">Hello, I'm Mauricio Filho</span><span class="nav-fish"> 🐡</span><span data-i18n="nav_role" class="nav-intro">. Independent Designer</span>
+      <span class="nav-sep" aria-hidden="true">—</span>
+      <a href="#work" class="nav-link" data-i18n="nav_work">Work</a>
+      <span class="nav-sep" aria-hidden="true">—</span>
+      <a href="about.html" class="nav-link" data-i18n="nav_about">About</a>
+      <span class="nav-sep" aria-hidden="true">—</span>
+      <button class="nav-link nav-copy" id="copy-email" data-i18n="nav_copy">Copy-email</button>
+    </nav>
+
+    <!-- Right: balance grid -->
+    <div class="nav-right" aria-hidden="true"></div>
+  </header>
+
+  <!-- ─── Hero: fullscreen slideshow ─────────────────────────────── -->
+  <section class="hero-full" id="hero">
+    <div class="hero-bg" id="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-foot">
+      <p class="hero-tagline" data-i18n="hero_tagline">I shape brands &amp;<br>build visual identities.</p>
+    </div>
+  </section>
+
+  <!-- ─── Bio ─────────────────────────────────────────────────────── -->
+  <section class="bio-section" id="bio">
+    <div class="bio-text">
+      <p data-i18n="bio_text">São Paulo–based Multidisciplinary Designer, focused on Brand &amp; Digital. Currently independent. Formerly Senior Designer at Tatil Design. Collaborated with agencies and consultancies like R/GA, Monigle (US), Marcas com Sal, among others.</p>
+      <p data-i18n="bio_text2">9+ years building logos, visual identities, typography, iconography, packaging, signage, and campaign art direction for brands like Itaú, Ambev, Natura, Avon, Google, Danone, C6, Caixa, Enjoei, Vibra and 99 App. Recognized at the Brazilian Graphic Design Biennial, Latin American Design Awards and Brazil Design Awards.</p>
+    </div>
+    <div class="bio-side">
+      <a href="#work" class="explore-link">
+        <span class="explore-arrow">↓</span>
+        <span class="explore-text" data-i18n="explore_cta">explore my work</span>
       </a>
     </div>
   </section>
 
-  <!-- Slideshow -->
-  <section class="slideshow">
-    <div class="slideshow-header">
-      <span class="slideshow-icon">↓</span>
-      <span class="slideshow-label" data-i18n="explore_label">Explore meu trabalho</span>
-    </div>
-    <div class="slideshow-viewport">
-      <div class="slideshow-track" id="slideshow-track">
-        <div class="slide"><img src="assets/images/feed/feed-01.png" alt="" /></div>
-        <div class="slide"><img src="assets/images/feed/feed-21.gif" alt="" /></div>
-        <div class="slide"><video src="assets/images/feed/feed-23.mp4" autoplay muted loop playsinline></video></div>
-        <div class="slide"><img src="assets/images/feed/feed-03.png" alt="" /></div>
-        <div class="slide"><img src="assets/images/feed/feed-05.png" alt="" /></div>
-        <div class="slide"><img src="assets/images/feed/feed-19.gif" alt="" /></div>
-        <div class="slide"><img src="assets/images/feed/feed-07.png" alt="" /></div>
-        <div class="slide"><img src="assets/images/feed/feed-09.png" alt="" /></div>
-        <div class="slide"><img src="assets/images/feed/feed-11.png" alt="" /></div>
-        <div class="slide"><img src="assets/images/feed/feed-22.gif" alt="" /></div>
-        <div class="slide"><img src="assets/images/feed/feed-06.png" alt="" /></div>
-        <div class="slide"><img src="assets/images/feed/feed-08.png" alt="" /></div>
-        <!-- duplicate for seamless loop -->
-        <div class="slide"><img src="assets/images/feed/feed-01.png" alt="" /></div>
-        <div class="slide"><img src="assets/images/feed/feed-21.gif" alt="" /></div>
-        <div class="slide"><video src="assets/images/feed/feed-23.mp4" autoplay muted loop playsinline></video></div>
-        <div class="slide"><img src="assets/images/feed/feed-03.png" alt="" /></div>
-        <div class="slide"><img src="assets/images/feed/feed-05.png" alt="" /></div>
-        <div class="slide"><img src="assets/images/feed/feed-19.gif" alt="" /></div>
-        <div class="slide"><img src="assets/images/feed/feed-07.png" alt="" /></div>
-        <div class="slide"><img src="assets/images/feed/feed-09.png" alt="" /></div>
-        <div class="slide"><img src="assets/images/feed/feed-11.png" alt="" /></div>
-        <div class="slide"><img src="assets/images/feed/feed-22.gif" alt="" /></div>
-        <div class="slide"><img src="assets/images/feed/feed-06.png" alt="" /></div>
-        <div class="slide"><img src="assets/images/feed/feed-08.png" alt="" /></div>
+  <!-- ─── Projects ─────────────────────────────────────────────────── -->
+  <main class="work-section" id="work">
+
+    <article class="project-koto" id="enjoei">
+      <div class="project-koto-media">
+        <img src="assets/images/enjoei/cover.png" alt="Enjoei" loading="lazy" />
       </div>
-    </div>
-  </section>
-
-  <!-- Projects -->
-  <main class="projects">
-
-    <!-- Enjoei — left aligned -->
-    <article class="project project--left" id="enjoei">
-      <div class="project-card">
-        <div class="project-image-wrap">
-          <div class="project-image" data-parallax>
-            <img src="assets/images/enjoei/cover.png" alt="Enjoei" loading="lazy" />
+      <div class="project-koto-info">
+        <div class="project-koto-meta">
+          <div class="project-koto-tags-row">
+            <span class="project-tag-pill">Brand Identity</span>
+            <span class="project-tag-pill">Custom Type</span>
+            <span class="project-tag-pill">Generative Design</span>
           </div>
-          <div class="project-hover-overlay">
-            <h2 class="project-hover-title" data-i18n="project_enjoei_title">ENJOEI</h2>
-            <div class="project-hover-tags" data-tags="project_enjoei_tags">
-              <span class="project-tag-pill">Brand Identity</span>
-              <span class="project-tag-pill">Custom Type</span>
-              <span class="project-tag-pill">Generative Design</span>
-            </div>
-            <span class="project-hover-year" data-i18n="project_enjoei_year">2023</span>
-          </div>
+          <span class="project-koto-year" data-i18n="project_enjoei_year">2023</span>
         </div>
-        <div class="project-caption">
-          <p class="project-caption-text">
-            <strong data-i18n="project_enjoei_bold">Identidade de marca com estrutura e coerência.</strong>
-            <span class="project-caption-muted" data-i18n="project_enjoei_muted"> Tipografia customizada e ferramentas de design generativo que mantêm a voz irreverente da marca.</span>
-          </p>
-        </div>
+        <h2 class="project-koto-title" data-i18n="project_enjoei_title">Enjoei</h2>
+        <p class="project-koto-desc">
+          <strong data-i18n="project_enjoei_bold">Brand identity built on structure and coherence.</strong>
+          <span data-i18n="project_enjoei_muted"> Custom typography and generative design tools that maintain the brand's irreverent voice.</span>
+        </p>
       </div>
     </article>
 
-    <!-- Justos — right aligned -->
-    <article class="project project--right" id="justos">
-      <div class="project-card">
-        <div class="project-image-wrap">
-          <div class="project-image" data-parallax>
-            <img src="assets/images/justos/cover.png" alt="Justos" loading="lazy" />
+    <article class="project-koto" id="justos">
+      <div class="project-koto-media">
+        <img src="assets/images/justos/cover.png" alt="Justos" loading="lazy" />
+      </div>
+      <div class="project-koto-info">
+        <div class="project-koto-meta">
+          <div class="project-koto-tags-row">
+            <span class="project-tag-pill">Brand Identity</span>
+            <span class="project-tag-pill">Shapes &amp; Icons</span>
+            <span class="project-tag-pill">Experience</span>
           </div>
-          <div class="project-hover-overlay">
-            <h2 class="project-hover-title" data-i18n="project_justos_title">JUSTOS</h2>
-            <div class="project-hover-tags">
-              <span class="project-tag-pill">Brand Identity</span>
-              <span class="project-tag-pill">Shapes & Icons</span>
-              <span class="project-tag-pill">Experience</span>
-            </div>
-            <span class="project-hover-year" data-i18n="project_justos_year">2024</span>
-          </div>
+          <span class="project-koto-year" data-i18n="project_justos_year">2024</span>
         </div>
-        <div class="project-caption">
-          <p class="project-caption-text">
-            <strong data-i18n="project_justos_bold">Identidade bold e otimista para marca de seguros.</strong>
-            <span class="project-caption-muted" data-i18n="project_justos_muted"> Formas inspiradas no trânsito e ícones customizados para uma experiência mais simples e humana.</span>
-          </p>
-        </div>
+        <h2 class="project-koto-title" data-i18n="project_justos_title">Justos</h2>
+        <p class="project-koto-desc">
+          <strong data-i18n="project_justos_bold">Bold, optimistic identity for an insurance brand.</strong>
+          <span data-i18n="project_justos_muted"> Traffic-inspired shapes and custom icons for a simpler, more human experience.</span>
+        </p>
       </div>
     </article>
 
-    <!-- Phlor — left aligned -->
-    <article class="project project--left" id="phlor">
-      <div class="project-card">
-        <div class="project-image-wrap">
-          <div class="project-image" data-parallax>
-            <img src="assets/images/phlor/cover.png" alt="Phlor" loading="lazy" />
+    <article class="project-koto" id="phlor">
+      <div class="project-koto-media">
+        <img src="assets/images/phlor/cover.png" alt="Phlor" loading="lazy" />
+      </div>
+      <div class="project-koto-info">
+        <div class="project-koto-meta">
+          <div class="project-koto-tags-row">
+            <span class="project-tag-pill">Brand Identity</span>
+            <span class="project-tag-pill">Typography</span>
+            <span class="project-tag-pill">Wellness</span>
           </div>
-          <div class="project-hover-overlay">
-            <h2 class="project-hover-title" data-i18n="project_phlor_title">PHLOR</h2>
-            <div class="project-hover-tags">
-              <span class="project-tag-pill">Brand Identity</span>
-              <span class="project-tag-pill">Typography</span>
-              <span class="project-tag-pill">Wellness</span>
-            </div>
-            <span class="project-hover-year" data-i18n="project_phlor_year">2023</span>
-          </div>
+          <span class="project-koto-year" data-i18n="project_phlor_year">2023</span>
         </div>
-        <div class="project-caption">
-          <p class="project-caption-text">
-            <strong data-i18n="project_phlor_bold">Identidade para marca de bem-estar.</strong>
-            <span class="project-caption-muted" data-i18n="project_phlor_muted"> A tipografia se expande com suavidade e os layouts abraçam o silêncio, priorizando o essencial.</span>
-          </p>
-        </div>
+        <h2 class="project-koto-title" data-i18n="project_phlor_title">Phlor</h2>
+        <p class="project-koto-desc">
+          <strong data-i18n="project_phlor_bold">Identity for a wellness brand.</strong>
+          <span data-i18n="project_phlor_muted"> Typography expands gently and layouts embrace silence, focusing on the essential.</span>
+        </p>
       </div>
     </article>
 
   </main>
 
-  <!-- Footer -->
-  <footer>
-    <p class="footer-tagline" data-i18n="footer_tagline">Fim da página, não das ideias✦</p>
-    <div class="footer-contacts">
-      <a href="mailto:talkmauriciof@gmail.com" data-i18n="footer_contact_email">E-mail</a>
-      <a href="https://api.whatsapp.com/send?phone=5511930780104" target="_blank" rel="noopener noreferrer" data-i18n="footer_contact_whatsapp">WhatsApp</a>
-      <span class="footer-scroll-top" data-i18n="scroll_top">Voltar ao topo</span>
+  <!-- ─── Footer ──────────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <a href="mailto:talkmauriciof@gmail.com" class="footer-cta" data-i18n="footer_big">Let's build something together.</a>
+    <div class="footer-bottom">
+      <div class="footer-links">
+        <a href="mailto:talkmauriciof@gmail.com">talkmauriciof@gmail.com</a>
+        <a href="https://api.whatsapp.com/send?phone=5511930780104" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <a href="https://www.linkedin.com/in/mauriciodesignbr/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </div>
+      <button class="footer-scroll-top" data-i18n="scroll_top">↑ top</button>
     </div>
   </footer>
 

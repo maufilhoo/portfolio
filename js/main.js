@@ -1,5 +1,4 @@
 import { initI18n } from './i18n.js';
-import { initHeroMotion } from './hero-motion.js';
 
 /* ─── Overlay ────────────────────────────────────────────────────── */
 function initOverlay() {
@@ -19,26 +18,65 @@ function initScrollTop() {
   if (btn) btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 }
 
-/* ─── Parallax on project images ────────────────────────────────── */
-function initParallax() {
-  const images = document.querySelectorAll('[data-parallax] img, [data-parallax] video');
-  if (!images.length) return;
+/* ─── Hero slideshow ─────────────────────────────────────────────── */
+function initHeroSlideshow() {
+  const container = document.getElementById('hero-bg');
+  if (!container) return;
 
-  function onScroll() {
-    images.forEach(img => {
-      const wrap = img.closest('[data-parallax]');
-      const rect = wrap.getBoundingClientRect();
-      const vh   = window.innerHeight;
-      if (rect.bottom < 0 || rect.top > vh) return;
+  const srcs = [
+    'assets/images/enjoei/cover.png',
+    'assets/images/feed/feed-01.png',
+    'assets/images/feed/feed-05.png',
+    'assets/images/justos/cover.png',
+    'assets/images/feed/feed-07.png',
+    'assets/images/phlor/cover.png',
+    'assets/images/feed/feed-09.png',
+    'assets/images/feed/feed-06.png',
+    'assets/images/feed/feed-11.png',
+    'assets/images/enjoei/cover-2.png',
+  ];
 
-      const progress = (vh - rect.top) / (vh + rect.height); // 0 → 1
-      const shift    = (progress - 0.5) * 40;                // ±20px
-      img.style.transform = `translateY(${shift}px)`;
-    });
-  }
+  const slides = srcs.map((src, i) => {
+    const el = document.createElement('div');
+    el.className = 'hero-slide' + (i === 0 ? ' active' : '');
+    el.style.backgroundImage = `url(${src})`;
+    container.appendChild(el);
+    return el;
+  });
 
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+  let idx = 0;
+  setInterval(() => {
+    slides[idx].classList.remove('active');
+    idx = (idx + 1) % slides.length;
+    slides[idx].classList.add('active');
+  }, 4000);
+}
+
+/* ─── Copy email ─────────────────────────────────────────────────── */
+function initCopyEmail() {
+  const btn = document.getElementById('copy-email');
+  if (!btn) return;
+  const orig = btn.textContent;
+  btn.addEventListener('click', () => {
+    navigator.clipboard.writeText('talkmauriciof@gmail.com')
+      .then(() => {
+        btn.textContent = 'Copied!';
+        setTimeout(() => (btn.textContent = orig), 2000);
+      })
+      .catch(() => { window.location.href = 'mailto:talkmauriciof@gmail.com'; });
+  });
+}
+
+/* ─── Project scroll reveal ──────────────────────────────────────── */
+function initProjectReveal() {
+  const items = document.querySelectorAll('.project-koto');
+  if (!items.length) return;
+
+  const obs = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view'); }),
+    { threshold: 0.1 }
+  );
+  items.forEach(el => obs.observe(el));
 }
 
 /* ─── Audio player ───────────────────────────────────────────────── */
@@ -49,13 +87,9 @@ function initAudio() {
 
   btn.addEventListener('click', () => {
     if (audio.paused) {
-      audio.play().then(() => {
-        btn.textContent = '⏸';
-        btn.classList.add('playing');
-      }).catch(() => {});
+      audio.play().then(() => btn.classList.add('playing')).catch(() => {});
     } else {
       audio.pause();
-      btn.textContent = '▶';
       btn.classList.remove('playing');
     }
   });
@@ -65,8 +99,9 @@ function initAudio() {
 document.addEventListener('DOMContentLoaded', async () => {
   initOverlay();
   initScrollTop();
-  initParallax();
-  initHeroMotion();
+  initHeroSlideshow();
+  initCopyEmail();
+  initProjectReveal();
   initAudio();
   await initI18n();
 });

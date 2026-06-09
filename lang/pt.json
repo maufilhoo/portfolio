@@ -36,8 +36,22 @@
   "project_phlor_muted": "A tipografia se expande com suavidade e os layouts abraçam o silêncio, priorizando o essencial.",
   "project_phlor_tags": "Identidade de Marca, Tipografia, Wellness",
 
-  "scroll_top": "Voltar ao topo",
+  "scroll_top": "↑ topo",
   "footer_tagline": "Fim da página, não das ideias✦",
   "footer_contact_email": "E-mail",
-  "footer_contact_whatsapp": "WhatsApp"
+  "footer_contact_whatsapp": "WhatsApp",
+
+  "nav_intro": "Olá, sou Mauricio Filho",
+  "nav_role": ". Designer Independente",
+  "nav_work": "Projetos",
+  "nav_about": "Sobre",
+  "nav_copy": "Copiar e-mail",
+
+  "hero_tagline": "Construo marcas &\nidentidades visuais.",
+
+  "bio_text": "Designer Multidisciplinar baseado em São Paulo, com foco em Branding & Digital. Atualmente independente. Ex-Senior Designer na Tatil Design. Colaborou com agências como R/GA, Monigle (EUA), Marcas com Sal, entre outras.",
+  "bio_text2": "9+ anos construindo logos, identidades visuais, tipografia, iconografia, embalagens, sinalização e direção de arte para marcas como Itaú, Ambev, Natura, Avon, Google, Danone, C6, Caixa, Enjoei, Vibra e 99 App. Reconhecido na Bienal Brasileira de Design Gráfico, Latin American Design Awards e Brazil Design Awards.",
+  "explore_cta": "explore meu trabalho",
+
+  "footer_big": "Vamos construir algo juntos."
 }

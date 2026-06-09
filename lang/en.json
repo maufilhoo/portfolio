@@ -36,8 +36,22 @@
   "project_phlor_muted": "Typography expands gently and layouts embrace silence, focusing on the essential.",
   "project_phlor_tags": "Brand Identity, Typography, Wellness",
 
-  "scroll_top": "Back to top",
+  "scroll_top": "↑ top",
   "footer_tagline": "End of the page, not of ideas✦",
   "footer_contact_email": "E-mail",
-  "footer_contact_whatsapp": "WhatsApp"
+  "footer_contact_whatsapp": "WhatsApp",
+
+  "nav_intro": "Hello, I'm Mauricio Filho",
+  "nav_role": ". Independent Designer",
+  "nav_work": "Work",
+  "nav_about": "About",
+  "nav_copy": "Copy-email",
+
+  "hero_tagline": "I shape brands &\nbuild visual identities.",
+
+  "bio_text": "São Paulo–based Multidisciplinary Designer, focused on Brand & Digital. Currently independent. Formerly Senior Designer at Tatil Design. Collaborated with agencies and consultancies like R/GA, Monigle (US), Marcas com Sal, among others.",
+  "bio_text2": "9+ years building logos, visual identities, typography, iconography, packaging, signage, and campaign art direction for brands like Itaú, Ambev, Natura, Avon, Google, Danone, C6, Caixa, Enjoei, Vibra and 99 App. Recognized at the Brazilian Graphic Design Biennial, Latin American Design Awards and Brazil Design Awards.",
+  "explore_cta": "explore my work",
+
+  "footer_big": "Let's build something together."
 }

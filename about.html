@@ -12,17 +12,26 @@
 
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/responsive.css" />
+  <style>
+    :root { --bg: #F2F7B5; }
+    body  { background: #F2F7B5; }
+    header { background: #F2F7B5; }
+  </style>
 </head>
 <body>
 
   <!-- Header -->
   <header>
-    <a href="index.html" class="header-menu about-back">← Index</a>
-    <span class="header-name">Mauricio Filho</span>
-    <nav class="header-lang">
-      <span class="lang-dot">●</span>
-      <button id="lang-toggle" class="lang-btn">EN</button>
-      <button class="lang-btn lang-btn--inactive" id="lang-other">PT</button>
+    <a href="index.html" class="header-avatar-link">
+      <img src="assets/images/hero/me.png" alt="Mauricio Filho" class="header-avatar" />
+    </a>
+    <a href="index.html" class="header-name visible" id="header-name">Mauricio Filho</a>
+    <nav class="header-right">
+      <a href="index.html" class="header-menu">← Index</a>
+      <div class="lang-pill">
+        <span class="lang-pill-opt" data-lang="en" id="lang-en">EN</span>
+        <span class="lang-pill-opt" data-lang="pt" id="lang-pt">PT</span>
+      </div>
     </nav>
   </header>
 
