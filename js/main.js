@@ -95,9 +95,19 @@ function initAudio() {
   });
 }
 
+/* ─── Transparent header on scroll ──────────────────────────────── */
+function initHeader() {
+  const header = document.querySelector('.site-header');
+  if (!header) return;
+  const update = () => header.classList.toggle('scrolled', window.scrollY > 40);
+  update();
+  window.addEventListener('scroll', update, { passive: true });
+}
+
 /* ─── Init ───────────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', async () => {
   initOverlay();
+  initHeader();
   initScrollTop();
   initHeroSlideshow();
   initCopyEmail();

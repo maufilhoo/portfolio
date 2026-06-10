@@ -2,19 +2,21 @@
 @media (max-width: 1024px) {
   :root { --gutter: 1.5rem; }
 
-  .nav-intro, .nav-fish, .nav-role { display: none; }
+  /* Header — hide greeting text, keep nav links */
+  .nav-intro { display: none; }
+  .nav-fish  { display: none; }
+  .nav-sep:first-of-type { display: none; }
 
-  .bio-section {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-    padding: 5rem var(--gutter);
-  }
-  .bio-side { justify-content: flex-start; }
+  /* Bio */
+  .bio-section { padding: 5rem var(--gutter) 4rem; }
 
-  .project-koto-media { height: 65vh; }
-  .project-koto-title { font-size: clamp(2rem, 5vw, 5rem); }
+  /* Projects */
+  .project-koto-media { height: 60vh; }
+  .project-koto-title { font-size: clamp(2.5rem, 6vw, 7rem); }
+  .project-koto-info  { grid-template-columns: 1fr; column-gap: 0; }
 
-  .footer-cta { font-size: clamp(3rem, 9vw, 9rem); }
+  /* Footer */
+  .footer-cta { font-size: clamp(2.5rem, 9vw, 9rem); }
 }
 
 /* ─── Mobile (≤ 768px) ──────────────────────────────────────────── */
@@ -22,32 +24,32 @@
   :root { --gutter: 1.25rem; }
 
   /* Header */
-  .site-header { grid-template-columns: auto 1fr; height: 48px; }
-  .nav-center { display: none; }
-  .nav-right  { display: none; }
-  .nav-left   { gap: 0.5rem; }
+  .site-header { height: 48px; }
+  .nav-center  { display: none; }
   .audio-label { display: none; }
+  .nav-right   { gap: 0.5rem; }
 
   /* Hero */
-  .hero-full { margin-top: 48px; }
-  .hero-tagline { font-size: clamp(1.8rem, 8vw, 3.5rem); }
+  .hero-tagline { font-size: clamp(2.25rem, 9vw, 4.5rem); }
+  .hero-foot    { padding-bottom: 2.5rem; }
 
   /* Bio */
-  .bio-section {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-    padding: 4rem var(--gutter);
-  }
-  .bio-text p { font-size: 1rem; }
+  .bio-section  { padding: 4rem var(--gutter) 3.5rem; }
+  .bio-text p:first-child { font-size: 1.1rem; }
+  .bio-text p:last-child  { font-size: 0.875rem; }
+
+  /* Work label */
+  .work-label { padding: 2.5rem var(--gutter) 2rem; }
 
   /* Projects */
-  .project-koto-media { height: 55vw; min-height: 220px; }
-  .project-koto-title { font-size: clamp(2rem, 8vw, 3.5rem); }
+  .project-koto-media { height: 56vw; min-height: 220px; }
+  .project-koto-title { font-size: clamp(2.25rem, 9vw, 4rem); }
+  .project-koto-info  { grid-template-columns: 1fr; column-gap: 0; padding-bottom: 3rem; }
 
   /* Footer */
-  .footer-cta { font-size: clamp(2.5rem, 10vw, 5rem); }
-  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
-  .footer-links { gap: 1rem; }
+  .footer-cta    { font-size: clamp(2rem, 10vw, 4.5rem); margin-bottom: 3.5rem; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+  .footer-links  { gap: 1.25rem; }
 
   /* About */
   .about-grid { grid-template-columns: 1fr; gap: 3rem; }
@@ -57,7 +59,7 @@
 /* ─── Small mobile (≤ 375px) ────────────────────────────────────── */
 @media (max-width: 375px) {
   :root { --gutter: 1rem; }
-  .hero-tagline { font-size: 1.8rem; }
-  .project-koto-title { font-size: 2rem; }
-  .footer-cta { font-size: 2.25rem; }
+  .hero-tagline        { font-size: 2rem; }
+  .project-koto-title  { font-size: 2rem; }
+  .footer-cta          { font-size: 1.75rem; }
 }
