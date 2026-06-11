@@ -5,11 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Mauricio Filho — Independent Brand & Visual Designer. São Paulo." />
   <title>Mauricio Filho — Brand & Visual Designer</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Color+Emoji&display=swap" rel="stylesheet" />
-
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/responsive.css" />
 </head>
@@ -20,36 +15,29 @@
 
   <!-- ─── Header ──────────────────────────────────────────────────── -->
   <header class="site-header">
-
-    <!-- Left: photo + nav links -->
-    <div class="nav-left">
-      <a href="about.html" class="nav-photo-link">
-        <div class="nav-photo-card" data-i18n="nav_who">Who's this guy?</div>
-        <div class="nav-photo-wrap">
-          <img src="assets/images/hero/me.png" alt="Mauricio Filho" />
-        </div>
-      </a>
-      <nav class="nav-links">
-        <a href="#work"      class="nav-link" data-i18n="nav_work">Work</a>
-        <a href="about.html" class="nav-link" data-i18n="nav_about">About</a>
-        <a href="#gallery"   class="nav-link" data-i18n="nav_gallery">Gallery</a>
-        <button class="nav-link nav-copy" id="copy-email" data-i18n="nav_contact">Contact</button>
-      </nav>
-    </div>
-
-    <!-- Center: audio player -->
-    <div class="nav-center-util">
-      <div class="audio-wrap">
+    <div class="header-btns-group">
+      <div class="nav-center-util">
         <button id="audio-btn" class="audio-btn" aria-label="Play music">
-          <span class="audio-bars"><b></b><b></b><b></b><b></b></span>
+          <span class="audio-disc">📀</span>
         </button>
-        <span class="audio-label">Set the tone, stay a while.</span>
       </div>
-    </div>
-
-    <!-- Right: lang -->
-    <div class="nav-right">
-      <button class="lang-round" id="lang-round">EN</button>
+      <div class="nav-left">
+        <div class="nav-fish-wrap">
+          <button class="nav-fish-btn" aria-label="Menu">🐡</button>
+          <nav class="nav-fish-pill">
+            <a href="index.html" class="nav-fish-link active" data-i18n="nav_home">Home</a>
+            <a href="#work"      class="nav-fish-link" data-i18n="nav_work">Work</a>
+            <a href="about.html" class="nav-fish-link" data-i18n="nav_about">About</a>
+            <a href="#gallery"   class="nav-fish-link" data-i18n="nav_gallery">Gallery</a>
+            <button class="nav-fish-link" id="copy-email" data-i18n="nav_contact">Contact</button>
+          </nav>
+        </div>
+      </div>
+      <div class="nav-right">
+        <button class="lang-round" id="lang-round" data-lang="pt">
+          <span class="lang-flag">🇧🇷</span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -60,106 +48,261 @@
       <span data-i18n="hero_line2">Brand &amp; Visual Designer</span>
       <span data-i18n="hero_line3">based in São Paulo.</span>
     </h1>
-
     <a href="about.html" class="hero-photo-link">
-      <div class="hero-photo-card" data-i18n="nav_who">Who's this guy?</div>
+      <div class="hero-photo-card" aria-hidden="true">click to know more about me →</div>
       <div class="hero-photo-wrap">
         <img src="assets/images/hero/me.png" alt="Mauricio Filho" />
       </div>
     </a>
-
-    <a href="#work" class="explore-cta">
-      <span class="explore-text" data-i18n="explore_cta">Explore my work</span>
-      <span class="explore-icon" aria-hidden="true">✦</span>
-    </a>
-  </section>
-
-  <!-- ─── Featured project ─────────────────────────────────────────── -->
-  <section class="featured-section">
-    <div class="featured-media">
-      <img src="assets/images/enjoei/cover.png" alt="Enjoei" />
+    <div class="welcome-tagline">
+      welcome my <s class="hero-strike">world</s> work <span class="hero-emoji">✌</span>
     </div>
   </section>
 
-  <!-- ─── Work grid ────────────────────────────────────────────────── -->
-  <section class="work-grid-section" id="work">
+  <!-- ─── Featured slideshow ──────────────────────────────────────── -->
+  <section class="featured-section" id="featured">
+    <div class="featured-media" id="featured-media" role="button" aria-label="Click to change image" tabindex="0">
+      <img src="assets/images/feed/feed-01.png"  alt="" class="featured-slide active" loading="eager" />
+      <img src="assets/images/feed/feed-02.jpg"  alt="" class="featured-slide" loading="lazy" />
+      <img src="assets/images/feed/feed-03.png"  alt="" class="featured-slide" loading="lazy" />
+      <img src="assets/images/feed/feed-04.jpg"  alt="" class="featured-slide" loading="lazy" />
+      <img src="assets/images/feed/feed-05.png"  alt="" class="featured-slide" loading="lazy" />
+      <img src="assets/images/feed/feed-06.png"  alt="" class="featured-slide" loading="lazy" />
+      <img src="assets/images/feed/feed-07.png"  alt="" class="featured-slide" loading="lazy" />
+      <img src="assets/images/feed/feed-08.png"  alt="" class="featured-slide" loading="lazy" />
+      <img src="assets/images/feed/feed-09.png"  alt="" class="featured-slide" loading="lazy" />
+      <img src="assets/images/feed/feed-10.png"  alt="" class="featured-slide" loading="lazy" />
+      <img src="assets/images/feed/feed-11.png"  alt="" class="featured-slide" loading="lazy" />
+      <img src="assets/images/feed/feed-12.png"  alt="" class="featured-slide" loading="lazy" />
+      <img src="assets/images/feed/feed-13.png"  alt="" class="featured-slide" loading="lazy" />
+      <img src="assets/images/feed/feed-14.png"  alt="" class="featured-slide" loading="lazy" />
+      <img src="assets/images/feed/metallo.png"  alt="" class="featured-slide" loading="lazy" />
+    </div>
+  </section>
 
-    <article class="work-item" data-reveal>
-      <a href="#enjoei" class="work-item-link">
-        <div class="work-item-img">
-          <img src="assets/images/enjoei/cover.png" alt="Enjoei" loading="lazy" />
+  <!-- ─── Work grid ───────────────────────────────────────────────── -->
+  <div class="work-grid-header">
+    <span data-i18n="explore_label">Explore</span>
+  </div>
+  <div class="work-scroll-outer">
+    <section class="work-grid-section" id="work">
+
+      <article class="work-item" data-reveal>
+        <a href="#enjoei" class="work-item-link">
+          <div class="work-item-img">
+            <img src="assets/images/cases/enjoei.png" alt="Enjoei" class="slide-img active" loading="lazy" />
+            <div class="slide-nav">
+              <button class="slide-btn slide-btn--prev" aria-label="Previous">◀</button>
+              <span class="slide-idx">1 / 1</span>
+              <button class="slide-btn slide-btn--next" aria-label="Next">▶</button>
+            </div>
+          </div>
+        </a>
+        <div class="work-item-info">
+          <h3 class="work-item-title">Enjoei</h3>
+          <p class="work-item-desc">Brand Identity, Custom Type, Generative Design</p>
         </div>
-      </a>
-      <div class="work-item-info">
-        <h3 class="work-item-title" data-i18n="project_enjoei_title">Enjoei</h3>
-        <p class="work-item-desc" data-i18n="project_enjoei_tags">Brand Identity, Custom Type, Generative Design</p>
-      </div>
-    </article>
+      </article>
 
-    <article class="work-item" data-reveal>
-      <a href="#justos" class="work-item-link">
-        <div class="work-item-img">
-          <img src="assets/images/justos/cover.png" alt="Justos" loading="lazy" />
+      <article class="work-item" data-reveal>
+        <a href="#justos" class="work-item-link">
+          <div class="work-item-img">
+            <img src="assets/images/cases/justos.png" alt="Justos" class="slide-img active" loading="lazy" />
+            <div class="slide-nav">
+              <button class="slide-btn slide-btn--prev" aria-label="Previous">◀</button>
+              <span class="slide-idx">1 / 1</span>
+              <button class="slide-btn slide-btn--next" aria-label="Next">▶</button>
+            </div>
+          </div>
+        </a>
+        <div class="work-item-info">
+          <h3 class="work-item-title">Justos</h3>
+          <p class="work-item-desc">Brand Identity, Shapes &amp; Icons, Experience</p>
         </div>
-      </a>
-      <div class="work-item-info">
-        <h3 class="work-item-title" data-i18n="project_justos_title">Justos</h3>
-        <p class="work-item-desc" data-i18n="project_justos_tags">Brand Identity, Shapes &amp; Icons, Experience</p>
-      </div>
-    </article>
+      </article>
 
-    <article class="work-item" data-reveal>
-      <a href="#phlor" class="work-item-link">
-        <div class="work-item-img">
-          <img src="assets/images/phlor/cover.png" alt="Phlor" loading="lazy" />
+      <article class="work-item" data-reveal>
+        <a href="#phlor" class="work-item-link">
+          <div class="work-item-img">
+            <img src="assets/images/cases/phlor.png" alt="Phlor" class="slide-img active" loading="lazy" />
+            <div class="slide-nav">
+              <button class="slide-btn slide-btn--prev" aria-label="Previous">◀</button>
+              <span class="slide-idx">1 / 1</span>
+              <button class="slide-btn slide-btn--next" aria-label="Next">▶</button>
+            </div>
+          </div>
+        </a>
+        <div class="work-item-info">
+          <h3 class="work-item-title">Phlor</h3>
+          <p class="work-item-desc">Brand Identity, Typography, Wellness</p>
         </div>
-      </a>
-      <div class="work-item-info">
-        <h3 class="work-item-title" data-i18n="project_phlor_title">Phlor</h3>
-        <p class="work-item-desc" data-i18n="project_phlor_tags">Brand Identity, Typography, Wellness</p>
-      </div>
-    </article>
+      </article>
 
-    <!-- Placeholder slots — fill as projects are added -->
-    <article class="work-item work-item--placeholder" data-reveal>
-      <div class="work-item-link"><div class="work-item-img"></div></div>
-      <div class="work-item-info">
-        <h3 class="work-item-title">Coming soon</h3>
-      </div>
-    </article>
+      <article class="work-item" data-reveal>
+        <a href="#metallo" class="work-item-link">
+          <div class="work-item-img">
+            <img src="assets/images/cases/metallo.png" alt="Metallo" class="slide-img active" loading="lazy" />
+            <div class="slide-nav">
+              <button class="slide-btn slide-btn--prev" aria-label="Previous">◀</button>
+              <span class="slide-idx">1 / 1</span>
+              <button class="slide-btn slide-btn--next" aria-label="Next">▶</button>
+            </div>
+          </div>
+        </a>
+        <div class="work-item-info">
+          <h3 class="work-item-title">Metallo</h3>
+          <p class="work-item-desc">Brand Identity, Premium, B2B</p>
+        </div>
+      </article>
 
-    <article class="work-item work-item--placeholder" data-reveal>
-      <div class="work-item-link"><div class="work-item-img"></div></div>
-      <div class="work-item-info">
-        <h3 class="work-item-title">Coming soon</h3>
-      </div>
-    </article>
+      <article class="work-item" data-reveal>
+        <a href="#papeltec" class="work-item-link">
+          <div class="work-item-img">
+            <img src="assets/images/cases/papeltec.png" alt="Papeltec" class="slide-img active" loading="lazy" />
+            <div class="slide-nav">
+              <button class="slide-btn slide-btn--prev" aria-label="Previous">◀</button>
+              <span class="slide-idx">1 / 1</span>
+              <button class="slide-btn slide-btn--next" aria-label="Next">▶</button>
+            </div>
+          </div>
+        </a>
+        <div class="work-item-info">
+          <h3 class="work-item-title">Papeltec</h3>
+          <p class="work-item-desc">Brand Identity, Packaging, Manufacturing</p>
+        </div>
+      </article>
 
-    <article class="work-item work-item--placeholder" data-reveal>
-      <div class="work-item-link"><div class="work-item-img"></div></div>
-      <div class="work-item-info">
-        <h3 class="work-item-title">Coming soon</h3>
-      </div>
-    </article>
+      <article class="work-item" data-reveal>
+        <a href="#caixa" class="work-item-link">
+          <div class="work-item-img">
+            <img src="assets/images/cases/caixa.png" alt="Caixa" class="slide-img active" loading="lazy" />
+            <div class="slide-nav">
+              <button class="slide-btn slide-btn--prev" aria-label="Previous">◀</button>
+              <span class="slide-idx">1 / 1</span>
+              <button class="slide-btn slide-btn--next" aria-label="Next">▶</button>
+            </div>
+          </div>
+        </a>
+        <div class="work-item-info">
+          <h3 class="work-item-title">Caixa</h3>
+          <p class="work-item-desc">Brand Identity, COP30, Institutional</p>
+        </div>
+      </article>
 
+      <article class="work-item" data-reveal>
+        <a href="#natura" class="work-item-link">
+          <div class="work-item-img">
+            <img src="assets/images/cases/natura.png" alt="Natura" class="slide-img active" loading="lazy" />
+            <div class="slide-nav">
+              <button class="slide-btn slide-btn--prev" aria-label="Previous">◀</button>
+              <span class="slide-idx">1 / 1</span>
+              <button class="slide-btn slide-btn--next" aria-label="Next">▶</button>
+            </div>
+          </div>
+        </a>
+        <div class="work-item-info">
+          <h3 class="work-item-title">Natura</h3>
+          <p class="work-item-desc">Brand Identity, Packaging, Beauty</p>
+        </div>
+      </article>
+
+      <article class="work-item" data-reveal>
+        <a href="#ativa" class="work-item-link">
+          <div class="work-item-img">
+            <img src="assets/images/cases/ativa.png" alt="Ativa" class="slide-img active" loading="lazy" />
+            <div class="slide-nav">
+              <button class="slide-btn slide-btn--prev" aria-label="Previous">◀</button>
+              <span class="slide-idx">1 / 1</span>
+              <button class="slide-btn slide-btn--next" aria-label="Next">▶</button>
+            </div>
+          </div>
+        </a>
+        <div class="work-item-info">
+          <h3 class="work-item-title">Ativa</h3>
+          <p class="work-item-desc">Brand Identity, Visual System, Finance</p>
+        </div>
+      </article>
+
+      <article class="work-item" data-reveal>
+        <a href="#vibra" class="work-item-link">
+          <div class="work-item-img">
+            <img src="assets/images/cases/vibra.png" alt="Vibra" class="slide-img active" loading="lazy" />
+            <div class="slide-nav">
+              <button class="slide-btn slide-btn--prev" aria-label="Previous">◀</button>
+              <span class="slide-idx">1 / 1</span>
+              <button class="slide-btn slide-btn--next" aria-label="Next">▶</button>
+            </div>
+          </div>
+        </a>
+        <div class="work-item-info">
+          <h3 class="work-item-title">Vibra</h3>
+          <p class="work-item-desc">Brand Identity, Pictogram, Energy</p>
+        </div>
+      </article>
+
+      <article class="work-item" data-reveal>
+        <a href="#mdesign" class="work-item-link">
+          <div class="work-item-img">
+            <img src="assets/images/cases/mdesign.png" alt="MDesign" class="slide-img active" loading="lazy" />
+            <div class="slide-nav">
+              <button class="slide-btn slide-btn--prev" aria-label="Previous">◀</button>
+              <span class="slide-idx">1 / 1</span>
+              <button class="slide-btn slide-btn--next" aria-label="Next">▶</button>
+            </div>
+          </div>
+        </a>
+        <div class="work-item-info">
+          <h3 class="work-item-title">MDesign</h3>
+          <p class="work-item-desc">Brand Identity, Motion, Design</p>
+        </div>
+      </article>
+
+    </section>
+    <button class="work-scroll-btn" aria-label="Scroll for more">👉</button>
+  </div>
+
+  <!-- ─── Bio ──────────────────────────────────────────────────────── -->
+  <section class="bio-section">
+    <p data-i18n="bio_text">São Paulo–based Multidisciplinary Designer, focused on Brand &amp; Digital. Currently independent. Formerly Senior Designer at Tatil Design. Collaborated with agencies and consultancies like R/GA, Monigle (US), Marcas com Sal, among others.</p>
+    <p data-i18n="bio_text2">9+ years building logos, visual identities, typography, iconography, packaging, signage, and campaign art direction for brands like Itaú, Ambev, Natura, Avon, Google, Danone, C6, Caixa, Enjoei, Vibra and 99 App. Recognized at the Brazilian Graphic Design Biennial, Latin American Design Awards and Brazil Design Awards.</p>
   </section>
 
   <!-- ─── Footer ──────────────────────────────────────────────────── -->
   <footer class="site-footer">
-    <div class="footer-headline">
-      <p data-i18n="footer_line1">End the page, not ideas.</p>
-      <p data-i18n="footer_line2">Let's Talk.</p>
+    <div class="footer-top">
+
+      <div class="footer-col-left">
+        <p class="footer-tagline" data-i18n="footer_line1">End the page, not ideas.</p>
+        <div class="footer-contact-block">
+          <span class="footer-contact-label" data-i18n="footer_available">Available for projects:</span>
+          <a href="mailto:talkmauriciof@gmail.com" class="footer-contact-link">talkmauriciof@gmail.com</a>
+        </div>
+      </div>
+
+      <div class="footer-col-right">
+        <nav class="footer-nav">
+          <a href="index.html"  class="footer-nav-link" data-i18n="nav_home">Home</a>
+          <a href="#work"       class="footer-nav-link" data-i18n="nav_work">Work</a>
+          <a href="about.html"  class="footer-nav-link" data-i18n="nav_about">About</a>
+          <a href="#gallery"    class="footer-nav-link" data-i18n="nav_gallery">Gallery</a>
+        </nav>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/in/mauriciodesignbr/" target="_blank" rel="noopener" class="footer-social-link">LinkedIn ↗</a>
+          <a href="https://api.whatsapp.com/send?phone=5511930780104" target="_blank" rel="noopener" class="footer-social-link">WhatsApp ↗</a>
+          <button class="footer-copy-btn" data-copy-email>talkmauriciof@gmail.com</button>
+        </div>
+        <div class="footer-meta-block">
+          <p>São Paulo — Brasil</p>
+          <p>©2016–2026</p>
+        </div>
+      </div>
+
     </div>
-    <div class="footer-bottom">
-      <div class="footer-links">
-        <a href="mailto:talkmauriciof@gmail.com">talkmauriciof@gmail.com</a>
-        <a href="https://api.whatsapp.com/send?phone=5511930780104" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-        <a href="https://www.linkedin.com/in/mauriciodesignbr/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      </div>
-      <div class="footer-meta">
-        <p class="footer-location">São Paulo — Brasil</p>
-        <button class="footer-scroll-top" data-i18n="scroll_top">↑ top</button>
-      </div>
+
+    <div class="footer-wordmark" aria-hidden="true">¯\_( ͡• ͜ʖ ͡•)_/¯</div>
+
+    <div class="footer-bar">
+      <button class="footer-scroll-top" data-i18n="scroll_top">↑ top</button>
     </div>
   </footer>
 

@@ -20,9 +20,14 @@ function applyTranslations() {
 
   document.documentElement.lang = currentLang;
 
-  /* Round lang button shows the OTHER language (what you'd switch to) */
+  /* Lang button shows CURRENT language */
   const langRound = document.getElementById('lang-round');
-  if (langRound) langRound.textContent = currentLang === 'en' ? 'PT' : 'EN';
+  if (langRound) {
+    const isEn = currentLang === 'en';
+    const flagEl = langRound.querySelector('.lang-flag');
+    if (flagEl) flagEl.textContent = isEn ? '🇺🇸' : '🇧🇷';
+    langRound.dataset.lang = currentLang;
+  }
 
   /* Pill support (about.html) */
   document.querySelectorAll('.lang-pill-opt').forEach(opt => {

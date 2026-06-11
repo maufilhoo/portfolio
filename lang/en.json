@@ -46,9 +46,17 @@
   "nav_cta": "Let's work together",
   "nav_intro": "Hello, I'm Mauricio Filho",
   "nav_role": ". Independent Designer",
+  "nav_home": "Home",
   "nav_work": "Work",
   "nav_about": "About",
+  "nav_gallery": "Gallery",
+  "nav_contact": "Contact",
   "nav_copy": "Copy-email",
+  "hero_line1": "I'm Mauricio Filho",
+  "hero_line2": "Brand & Visual Designer",
+  "hero_line3": "based in São Paulo.",
+  "footer_line1": "End the page, not ideas.",
+  "footer_line2": "Let's Talk.",
 
   "hero_tagline": "I shape brands &\nbuild visual identities.",
 
@@ -56,5 +64,7 @@
   "bio_text2": "9+ years building logos, visual identities, typography, iconography, packaging, signage, and campaign art direction for brands like Itaú, Ambev, Natura, Avon, Google, Danone, C6, Caixa, Enjoei, Vibra and 99 App. Recognized at the Brazilian Graphic Design Biennial, Latin American Design Awards and Brazil Design Awards.",
   "explore_cta": "explore my work",
 
-  "footer_big": "Let's build something together."
+  "footer_big": "Let's build something together.",
+  "footer_new_work": "New Work:",
+  "footer_available": "Available for projects:"
 }

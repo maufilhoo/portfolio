@@ -1,22 +1,7 @@
 /* ─── Tablet (≤ 1024px) ─────────────────────────────────────────── */
 @media (max-width: 1024px) {
   :root { --gutter: 1.5rem; }
-
-  /* Header — hide greeting text, keep nav links */
-  .nav-intro { display: none; }
-  .nav-fish  { display: none; }
-  .nav-sep:first-of-type { display: none; }
-
-  /* Bio */
-  .bio-section { padding: 5rem var(--gutter) 4rem; }
-
-  /* Projects */
-  .project-koto-media { height: 60vh; }
-  .project-koto-title { font-size: clamp(2.5rem, 6vw, 7rem); }
-  .project-koto-info  { grid-template-columns: 1fr; column-gap: 0; }
-
-  /* Footer */
-  .footer-cta { font-size: clamp(2.5rem, 9vw, 9rem); }
+  .hero-title span { font-size: clamp(1.75rem, 4vw, 3rem); }
 }
 
 /* ─── Mobile (≤ 768px) ──────────────────────────────────────────── */
@@ -24,42 +9,37 @@
   :root { --gutter: 1.25rem; }
 
   /* Header */
-  .site-header { height: 48px; }
-  .nav-center  { display: none; }
-  .audio-label { display: none; }
-  .nav-right   { gap: 0.5rem; }
+  .site-header { height: 64px; }
+  .nav-fish-pill { display: none !important; }
+  .nav-fish-wrap:hover { padding-left: 0.3rem; }
 
   /* Hero */
-  .hero-tagline { font-size: clamp(2.25rem, 9vw, 4.5rem); }
-  .hero-foot    { padding-bottom: 2.5rem; }
+  .hero-section { padding-top: 120px; }
+  .hero-title span { font-size: clamp(1.5rem, 7vw, 2.5rem); }
+  .hero-photo-link { width: 110px; height: 110px; margin-top: 32px; }
+  .welcome-tagline { font-size: 1rem; margin-top: 80px; }
 
-  /* Bio */
-  .bio-section  { padding: 4rem var(--gutter) 3.5rem; }
-  .bio-text p:first-child { font-size: 1.1rem; }
-  .bio-text p:last-child  { font-size: 0.875rem; }
+  /* Featured */
+  .featured-media { aspect-ratio: 4/3; }
 
-  /* Work label */
-  .work-label { padding: 2.5rem var(--gutter) 2rem; }
-
-  /* Projects */
-  .project-koto-media { height: 56vw; min-height: 220px; }
-  .project-koto-title { font-size: clamp(2.25rem, 9vw, 4rem); }
-  .project-koto-info  { grid-template-columns: 1fr; column-gap: 0; padding-bottom: 3rem; }
+  /* Work grid — keep horizontal scroll, just adjust item sizes */
+  .work-item--square { width: 220px; }
+  .work-item--portrait { width: 180px; }
 
   /* Footer */
-  .footer-cta    { font-size: clamp(2rem, 10vw, 4.5rem); margin-bottom: 3.5rem; }
-  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
-  .footer-links  { gap: 1.25rem; }
+  .footer-top { grid-template-columns: 1fr; gap: 3rem; }
+  .footer-wordmark { font-size: clamp(1rem, 5vw, 1.5rem); }
+  .footer-col-right { grid-template-columns: 1fr 1fr; }
 
   /* About */
-  .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-  .about-name { font-size: clamp(2.5rem, 8vw, 4rem); }
+  .about-hero { grid-template-columns: 1fr; gap: 2rem; }
+  .about-row { grid-template-columns: 1fr; gap: 1rem; }
 }
 
-/* ─── Small mobile (≤ 375px) ────────────────────────────────────── */
-@media (max-width: 375px) {
+/* ─── Small mobile (≤ 480px) ────────────────────────────────────── */
+@media (max-width: 480px) {
   :root { --gutter: 1rem; }
-  .hero-tagline        { font-size: 2rem; }
-  .project-koto-title  { font-size: 2rem; }
-  .footer-cta          { font-size: 1.75rem; }
+  .hero-title span { font-size: 1.5rem; }
+  .work-item--square { width: 180px; }
+  .work-item--portrait { width: 150px; }
 }

@@ -46,9 +46,17 @@
   "nav_cta": "Vamos trabalhar juntos",
   "nav_intro": "Olá, sou Mauricio Filho",
   "nav_role": ". Designer Independente",
+  "nav_home": "Home",
   "nav_work": "Projetos",
   "nav_about": "Sobre",
+  "nav_gallery": "Galeria",
+  "nav_contact": "Contato",
   "nav_copy": "Copiar e-mail",
+  "hero_line1": "Sou Mauricio Filho",
+  "hero_line2": "Designer de Marca & Visual",
+  "hero_line3": "baseado em São Paulo.",
+  "footer_line1": "Fim da página, não das ideias.",
+  "footer_line2": "Vamos Conversar.",
 
   "hero_tagline": "Construo marcas &\nidentidades visuais.",
 
@@ -56,5 +64,7 @@
   "bio_text2": "9+ anos construindo logos, identidades visuais, tipografia, iconografia, embalagens, sinalização e direção de arte para marcas como Itaú, Ambev, Natura, Avon, Google, Danone, C6, Caixa, Enjoei, Vibra e 99 App. Reconhecido na Bienal Brasileira de Design Gráfico, Latin American Design Awards e Brazil Design Awards.",
   "explore_cta": "explore meu trabalho",
 
-  "footer_big": "Vamos construir algo juntos."
+  "footer_big": "Vamos construir algo juntos.",
+  "footer_new_work": "Novos Projetos:",
+  "footer_available": "Disponível para projetos:"
 }
