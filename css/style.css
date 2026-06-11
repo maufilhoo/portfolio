@@ -261,28 +261,28 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 /* Fish menu */
 .nav-fish-wrap {
   display: flex;
-  flex-direction: row-reverse;  /* fish btn on right, links grow left */
+  flex-direction: row;
   align-items: center;
-  width: 54px;
+  width: fit-content;
   height: 54px;
   border-radius: 100px;
   border: 1px solid #DFDEDE;
   background: #FCFBFA;
   padding: 0;
   overflow: hidden;
-  transition: width 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              padding-left 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: padding 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .nav-fish-wrap:hover,
 .nav-fish-wrap:focus-within {
-  width: 380px;
-  padding-left: 1.5rem;
+  padding: 0 0 0 1.25rem;
 }
+.nav-fish-pill { order: 1; }
+.nav-fish-btn  { order: 2; flex-shrink: 0; }
 
 .nav-fish-pill {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.15rem;
   max-width: 0;
   overflow: hidden;
   white-space: nowrap;

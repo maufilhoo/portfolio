@@ -151,7 +151,6 @@ function initScrollHint() {
 document.addEventListener('DOMContentLoaded', async () => {
   initOverlay();
   initScrollTop();
-  initCopyEmail();
   initWorkReveal();
   initAudio();
   initHeaderScroll();
@@ -159,4 +158,5 @@ document.addEventListener('DOMContentLoaded', async () => {
   initSliders();
   initScrollHint();
   await initI18n();
+  initCopyEmail();
 });
