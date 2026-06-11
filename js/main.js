@@ -162,155 +162,484 @@ function initBioFade() {
   update();
 }
 
-/* ─── Dock magnification for thumbnail strip ────────────────────── */
-function initDockEffect(showcase) {
-  const BASE_H   = 44;
-  const MAX_H    = 90;
-  const RADIUS   = 130;
+/* ─── Feed items ─────────────────────────────────────────────────── */
+const FEED_ITEMS = [
+  'assets/images/feed/1.png',
+  'assets/images/feed/2.png',
+  'assets/images/feed/3.png',
+  'assets/images/feed/4.png',
+  'assets/images/feed/5.png',
+  'assets/images/feed/6.gif',
+  'assets/images/feed/7.png',
+  'assets/images/feed/8.gif',
+  'assets/images/feed/9.png',
+  'assets/images/feed/10.mp4',
+  'assets/images/feed/11.png',
+  'assets/images/feed/12.gif',
+  'assets/images/feed/13.png',
+  'assets/images/feed/14.png',
+  'assets/images/feed/15.jpg',
+  'assets/images/feed/16.png',
+  'assets/images/feed/17.jpg',
+  'assets/images/feed/18.png',
+  'assets/images/feed/19.png',
+  'assets/images/feed/20.png',
+  'assets/images/feed/21.gif',
+  'assets/images/feed/22.png',
+  'assets/images/feed/23.png',
+];
 
-  function applyDock(mouseX) {
-    const strip = showcase.querySelector('.showcase-thumbs');
-    if (!strip) return;
-    strip.querySelectorAll('.showcase-thumb-item').forEach(item => {
-      const r    = item.getBoundingClientRect();
-      const cx   = r.left + r.width / 2;
-      const dist = Math.abs(mouseX - cx);
-      const t    = Math.max(0, 1 - dist / RADIUS);
-      const h    = BASE_H + (MAX_H - BASE_H) * Math.pow(t, 1.5);
-      item.style.height = h + 'px';
-    });
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+/* ─── Feed showcase (random auto-play) ──────────────────────────── */
+function initFeedShowcase() {
+  const section = document.getElementById('work');
+  if (!section) return;
+
+  const items = [...FEED_ITEMS];
+  let idx = 0;
+  let current = null;
+  let timer = null;
+
+  function next() {
+    if (idx >= items.length) { idx = 0; }
+    const src = items[idx++];
+    const isVideo = src.endsWith('.mp4');
+
+    let el;
+    if (isVideo) {
+      el = document.createElement('video');
+      el.autoplay = true;
+      el.muted = true;
+      el.playsInline = true;
+      el.loop = false;
+      el.src = src;
+      el.addEventListener('ended', () => { clearTimeout(timer); next(); });
+    } else {
+      el = document.createElement('img');
+      el.src = src;
+      el.alt = '';
+    }
+    el.className = 'feed-media';
+    section.appendChild(el);
+
+    const old = current;
+    current = el;
+
+    requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('visible')));
+
+    if (old) {
+      old.classList.remove('visible');
+      setTimeout(() => { if (old.parentNode) old.remove(); }, 750);
+    }
+
+    if (!isVideo) {
+      clearTimeout(timer);
+      timer = setTimeout(next, 4500);
+    }
   }
 
-  function resetDock() {
-    const strip = showcase.querySelector('.showcase-thumbs');
-    if (!strip) return;
-    strip.querySelectorAll('.showcase-thumb-item').forEach(item => {
-      item.style.height = BASE_H + 'px';
-    });
-  }
-
-  showcase.addEventListener('mousemove', e => {
-    if (e.target.closest('.showcase-thumbs')) applyDock(e.clientX);
-    else resetDock();
-  });
-  showcase.addEventListener('mouseleave', resetDock);
+  next();
 }
 
 /* ─── Project data ───────────────────────────────────────────────── */
 const PROJECT_DATA = {
   enjoei: {
-    detail: 'Enjoei came to us at a turning point. Born from internet culture, the brand had accumulated multiple references, codes, and personalities, but needed clearer structure and maturity to evolve alongside a growing audience. Our role was to organize this abundance without losing its irreverence, shaping a flexible, contemporary, and living identity system.\n\nWe redesigned the logo, developed proprietary assets, and created Enjoei Display, a custom typeface built to support multiple moods and expressions. Technology extended the craft through a creative platform that turns letters into patterns, prints, and infinite compositions for everyday use.\n\nAs a Senior Designer, I was deeply involved across all aspects of the project, from visual identity and typography to the creative platform, case development, and visual assets. Projeto desenvolvido na Tátil Design.',
+    client: 'Enjoei',
+    detail: 'Enjoei came to us at a turning point. Born from internet culture, the brand had accumulated multiple references, codes, and personalities, but needed clearer structure and maturity to evolve alongside a growing audience. Our role was to organize this abundance without losing its irreverence, shaping a flexible, contemporary, and living identity system.\n\nWe redesigned the logo, developed proprietary assets, and created Enjoei Display, a custom typeface built to support multiple moods and expressions. Technology extended the craft through a creative platform that turns letters into patterns, prints, and infinite compositions for everyday use.\n\nAs a Senior Designer, I was deeply involved across all aspects of the project, from visual identity and typography to the creative platform, case development, and visual assets. Developed at Tátil Design.',
     credits: [
-      ['Eduardo França, Gustavo André, Mauricio Filho e Mariana Hermeto', 'Direção: Dandara Almeida'],
-      ['Estratégia', 'Anna Carla, Carol Polli e Sarah Stutz', 'Direção: Paula Marchiori'],
-      ['Verbal', 'Elen Campos e Vallécia Carvalho'],
-      ['Parceiros', 'Tipografia Enjoei Display: Blackletra', 'Programação criativa: André Burnier', 'Identidade sonora: Consoante'],
+      [{ pt: 'Design',     en: 'Design' },     'Eduardo França, Gustavo André, Mauricio Filho e Mariana Hermeto', { pt: 'Direção: Dandara Almeida', en: 'Direction: Dandara Almeida' }],
+      [{ pt: 'Estratégia', en: 'Strategy' },   'Anna Carla, Carol Polli e Sarah Stutz', { pt: 'Direção: Paula Marchiori', en: 'Direction: Paula Marchiori' }],
+      [{ pt: 'Verbal',     en: 'Copywriting' },'Elen Campos e Vallécia Carvalho'],
+      [{ pt: 'Parceiros',  en: 'Partners' },   'Tipografia Enjoei Display: Blackletra', 'Programação criativa: André Burnier', 'Identidade sonora: Consoante'],
     ]
-  }
+  },
+  justos:        { client: 'Justos' },
+  phlor:         { client: 'Phlor' },
+  metallo:       { client: 'Metallo' },
+  papeltec:      { client: 'Papeltec' },
+  caixa:         { client: 'Caixa' },
+  'natura-homem':{ client: 'Natura' },
+  'natura-pais': { client: 'Natura' },
+  ativa:         { client: 'Ativa' },
+  vibra:         { client: 'Vibra' },
+  mdesign:       { client: 'MDesign' },
 };
 
-/* ─── Work showcase ──────────────────────────────────────────────── */
-function initWorkShowcase() {
-  const track    = document.getElementById('work-showcase-track');
-  const rows     = document.querySelectorAll('.work-list-row');
+/* ─── Work table ─────────────────────────────────────────────────── */
+function initWorkTable() {
+  const wrap = document.querySelector('.work-table-wrap');
+  if (!wrap) return;
 
-  if (!track || !rows.length) return;
+  const rows = wrap.querySelectorAll('.wt-row');
+  const preview = document.getElementById('wt-hover-preview');
+  const previewImg = preview ? preview.querySelector('img') : null;
+  let activeRow = null;
 
-  let images   = [];
-  let cur      = 0;
-  let activeIdx = 0;
-
-  function buildThumbs(imgs) {
-    const showcase = track.parentElement;
-    const existing = showcase.querySelector('.showcase-thumbs');
-    if (existing) existing.remove();
-    if (!imgs.length) return;
-
-    const strip = document.createElement('div');
-    strip.className = 'showcase-thumbs';
-
-    imgs.forEach((src, i) => {
-      const item = document.createElement('div');
-      item.className = 'showcase-thumb-item' + (i === 0 ? ' active' : '');
-      const img = document.createElement('img');
-      img.src = src;
-      img.alt = '';
-      img.loading = 'lazy';
-      item.appendChild(img);
-      item.addEventListener('click', () => showSlide(i));
-      strip.appendChild(item);
+  if (preview && previewImg) {
+    document.addEventListener('mousemove', e => {
+      preview.style.left = e.clientX + 'px';
+      preview.style.top  = e.clientY + 'px';
     });
 
-    showcase.appendChild(strip);
-  }
-
-  function buildSlides(imgs) {
-    track.innerHTML = '';
-    imgs.forEach((src, i) => {
-      const img = document.createElement('img');
-      img.src = src;
-      img.alt = '';
-      img.className = 'work-showcase-img' + (i === 0 ? ' active' : '');
-      img.loading = i === 0 ? 'eager' : 'lazy';
-      track.appendChild(img);
+    rows.forEach(row => {
+      const head = row.querySelector('.wt-row-head');
+      head.addEventListener('mouseenter', () => {
+        if (row.classList.contains('is-open')) return;
+        try {
+          const imgs = JSON.parse(row.dataset.images || '[]');
+          if (imgs.length) { previewImg.src = imgs[0]; preview.classList.add('visible'); }
+        } catch(e) {}
+      });
+      head.addEventListener('mouseleave', () => preview.classList.remove('visible'));
     });
-    cur = 0;
-    buildThumbs(imgs);
   }
 
-  function showSlide(n) {
-    const slides     = track.querySelectorAll('.work-showcase-img');
-    const thumbItems = track.parentElement.querySelectorAll('.showcase-thumb-item');
-    if (!slides.length) return;
-    slides[cur].classList.remove('active');
-    if (thumbItems[cur]) thumbItems[cur].classList.remove('active');
-    cur = (n + slides.length) % slides.length;
-    slides[cur].classList.add('active');
-    if (thumbItems[cur]) {
-      thumbItems[cur].classList.add('active');
-      thumbItems[cur].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  rows.forEach(row => {
+    row.querySelector('.wt-row-head').addEventListener('click', () => {
+      const isOpen = row.classList.contains('is-open');
+      if (activeRow && activeRow !== row) closeRow(activeRow);
+      isOpen ? (() => { closeRow(row); activeRow = null; })()
+             : (() => { openRow(row);  activeRow = row;  })();
+    });
+  });
+
+  document.getElementById('lang-round')?.addEventListener('click', () => {
+    if (activeRow) { closeRow(activeRow); activeRow = null; }
+    wrap.querySelectorAll('.wt-expand-inner[data-built]').forEach(el => delete el.dataset.built);
+  });
+
+  function openRow(row) {
+    if (preview) preview.classList.remove('visible');
+    row.classList.add('is-open');
+    buildExpand(row);
+    requestAnimationFrame(() => row.querySelector('.wt-expand').classList.add('is-open'));
+  }
+
+  function closeRow(row) {
+    row.classList.remove('is-open');
+    row.querySelector('.wt-expand').classList.remove('is-open');
+  }
+
+  function buildExpand(row) {
+    const inner = row.querySelector('.wt-expand-inner');
+    if (inner.dataset.built) return;
+    inner.dataset.built = '1';
+
+    const project  = row.dataset.project;
+    const data     = PROJECT_DATA[project] || {};
+    const name     = row.querySelector('.wt-name')?.textContent || '';
+    const sector   = row.querySelector('.wt-sector')?.textContent || '';
+    const services = row.querySelector('.wt-services')?.textContent || '';
+
+    let imgs = [];
+    try { imgs = JSON.parse(row.dataset.images || '[]'); } catch(e) {}
+
+    // ── Info panel (col 1) ───────────────────────────────────────
+    const info = document.createElement('div');
+    info.className = 'wt-info-panel';
+
+    const titleEl = document.createElement('h2');
+    titleEl.className = 'wt-expand-title';
+    titleEl.textContent = name;
+    info.appendChild(titleEl);
+
+    const meta = document.createElement('div');
+    meta.className = 'wt-expand-meta';
+    const svcEl = document.createElement('span');
+    svcEl.className = 'wt-expand-svc';
+    svcEl.textContent = services;
+    meta.appendChild(svcEl);
+    info.appendChild(meta);
+
+    if (data.detail) {
+      const desc = document.createElement('div');
+      desc.className = 'wt-expand-desc';
+      desc.innerHTML = data.detail.split('\n\n').map(p =>
+        `<p>${p.replace(/\n/g, '<br>')}</p>`
+      ).join('');
+      info.appendChild(desc);
     }
-  }
 
-  function buildDetail(row) {
-    let detail = row.querySelector('.work-list-detail');
-    if (detail) { detail.remove(); return; }
+    if (data.credits && data.credits.length) {
+      const isEN = document.documentElement.lang === 'en';
+      const credWrap = document.createElement('div');
+      credWrap.className = 'wt-credits';
 
-    const data = PROJECT_DATA[row.dataset.project];
-    if (!data || !data.detail) return;
+      const credToggle = document.createElement('button');
+      credToggle.className = 'wt-credits-toggle';
+      const credLabel = document.createElement('span');
+      credLabel.className = 'wt-credits-label';
+      credLabel.textContent = isEN ? 'Technical Sheet' : 'Ficha Técnica';
+      const credIcon = document.createElement('span');
+      credIcon.className = 'wt-credits-icon';
+      credIcon.textContent = '+';
+      credToggle.appendChild(credLabel);
+      credToggle.appendChild(credIcon);
 
-    detail = document.createElement('div');
-    detail.className = 'work-list-detail';
-    detail.innerHTML = data.detail.split('\n\n').map(p =>
-      `<p>${p.replace(/\n/g, '<br>')}</p>`
-    ).join('');
-    row.appendChild(detail);
-  }
+      const credBody = document.createElement('div');
+      credBody.className = 'wt-credits-body';
 
-  function selectProject(row, idx) {
-    activeIdx = idx;
-    rows.forEach(r => {
-      r.classList.remove('active');
-      const d = r.querySelector('.work-list-detail');
-      if (d) d.remove();
+      data.credits.forEach(([labelObj, ...values]) => {
+        const label = typeof labelObj === 'object' ? (isEN ? labelObj.en : labelObj.pt) : labelObj;
+        const credRow = document.createElement('div');
+        credRow.className = 'wt-credits-row';
+        const keyEl = document.createElement('span');
+        keyEl.className = 'wt-credits-key';
+        keyEl.textContent = label;
+        credRow.appendChild(keyEl);
+        values.forEach(v => {
+          const resolved = typeof v === 'object' ? (isEN ? v.en : v.pt) : v;
+          const valEl = document.createElement('span');
+          valEl.className = 'wt-credits-val';
+          valEl.textContent = resolved;
+          credRow.appendChild(valEl);
+        });
+        credBody.appendChild(credRow);
+      });
+
+      credToggle.addEventListener('click', () => {
+        const open = credWrap.classList.toggle('is-open');
+        credIcon.textContent = open ? '−' : '+';
+      });
+
+      credWrap.appendChild(credToggle);
+      credWrap.appendChild(credBody);
+      info.appendChild(credWrap);
+    }
+
+    inner.appendChild(info);
+
+    // ── Carousel wrap (cols 2–3, aligned to services col) ────────
+    const carouselWrap = document.createElement('div');
+    carouselWrap.className = 'wt-carousel-wrap';
+
+    const carouselOuter = document.createElement('div');
+    carouselOuter.className = 'wt-carousel-outer';
+
+    const carousel = document.createElement('div');
+    carousel.className = 'wt-carousel';
+
+    imgs.forEach(src => {
+      let el;
+      if (src.endsWith('.mp4')) {
+        el = document.createElement('video');
+        el.src      = src;
+        el.autoplay = true;
+        el.muted    = true;
+        el.loop     = true;
+        el.playsInline = true;
+        el.style.height = '100%';
+        el.style.width  = 'auto';
+        el.style.borderRadius = '6px';
+        el.style.flexShrink = '0';
+        el.style.display = 'block';
+      } else {
+        el = document.createElement('img');
+        el.src     = src;
+        el.alt     = '';
+        el.loading = 'lazy';
+      }
+      carousel.appendChild(el);
     });
-    row.classList.add('active');
-    buildDetail(row);
+    carouselOuter.appendChild(carousel);
+    carouselWrap.appendChild(carouselOuter);
 
-    try { images = JSON.parse(row.dataset.images || '[]'); } catch(e) { images = []; }
-    buildSlides(images);
+    // Dots
+    if (imgs.length > 1) {
+      const dotsEl = document.createElement('div');
+      dotsEl.className = 'wt-dots';
 
-    document.getElementById('work').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const dots = imgs.map((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'wt-dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', `Image ${i + 1}`);
+        dot.addEventListener('click', e => {
+          e.preventDefault();
+          dot.blur();
+          const imgEl = carousel.children[i];
+          if (imgEl) carouselOuter.scrollTo({ left: imgEl.offsetLeft, behavior: 'smooth' });
+        });
+        dotsEl.appendChild(dot);
+        return dot;
+      });
+
+      carouselOuter.addEventListener('scroll', () => {
+        const mid = carouselOuter.scrollLeft + carouselOuter.clientWidth / 2;
+        let best = 0, bestDist = Infinity;
+        Array.from(carousel.children).forEach((img, i) => {
+          const dist = Math.abs(img.offsetLeft + img.offsetWidth / 2 - mid);
+          if (dist < bestDist) { bestDist = dist; best = i; }
+        });
+        dots.forEach((d, i) => d.classList.toggle('active', i === best));
+      }, { passive: true });
+
+      carouselWrap.appendChild(dotsEl);
+    }
+
+    inner.appendChild(carouselWrap);
+  }
+}
+
+/* ─── Gallery ────────────────────────────────────────────────────── */
+const GALLERY_DATA = [
+  { project: 'enjoei',   label: 'Enjoei',
+    picks: ['assets/images/cases/enjoei/1.png','assets/images/cases/enjoei/5.png','assets/images/cases/enjoei/12.png'],
+    all:   ['assets/images/cases/enjoei/1.png','assets/images/cases/enjoei/2.jpg','assets/images/cases/enjoei/3.jpg','assets/images/cases/enjoei/4.jpg','assets/images/cases/enjoei/5.png','assets/images/cases/enjoei/6.jpg','assets/images/cases/enjoei/7.png','assets/images/cases/enjoei/8.png','assets/images/cases/enjoei/10.png','assets/images/cases/enjoei/11.jpg','assets/images/cases/enjoei/12.png','assets/images/cases/enjoei/14.png','assets/images/cases/enjoei/15.png','assets/images/cases/enjoei/16.jpg','assets/images/cases/enjoei/17.jpg','assets/images/cases/enjoei/18.jpg','assets/images/cases/enjoei/20.png','assets/images/cases/enjoei/21.png','assets/images/cases/enjoei/22.png'] },
+  { project: 'justos',   label: 'Justos',
+    picks: ['assets/images/cases/justos/1.png','assets/images/cases/justos/6.png','assets/images/cases/justos/11.png'],
+    all:   ['assets/images/cases/justos/1.png','assets/images/cases/justos/3.png','assets/images/cases/justos/6.png','assets/images/cases/justos/7.png','assets/images/cases/justos/9.png','assets/images/cases/justos/10.png','assets/images/cases/justos/11.png','assets/images/cases/justos/13.png','assets/images/cases/justos/15.png'] },
+  { project: 'phlor',    label: 'Phlor',
+    picks: ['assets/images/cases/phlor/1.png','assets/images/cases/phlor/5.png','assets/images/cases/phlor/10.png'],
+    all:   ['assets/images/cases/phlor/1.png','assets/images/cases/phlor/2.png','assets/images/cases/phlor/3.png','assets/images/cases/phlor/4.png','assets/images/cases/phlor/5.png','assets/images/cases/phlor/6.png','assets/images/cases/phlor/7.png','assets/images/cases/phlor/8.png','assets/images/cases/phlor/9.png','assets/images/cases/phlor/10.png','assets/images/cases/phlor/11.png','assets/images/cases/phlor/12.png','assets/images/cases/phlor/13.png','assets/images/cases/phlor/14.png','assets/images/cases/phlor/15.png'] },
+  { project: 'metallo',  label: 'Metallo',
+    picks: ['assets/images/cases/metallo/1.png','assets/images/cases/metallo/3.png','assets/images/cases/metallo/5.png'],
+    all:   ['assets/images/cases/metallo/1.png','assets/images/cases/metallo/2.png','assets/images/cases/metallo/3.png','assets/images/cases/metallo/4.png','assets/images/cases/metallo/5.png','assets/images/cases/metallo/6.png'] },
+  { project: 'papeltec', label: 'Papeltec',
+    picks: ['assets/images/cases/papeltec/1.png','assets/images/cases/papeltec/4.png','assets/images/cases/papeltec/7.png'],
+    all:   ['assets/images/cases/papeltec/1.png','assets/images/cases/papeltec/2.png','assets/images/cases/papeltec/3.png','assets/images/cases/papeltec/4.png','assets/images/cases/papeltec/5.png','assets/images/cases/papeltec/6.png','assets/images/cases/papeltec/7.png','assets/images/cases/papeltec/Frame 2629.png','assets/images/cases/papeltec/Frame 2630.png'] },
+  { project: 'caixa',    label: 'Caixa',
+    picks: ['assets/images/cases/caixa.png'],
+    all:   ['assets/images/cases/caixa.png'] },
+  { project: 'natura',   label: 'Natura',
+    picks: ['assets/images/cases/natura.png'],
+    all:   ['assets/images/cases/natura.png'] },
+  { project: 'ativa',    label: 'Ativa',
+    picks: ['assets/images/cases/ativa/1.png','assets/images/cases/ativa/3.png','assets/images/cases/ativa/5.png'],
+    all:   ['assets/images/cases/ativa/1.png','assets/images/cases/ativa/2.png','assets/images/cases/ativa/3.png','assets/images/cases/ativa/4.png','assets/images/cases/ativa/5.png','assets/images/cases/ativa/6.png'] },
+  { project: 'vibra',    label: 'Vibra Picto',
+    picks: ['assets/images/cases/vibra/1.png','assets/images/cases/vibra/3.png','assets/images/cases/vibra/5.png'],
+    all:   ['assets/images/cases/vibra/1.png','assets/images/cases/vibra/2.png','assets/images/cases/vibra/3.png','assets/images/cases/vibra/4.png','assets/images/cases/vibra/5.png','assets/images/cases/vibra/6.png','assets/images/cases/vibra/7.png'] },
+  { project: 'mdesign',  label: 'MDesign',
+    picks: ['assets/images/cases/mdesign/1.gif','assets/images/cases/mdesign/571399534.png','assets/images/cases/mdesign/Frame 84.png'],
+    all:   ['assets/images/cases/mdesign/1.gif','assets/images/cases/mdesign/571399534.png','assets/images/cases/mdesign/571399535.png','assets/images/cases/mdesign/Envelope.png','assets/images/cases/mdesign/Frame 2.png','assets/images/cases/mdesign/Frame 3.png','assets/images/cases/mdesign/Frame 84.png'] },
+];
+
+function initGallery() {
+  const section = document.getElementById('gallery');
+  if (!section) return;
+
+  // Label
+  const label = document.createElement('p');
+  label.className = 'gallery-label';
+  label.textContent = 'Gallery';
+  section.appendChild(label);
+
+  // Flat list of gallery items (shuffled)
+  const flat = [];
+  GALLERY_DATA.forEach(({ project, label: proj, picks, all }) => {
+    picks.forEach(src => flat.push({ src, project, label: proj, all }));
+  });
+  shuffle(flat);
+
+  // Scatter layout: 5 x-zones
+  const zones   = [3, 19, 38, 57, 73]; // % from left
+  const zoneY   = zones.map(() => 0);
+  const IMG_H   = 200; // fixed image height (px)
+  const CAP_H   = 24;
+  const GAP_MIN = 70;
+  const GAP_RND = 140;
+
+  const canvas = document.createElement('div');
+  canvas.className = 'gallery-canvas';
+  section.appendChild(canvas);
+
+  flat.forEach(item => {
+    // Place in shortest zone, with slight randomness to avoid strict ordering
+    const candidates = zoneY.map((y, i) => ({ i, y })).sort((a, b) => a.y - b.y).slice(0, 3);
+    const chosen = candidates[Math.floor(Math.random() * candidates.length)];
+    const zoneIdx = chosen.i;
+
+    const topGap  = GAP_MIN + Math.floor(Math.random() * GAP_RND);
+    const top     = zoneY[zoneIdx] + (zoneY[zoneIdx] === 0 ? Math.floor(Math.random() * 80) : topGap);
+
+    const el = document.createElement('div');
+    el.className = 'gallery-item';
+    el.style.left = zones[zoneIdx] + '%';
+    el.style.top  = top + 'px';
+    el.dataset.project = item.project;
+
+    const img = document.createElement('img');
+    img.src     = item.src;
+    img.alt     = '';
+    img.loading = 'lazy';
+
+    const cap = document.createElement('p');
+    cap.className   = 'gallery-item-caption';
+    cap.textContent = item.label;
+
+    el.appendChild(img);
+    el.appendChild(cap);
+    canvas.appendChild(el);
+
+    el.addEventListener('click', () => openLightbox(item.all, item.all.indexOf(item.src), item.label));
+
+    zoneY[zoneIdx] = top + IMG_H + CAP_H + GAP_MIN;
+  });
+
+  canvas.style.height = Math.max(...zoneY) + 80 + 'px';
+
+  // ── Lightbox ────────────────────────────────────────────────────
+  const lb      = document.createElement('div');
+  lb.className  = 'gallery-lightbox';
+  lb.innerHTML  = `
+    <button class="gallery-lb-close" aria-label="Close">✕</button>
+    <button class="gallery-lb-prev"  aria-label="Previous">←</button>
+    <img class="gallery-lightbox-img" src="" alt="" />
+    <button class="gallery-lb-next"  aria-label="Next">→</button>
+    <span class="gallery-lb-project"></span>
+    <span class="gallery-lb-counter"></span>
+  `;
+  document.body.appendChild(lb);
+
+  const lbImg     = lb.querySelector('.gallery-lightbox-img');
+  const lbCounter = lb.querySelector('.gallery-lb-counter');
+  const lbProject = lb.querySelector('.gallery-lb-project');
+  let lbImgs = [], lbIdx = 0;
+
+  function openLightbox(imgs, startIdx, projectLabel) {
+    lbImgs = imgs;
+    lbIdx  = Math.max(0, startIdx);
+    lbProject.textContent = projectLabel;
+    showLbSlide(lbIdx);
+    lb.classList.add('visible');
   }
 
-  rows.forEach((row, i) => row.addEventListener('click', () => selectProject(row, i)));
+  function showLbSlide(idx) {
+    lbImg.classList.add('fading');
+    setTimeout(() => {
+      lbImg.src = lbImgs[idx];
+      lbCounter.textContent = (idx + 1) + ' / ' + lbImgs.length;
+      lbImg.classList.remove('fading');
+    }, 160);
+  }
 
-  const firstIdx = Array.from(rows).findIndex(r => r.classList.contains('active'));
-  const startRow = rows[firstIdx >= 0 ? firstIdx : 0];
-  try { images = JSON.parse(startRow.dataset.images || '[]'); } catch(e) { images = []; }
-  buildSlides(images);
+  lb.querySelector('.gallery-lb-close').addEventListener('click', () => lb.classList.remove('visible'));
+  lb.addEventListener('click', e => { if (e.target === lb) lb.classList.remove('visible'); });
 
-  initDockEffect(track.parentElement);
+  lb.querySelector('.gallery-lb-prev').addEventListener('click', e => {
+    e.stopPropagation();
+    lbIdx = (lbIdx - 1 + lbImgs.length) % lbImgs.length;
+    showLbSlide(lbIdx);
+  });
+  lb.querySelector('.gallery-lb-next').addEventListener('click', e => {
+    e.stopPropagation();
+    lbIdx = (lbIdx + 1) % lbImgs.length;
+    showLbSlide(lbIdx);
+  });
+
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('visible')) return;
+    if (e.key === 'Escape')      lb.classList.remove('visible');
+    if (e.key === 'ArrowLeft')   { lbIdx = (lbIdx - 1 + lbImgs.length) % lbImgs.length; showLbSlide(lbIdx); }
+    if (e.key === 'ArrowRight')  { lbIdx = (lbIdx + 1) % lbImgs.length; showLbSlide(lbIdx); }
+  });
 }
 
 /* ─── Hero card gather animation ────────────────────────────────── */
@@ -479,7 +808,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   initHeaderScroll();
   initBioFade();
   initBioParallax();
-  initWorkShowcase();
+  initFeedShowcase();
+  initWorkTable();
   await initI18n();
   initHelloGreeting(armGather);
   initCopyEmail();

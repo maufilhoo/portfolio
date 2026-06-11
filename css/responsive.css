@@ -4,6 +4,18 @@
   .hero-title span { font-size: clamp(1.75rem, 4vw, 3rem); }
 }
 
+/* ─── Tablet work table ─────────────────────────────────────────── */
+@media (max-width: 960px) {
+  .work-table-head,
+  .wt-row-head { grid-template-columns: 1fr auto; }
+  .work-table-head span:nth-child(2),
+  .wt-services { display: none; }
+  .wt-expand-inner { grid-template-columns: 1fr; }
+  .wt-info-panel { grid-column: 1; height: auto; }
+  .wt-carousel-wrap { grid-column: 1; }
+  .wt-carousel-outer { height: 260px; }
+}
+
 /* ─── Mobile (≤ 768px) ──────────────────────────────────────────── */
 @media (max-width: 768px) {
   :root { --gutter: 1.25rem; }
@@ -34,6 +46,16 @@
   /* About */
   .about-hero { grid-template-columns: 1fr; gap: 2rem; }
   .about-row { grid-template-columns: 1fr; gap: 1rem; }
+
+  /* Work table */
+  .work-table-head,
+  .wt-row-head { grid-template-columns: 1fr auto; column-gap: 1rem; }
+  .work-table-head span:nth-child(3),
+  .work-table-head span:nth-child(4),
+  .wt-services, .wt-sector { display: none; }
+
+  /* Gallery */
+  .gallery-item img { height: 140px; max-width: 180px; }
 }
 
 /* ─── Small mobile (≤ 480px) ────────────────────────────────────── */

@@ -35,7 +35,7 @@
             <a href="index.html" class="nav-fish-link active" data-i18n="nav_home">Home</a>
             <a href="#work"      class="nav-fish-link" data-i18n="nav_work">Work</a>
             <a href="about.html" class="nav-fish-link" data-i18n="nav_about">About</a>
-            <a href="#gallery"   class="nav-fish-link" data-i18n="nav_gallery">Gallery</a>
+            <a href="gallery.html"   class="nav-fish-link" data-i18n="nav_gallery">Gallery</a>
             <button class="nav-fish-link" id="copy-email" data-i18n="nav_contact">Contact</button>
           </nav>
         </div>
@@ -81,127 +81,134 @@
     <div class="bio-divider" aria-hidden="true"></div>
   </section>
 
-  <!-- ─── Work showcase ───────────────────────────────────────────── -->
-  <section class="work-showcase" id="work">
-    <div class="work-showcase-track" id="work-showcase-track">
-      <img src="assets/images/cases/enjoei.png" alt="" class="work-showcase-img active" loading="eager" />
-    </div>
-  </section>
+  <!-- ─── Feed Showcase ──────────────────────────────────────────── -->
+  <section class="feed-showcase" id="work"></section>
 
-  <!-- ─── Work list ───────────────────────────────────────────────── -->
-  <div class="work-list">
+  <!-- ─── Work Table ──────────────────────────────────────────────── -->
+  <div class="work-table-wrap">
 
-    <div class="work-list-row active" data-project="enjoei"
-         data-images='["assets/images/cases/enjoei/1.png","assets/images/cases/enjoei/2.jpg","assets/images/cases/enjoei/3.jpg","assets/images/cases/enjoei/4.jpg","assets/images/cases/enjoei/5.png","assets/images/cases/enjoei/6.jpg","assets/images/cases/enjoei/7.png","assets/images/cases/enjoei/8.png","assets/images/cases/enjoei/10.png","assets/images/cases/enjoei/11.jpg","assets/images/cases/enjoei/12.png","assets/images/cases/enjoei/14.png","assets/images/cases/enjoei/15.png","assets/images/cases/enjoei/16.jpg","assets/images/cases/enjoei/17.jpg","assets/images/cases/enjoei/18.jpg","assets/images/cases/enjoei/20.png","assets/images/cases/enjoei/21.png","assets/images/cases/enjoei/22.png"]'>
-      <span class="work-list-name">Enjoei</span>
-      <span class="work-list-tags">
-        <span class="tag-cat">E-commerce</span>
-        <span class="tag-svc">Brand Identity</span>
-        <span class="tag-svc">Custom Type</span>
-        <span class="tag-svc">Generative Design</span>
-      </span>
-      <span class="work-list-year">—</span>
+    <div class="wt-hover-preview" id="wt-hover-preview" aria-hidden="true">
+      <img src="" alt="" />
     </div>
 
-    <div class="work-list-row" data-project="justos"
-         data-images='["assets/images/cases/justos/1.png","assets/images/cases/justos/3.png","assets/images/cases/justos/6.png","assets/images/cases/justos/7.png","assets/images/cases/justos/9.png","assets/images/cases/justos/10.png","assets/images/cases/justos/11.png","assets/images/cases/justos/13.png","assets/images/cases/justos/15.png"]'>
-      <span class="work-list-name">Justos</span>
-      <span class="work-list-tags">
-        <span class="tag-cat">InsurTech</span>
-        <span class="tag-svc">Brand Identity</span>
-        <span class="tag-svc">Shapes &amp; Icons</span>
-        <span class="tag-svc">Experience</span>
-      </span>
-      <span class="work-list-year">—</span>
-    </div>
+    <div class="work-table">
+      <div class="work-table-head">
+        <span data-i18n="wt_projects">Projetos</span>
+        <span data-i18n="wt_services">Serviços</span>
+        <span data-i18n="wt_year">Ano</span>
+      </div>
 
-    <div class="work-list-row" data-project="phlor"
-         data-images='["assets/images/cases/phlor/1.png","assets/images/cases/phlor/2.png","assets/images/cases/phlor/3.png","assets/images/cases/phlor/4.png","assets/images/cases/phlor/5.png","assets/images/cases/phlor/6.png","assets/images/cases/phlor/7.png","assets/images/cases/phlor/8.png","assets/images/cases/phlor/9.png","assets/images/cases/phlor/10.png","assets/images/cases/phlor/11.png","assets/images/cases/phlor/12.png","assets/images/cases/phlor/13.png","assets/images/cases/phlor/14.png","assets/images/cases/phlor/15.png"]'>
-      <span class="work-list-name">Phlor</span>
-      <span class="work-list-tags">
-        <span class="tag-cat">Wellness</span>
-        <span class="tag-svc">Brand Identity</span>
-        <span class="tag-svc">Typography</span>
-      </span>
-      <span class="work-list-year">—</span>
-    </div>
+      <div class="wt-row" data-project="enjoei"
+           data-images='["assets/images/cases/enjoei/1.png","assets/images/cases/enjoei/2.jpg","assets/images/cases/enjoei/3.jpg","assets/images/cases/enjoei/4.jpg","assets/images/cases/enjoei/5.png","assets/images/cases/enjoei/6.jpg","assets/images/cases/enjoei/7.png","assets/images/cases/enjoei/8.png","assets/images/cases/enjoei/10.png","assets/images/cases/enjoei/11.jpg","assets/images/cases/enjoei/12.png","assets/images/cases/enjoei/14.png","assets/images/cases/enjoei/15.png","assets/images/cases/enjoei/16.jpg","assets/images/cases/enjoei/17.jpg","assets/images/cases/enjoei/18.jpg","assets/images/cases/enjoei/20.png","assets/images/cases/enjoei/21.png","assets/images/cases/enjoei/22.png"]'>
+        <div class="wt-row-head">
+          <div class="wt-name-cell"><span class="wt-name">Enjoei</span><span class="wt-sector">E-commerce</span></div>
+          <span class="wt-services">Brand Identity · Custom Type · Generative Design</span>
+          <span class="wt-year">—</span>
+        </div>
+        <div class="wt-expand"><div class="wt-expand-inner"></div></div>
+      </div>
 
-    <div class="work-list-row" data-project="metallo"
-         data-images='["assets/images/cases/metallo/1.png","assets/images/cases/metallo/2.png","assets/images/cases/metallo/3.png","assets/images/cases/metallo/4.png","assets/images/cases/metallo/5.png","assets/images/cases/metallo/6.png"]'>
-      <span class="work-list-name">Metallo</span>
-      <span class="work-list-tags">
-        <span class="tag-cat">B2B</span>
-        <span class="tag-svc">Brand Identity</span>
-      </span>
-      <span class="work-list-year">—</span>
-    </div>
+      <div class="wt-row" data-project="justos"
+           data-images='["assets/images/cases/justos/1.png","assets/images/cases/justos/02.mp4","assets/images/cases/justos/3.png","assets/images/cases/justos/05.mp4","assets/images/cases/justos/6.png","assets/images/cases/justos/7.png","assets/images/cases/justos/08.mp4","assets/images/cases/justos/9.png","assets/images/cases/justos/10.png","assets/images/cases/justos/11.png","assets/images/cases/justos/12.mp4","assets/images/cases/justos/13.png","assets/images/cases/justos/15.png"]'>
+        <div class="wt-row-head">
+          <div class="wt-name-cell"><span class="wt-name">Justos</span><span class="wt-sector">InsurTech</span></div>
+          <span class="wt-services">Brand Identity · Shapes &amp; Icons · Experience</span>
+          <span class="wt-year">—</span>
+        </div>
+        <div class="wt-expand"><div class="wt-expand-inner"></div></div>
+      </div>
 
-    <div class="work-list-row" data-project="papeltec"
-         data-images='["assets/images/cases/papeltec/1.png","assets/images/cases/papeltec/2.png","assets/images/cases/papeltec/3.png","assets/images/cases/papeltec/4.png","assets/images/cases/papeltec/5.png","assets/images/cases/papeltec/6.png","assets/images/cases/papeltec/7.png","assets/images/cases/papeltec/Frame 2629.png","assets/images/cases/papeltec/Frame 2630.png"]'>
-      <span class="work-list-name">Papeltec</span>
-      <span class="work-list-tags">
-        <span class="tag-cat">Manufacturing</span>
-        <span class="tag-svc">Brand Identity</span>
-        <span class="tag-svc">Packaging</span>
-      </span>
-      <span class="work-list-year">—</span>
-    </div>
+      <div class="wt-row" data-project="phlor"
+           data-images='["assets/images/cases/phlor/1.png","assets/images/cases/phlor/2.png","assets/images/cases/phlor/3.png","assets/images/cases/phlor/4.png","assets/images/cases/phlor/5.png","assets/images/cases/phlor/6.png","assets/images/cases/phlor/7.png","assets/images/cases/phlor/8.png","assets/images/cases/phlor/9.png","assets/images/cases/phlor/10.png","assets/images/cases/phlor/11.png","assets/images/cases/phlor/12.png","assets/images/cases/phlor/13.png","assets/images/cases/phlor/14.png","assets/images/cases/phlor/15.png"]'>
+        <div class="wt-row-head">
+          <div class="wt-name-cell"><span class="wt-name">Phlor</span><span class="wt-sector">Wellness</span></div>
+          <span class="wt-services">Brand Identity · Typography</span>
+          <span class="wt-year">—</span>
+        </div>
+        <div class="wt-expand"><div class="wt-expand-inner"></div></div>
+      </div>
 
-    <div class="work-list-row" data-project="caixa"
-         data-images='["assets/images/cases/caixa.png"]'>
-      <span class="work-list-name">Caixa</span>
-      <span class="work-list-tags">
-        <span class="tag-cat">Institutional</span>
-        <span class="tag-svc">Brand Identity</span>
-        <span class="tag-svc">COP30</span>
-      </span>
-      <span class="work-list-year">—</span>
-    </div>
+      <div class="wt-row" data-project="metallo"
+           data-images='["assets/images/cases/metallo/1.png","assets/images/cases/metallo/2.png","assets/images/cases/metallo/3.png","assets/images/cases/metallo/4.png","assets/images/cases/metallo/5.png","assets/images/cases/metallo/6.png"]'>
+        <div class="wt-row-head">
+          <div class="wt-name-cell"><span class="wt-name">Metallo</span><span class="wt-sector">B2B</span></div>
+          <span class="wt-services">Brand Identity</span>
+          <span class="wt-year">—</span>
+        </div>
+        <div class="wt-expand"><div class="wt-expand-inner"></div></div>
+      </div>
 
-    <div class="work-list-row" data-project="natura"
-         data-images='["assets/images/cases/natura.png"]'>
-      <span class="work-list-name">Natura</span>
-      <span class="work-list-tags">
-        <span class="tag-cat">Beauty</span>
-        <span class="tag-svc">Brand Identity</span>
-        <span class="tag-svc">Packaging</span>
-      </span>
-      <span class="work-list-year">—</span>
-    </div>
+      <div class="wt-row" data-project="papeltec"
+           data-images='["assets/images/cases/papeltec/1.png","assets/images/cases/papeltec/2.png","assets/images/cases/papeltec/3.png","assets/images/cases/papeltec/4.png","assets/images/cases/papeltec/5.png","assets/images/cases/papeltec/6.png","assets/images/cases/papeltec/7.png","assets/images/cases/papeltec/Frame 2629.png","assets/images/cases/papeltec/Frame 2630.png"]'>
+        <div class="wt-row-head">
+          <div class="wt-name-cell"><span class="wt-name">Papeltec</span><span class="wt-sector">Manufacturing</span></div>
+          <span class="wt-services">Brand Identity · Packaging</span>
+          <span class="wt-year">—</span>
+        </div>
+        <div class="wt-expand"><div class="wt-expand-inner"></div></div>
+      </div>
 
-    <div class="work-list-row" data-project="ativa"
-         data-images='["assets/images/cases/ativa/1.png","assets/images/cases/ativa/2.png","assets/images/cases/ativa/3.png","assets/images/cases/ativa/4.png","assets/images/cases/ativa/5.png","assets/images/cases/ativa/6.png"]'>
-      <span class="work-list-name">Ativa</span>
-      <span class="work-list-tags">
-        <span class="tag-cat">Finance</span>
-        <span class="tag-svc">Brand Identity</span>
-        <span class="tag-svc">Visual System</span>
-      </span>
-      <span class="work-list-year">—</span>
-    </div>
+      <div class="wt-row" data-project="caixa"
+           data-images='["assets/images/cases/caixa/1.png","assets/images/cases/caixa/2.png","assets/images/cases/caixa/3.png","assets/images/cases/caixa/4.png","assets/images/cases/caixa/5.png","assets/images/cases/caixa/6.png","assets/images/cases/caixa/7.png"]'>
+        <div class="wt-row-head">
+          <div class="wt-name-cell"><span class="wt-name">Caixa</span><span class="wt-sector">Institutional</span></div>
+          <span class="wt-services">Brand Identity · COP30</span>
+          <span class="wt-year">—</span>
+        </div>
+        <div class="wt-expand"><div class="wt-expand-inner"></div></div>
+      </div>
 
-    <div class="work-list-row" data-project="vibra"
-         data-images='["assets/images/cases/vibra/1.png","assets/images/cases/vibra/2.png","assets/images/cases/vibra/3.png","assets/images/cases/vibra/4.png","assets/images/cases/vibra/5.png","assets/images/cases/vibra/6.png","assets/images/cases/vibra/7.png"]'>
-      <span class="work-list-name">Vibra Picto</span>
-      <span class="work-list-tags">
-        <span class="tag-cat">Energy</span>
-        <span class="tag-svc">Brand Identity</span>
-        <span class="tag-svc">Pictogram</span>
-      </span>
-      <span class="work-list-year">—</span>
-    </div>
+      <div class="wt-row" data-project="natura-homem"
+           data-images='["assets/images/cases/natura-homem/1.png","assets/images/cases/natura-homem/2.png","assets/images/cases/natura-homem/3.png","assets/images/cases/natura-homem/4.png","assets/images/cases/natura-homem/5.png","assets/images/cases/natura-homem/6.png"]'>
+        <div class="wt-row-head">
+          <div class="wt-name-cell"><span class="wt-name">Natura Homem</span><span class="wt-sector">Beauty</span></div>
+          <span class="wt-services">Brand Identity · Packaging</span>
+          <span class="wt-year">—</span>
+        </div>
+        <div class="wt-expand"><div class="wt-expand-inner"></div></div>
+      </div>
 
-    <div class="work-list-row" data-project="mdesign"
-         data-images='["assets/images/cases/mdesign/1.gif","assets/images/cases/mdesign/571399534.png","assets/images/cases/mdesign/571399535.png","assets/images/cases/mdesign/Envelope.png","assets/images/cases/mdesign/Frame 2.png","assets/images/cases/mdesign/Frame 3.png","assets/images/cases/mdesign/Frame 84.png"]'>
-      <span class="work-list-name">MDesign</span>
-      <span class="work-list-tags">
-        <span class="tag-cat">Design Studio</span>
-        <span class="tag-svc">Brand Identity</span>
-        <span class="tag-svc">Motion</span>
-      </span>
-      <span class="work-list-year">—</span>
-    </div>
+      <div class="wt-row" data-project="natura-pais"
+           data-images='["assets/images/cases/natura-pais/1.png","assets/images/cases/natura-pais/2.png","assets/images/cases/natura-pais/3.png","assets/images/cases/natura-pais/4.png","assets/images/cases/natura-pais/5.png"]'>
+        <div class="wt-row-head">
+          <div class="wt-name-cell"><span class="wt-name">Natura — Dia dos Pais</span><span class="wt-sector">Beauty</span></div>
+          <span class="wt-services">Brand Identity · Packaging</span>
+          <span class="wt-year">—</span>
+        </div>
+        <div class="wt-expand"><div class="wt-expand-inner"></div></div>
+      </div>
 
+      <div class="wt-row" data-project="ativa"
+           data-images='["assets/images/cases/ativa/1.png","assets/images/cases/ativa/2.png","assets/images/cases/ativa/3.png","assets/images/cases/ativa/4.png","assets/images/cases/ativa/5.png","assets/images/cases/ativa/6.png"]'>
+        <div class="wt-row-head">
+          <div class="wt-name-cell"><span class="wt-name">Ativa</span><span class="wt-sector">Finance</span></div>
+          <span class="wt-services">Brand Identity · Visual System</span>
+          <span class="wt-year">—</span>
+        </div>
+        <div class="wt-expand"><div class="wt-expand-inner"></div></div>
+      </div>
+
+      <div class="wt-row" data-project="vibra"
+           data-images='["assets/images/cases/vibra/1.png","assets/images/cases/vibra/2.png","assets/images/cases/vibra/3.png","assets/images/cases/vibra/4.png","assets/images/cases/vibra/5.png","assets/images/cases/vibra/6.png","assets/images/cases/vibra/7.png"]'>
+        <div class="wt-row-head">
+          <div class="wt-name-cell"><span class="wt-name">Vibra Picto</span><span class="wt-sector">Energy</span></div>
+          <span class="wt-services">Brand Identity · Pictogram</span>
+          <span class="wt-year">—</span>
+        </div>
+        <div class="wt-expand"><div class="wt-expand-inner"></div></div>
+      </div>
+
+      <div class="wt-row" data-project="mdesign"
+           data-images='["assets/images/cases/mdesign/1.gif","assets/images/cases/mdesign/571399534.png","assets/images/cases/mdesign/571399535.png","assets/images/cases/mdesign/Envelope.png","assets/images/cases/mdesign/Frame 2.png","assets/images/cases/mdesign/Frame 3.png","assets/images/cases/mdesign/Frame 84.png"]'>
+        <div class="wt-row-head">
+          <div class="wt-name-cell"><span class="wt-name">MDesign</span><span class="wt-sector">Design Studio</span></div>
+          <span class="wt-services">Brand Identity · Motion</span>
+          <span class="wt-year">—</span>
+        </div>
+        <div class="wt-expand"><div class="wt-expand-inner"></div></div>
+      </div>
+
+    </div>
   </div>
 
   <!-- ─── Footer ──────────────────────────────────────────────────── -->
@@ -221,7 +228,7 @@
           <a href="index.html"  class="footer-nav-link" data-i18n="nav_home">Home</a>
           <a href="#work"       class="footer-nav-link" data-i18n="nav_work">Work</a>
           <a href="about.html"  class="footer-nav-link" data-i18n="nav_about">About</a>
-          <a href="#gallery"    class="footer-nav-link" data-i18n="nav_gallery">Gallery</a>
+          <a href="gallery.html"    class="footer-nav-link" data-i18n="nav_gallery">Gallery</a>
         </nav>
         <div class="footer-social">
           <a href="https://www.linkedin.com/in/mauriciodesignbr/" target="_blank" rel="noopener" class="footer-social-link">LinkedIn ↗</a>

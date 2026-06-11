@@ -68,5 +68,10 @@
 
   "footer_big": "Vamos construir algo juntos.",
   "footer_new_work": "Novos Projetos:",
-  "footer_available": "Disponível para projetos:"
+  "footer_available": "Disponível para projetos:",
+
+  "wt_projects": "Projetos",
+  "wt_services": "Serviços",
+  "wt_year": "Ano",
+  "wt_credits": "Ficha Técnica"
 }
