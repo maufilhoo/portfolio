@@ -119,34 +119,29 @@ function initGalleryPage() {
   const FLOAT_ANIMS = ['float-a', 'float-b', 'float-c', 'float-d'];
 
   function doScatter() {
-    const W     = window.innerWidth - 80;
-    const count = allItems.length;
-    const COLS  = 3;
-    const cellW = W / COLS;
-    const cellH = 580;                       // large gap → airy feel
-    const rows  = Math.ceil(count / COLS);
-    const SIZES = [120, 160, 200, 240, 280, 320];
+    const W      = window.innerWidth - 80;
+    const H_STEP = 190;                              // tighter vertical step
+    const SIZES  = [180, 220, 280, 340, 400, 460];  // bigger images
 
-    canvas.style.height = (rows * cellH + 160) + 'px';
+    const order = allItems.map((_, i) => i).sort(() => Math.random() - 0.5);
+    canvas.style.height = (order.length * H_STEP + 300) + 'px';
 
-    allItems.forEach((item, idx) => {
-      const col = idx % COLS;
-      const row = Math.floor(idx / COLS);
-      const w   = SIZES[Math.floor(Math.random() * SIZES.length)];
-
-      // Random position within cell — allow items near edges
-      const xInCell = Math.random() * (cellW - w * 0.4);
-      const x = Math.round(col * cellW + xInCell);
-      const y = Math.round(row * cellH + Math.random() * 200 + 40);
+    order.forEach((srcIdx, plotIdx) => {
+      const item = allItems[srcIdx];
+      const w    = SIZES[Math.floor(Math.random() * SIZES.length)];
+      const x    = Math.round(Math.random() * Math.max(0, W - w * 0.7));
+      const y    = Math.round(plotIdx * H_STEP + Math.random() * 100);
 
       item.style.position = 'absolute';
       item.style.width    = w + 'px';
       item.style.left     = x + 'px';
       item.style.top      = y + 'px';
+      // ~40% of items go behind GALLERY word (z-index < 2), rest in front
+      item.style.zIndex   = Math.random() > 0.4 ? '3' : '1';
 
-      const anim = FLOAT_ANIMS[idx % FLOAT_ANIMS.length];
-      const dur  = (14 + Math.random() * 8).toFixed(1);
-      const del  = (-(Math.random() * 12)).toFixed(1);
+      const anim = FLOAT_ANIMS[plotIdx % FLOAT_ANIMS.length];
+      const dur  = (12 + Math.random() * 10).toFixed(1);
+      const del  = (-(Math.random() * 14)).toFixed(1);
       item.style.animation = `${anim} ${dur}s ${del}s ease-in-out infinite`;
     });
   }

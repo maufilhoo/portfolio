@@ -1,9 +1,28 @@
+/* ─── Static background word ────────────────────────────────────── */
+.gallery-bg-word {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-body);
+  font-size: clamp(6rem, 18vw, 16rem);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--text);
+  opacity: 0.05;
+  pointer-events: none;
+  user-select: none;
+  z-index: 2;
+  white-space: nowrap;
+}
+
 /* ─── Gallery page ───────────────────────────────────────────────── */
 .page-gallery { background: var(--bg); }
 .page-gallery .site-header { background: var(--bg); }
 .page-gallery .site-header.is-scrolled { background: transparent; }
 
 .gallery-page {
+  position: relative;
   padding: calc(72px + 5rem) var(--gutter) 8rem;
   max-width: var(--max-width);
   margin: 0 auto;
@@ -14,8 +33,7 @@
   align-items: baseline;
   justify-content: space-between;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 6rem;
+  margin-bottom: 4rem;
 }
 
 .gallery-page-title {
