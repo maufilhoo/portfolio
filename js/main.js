@@ -49,10 +49,17 @@ function initWorkReveal() {
 }
 
 /* ─── Audio player ───────────────────────────────────────────────── */
+const TRACKS = [
+  'assets/audio/Os-Tincoas---Deixa-A-Gira-Girar-j-g-b-edit---millemon---electronic-_-world-music-youtube.mp3',
+  'assets/audio/Tom Misch - It Runs Through Me  INSTRUMENTAL - Shai Town (youtube).mp3'
+];
+
 function initAudio() {
-  const btn   = document.getElementById('audio-btn');
-  const audio = document.getElementById('bg-audio');
-  if (!btn || !audio) return;
+  const btn     = document.getElementById('audio-btn');
+  const audio   = document.getElementById('bg-audio');
+  const popover = document.getElementById('audio-track-popover');
+  if (!btn || !audio || !popover) return;
+
   btn.addEventListener('click', () => {
     if (audio.paused) {
       audio.play().then(() => btn.classList.add('playing')).catch(() => {});
@@ -61,15 +68,132 @@ function initAudio() {
       btn.classList.remove('playing');
     }
   });
+
+  popover.querySelectorAll('.track-opt').forEach(opt => {
+    opt.addEventListener('click', e => {
+      e.stopPropagation();
+      const idx = parseInt(opt.dataset.track);
+      const wasPlaying = !audio.paused;
+      const currentTime = 0;
+
+      popover.querySelectorAll('.track-opt').forEach(o => o.classList.remove('active'));
+      opt.classList.add('active');
+
+      audio.pause();
+      audio.src = TRACKS[idx];
+      audio.currentTime = currentTime;
+
+      if (wasPlaying) {
+        audio.play().then(() => btn.classList.add('playing')).catch(() => {});
+      } else {
+        btn.classList.remove('playing');
+      }
+    });
+  });
 }
 
-/* ─── Header scroll — transparent on scroll ─────────────────────── */
+/* ─── Header scroll — transparent + auto-hide over showcase ─────── */
 function initHeaderScroll() {
-  const header = document.querySelector('.site-header');
+  const header   = document.querySelector('.site-header');
+  const showcase = document.getElementById('work');
   if (!header) return;
-  const update = () => header.classList.toggle('is-scrolled', window.scrollY > 50);
+
+  let hideTimer   = null;
+  let lastScrollY = window.scrollY;
+
+  function showHeader() {
+    clearTimeout(hideTimer);
+    header.classList.remove('is-hidden');
+  }
+
+  function scheduleHide() {
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(() => header.classList.add('is-hidden'), 2000);
+  }
+
+  function isOverShowcase() {
+    if (!showcase) return false;
+    const rect = showcase.getBoundingClientRect();
+    return rect.top <= 72 && rect.bottom > 0;
+  }
+
+  function update() {
+    const scrolled = window.scrollY > 50;
+    header.classList.toggle('is-scrolled', scrolled);
+
+    const dy = window.scrollY - lastScrollY;
+    lastScrollY = window.scrollY;
+
+    if (!scrolled) {
+      showHeader();
+      return;
+    }
+
+    if (dy < 0) {
+      showHeader();
+      return;
+    }
+
+    if (isOverShowcase()) scheduleHide();
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+
+  document.addEventListener('mousemove', e => {
+    if (e.clientY < 80) showHeader();
+  });
+
+  update();
+}
+
+/* ─── Bio fade on scroll ─────────────────────────────────────────── */
+function initBioFade() {
+  const hero = document.querySelector('.hero-section');
+  if (!hero) return;
+  const update = () => {
+    const bottom = hero.getBoundingClientRect().bottom;
+    const height = hero.offsetHeight;
+    const fadeStart = height * 0.5;
+    const fadeEnd   = height * 0.1;
+    const progress  = Math.min(1, Math.max(0, (bottom - fadeEnd) / (fadeStart - fadeEnd)));
+    hero.style.opacity = progress;
+  };
   window.addEventListener('scroll', update, { passive: true });
   update();
+}
+
+/* ─── Dock magnification for thumbnail strip ────────────────────── */
+function initDockEffect(showcase) {
+  const BASE_H   = 44;
+  const MAX_H    = 90;
+  const RADIUS   = 130;
+
+  function applyDock(mouseX) {
+    const strip = showcase.querySelector('.showcase-thumbs');
+    if (!strip) return;
+    strip.querySelectorAll('.showcase-thumb-item').forEach(item => {
+      const r    = item.getBoundingClientRect();
+      const cx   = r.left + r.width / 2;
+      const dist = Math.abs(mouseX - cx);
+      const t    = Math.max(0, 1 - dist / RADIUS);
+      const h    = BASE_H + (MAX_H - BASE_H) * Math.pow(t, 1.5);
+      item.style.height = h + 'px';
+    });
+  }
+
+  function resetDock() {
+    const strip = showcase.querySelector('.showcase-thumbs');
+    if (!strip) return;
+    strip.querySelectorAll('.showcase-thumb-item').forEach(item => {
+      item.style.height = BASE_H + 'px';
+    });
+  }
+
+  showcase.addEventListener('mousemove', e => {
+    if (e.target.closest('.showcase-thumbs')) applyDock(e.clientX);
+    else resetDock();
+  });
+  showcase.addEventListener('mouseleave', resetDock);
 }
 
 /* ─── Project data ───────────────────────────────────────────────── */
@@ -87,27 +211,38 @@ const PROJECT_DATA = {
 
 /* ─── Work showcase ──────────────────────────────────────────────── */
 function initWorkShowcase() {
-  const track        = document.getElementById('work-showcase-track');
-  const counter      = document.querySelector('.showcase-counter');
-  const prevBtn      = document.querySelector('.showcase-prev');
-  const nextBtn      = document.querySelector('.showcase-next');
-  const thumbs       = document.querySelectorAll('.work-thumb');
-  const detailPanel  = document.querySelector('.work-project-detail');
-  const detailText   = document.querySelector('.work-detail-text');
-  const creditsToggle  = document.querySelector('.work-credits-toggle');
-  const creditsContent = document.querySelector('.work-credits-content');
-  const creditsBody    = document.querySelector('.work-credits-body');
-  const toggleIcon     = creditsToggle ? creditsToggle.querySelector('.toggle-icon') : null;
-  const sbTrack        = document.getElementById('gallery-sb-track');
-  const sbPrev         = document.querySelector('.gallery-sb-prev');
-  const sbNext         = document.querySelector('.gallery-sb-next');
+  const track    = document.getElementById('work-showcase-track');
+  const rows     = document.querySelectorAll('.work-list-row');
 
-  if (!track || !thumbs.length) return;
+  if (!track || !rows.length) return;
 
-  let images      = [];
-  let cur         = 0;
-  let activeIdx   = 0;
-  let creditsOpen = false;
+  let images   = [];
+  let cur      = 0;
+  let activeIdx = 0;
+
+  function buildThumbs(imgs) {
+    const showcase = track.parentElement;
+    const existing = showcase.querySelector('.showcase-thumbs');
+    if (existing) existing.remove();
+    if (!imgs.length) return;
+
+    const strip = document.createElement('div');
+    strip.className = 'showcase-thumbs';
+
+    imgs.forEach((src, i) => {
+      const item = document.createElement('div');
+      item.className = 'showcase-thumb-item' + (i === 0 ? ' active' : '');
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = '';
+      img.loading = 'lazy';
+      item.appendChild(img);
+      item.addEventListener('click', () => showSlide(i));
+      strip.appendChild(item);
+    });
+
+    showcase.appendChild(strip);
+  }
 
   function buildSlides(imgs) {
     track.innerHTML = '';
@@ -120,105 +255,62 @@ function initWorkShowcase() {
       track.appendChild(img);
     });
     cur = 0;
-    updateCounter();
-  }
-
-  function updateCounter() {
-    if (counter) counter.textContent = `${cur + 1} / ${images.length}`;
+    buildThumbs(imgs);
   }
 
   function showSlide(n) {
-    const slides = track.querySelectorAll('.work-showcase-img');
-    if (slides.length <= 1) return;
+    const slides     = track.querySelectorAll('.work-showcase-img');
+    const thumbItems = track.parentElement.querySelectorAll('.showcase-thumb-item');
+    if (!slides.length) return;
     slides[cur].classList.remove('active');
+    if (thumbItems[cur]) thumbItems[cur].classList.remove('active');
     cur = (n + slides.length) % slides.length;
     slides[cur].classList.add('active');
-    updateCounter();
-  }
-
-  function formatCredits(groups) {
-    return groups.map(lines =>
-      `<div class="work-credits-section">${lines.map(l => `<p>${l}</p>`).join('')}</div>`
-    ).join('');
-  }
-
-  function updateDots(idx) {
-    if (!sbTrack) return;
-    sbTrack.querySelectorAll('.gallery-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
-  }
-
-  function selectProject(thumb, idx) {
-    activeIdx = idx;
-    thumbs.forEach(t => t.classList.remove('active'));
-    thumb.classList.add('active');
-    thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-    updateDots(idx);
-
-    try { images = JSON.parse(thumb.dataset.images || '[]'); } catch(e) { images = []; }
-    buildSlides(images);
-
-    if (detailPanel) {
-      const data = PROJECT_DATA[thumb.dataset.project];
-      if (data && data.detail) {
-        detailText.innerHTML = data.detail.split('\n\n').map(p =>
-          `<p>${p.replace(/\n/g, '<br>')}</p>`
-        ).join('');
-
-        creditsOpen = false;
-        if (creditsContent) creditsContent.classList.remove('is-open');
-        if (toggleIcon) toggleIcon.textContent = '+';
-
-        if (data.credits && creditsBody) {
-          creditsBody.innerHTML = formatCredits(data.credits);
-          if (creditsToggle) creditsToggle.style.display = '';
-        } else if (creditsToggle) {
-          creditsToggle.style.display = 'none';
-        }
-
-        detailPanel.classList.add('is-open');
-      } else {
-        detailPanel.classList.remove('is-open');
-      }
+    if (thumbItems[cur]) {
+      thumbItems[cur].classList.add('active');
+      thumbItems[cur].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     }
   }
 
-  // Build dots
-  if (sbTrack) {
-    thumbs.forEach((_, i) => {
-      const dot = document.createElement('button');
-      dot.className = 'gallery-dot' + (i === 0 ? ' active' : '');
-      dot.setAttribute('aria-label', `Project ${i + 1}`);
-      dot.addEventListener('click', () => selectProject(thumbs[i], i));
-      sbTrack.appendChild(dot);
-    });
+  function buildDetail(row) {
+    let detail = row.querySelector('.work-list-detail');
+    if (detail) { detail.remove(); return; }
+
+    const data = PROJECT_DATA[row.dataset.project];
+    if (!data || !data.detail) return;
+
+    detail = document.createElement('div');
+    detail.className = 'work-list-detail';
+    detail.innerHTML = data.detail.split('\n\n').map(p =>
+      `<p>${p.replace(/\n/g, '<br>')}</p>`
+    ).join('');
+    row.appendChild(detail);
   }
 
-  // Showcase image prev/next
-  if (prevBtn) prevBtn.addEventListener('click', () => showSlide(cur - 1));
-  if (nextBtn) nextBtn.addEventListener('click', () => showSlide(cur + 1));
-
-  // Gallery prev/next project
-  if (sbPrev) sbPrev.addEventListener('click', () => {
-    const newIdx = (activeIdx - 1 + thumbs.length) % thumbs.length;
-    selectProject(thumbs[newIdx], newIdx);
-  });
-  if (sbNext) sbNext.addEventListener('click', () => {
-    const newIdx = (activeIdx + 1) % thumbs.length;
-    selectProject(thumbs[newIdx], newIdx);
-  });
-
-  if (creditsToggle) {
-    creditsToggle.addEventListener('click', () => {
-      creditsOpen = !creditsOpen;
-      if (creditsContent) creditsContent.classList.toggle('is-open', creditsOpen);
-      if (toggleIcon) toggleIcon.textContent = creditsOpen ? '−' : '+';
+  function selectProject(row, idx) {
+    activeIdx = idx;
+    rows.forEach(r => {
+      r.classList.remove('active');
+      const d = r.querySelector('.work-list-detail');
+      if (d) d.remove();
     });
+    row.classList.add('active');
+    buildDetail(row);
+
+    try { images = JSON.parse(row.dataset.images || '[]'); } catch(e) { images = []; }
+    buildSlides(images);
+
+    document.getElementById('work').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  thumbs.forEach((thumb, i) => thumb.addEventListener('click', () => selectProject(thumb, i)));
+  rows.forEach((row, i) => row.addEventListener('click', () => selectProject(row, i)));
 
-  const firstIdx = Array.from(thumbs).findIndex(t => t.classList.contains('active'));
-  selectProject(thumbs[firstIdx >= 0 ? firstIdx : 0], firstIdx >= 0 ? firstIdx : 0);
+  const firstIdx = Array.from(rows).findIndex(r => r.classList.contains('active'));
+  const startRow = rows[firstIdx >= 0 ? firstIdx : 0];
+  try { images = JSON.parse(startRow.dataset.images || '[]'); } catch(e) { images = []; }
+  buildSlides(images);
+
+  initDockEffect(track.parentElement);
 }
 
 /* ─── Hero card gather animation ────────────────────────────────── */
@@ -385,6 +477,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initWorkReveal();
   initAudio();
   initHeaderScroll();
+  initBioFade();
   initBioParallax();
   initWorkShowcase();
   await initI18n();

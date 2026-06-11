@@ -18,9 +18,15 @@
   <header class="site-header">
     <div class="header-btns-group">
       <div class="nav-center-util">
-        <button id="audio-btn" class="audio-btn" aria-label="Play music">
-          <span class="audio-disc">📀</span>
-        </button>
+        <div class="audio-wrap">
+          <button id="audio-btn" class="audio-btn" aria-label="Play music">
+            <span class="audio-disc">📀</span>
+          </button>
+          <div class="audio-track-popover" id="audio-track-popover">
+            <button class="track-opt active" data-track="0" aria-label="Tincoas">🪘</button>
+            <button class="track-opt" data-track="1" aria-label="Tom Misch">🎸</button>
+          </div>
+        </div>
       </div>
       <div class="nav-left">
         <div class="nav-fish-wrap">
@@ -80,107 +86,122 @@
     <div class="work-showcase-track" id="work-showcase-track">
       <img src="assets/images/cases/enjoei.png" alt="" class="work-showcase-img active" loading="eager" />
     </div>
-    <div class="work-showcase-pill">
-      <button class="showcase-btn showcase-prev" aria-label="Previous">◀</button>
-      <span class="showcase-counter">1 / 1</span>
-      <button class="showcase-btn showcase-next" aria-label="Next">▶</button>
-    </div>
   </section>
 
-  <!-- ─── Work gallery ─────────────────────────────────────────────── -->
-  <div class="work-gallery-outer">
-    <div class="work-gallery-track" id="work-gallery-track">
+  <!-- ─── Work list ───────────────────────────────────────────────── -->
+  <div class="work-list">
 
-      <article class="work-thumb active" data-project="enjoei"
-               data-images='["assets/images/cases/enjoei.png"]'>
-        <img src="assets/images/cases/enjoei.png" alt="Enjoei" loading="lazy" />
-        <h3>Enjoei</h3>
-        <p>Brand Identity, Custom Type, Generative Design</p>
-      </article>
-
-      <article class="work-thumb" data-project="justos"
-               data-images='["assets/images/cases/justos.png"]'>
-        <img src="assets/images/cases/justos.png" alt="Justos" loading="lazy" />
-        <h3>Justos</h3>
-        <p>Brand Identity, Shapes &amp; Icons, Experience</p>
-      </article>
-
-      <article class="work-thumb" data-project="phlor"
-               data-images='["assets/images/cases/phlor.png"]'>
-        <img src="assets/images/cases/phlor.png" alt="Phlor" loading="lazy" />
-        <h3>Phlor</h3>
-        <p>Brand Identity, Typography, Wellness</p>
-      </article>
-
-      <article class="work-thumb" data-project="metallo"
-               data-images='["assets/images/cases/metallo.png"]'>
-        <img src="assets/images/cases/metallo.png" alt="Metallo" loading="lazy" />
-        <h3>Metallo</h3>
-        <p>Brand Identity, Premium, B2B</p>
-      </article>
-
-      <article class="work-thumb" data-project="papeltec"
-               data-images='["assets/images/cases/papeltec.png"]'>
-        <img src="assets/images/cases/papeltec.png" alt="Papeltec" loading="lazy" />
-        <h3>Papeltec</h3>
-        <p>Brand Identity, Packaging, Manufacturing</p>
-      </article>
-
-      <article class="work-thumb" data-project="caixa"
-               data-images='["assets/images/cases/caixa.png"]'>
-        <img src="assets/images/cases/caixa.png" alt="Caixa" loading="lazy" />
-        <h3>Caixa</h3>
-        <p>Brand Identity, COP30, Institutional</p>
-      </article>
-
-      <article class="work-thumb" data-project="natura"
-               data-images='["assets/images/cases/natura.png"]'>
-        <img src="assets/images/cases/natura.png" alt="Natura" loading="lazy" />
-        <h3>Natura</h3>
-        <p>Brand Identity, Packaging, Beauty</p>
-      </article>
-
-      <article class="work-thumb" data-project="ativa"
-               data-images='["assets/images/cases/ativa.png"]'>
-        <img src="assets/images/cases/ativa.png" alt="Ativa" loading="lazy" />
-        <h3>Ativa</h3>
-        <p>Brand Identity, Visual System, Finance</p>
-      </article>
-
-      <article class="work-thumb" data-project="vibra"
-               data-images='["assets/images/cases/vibra.png"]'>
-        <img src="assets/images/cases/vibra.png" alt="Vibra" loading="lazy" />
-        <h3>Vibra</h3>
-        <p>Brand Identity, Pictogram, Energy</p>
-      </article>
-
-      <article class="work-thumb" data-project="mdesign"
-               data-images='["assets/images/cases/mdesign.png"]'>
-        <img src="assets/images/cases/mdesign.png" alt="MDesign" loading="lazy" />
-        <h3>MDesign</h3>
-        <p>Brand Identity, Motion, Design</p>
-      </article>
-
+    <div class="work-list-row active" data-project="enjoei"
+         data-images='["assets/images/cases/enjoei/1.png","assets/images/cases/enjoei/2.jpg","assets/images/cases/enjoei/3.jpg","assets/images/cases/enjoei/4.jpg","assets/images/cases/enjoei/5.png","assets/images/cases/enjoei/6.jpg","assets/images/cases/enjoei/7.png","assets/images/cases/enjoei/8.png","assets/images/cases/enjoei/10.png","assets/images/cases/enjoei/11.jpg","assets/images/cases/enjoei/12.png","assets/images/cases/enjoei/14.png","assets/images/cases/enjoei/15.png","assets/images/cases/enjoei/16.jpg","assets/images/cases/enjoei/17.jpg","assets/images/cases/enjoei/18.jpg","assets/images/cases/enjoei/20.png","assets/images/cases/enjoei/21.png","assets/images/cases/enjoei/22.png"]'>
+      <span class="work-list-name">Enjoei</span>
+      <span class="work-list-tags">
+        <span class="tag-cat">E-commerce</span>
+        <span class="tag-svc">Brand Identity</span>
+        <span class="tag-svc">Custom Type</span>
+        <span class="tag-svc">Generative Design</span>
+      </span>
+      <span class="work-list-year">—</span>
     </div>
-  </div>
-  <div class="gallery-scrollbar">
-    <div class="gallery-sb-pill">
-      <div class="gallery-sb-track" id="gallery-sb-track"></div>
-    </div>
-  </div>
 
-  <!-- ─── Project detail ──────────────────────────────────────────── -->
-  <div class="work-project-detail">
-    <div class="work-detail-inner">
-      <div class="work-detail-text"></div>
-      <button class="work-credits-toggle">
-        <span class="toggle-icon">+</span>
-        <span>Ficha Técnica</span>
-      </button>
-      <div class="work-credits-content">
-        <div class="work-credits-body"></div>
-      </div>
+    <div class="work-list-row" data-project="justos"
+         data-images='["assets/images/cases/justos/1.png","assets/images/cases/justos/3.png","assets/images/cases/justos/6.png","assets/images/cases/justos/7.png","assets/images/cases/justos/9.png","assets/images/cases/justos/10.png","assets/images/cases/justos/11.png","assets/images/cases/justos/13.png","assets/images/cases/justos/15.png"]'>
+      <span class="work-list-name">Justos</span>
+      <span class="work-list-tags">
+        <span class="tag-cat">InsurTech</span>
+        <span class="tag-svc">Brand Identity</span>
+        <span class="tag-svc">Shapes &amp; Icons</span>
+        <span class="tag-svc">Experience</span>
+      </span>
+      <span class="work-list-year">—</span>
     </div>
+
+    <div class="work-list-row" data-project="phlor"
+         data-images='["assets/images/cases/phlor/1.png","assets/images/cases/phlor/2.png","assets/images/cases/phlor/3.png","assets/images/cases/phlor/4.png","assets/images/cases/phlor/5.png","assets/images/cases/phlor/6.png","assets/images/cases/phlor/7.png","assets/images/cases/phlor/8.png","assets/images/cases/phlor/9.png","assets/images/cases/phlor/10.png","assets/images/cases/phlor/11.png","assets/images/cases/phlor/12.png","assets/images/cases/phlor/13.png","assets/images/cases/phlor/14.png","assets/images/cases/phlor/15.png"]'>
+      <span class="work-list-name">Phlor</span>
+      <span class="work-list-tags">
+        <span class="tag-cat">Wellness</span>
+        <span class="tag-svc">Brand Identity</span>
+        <span class="tag-svc">Typography</span>
+      </span>
+      <span class="work-list-year">—</span>
+    </div>
+
+    <div class="work-list-row" data-project="metallo"
+         data-images='["assets/images/cases/metallo/1.png","assets/images/cases/metallo/2.png","assets/images/cases/metallo/3.png","assets/images/cases/metallo/4.png","assets/images/cases/metallo/5.png","assets/images/cases/metallo/6.png"]'>
+      <span class="work-list-name">Metallo</span>
+      <span class="work-list-tags">
+        <span class="tag-cat">B2B</span>
+        <span class="tag-svc">Brand Identity</span>
+      </span>
+      <span class="work-list-year">—</span>
+    </div>
+
+    <div class="work-list-row" data-project="papeltec"
+         data-images='["assets/images/cases/papeltec/1.png","assets/images/cases/papeltec/2.png","assets/images/cases/papeltec/3.png","assets/images/cases/papeltec/4.png","assets/images/cases/papeltec/5.png","assets/images/cases/papeltec/6.png","assets/images/cases/papeltec/7.png","assets/images/cases/papeltec/Frame 2629.png","assets/images/cases/papeltec/Frame 2630.png"]'>
+      <span class="work-list-name">Papeltec</span>
+      <span class="work-list-tags">
+        <span class="tag-cat">Manufacturing</span>
+        <span class="tag-svc">Brand Identity</span>
+        <span class="tag-svc">Packaging</span>
+      </span>
+      <span class="work-list-year">—</span>
+    </div>
+
+    <div class="work-list-row" data-project="caixa"
+         data-images='["assets/images/cases/caixa.png"]'>
+      <span class="work-list-name">Caixa</span>
+      <span class="work-list-tags">
+        <span class="tag-cat">Institutional</span>
+        <span class="tag-svc">Brand Identity</span>
+        <span class="tag-svc">COP30</span>
+      </span>
+      <span class="work-list-year">—</span>
+    </div>
+
+    <div class="work-list-row" data-project="natura"
+         data-images='["assets/images/cases/natura.png"]'>
+      <span class="work-list-name">Natura</span>
+      <span class="work-list-tags">
+        <span class="tag-cat">Beauty</span>
+        <span class="tag-svc">Brand Identity</span>
+        <span class="tag-svc">Packaging</span>
+      </span>
+      <span class="work-list-year">—</span>
+    </div>
+
+    <div class="work-list-row" data-project="ativa"
+         data-images='["assets/images/cases/ativa/1.png","assets/images/cases/ativa/2.png","assets/images/cases/ativa/3.png","assets/images/cases/ativa/4.png","assets/images/cases/ativa/5.png","assets/images/cases/ativa/6.png"]'>
+      <span class="work-list-name">Ativa</span>
+      <span class="work-list-tags">
+        <span class="tag-cat">Finance</span>
+        <span class="tag-svc">Brand Identity</span>
+        <span class="tag-svc">Visual System</span>
+      </span>
+      <span class="work-list-year">—</span>
+    </div>
+
+    <div class="work-list-row" data-project="vibra"
+         data-images='["assets/images/cases/vibra/1.png","assets/images/cases/vibra/2.png","assets/images/cases/vibra/3.png","assets/images/cases/vibra/4.png","assets/images/cases/vibra/5.png","assets/images/cases/vibra/6.png","assets/images/cases/vibra/7.png"]'>
+      <span class="work-list-name">Vibra Picto</span>
+      <span class="work-list-tags">
+        <span class="tag-cat">Energy</span>
+        <span class="tag-svc">Brand Identity</span>
+        <span class="tag-svc">Pictogram</span>
+      </span>
+      <span class="work-list-year">—</span>
+    </div>
+
+    <div class="work-list-row" data-project="mdesign"
+         data-images='["assets/images/cases/mdesign/1.gif","assets/images/cases/mdesign/571399534.png","assets/images/cases/mdesign/571399535.png","assets/images/cases/mdesign/Envelope.png","assets/images/cases/mdesign/Frame 2.png","assets/images/cases/mdesign/Frame 3.png","assets/images/cases/mdesign/Frame 84.png"]'>
+      <span class="work-list-name">MDesign</span>
+      <span class="work-list-tags">
+        <span class="tag-cat">Design Studio</span>
+        <span class="tag-svc">Brand Identity</span>
+        <span class="tag-svc">Motion</span>
+      </span>
+      <span class="work-list-year">—</span>
+    </div>
+
   </div>
 
   <!-- ─── Footer ──────────────────────────────────────────────────── -->
