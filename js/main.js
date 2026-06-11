@@ -72,82 +72,126 @@ function initHeaderScroll() {
   update();
 }
 
-/* ─── Work grid image sliders ────────────────────────────────────── */
-function initSliders() {
-  document.querySelectorAll('.work-item-img').forEach(container => {
-    const slides = container.querySelectorAll('.slide-img');
-    const nav    = container.querySelector('.slide-nav');
-    const idx    = container.querySelector('.slide-idx');
-    const prev   = container.querySelector('.slide-btn--prev');
-    const next   = container.querySelector('.slide-btn--next');
-    if (!slides.length) return;
-    if (slides.length <= 1) { if (nav) nav.classList.add('is-single'); return; }
-    let cur = 0;
-    const show = n => {
-      slides[cur].classList.remove('active');
-      cur = (n + slides.length) % slides.length;
-      slides[cur].classList.add('active');
-      if (idx) idx.textContent = `${cur + 1} / ${slides.length}`;
-    };
-    if (prev) prev.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); show(cur - 1); });
-    if (next) next.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); show(cur + 1); });
-  });
-}
-
-/* ─── Featured slideshow ─────────────────────────────────────────── */
-function initFeaturedSlideshow() {
-  const media = document.getElementById('featured-media');
-  if (!media) return;
-  const slides = media.querySelectorAll('.featured-slide');
-  if (slides.length <= 1) return;
-  let cur = 0;
-  let currentScale = 1;
-
-  const applyScale = slide => { slide.style.transform = `scale(${currentScale})`; };
-
-  const show = n => {
-    slides[cur].classList.remove('active');
-    slides[cur].style.transform = '';
-    cur = n;
-    slides[cur].classList.add('active');
-    applyScale(slides[cur]);
-  };
-
-  media.addEventListener('click', () => {
-    let next;
-    do { next = Math.floor(Math.random() * slides.length); } while (next === cur);
-    show(next);
-  });
-  media.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') media.click(); });
-
-  /* Parallax: grow active slide as section scrolls into view */
-  const section = media.closest('.featured-section');
-  if (section) {
-    const onScroll = () => {
-      const rect = section.getBoundingClientRect();
-      const vh = window.innerHeight;
-      const progress = Math.max(0, Math.min(1, 1 - rect.top / vh));
-      currentScale = 1 + progress * 0.05;
-      applyScale(slides[cur]);
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+/* ─── Project data ───────────────────────────────────────────────── */
+const PROJECT_DATA = {
+  enjoei: {
+    detail: 'Enjoei came to us at a turning point. Born from internet culture, the brand had accumulated multiple references, codes, and personalities, but needed clearer structure and maturity to evolve alongside a growing audience. Our role was to organize this abundance without losing its irreverence, shaping a flexible, contemporary, and living identity system.\n\nWe redesigned the logo, developed proprietary assets, and created Enjoei Display, a custom typeface built to support multiple moods and expressions. Technology extended the craft through a creative platform that turns letters into patterns, prints, and infinite compositions for everyday use.\n\nAs a Senior Designer, I was deeply involved across all aspects of the project, from visual identity and typography to the creative platform, case development, and visual assets. Projeto desenvolvido na Tátil Design.',
+    credits: [
+      ['Eduardo França, Gustavo André, Mauricio Filho e Mariana Hermeto', 'Direção: Dandara Almeida'],
+      ['Estratégia', 'Anna Carla, Carol Polli e Sarah Stutz', 'Direção: Paula Marchiori'],
+      ['Verbal', 'Elen Campos e Vallécia Carvalho'],
+      ['Parceiros', 'Tipografia Enjoei Display: Blackletra', 'Programação criativa: André Burnier', 'Identidade sonora: Consoante'],
+    ]
   }
-}
+};
 
-/* ─── Work grid scroll hint ──────────────────────────────────────── */
-function initScrollHint() {
-  const btn  = document.querySelector('.work-scroll-btn');
-  const grid = document.querySelector('.work-grid-section');
-  if (!btn || !grid) return;
-  btn.addEventListener('click', () => grid.scrollBy({ left: 340, behavior: 'smooth' }));
-  const update = () => {
-    const atEnd = grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 30;
-    btn.style.opacity       = atEnd ? '0' : '0.75';
-    btn.style.pointerEvents = atEnd ? 'none' : 'auto';
-  };
-  grid.addEventListener('scroll', update, { passive: true });
-  update();
+/* ─── Work showcase ──────────────────────────────────────────────── */
+function initWorkShowcase() {
+  const track        = document.getElementById('work-showcase-track');
+  const counter      = document.querySelector('.showcase-counter');
+  const prevBtn      = document.querySelector('.showcase-prev');
+  const nextBtn      = document.querySelector('.showcase-next');
+  const thumbs       = document.querySelectorAll('.work-thumb');
+  const hintBtn      = document.querySelector('.work-gallery-hint');
+  const galleryOuter = document.querySelector('.work-gallery-outer');
+  const detailPanel  = document.querySelector('.work-project-detail');
+  const detailText   = document.querySelector('.work-detail-text');
+  const creditsToggle  = document.querySelector('.work-credits-toggle');
+  const creditsContent = document.querySelector('.work-credits-content');
+  const creditsBody    = document.querySelector('.work-credits-body');
+  const toggleIcon     = creditsToggle ? creditsToggle.querySelector('.toggle-icon') : null;
+
+  if (!track || !thumbs.length) return;
+
+  let images = [];
+  let cur    = 0;
+  let creditsOpen = false;
+
+  function buildSlides(imgs) {
+    track.innerHTML = '';
+    imgs.forEach((src, i) => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = '';
+      img.className = 'work-showcase-img' + (i === 0 ? ' active' : '');
+      img.loading = i === 0 ? 'eager' : 'lazy';
+      track.appendChild(img);
+    });
+    cur = 0;
+    updateCounter();
+  }
+
+  function updateCounter() {
+    if (counter) counter.textContent = `${cur + 1} / ${images.length}`;
+  }
+
+  function showSlide(n) {
+    const slides = track.querySelectorAll('.work-showcase-img');
+    if (slides.length <= 1) return;
+    slides[cur].classList.remove('active');
+    cur = (n + slides.length) % slides.length;
+    slides[cur].classList.add('active');
+    updateCounter();
+  }
+
+  function formatCredits(groups) {
+    return groups.map(lines =>
+      `<div class="work-credits-section">${lines.map(l => `<p>${l}</p>`).join('')}</div>`
+    ).join('');
+  }
+
+  function selectProject(thumb) {
+    thumbs.forEach(t => t.classList.remove('active'));
+    thumb.classList.add('active');
+    thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+
+    try { images = JSON.parse(thumb.dataset.images || '[]'); } catch(e) { images = []; }
+    buildSlides(images);
+
+    if (detailPanel) {
+      const data = PROJECT_DATA[thumb.dataset.project];
+      if (data && data.detail) {
+        detailText.innerHTML = data.detail.split('\n\n').map(p =>
+          `<p>${p.replace(/\n/g, '<br>')}</p>`
+        ).join('');
+
+        creditsOpen = false;
+        if (creditsContent) creditsContent.classList.remove('is-open');
+        if (toggleIcon) toggleIcon.textContent = '+';
+
+        if (data.credits && creditsBody) {
+          creditsBody.innerHTML = formatCredits(data.credits);
+          if (creditsToggle) creditsToggle.style.display = '';
+        } else if (creditsToggle) {
+          creditsToggle.style.display = 'none';
+        }
+
+        detailPanel.classList.add('is-open');
+      } else {
+        detailPanel.classList.remove('is-open');
+      }
+    }
+  }
+
+  if (prevBtn) prevBtn.addEventListener('click', () => showSlide(cur - 1));
+  if (nextBtn) nextBtn.addEventListener('click', () => showSlide(cur + 1));
+
+  if (creditsToggle) {
+    creditsToggle.addEventListener('click', () => {
+      creditsOpen = !creditsOpen;
+      if (creditsContent) creditsContent.classList.toggle('is-open', creditsOpen);
+      if (toggleIcon) toggleIcon.textContent = creditsOpen ? '−' : '+';
+    });
+  }
+
+  if (hintBtn && galleryOuter) {
+    hintBtn.addEventListener('click', () => galleryOuter.scrollBy({ left: 250, behavior: 'smooth' }));
+  }
+
+  thumbs.forEach(thumb => thumb.addEventListener('click', () => selectProject(thumb)));
+
+  const firstActive = document.querySelector('.work-thumb.active');
+  if (firstActive) selectProject(firstActive);
 }
 
 /* ─── Hero card gather animation ────────────────────────────────── */
@@ -158,7 +202,7 @@ function initHeroCards() {
   if (!cards.length) return;
 
   const UNIT     = 170;
-  const HOLD_MS  = 10000; // 10s spread before gathering
+  const HOLD_MS  = 4000; // 4s spread before gathering
   let   autoTimer = null;
 
   function hidePhotoCard() {
@@ -257,113 +301,48 @@ function initBioParallax() {
   window.addEventListener('scroll', update, { passive: true });
 }
 
-/* ─── Hero typewriter ────────────────────────────────────────────── */
-function initHeroTypewriter(armGather) {
-  const title   = document.querySelector('.hero-title');
-  const spans   = title ? title.querySelectorAll('span') : [];
+/* ─── Hello greeting (first visit only) ─────────────────────────── */
+function initHelloGreeting(armGather) {
   const stage   = document.querySelector('.hero-card-stage');
   const tagline = document.querySelector('.welcome-tagline');
-  if (!spans.length) return;
-
+  const title   = document.querySelector('.hero-title');
   const FIRST_VISIT_KEY = 'mf-intro-seen';
   const firstVisit = !localStorage.getItem(FIRST_VISIT_KEY);
 
-  // Subsequent visits — show everything immediately, skip typewriter
   if (!firstVisit) {
-    if (stage)   { stage.style.opacity = '1'; }
-    if (tagline) { tagline.style.opacity = '1'; }
+    if (stage)   stage.style.opacity   = '1';
+    if (tagline) tagline.style.opacity = '1';
+    if (title)   title.style.opacity   = '1';
     if (armGather) armGather();
     return;
   }
 
   localStorage.setItem(FIRST_VISIT_KEY, '1');
 
-  if (stage)   { stage.style.opacity = '0'; stage.style.transition = 'none'; }
-  if (tagline) { tagline.style.opacity = '0'; tagline.style.transition = 'none'; }
-
-  // Center title in viewport via translateY
-  const titleTop = title.getBoundingClientRect().top;
-  const offset   = window.innerHeight / 2 - titleTop - title.offsetHeight / 2;
-  title.style.transition = 'none';
-  title.style.transform  = `translateY(${offset}px)`;
-
-  // Store real texts, clear spans
-  const texts = Array.from(spans).map(s => {
-    const t = s.textContent;
-    s.textContent = '';
-    return t;
+  [stage, tagline, title].forEach(el => {
+    if (el) { el.style.opacity = '0'; el.style.transition = 'none'; }
   });
 
-  // 25% faster base speeds
-  function charDelay(ch, prev) {
-    const base = 32 + Math.random() * 36;            // 32–68ms
-    if ('.!?'.includes(ch))  return base + 240;
-    if (',;:'.includes(ch))  return base + 120;
-    if (ch === ' ' && prev !== ' ') return base + 15;
-    if (Math.random() < 0.04) return base + 135;
-    return base;
-  }
+  const greeting = document.createElement('div');
+  greeting.className = 'hello-greeting';
+  greeting.textContent = getTranslation('hero_hello');
+  document.body.appendChild(greeting);
 
-  function settle() {
+  requestAnimationFrame(() => requestAnimationFrame(() => greeting.classList.add('visible')));
+
+  setTimeout(() => {
+    greeting.style.transition = 'opacity 0.5s ease';
+    greeting.style.opacity = '0';
     setTimeout(() => {
-      title.style.transition = 'transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94)';
-      title.style.transform  = 'translateY(0)';
-      setTimeout(() => {
-        if (stage) { stage.style.transition = 'opacity 0.6s ease'; stage.style.opacity = '1'; }
-        if (armGather) armGather(); // activate spread→gather after cards reveal
-        setTimeout(() => {
-          if (tagline) { tagline.style.transition = 'opacity 0.6s ease'; tagline.style.opacity = '1'; }
-        }, 600);
-      }, 750);
-    }, 200);
-  }
-
-  // Phase 2: type real content
-  function typeLines() {
-    let lineIdx = 0, charIdx = 0;
-    function next() {
-      if (lineIdx >= spans.length) { settle(); return; }
-      if (charIdx < texts[lineIdx].length) {
-        const ch = texts[lineIdx][charIdx];
-        const prev = charIdx > 0 ? texts[lineIdx][charIdx - 1] : '';
-        spans[lineIdx].textContent += ch;
-        charIdx++;
-        setTimeout(next, charDelay(ch, prev));
-      } else {
-        lineIdx++; charIdx = 0;
-        setTimeout(next, 150 + Math.random() * 112);
-      }
-    }
-    next();
-  }
-
-  // Phase 1: type "Hello!" / "Olá!" then erase
-  const ERASE_MS = 55;
-  const helloStr = getTranslation('hero_hello');
-  let hiText = '';
-  let hiIdx  = 0;
-
-  function typeHello() {
-    if (hiIdx < helloStr.length) {
-      hiText += helloStr[hiIdx];
-      spans[0].textContent = hiText;
-      setTimeout(typeHello, charDelay(helloStr[hiIdx++], helloStr[hiIdx - 2] || ''));
-    } else {
-      setTimeout(eraseHello, 380);
-    }
-  }
-
-  function eraseHello() {
-    if (hiText.length > 0) {
-      hiText = hiText.slice(0, -1);
-      spans[0].textContent = hiText;
-      setTimeout(eraseHello, ERASE_MS);
-    } else {
-      setTimeout(typeLines, 200);
-    }
-  }
-
-  setTimeout(typeHello, 300);
+      greeting.remove();
+      [title, stage, tagline].forEach(el => {
+        if (!el) return;
+        el.style.transition = 'opacity 0.6s ease';
+        el.style.opacity = '1';
+      });
+      if (armGather) armGather();
+    }, 500);
+  }, 1800);
 }
 
 /* ─── Init ───────────────────────────────────────────────────────── */
@@ -374,11 +353,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   initWorkReveal();
   initAudio();
   initHeaderScroll();
-  initFeaturedSlideshow();
-  initSliders();
-  initScrollHint();
   initBioParallax();
+  initWorkShowcase();
   await initI18n();
-  initHeroTypewriter(armGather);
+  initHelloGreeting(armGather);
   initCopyEmail();
 });

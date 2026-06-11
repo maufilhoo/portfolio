@@ -74,206 +74,110 @@
     <div class="bio-divider" aria-hidden="true"></div>
   </section>
 
-  <!-- ─── Featured slideshow ──────────────────────────────────────── -->
-  <section class="featured-section" id="featured">
-    <div class="featured-media" id="featured-media" role="button" aria-label="Click to change image" tabindex="0">
-      <img src="assets/images/feed/feed-01.png"  alt="" class="featured-slide active" loading="eager" />
-      <img src="assets/images/feed/feed-02.jpg"  alt="" class="featured-slide" loading="lazy" />
-      <img src="assets/images/feed/feed-03.png"  alt="" class="featured-slide" loading="lazy" />
-      <img src="assets/images/feed/feed-04.jpg"  alt="" class="featured-slide" loading="lazy" />
-      <img src="assets/images/feed/feed-05.png"  alt="" class="featured-slide" loading="lazy" />
-      <img src="assets/images/feed/feed-06.png"  alt="" class="featured-slide" loading="lazy" />
-      <img src="assets/images/feed/feed-07.png"  alt="" class="featured-slide" loading="lazy" />
-      <img src="assets/images/feed/feed-08.png"  alt="" class="featured-slide" loading="lazy" />
-      <img src="assets/images/feed/feed-09.png"  alt="" class="featured-slide" loading="lazy" />
-      <img src="assets/images/feed/feed-10.png"  alt="" class="featured-slide" loading="lazy" />
-      <img src="assets/images/feed/feed-11.png"  alt="" class="featured-slide" loading="lazy" />
-      <img src="assets/images/feed/feed-12.png"  alt="" class="featured-slide" loading="lazy" />
-      <img src="assets/images/feed/feed-13.png"  alt="" class="featured-slide" loading="lazy" />
-      <img src="assets/images/feed/feed-14.png"  alt="" class="featured-slide" loading="lazy" />
-      <img src="assets/images/feed/metallo.png"  alt="" class="featured-slide" loading="lazy" />
+  <!-- ─── Work showcase ───────────────────────────────────────────── -->
+  <section class="work-showcase" id="work">
+    <div class="work-showcase-track" id="work-showcase-track">
+      <img src="assets/images/cases/enjoei.png" alt="" class="work-showcase-img active" loading="eager" />
+    </div>
+    <div class="work-showcase-pill">
+      <button class="showcase-btn showcase-prev" aria-label="Previous">◀</button>
+      <span class="showcase-counter">1 / 1</span>
+      <button class="showcase-btn showcase-next" aria-label="Next">▶</button>
     </div>
   </section>
 
-  <!-- ─── Work grid ───────────────────────────────────────────────── -->
-  <div class="work-grid-header">
-    <span data-i18n="explore_label">Explore</span>
+  <!-- ─── Work gallery ─────────────────────────────────────────────── -->
+  <div class="work-gallery-header">
+    <span data-i18n="explore_label">Explore my work</span> <span class="hero-emoji">🗃</span>
   </div>
-  <div class="work-scroll-outer">
-    <section class="work-grid-section" id="work">
+  <div class="work-gallery-outer">
+    <div class="work-gallery-track" id="work-gallery-track">
 
-      <article class="work-item" data-reveal>
-        <a href="#enjoei" class="work-item-link">
-          <div class="work-item-img">
-            <img src="assets/images/cases/enjoei.png" alt="Enjoei" class="slide-img active" loading="lazy" />
-            <div class="slide-nav">
-              <button class="slide-btn slide-btn--prev" aria-label="Previous">◀</button>
-              <span class="slide-idx">1 / 1</span>
-              <button class="slide-btn slide-btn--next" aria-label="Next">▶</button>
-            </div>
-          </div>
-        </a>
-        <div class="work-item-info">
-          <h3 class="work-item-title">Enjoei</h3>
-          <p class="work-item-desc">Brand Identity, Custom Type, Generative Design</p>
-        </div>
+      <article class="work-thumb active" data-project="enjoei"
+               data-images='["assets/images/cases/enjoei.png"]'>
+        <img src="assets/images/cases/enjoei.png" alt="Enjoei" loading="lazy" />
+        <h3>Enjoei</h3>
+        <p>Brand Identity, Custom Type, Generative Design</p>
       </article>
 
-      <article class="work-item" data-reveal>
-        <a href="#justos" class="work-item-link">
-          <div class="work-item-img">
-            <img src="assets/images/cases/justos.png" alt="Justos" class="slide-img active" loading="lazy" />
-            <div class="slide-nav">
-              <button class="slide-btn slide-btn--prev" aria-label="Previous">◀</button>
-              <span class="slide-idx">1 / 1</span>
-              <button class="slide-btn slide-btn--next" aria-label="Next">▶</button>
-            </div>
-          </div>
-        </a>
-        <div class="work-item-info">
-          <h3 class="work-item-title">Justos</h3>
-          <p class="work-item-desc">Brand Identity, Shapes &amp; Icons, Experience</p>
-        </div>
+      <article class="work-thumb" data-project="justos"
+               data-images='["assets/images/cases/justos.png"]'>
+        <img src="assets/images/cases/justos.png" alt="Justos" loading="lazy" />
+        <h3>Justos</h3>
+        <p>Brand Identity, Shapes &amp; Icons, Experience</p>
       </article>
 
-      <article class="work-item" data-reveal>
-        <a href="#phlor" class="work-item-link">
-          <div class="work-item-img">
-            <img src="assets/images/cases/phlor.png" alt="Phlor" class="slide-img active" loading="lazy" />
-            <div class="slide-nav">
-              <button class="slide-btn slide-btn--prev" aria-label="Previous">◀</button>
-              <span class="slide-idx">1 / 1</span>
-              <button class="slide-btn slide-btn--next" aria-label="Next">▶</button>
-            </div>
-          </div>
-        </a>
-        <div class="work-item-info">
-          <h3 class="work-item-title">Phlor</h3>
-          <p class="work-item-desc">Brand Identity, Typography, Wellness</p>
-        </div>
+      <article class="work-thumb" data-project="phlor"
+               data-images='["assets/images/cases/phlor.png"]'>
+        <img src="assets/images/cases/phlor.png" alt="Phlor" loading="lazy" />
+        <h3>Phlor</h3>
+        <p>Brand Identity, Typography, Wellness</p>
       </article>
 
-      <article class="work-item" data-reveal>
-        <a href="#metallo" class="work-item-link">
-          <div class="work-item-img">
-            <img src="assets/images/cases/metallo.png" alt="Metallo" class="slide-img active" loading="lazy" />
-            <div class="slide-nav">
-              <button class="slide-btn slide-btn--prev" aria-label="Previous">◀</button>
-              <span class="slide-idx">1 / 1</span>
-              <button class="slide-btn slide-btn--next" aria-label="Next">▶</button>
-            </div>
-          </div>
-        </a>
-        <div class="work-item-info">
-          <h3 class="work-item-title">Metallo</h3>
-          <p class="work-item-desc">Brand Identity, Premium, B2B</p>
-        </div>
+      <article class="work-thumb" data-project="metallo"
+               data-images='["assets/images/cases/metallo.png"]'>
+        <img src="assets/images/cases/metallo.png" alt="Metallo" loading="lazy" />
+        <h3>Metallo</h3>
+        <p>Brand Identity, Premium, B2B</p>
       </article>
 
-      <article class="work-item" data-reveal>
-        <a href="#papeltec" class="work-item-link">
-          <div class="work-item-img">
-            <img src="assets/images/cases/papeltec.png" alt="Papeltec" class="slide-img active" loading="lazy" />
-            <div class="slide-nav">
-              <button class="slide-btn slide-btn--prev" aria-label="Previous">◀</button>
-              <span class="slide-idx">1 / 1</span>
-              <button class="slide-btn slide-btn--next" aria-label="Next">▶</button>
-            </div>
-          </div>
-        </a>
-        <div class="work-item-info">
-          <h3 class="work-item-title">Papeltec</h3>
-          <p class="work-item-desc">Brand Identity, Packaging, Manufacturing</p>
-        </div>
+      <article class="work-thumb" data-project="papeltec"
+               data-images='["assets/images/cases/papeltec.png"]'>
+        <img src="assets/images/cases/papeltec.png" alt="Papeltec" loading="lazy" />
+        <h3>Papeltec</h3>
+        <p>Brand Identity, Packaging, Manufacturing</p>
       </article>
 
-      <article class="work-item" data-reveal>
-        <a href="#caixa" class="work-item-link">
-          <div class="work-item-img">
-            <img src="assets/images/cases/caixa.png" alt="Caixa" class="slide-img active" loading="lazy" />
-            <div class="slide-nav">
-              <button class="slide-btn slide-btn--prev" aria-label="Previous">◀</button>
-              <span class="slide-idx">1 / 1</span>
-              <button class="slide-btn slide-btn--next" aria-label="Next">▶</button>
-            </div>
-          </div>
-        </a>
-        <div class="work-item-info">
-          <h3 class="work-item-title">Caixa</h3>
-          <p class="work-item-desc">Brand Identity, COP30, Institutional</p>
-        </div>
+      <article class="work-thumb" data-project="caixa"
+               data-images='["assets/images/cases/caixa.png"]'>
+        <img src="assets/images/cases/caixa.png" alt="Caixa" loading="lazy" />
+        <h3>Caixa</h3>
+        <p>Brand Identity, COP30, Institutional</p>
       </article>
 
-      <article class="work-item" data-reveal>
-        <a href="#natura" class="work-item-link">
-          <div class="work-item-img">
-            <img src="assets/images/cases/natura.png" alt="Natura" class="slide-img active" loading="lazy" />
-            <div class="slide-nav">
-              <button class="slide-btn slide-btn--prev" aria-label="Previous">◀</button>
-              <span class="slide-idx">1 / 1</span>
-              <button class="slide-btn slide-btn--next" aria-label="Next">▶</button>
-            </div>
-          </div>
-        </a>
-        <div class="work-item-info">
-          <h3 class="work-item-title">Natura</h3>
-          <p class="work-item-desc">Brand Identity, Packaging, Beauty</p>
-        </div>
+      <article class="work-thumb" data-project="natura"
+               data-images='["assets/images/cases/natura.png"]'>
+        <img src="assets/images/cases/natura.png" alt="Natura" loading="lazy" />
+        <h3>Natura</h3>
+        <p>Brand Identity, Packaging, Beauty</p>
       </article>
 
-      <article class="work-item" data-reveal>
-        <a href="#ativa" class="work-item-link">
-          <div class="work-item-img">
-            <img src="assets/images/cases/ativa.png" alt="Ativa" class="slide-img active" loading="lazy" />
-            <div class="slide-nav">
-              <button class="slide-btn slide-btn--prev" aria-label="Previous">◀</button>
-              <span class="slide-idx">1 / 1</span>
-              <button class="slide-btn slide-btn--next" aria-label="Next">▶</button>
-            </div>
-          </div>
-        </a>
-        <div class="work-item-info">
-          <h3 class="work-item-title">Ativa</h3>
-          <p class="work-item-desc">Brand Identity, Visual System, Finance</p>
-        </div>
+      <article class="work-thumb" data-project="ativa"
+               data-images='["assets/images/cases/ativa.png"]'>
+        <img src="assets/images/cases/ativa.png" alt="Ativa" loading="lazy" />
+        <h3>Ativa</h3>
+        <p>Brand Identity, Visual System, Finance</p>
       </article>
 
-      <article class="work-item" data-reveal>
-        <a href="#vibra" class="work-item-link">
-          <div class="work-item-img">
-            <img src="assets/images/cases/vibra.png" alt="Vibra" class="slide-img active" loading="lazy" />
-            <div class="slide-nav">
-              <button class="slide-btn slide-btn--prev" aria-label="Previous">◀</button>
-              <span class="slide-idx">1 / 1</span>
-              <button class="slide-btn slide-btn--next" aria-label="Next">▶</button>
-            </div>
-          </div>
-        </a>
-        <div class="work-item-info">
-          <h3 class="work-item-title">Vibra</h3>
-          <p class="work-item-desc">Brand Identity, Pictogram, Energy</p>
-        </div>
+      <article class="work-thumb" data-project="vibra"
+               data-images='["assets/images/cases/vibra.png"]'>
+        <img src="assets/images/cases/vibra.png" alt="Vibra" loading="lazy" />
+        <h3>Vibra</h3>
+        <p>Brand Identity, Pictogram, Energy</p>
       </article>
 
-      <article class="work-item" data-reveal>
-        <a href="#mdesign" class="work-item-link">
-          <div class="work-item-img">
-            <img src="assets/images/cases/mdesign.png" alt="MDesign" class="slide-img active" loading="lazy" />
-            <div class="slide-nav">
-              <button class="slide-btn slide-btn--prev" aria-label="Previous">◀</button>
-              <span class="slide-idx">1 / 1</span>
-              <button class="slide-btn slide-btn--next" aria-label="Next">▶</button>
-            </div>
-          </div>
-        </a>
-        <div class="work-item-info">
-          <h3 class="work-item-title">MDesign</h3>
-          <p class="work-item-desc">Brand Identity, Motion, Design</p>
-        </div>
+      <article class="work-thumb" data-project="mdesign"
+               data-images='["assets/images/cases/mdesign.png"]'>
+        <img src="assets/images/cases/mdesign.png" alt="MDesign" loading="lazy" />
+        <h3>MDesign</h3>
+        <p>Brand Identity, Motion, Design</p>
       </article>
 
-    </section>
-    <button class="work-scroll-btn" aria-label="Scroll for more">👉</button>
+    </div>
+  </div>
+
+  <!-- ─── Project detail ──────────────────────────────────────────── -->
+  <div class="work-project-detail">
+    <div class="work-detail-inner">
+      <div class="work-detail-text"></div>
+      <button class="work-credits-toggle">
+        <span class="toggle-icon">+</span>
+        <span>Ficha Técnica</span>
+      </button>
+      <div class="work-credits-content">
+        <div class="work-credits-body"></div>
+      </div>
+    </div>
   </div>
 
   <!-- ─── Footer ──────────────────────────────────────────────────── -->
