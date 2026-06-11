@@ -58,4 +58,5 @@ async function initI18n() {
   });
 }
 
-export { initI18n };
+function getTranslation(key) { return translations[key] ?? key; }
+export { initI18n, getTranslation };
