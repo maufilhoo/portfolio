@@ -92,19 +92,21 @@ function initWorkShowcase() {
   const prevBtn      = document.querySelector('.showcase-prev');
   const nextBtn      = document.querySelector('.showcase-next');
   const thumbs       = document.querySelectorAll('.work-thumb');
-  const hintBtn      = document.querySelector('.work-gallery-hint');
-  const galleryOuter = document.querySelector('.work-gallery-outer');
   const detailPanel  = document.querySelector('.work-project-detail');
   const detailText   = document.querySelector('.work-detail-text');
   const creditsToggle  = document.querySelector('.work-credits-toggle');
   const creditsContent = document.querySelector('.work-credits-content');
   const creditsBody    = document.querySelector('.work-credits-body');
   const toggleIcon     = creditsToggle ? creditsToggle.querySelector('.toggle-icon') : null;
+  const sbTrack        = document.getElementById('gallery-sb-track');
+  const sbPrev         = document.querySelector('.gallery-sb-prev');
+  const sbNext         = document.querySelector('.gallery-sb-next');
 
   if (!track || !thumbs.length) return;
 
-  let images = [];
-  let cur    = 0;
+  let images      = [];
+  let cur         = 0;
+  let activeIdx   = 0;
   let creditsOpen = false;
 
   function buildSlides(imgs) {
@@ -140,10 +142,17 @@ function initWorkShowcase() {
     ).join('');
   }
 
-  function selectProject(thumb) {
+  function updateDots(idx) {
+    if (!sbTrack) return;
+    sbTrack.querySelectorAll('.gallery-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+  }
+
+  function selectProject(thumb, idx) {
+    activeIdx = idx;
     thumbs.forEach(t => t.classList.remove('active'));
     thumb.classList.add('active');
     thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    updateDots(idx);
 
     try { images = JSON.parse(thumb.dataset.images || '[]'); } catch(e) { images = []; }
     buildSlides(images);
@@ -173,8 +182,30 @@ function initWorkShowcase() {
     }
   }
 
+  // Build dots
+  if (sbTrack) {
+    thumbs.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'gallery-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', `Project ${i + 1}`);
+      dot.addEventListener('click', () => selectProject(thumbs[i], i));
+      sbTrack.appendChild(dot);
+    });
+  }
+
+  // Showcase image prev/next
   if (prevBtn) prevBtn.addEventListener('click', () => showSlide(cur - 1));
   if (nextBtn) nextBtn.addEventListener('click', () => showSlide(cur + 1));
+
+  // Gallery prev/next project
+  if (sbPrev) sbPrev.addEventListener('click', () => {
+    const newIdx = (activeIdx - 1 + thumbs.length) % thumbs.length;
+    selectProject(thumbs[newIdx], newIdx);
+  });
+  if (sbNext) sbNext.addEventListener('click', () => {
+    const newIdx = (activeIdx + 1) % thumbs.length;
+    selectProject(thumbs[newIdx], newIdx);
+  });
 
   if (creditsToggle) {
     creditsToggle.addEventListener('click', () => {
@@ -184,14 +215,10 @@ function initWorkShowcase() {
     });
   }
 
-  if (hintBtn && galleryOuter) {
-    hintBtn.addEventListener('click', () => galleryOuter.scrollBy({ left: 250, behavior: 'smooth' }));
-  }
+  thumbs.forEach((thumb, i) => thumb.addEventListener('click', () => selectProject(thumb, i)));
 
-  thumbs.forEach(thumb => thumb.addEventListener('click', () => selectProject(thumb)));
-
-  const firstActive = document.querySelector('.work-thumb.active');
-  if (firstActive) selectProject(firstActive);
+  const firstIdx = Array.from(thumbs).findIndex(t => t.classList.contains('active'));
+  selectProject(thumbs[firstIdx >= 0 ? firstIdx : 0], firstIdx >= 0 ? firstIdx : 0);
 }
 
 /* ─── Hero card gather animation ────────────────────────────────── */
@@ -202,7 +229,7 @@ function initHeroCards() {
   if (!cards.length) return;
 
   const UNIT     = 170;
-  const HOLD_MS  = 4000; // 4s spread before gathering
+  const HOLD_MS  = 3000; // 3s spread before gathering
   let   autoTimer = null;
 
   function hidePhotoCard() {
@@ -273,9 +300,13 @@ function initHeroCards() {
     }, { threshold: 0.4 }).observe(hero);
   }
 
-  // Re-trigger on Home nav click
+  // Re-trigger on Home nav click — prevent reload, scroll to top instead
   document.querySelectorAll('a[href="index.html"], a[href="/"]').forEach(link => {
-    link.addEventListener('click', () => setTimeout(activate, 400));
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(activate, 600);
+    });
   });
 
   return activate;
@@ -347,6 +378,7 @@ function initHelloGreeting(armGather) {
 
 /* ─── Init ───────────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', async () => {
+  window.scrollTo(0, 0);
   initOverlay();
   const armGather = initHeroCards();
   initScrollTop();

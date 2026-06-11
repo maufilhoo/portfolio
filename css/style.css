@@ -522,11 +522,12 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 
 .work-showcase-track {
   position: relative;
-  width: 100%;
+  width: min(100%, calc((100vh - 72px - 4rem) * 16 / 9));
+  aspect-ratio: 16/9;
+  margin: 0 auto;
   border-radius: 18px;
   overflow: hidden;
   background: #e8e8e8;
-  aspect-ratio: 16/9;
 }
 
 .work-showcase-img {
@@ -542,75 +543,101 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 
 .work-showcase-pill {
   position: absolute;
-  bottom: 1.25rem;
+  bottom: 1rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  background: rgba(252,251,250,0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(220,220,220,0.7);
+  gap: 0.35rem;
+  background: rgba(252,251,250,0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border-radius: 100px;
-  padding: 0.4rem 0.9rem;
+  padding: 0.25rem 0.65rem;
   z-index: 10;
   white-space: nowrap;
 }
 
 .showcase-btn {
   color: var(--text);
-  font-size: 0.65rem;
-  opacity: 0.5;
+  font-size: 0.55rem;
+  opacity: 0.4;
   padding: 0;
   transition: opacity 0.2s;
 }
-.showcase-btn:hover { opacity: 1; }
+.showcase-btn:hover { opacity: 0.8; }
 
 .showcase-counter {
   font-family: var(--font-body);
-  font-size: 0.7rem;
-  font-weight: 500;
+  font-size: 0.62rem;
+  font-weight: 400;
   color: var(--text);
+  opacity: 0.6;
   min-width: 3ch;
   text-align: center;
 }
 
 /* ─── Work Gallery ───────────────────────────────────────────────── */
-.work-gallery-header {
-  text-align: center;
-  padding: 2rem var(--gutter) 0.75rem;
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 1.25rem;
-  line-height: 1.04;
-  letter-spacing: -0.01em;
-  color: var(--text);
-}
-
 .work-gallery-outer {
   overflow-x: auto;
-  padding: 0 var(--gutter) 1.5rem;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(17,17,17,0.18) transparent;
+  padding-top: 1.5rem;
+  padding-right: var(--gutter);
+  padding-bottom: 0;
+  padding-left: max(var(--gutter), calc((100vw - (100vh - 72px - 4rem) * 16 / 9) / 2));
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
-.work-gallery-outer::-webkit-scrollbar { height: 3px; }
-.work-gallery-outer::-webkit-scrollbar-track { background: transparent; }
-.work-gallery-outer::-webkit-scrollbar-thumb {
-  background: rgba(17,17,17,0.18);
+.work-gallery-outer::-webkit-scrollbar { display: none; }
+
+/* ─── Gallery dot scrollbar ──────────────────────────────────────── */
+.gallery-scrollbar {
+  display: flex;
+  justify-content: center;
+  padding: 1rem var(--gutter) 1.5rem;
+}
+
+.gallery-sb-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(17,17,17,0.06);
   border-radius: 100px;
+  padding: 8px 14px;
+}
+
+.gallery-sb-track {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.gallery-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 100px;
+  background: rgba(17,17,17,0.2);
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  padding: 0;
+  transition: width 0.3s cubic-bezier(0.25,0.46,0.45,0.94),
+              background 0.3s ease;
+}
+.gallery-dot.active {
+  width: 22px;
+  background: rgba(17,17,17,0.55);
 }
 
 .work-gallery-track {
   display: flex;
   flex-direction: row;
-  gap: 1rem;
+  gap: 16px;
   width: max-content;
 }
 
 .work-thumb {
   flex-shrink: 0;
-  width: 220px;
+  width: min(327px, calc((100vh - 72px - 4rem) * 16 / 9 * 0.24));
   cursor: pointer;
   transition: opacity 0.2s;
 }
@@ -619,7 +646,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 
 .work-thumb img {
   width: 100%;
-  aspect-ratio: 4/3;
+  aspect-ratio: 16/9;
   object-fit: cover;
   border-radius: var(--radius);
   display: block;
