@@ -120,7 +120,7 @@ function initGalleryPage() {
 
   function doScatter() {
     const W      = window.innerWidth - 80;
-    const H_STEP = 190;                              // tighter vertical step
+    const H_STEP = 140;                              // middle ground spacing
     const SIZES  = [180, 220, 280, 340, 400, 460];  // bigger images
 
     const order = allItems.map((_, i) => i).sort(() => Math.random() - 0.5);
