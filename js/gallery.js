@@ -67,30 +67,45 @@ function initAudio() {
   });
 }
 
+/* ─── Case image lists (mirrors index.html data-images) ──────────── */
+const CASE_IMAGES = {
+  enjoei:       ['assets/images/cases/enjoei/1.png','assets/images/cases/enjoei/2.jpg','assets/images/cases/enjoei/3.jpg','assets/images/cases/enjoei/4.jpg','assets/images/cases/enjoei/5.gif','assets/images/cases/enjoei/6.png','assets/images/cases/enjoei/7.png','assets/images/cases/enjoei/8b.png','assets/images/cases/enjoei/9.jpg','assets/images/cases/enjoei/10.png','assets/images/cases/enjoei/10 1.gif','assets/images/cases/enjoei/11.jpg','assets/images/cases/enjoei/12.png','assets/images/cases/enjoei/14.png','assets/images/cases/enjoei/15.png','assets/images/cases/enjoei/16.jpg','assets/images/cases/enjoei/17.jpg','assets/images/cases/enjoei/18.jpg','assets/images/cases/enjoei/20.png','assets/images/cases/enjoei/21.png','assets/images/cases/enjoei/22.png'],
+  justos:       ['assets/images/cases/justos/1.png','assets/images/cases/justos/3.png','assets/images/cases/justos/6.png','assets/images/cases/justos/7.png','assets/images/cases/justos/9.png','assets/images/cases/justos/10.png','assets/images/cases/justos/11.png','assets/images/cases/justos/13.png','assets/images/cases/justos/15.png'],
+  phlor:        ['assets/images/cases/phlor/1.png','assets/images/cases/phlor/2.png','assets/images/cases/phlor/3.png','assets/images/cases/phlor/4.png','assets/images/cases/phlor/5.png','assets/images/cases/phlor/6.png','assets/images/cases/phlor/7.png','assets/images/cases/phlor/8.png','assets/images/cases/phlor/9.png','assets/images/cases/phlor/10.png','assets/images/cases/phlor/11.png','assets/images/cases/phlor/12.png','assets/images/cases/phlor/13.png','assets/images/cases/phlor/14.png','assets/images/cases/phlor/15.png'],
+  '99':         ['assets/images/cases/99/imageye___-_6924204799d08a071d58f46b_tatil-99-nova-linguagem-visual-escalator-advertisement.webp','assets/images/cases/99/imageye___-_69242056d05392e7c6377003_tatil-99-nova-linguagem-visual-bold-yellow-text.webp','assets/images/cases/99/imageye___-_6924205a73c8da16db0f5660_tatil-99-nova-linguagem-visual-smartphone-displaying-app.webp','assets/images/cases/99/imageye___-_6924205edf44a64f77a34a72_tatil-99-nova-linguagem-visual-framed-posters-gallery.webp','assets/images/cases/99/imageye___-_69242084e72288e44cd8981f_tatil-99-nova-linguagem-visual-notebook-with-yellow-design.webp','assets/images/cases/99/imageye___-_692420acdb6ccb7c5603d7ff_tatil-99-nova-linguagem-visual-open-book-with-yellow-pages.webp','assets/images/cases/99/imageye___-_692420b0ceb4d12ea2ac9faa_tatil-99-nova-linguagem-visual-map-of-sao-paulo.webp','assets/images/cases/99/imageye___-_692420b5b54d651606e73bfa_tatil-99-nova-linguagem-visual-collage-of-graphics-and-photos.webp','assets/images/cases/99/imageye___-_692420bf6219eca972b28b79_tatil-99-nova-linguagem-visual-yellow-graphic-design.webp','assets/images/cases/99/imageye___-_692420c563bdeb9ba92f8b11_tatil-99-nova-linguagem-visual-car-ride-experience.webp','assets/images/cases/99/imageye___-_692420cb09c8c9bc1c417079_tatil-99-nova-linguagem-visual-app-interface-for-women-drivers.webp','assets/images/cases/99/imageye___-_69331acb62c25635edf11e0b_tatil-99-nova-linguagem-visual-aerial-parking-lot.webp'],
+  martorelli:   ['assets/images/cases/martorelli/1.png','assets/images/cases/martorelli/3.png','assets/images/cases/martorelli/4.png','assets/images/cases/martorelli/5.png','assets/images/cases/martorelli/9.png','assets/images/cases/martorelli/10.png','assets/images/cases/martorelli/11.png','assets/images/cases/martorelli/12.png','assets/images/cases/martorelli/13.png','assets/images/cases/martorelli/14.png','assets/images/cases/martorelli/15.png','assets/images/cases/martorelli/16.png'],
+  metallo:      ['assets/images/cases/metallo/1.png','assets/images/cases/metallo/2.png','assets/images/cases/metallo/3.png','assets/images/cases/metallo/4.png','assets/images/cases/metallo/5.png','assets/images/cases/metallo/6.png'],
+  papeltec:     ['assets/images/cases/papeltec/1.png','assets/images/cases/papeltec/2.png','assets/images/cases/papeltec/3.png','assets/images/cases/papeltec/4.png','assets/images/cases/papeltec/5.png','assets/images/cases/papeltec/6.png','assets/images/cases/papeltec/7.png','assets/images/cases/papeltec/Frame 2629.png','assets/images/cases/papeltec/Frame 2630.png'],
+  caixa:        ['assets/images/cases/caixa/1.png','assets/images/cases/caixa/2.png','assets/images/cases/caixa/3.png','assets/images/cases/caixa/4.png','assets/images/cases/caixa/5.png','assets/images/cases/caixa/6.png','assets/images/cases/caixa/7.png'],
+  'natura-homem':['assets/images/cases/natura-homem/1.png','assets/images/cases/natura-homem/2.png','assets/images/cases/natura-homem/3.png','assets/images/cases/natura-homem/4.png','assets/images/cases/natura-homem/5.png','assets/images/cases/natura-homem/6.png'],
+  'natura-pais': ['assets/images/cases/natura-pais/1.png','assets/images/cases/natura-pais/2.png','assets/images/cases/natura-pais/3.png','assets/images/cases/natura-pais/4.png','assets/images/cases/natura-pais/5.png'],
+  ativa:        ['assets/images/cases/ativa/1.png','assets/images/cases/ativa/2.png','assets/images/cases/ativa/3.png','assets/images/cases/ativa/4.png','assets/images/cases/ativa/5.png','assets/images/cases/ativa/6.png'],
+  vibra:        ['assets/images/cases/vibra/1.png','assets/images/cases/vibra/2.png','assets/images/cases/vibra/3.png','assets/images/cases/vibra/4.png','assets/images/cases/vibra/5.png','assets/images/cases/vibra/6.png','assets/images/cases/vibra/7.png'],
+  mdesign:      ['assets/images/cases/mdesign/1.gif','assets/images/cases/mdesign/571399534.png','assets/images/cases/mdesign/571399535.png','assets/images/cases/mdesign/Envelope.png','assets/images/cases/mdesign/Frame 2.png','assets/images/cases/mdesign/Frame 3.png','assets/images/cases/mdesign/Frame 84.png'],
+};
+
 /* ─── Gallery: scatter + float + lightbox ────────────────────────── */
 function initGalleryPage() {
-  const lb        = document.getElementById('gallery-lightbox');
-  const lbImg     = document.getElementById('lb-img');
-  const lbCounter = document.getElementById('lb-counter');
-  const lbProject = document.getElementById('lb-project');
-  const lbClose   = document.getElementById('lb-close');
-  const lbPrev    = document.getElementById('lb-prev');
-  const lbNext    = document.getElementById('lb-next');
-  const countEl   = null; // removed
+  const lb      = document.getElementById('case-lightbox');
+  const lbImg   = document.getElementById('lb-img');
+  const lbDots  = document.getElementById('lb-dots');
+  const lbClose = document.getElementById('lb-close');
+  const lbPrev  = document.getElementById('lb-prev');
+  const lbNext  = document.getElementById('lb-next');
 
-  const allItems  = [];
-  const allSrcs   = [];
-  const allLabels = [];
+  const allItems    = [];
+  const allProjects = [];
+  const allLabels   = [];
 
   // Collect items + add captions
   document.querySelectorAll('.gallery-group').forEach(group => {
-    const label = group.querySelector('.gallery-group-label')?.textContent.trim() || '';
+    const label   = group.querySelector('.gallery-group-label')?.textContent.trim() || '';
+    const project = group.dataset.project || '';
     group.querySelectorAll('.gallery-item').forEach(item => {
       allItems.push(item);
-      allSrcs.push(item.dataset.src || item.querySelector('img')?.src || '');
+      allProjects.push(project);
       allLabels.push(label);
 
-      // Small project caption below image
       if (label && !item.querySelector('.gallery-caption')) {
         const cap = document.createElement('span');
         cap.className = 'gallery-caption';
@@ -108,12 +123,10 @@ function initGalleryPage() {
 
   allItems.forEach((item, i) => {
     canvas.appendChild(item);
-    item.addEventListener('click', () => openLightbox(i));
+    item.addEventListener('click', () => openCaseLightbox(allProjects[i]));
   });
 
   document.querySelectorAll('.gallery-group').forEach(g => g.remove());
-
-  if (countEl) countEl.textContent = allItems.length + ' works';
 
   // ── Scatter + float ──────────────────────────────────────────────
   const FLOAT_ANIMS = ['float-a', 'float-b', 'float-c', 'float-d', 'float-e', 'float-f', 'float-g', 'float-h'];
@@ -150,32 +163,29 @@ function initGalleryPage() {
       return;
     }
 
-    const W        = window.innerWidth - 80;
-    const H_STEP   = 560;
-    const SIZE_PCS = [0.25, 0.50, 1.0];   // 25 / 50 / 100% of available width
+    const W       = window.innerWidth - 80;
+    const H_STEP  = 560;
+    // 25% / 50% / 100% relative to case carousel height (340px)
+    const H_SIZES = [85, 170, 340];
 
     const order = allItems.map((_, i) => i).sort(() => Math.random() - 0.5);
     canvas.style.height = (order.length * H_STEP + 600) + 'px';
 
     order.forEach((srcIdx, plotIdx) => {
-      const item   = allItems[srcIdx];
-      const sizePC = SIZE_PCS[Math.floor(Math.random() * SIZE_PCS.length)];
-      const w      = Math.round(W * sizePC);
+      const item = allItems[srcIdx];
+      const h    = H_SIZES[Math.floor(Math.random() * H_SIZES.length)];
 
-      let x;
-      if (sizePC >= 1.0) {
-        x = 0;
-      } else {
-        const zone = ZONES[plotIdx % ZONES.length];
-        const xMin = W * zone[0];
-        const xMax = W * zone[1] - w * 0.5;
-        x = Math.round(xMin + Math.random() * Math.max(0, xMax - xMin));
-      }
-
-      const y = Math.round(plotIdx * H_STEP + Math.random() * 180);
+      // Estimate width for x-placement (assume average landscape ~4:3 ratio)
+      const estW = Math.round(h * 1.4);
+      const zone = ZONES[plotIdx % ZONES.length];
+      const xMin = W * zone[0];
+      const xMax = W * zone[1] - estW * 0.5;
+      const x    = Math.round(xMin + Math.random() * Math.max(0, xMax - xMin));
+      const y    = Math.round(plotIdx * H_STEP + Math.random() * 180);
 
       item.style.position = 'absolute';
-      item.style.width    = w + 'px';
+      item.style.width    = 'auto';
+      item.style.height   = h + 'px';
       item.style.left     = x + 'px';
       item.style.top      = y + 'px';
       item.style.zIndex   = plotIdx % 2 === 0 ? '3' : '1';
@@ -190,23 +200,36 @@ function initGalleryPage() {
   if (document.readyState === 'complete') doScatter();
   else window.addEventListener('load', doScatter);
 
-  // ── Lightbox ────────────────────────────────────────────────────
-  let lbIdx = 0;
+  // ── Case lightbox ───────────────────────────────────────────────
+  let lbSrcs = [];
+  let lbIdx  = 0;
 
-  function openLightbox(idx) {
-    lbIdx = idx;
-    showSlide(idx);
+  function openCaseLightbox(project) {
+    lbSrcs = (CASE_IMAGES[project] || []).filter(s => !/\.(mp4|mov)$/i.test(s));
+    if (!lbSrcs.length) return;
+    lbIdx = 0;
+    buildDots();
+    showSlide(0);
     lb.classList.add('visible');
+  }
+
+  function buildDots() {
+    lbDots.innerHTML = '';
+    lbSrcs.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'case-lb-dot' + (i === 0 ? ' active' : '');
+      dot.addEventListener('click', () => { lbIdx = i; showSlide(i); });
+      lbDots.appendChild(dot);
+    });
   }
 
   function showSlide(idx) {
     lbImg.classList.add('fading');
     setTimeout(() => {
-      lbImg.src = allSrcs[idx];
-      lbCounter.textContent = (idx + 1) + ' / ' + allSrcs.length;
-      lbProject.textContent = allLabels[idx] || '';
+      lbImg.src = lbSrcs[idx];
       lbImg.classList.remove('fading');
-    }, 160);
+      lbDots.querySelectorAll('.case-lb-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+    }, 180);
   }
 
   function closeLightbox() { lb.classList.remove('visible'); }
@@ -216,27 +239,26 @@ function initGalleryPage() {
     lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
     lbPrev.addEventListener('click', e => {
       e.stopPropagation();
-      lbIdx = (lbIdx - 1 + allSrcs.length) % allSrcs.length;
+      lbIdx = (lbIdx - 1 + lbSrcs.length) % lbSrcs.length;
       showSlide(lbIdx);
     });
     lbNext.addEventListener('click', e => {
       e.stopPropagation();
-      lbIdx = (lbIdx + 1) % allSrcs.length;
+      lbIdx = (lbIdx + 1) % lbSrcs.length;
       showSlide(lbIdx);
     });
     document.addEventListener('keydown', e => {
       if (!lb.classList.contains('visible')) return;
       if (e.key === 'Escape')     closeLightbox();
-      if (e.key === 'ArrowLeft')  { lbIdx = (lbIdx - 1 + allSrcs.length) % allSrcs.length; showSlide(lbIdx); }
-      if (e.key === 'ArrowRight') { lbIdx = (lbIdx + 1) % allSrcs.length; showSlide(lbIdx); }
+      if (e.key === 'ArrowLeft')  { lbIdx = (lbIdx - 1 + lbSrcs.length) % lbSrcs.length; showSlide(lbIdx); }
+      if (e.key === 'ArrowRight') { lbIdx = (lbIdx + 1) % lbSrcs.length; showSlide(lbIdx); }
     });
-
     let touchX = 0;
     lb.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
     lb.addEventListener('touchend', e => {
       const dx = e.changedTouches[0].clientX - touchX;
       if (Math.abs(dx) > 50) {
-        lbIdx = dx < 0 ? (lbIdx + 1) % allSrcs.length : (lbIdx - 1 + allSrcs.length) % allSrcs.length;
+        lbIdx = dx < 0 ? (lbIdx + 1) % lbSrcs.length : (lbIdx - 1 + lbSrcs.length) % lbSrcs.length;
         showSlide(lbIdx);
       }
     });
