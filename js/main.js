@@ -261,7 +261,7 @@ const PROJECT_DATA = {
       [{ pt: 'Design',      en: 'Design' },      'Eduardo França, Gustavo André, Mauricio Filho, Mariana Hermeto', { dir: 'Dandara Almeida' }],
       [{ pt: 'Estratégia',  en: 'Strategy' },    'Anna Carla, Carol Polli, Sarah Stutz', { dir: 'Paula Marchiori' }],
       [{ pt: 'Verbal',      en: 'Copywriting' }, 'Elen Campos, Vallécia Carvalho'],
-      [{ pt: 'Parceiros',   en: 'Partners' },    'Blackletra — Enjoei Display', 'André Burnier — Programação Criativa', 'Consoante — Identidade Sonora'],
+      [{ pt: 'Parceiros',   en: 'Partners' },    'Blackletra: Enjoei Display', 'André Burnier: Programação Criativa', 'Consoante: Identidade Sonora'],
     ],
     studio: 'Tátil Design',
     recognition: [
@@ -297,7 +297,7 @@ const PROJECT_DATA = {
     },
     credits: [
       [{ pt: 'Design & Direção de Arte', en: 'Design & Art Direction' }, 'Mauricio Filho'],
-      [{ pt: 'Parceiros',               en: 'Partners' },               'Órix Media House — Fotografia'],
+      [{ pt: 'Parceiros',               en: 'Partners' },               'Órix Media House: Fotografia'],
     ]
   },
   '99': {
@@ -1039,20 +1039,28 @@ function initHelloGreeting(armGather) {
   const firstVisit = !localStorage.getItem(FIRST_VISIT_KEY);
 
   if (!firstVisit) {
-    if (stage)   stage.style.opacity   = '1';
-    if (tagline) tagline.style.opacity = '1';
-    if (title)   title.style.opacity   = '1';
-    if (armGather) armGather();
+    [stage, tagline, title].forEach(el => {
+      if (el) { el.style.opacity = '0'; el.style.transition = 'none'; }
+    });
 
     const retGreeting = document.createElement('div');
     retGreeting.className = 'hello-greeting';
     retGreeting.textContent = getTranslation('hero_hello_return');
     document.body.appendChild(retGreeting);
     requestAnimationFrame(() => requestAnimationFrame(() => retGreeting.classList.add('visible')));
+
     setTimeout(() => {
       retGreeting.style.transition = 'opacity 0.5s ease';
       retGreeting.style.opacity = '0';
-      setTimeout(() => retGreeting.remove(), 500);
+      setTimeout(() => {
+        retGreeting.remove();
+        [title, stage, tagline].forEach(el => {
+          if (!el) return;
+          el.style.transition = 'opacity 0.6s ease';
+          el.style.opacity = '1';
+        });
+        if (armGather) armGather();
+      }, 500);
     }, 1400);
     return;
   }
