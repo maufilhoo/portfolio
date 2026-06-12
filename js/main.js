@@ -252,16 +252,83 @@ function initFeedShowcase() {
 const PROJECT_DATA = {
   enjoei: {
     client: 'Enjoei',
-    detail: 'Enjoei came to us at a turning point. Born from internet culture, the brand had accumulated multiple references, codes, and personalities, but needed clearer structure and maturity to evolve alongside a growing audience. Our role was to organize this abundance without losing its irreverence, shaping a flexible, contemporary, and living identity system.\n\nWe redesigned the logo, developed proprietary assets, and created Enjoei Display, a custom typeface built to support multiple moods and expressions. Technology extended the craft through a creative platform that turns letters into patterns, prints, and infinite compositions for everyday use.\n\nAs a Senior Designer, I was deeply involved across all aspects of the project, from visual identity and typography to the creative platform, case development, and visual assets. Developed at Tátil Design.',
+    detail: {
+      pt: 'Enjoei veio até nós em um momento de virada. Nascida da linguagem da internet, a marca havia acumulado múltiplas referências, códigos e personalidades, mas precisava de mais critério e maturidade para acompanhar um público que também evoluiu. Nosso trabalho foi organizar esse excesso sem perder a irreverência, criando um sistema de identidade flexível, contemporâneo e vivo.\n\nRedesenhamos o logotipo, desenvolvemos assets proprietários e criamos a Enjoei Display, tipografia feita sob medida para sustentar diferentes climas e expressões. A tecnologia ampliou o craft por meio de uma plataforma criativa que transforma letras em padrões, estampas e composições infinitas para o dia a dia da marca.\n\nComo Designer Sênior, estive profundamente envolvido em todas as frentes do projeto, da identidade visual à criação da tipografia proprietária, plataforma criativa, case e demais elementos visuais.',
+      en: 'Enjoei came to us at a turning point. Born from internet culture, the brand had accumulated multiple references, codes, and personalities, but needed clearer structure and maturity to evolve alongside a growing audience. Our role was to organize this abundance without losing its irreverence, shaping a flexible, contemporary, and living identity system.\n\nWe redesigned the logo, developed proprietary assets, and created Enjoei Display, a custom typeface built to support multiple moods and expressions. Technology extended the craft through a creative platform that turns letters into patterns, prints, and infinite compositions for everyday use.\n\nAs a Senior Designer, I was deeply involved across all aspects of the project, from visual identity and typography to the creative platform, case development, and visual assets.',
+    },
     credits: [
-      [{ pt: 'Design',     en: 'Design' },     'Eduardo França, Gustavo André, Mauricio Filho e Mariana Hermeto', { pt: 'Direção: Dandara Almeida', en: 'Direction: Dandara Almeida' }],
-      [{ pt: 'Estratégia', en: 'Strategy' },   'Anna Carla, Carol Polli e Sarah Stutz', { pt: 'Direção: Paula Marchiori', en: 'Direction: Paula Marchiori' }],
-      [{ pt: 'Verbal',     en: 'Copywriting' },'Elen Campos e Vallécia Carvalho'],
-      [{ pt: 'Parceiros',  en: 'Partners' },   'Tipografia Enjoei Display: Blackletra', 'Programação criativa: André Burnier', 'Identidade sonora: Consoante'],
+      [{ pt: 'Design',      en: 'Design' },      'Eduardo França, Gustavo André, Mauricio Filho, Mariana Hermeto', { dir: 'Dandara Almeida' }],
+      [{ pt: 'Estratégia',  en: 'Strategy' },    'Anna Carla, Carol Polli, Sarah Stutz', { dir: 'Paula Marchiori' }],
+      [{ pt: 'Verbal',      en: 'Copywriting' }, 'Elen Campos, Vallécia Carvalho'],
+      [{ pt: 'Parceiros',   en: 'Partners' },    'Blackletra — Enjoei Display', 'André Burnier — Programação Criativa', 'Consoante — Identidade Sonora'],
+    ],
+    studio: 'Tátil Design',
+    recognition: [
+      'Brazil Design Award (BDA) 2023',
+      '🥇 Craft for Design / Typography',
+      '🥈 Graphic Design / Brand Design',
+      '🥈 Branding / Creative Programming',
+      '🥉 Graphic Design / Brand Design',
+      'Latin American Design Awards (LAD) 2023',
+      '🥇 Typography / Kinetic',
+      '🥈 Digital / Experimental',
+      'ADG Brazilian Graphic Design Biennial 2024',
+      '📕 Enjoei Display Variable Font',
+    ],
+  },
+  justos: {
+    client: 'Justos',
+    detail: {
+      pt: 'A Justos surgiu com a ambição de transformar uma categoria inteira. Criada para repensar o mercado de seguros, a marca nasceu para desafiar convenções, engajar motoristas e incentivar um trânsito mais tranquilo e consciente. Nosso papel foi traduzir esse propósito em uma identidade bold e ativista, capaz de equilibrar tecnologia, inteligência de dados e conexão humana.\n\nDesenvolvemos um sistema visual inspirado na linguagem geométrica da sinalização viária e dos elementos do trânsito, utilizando códigos e símbolos universais para construir uma experiência de marca dinâmica e acessível. Um tom de voz provocativo e direto ajudou a descomplicar o segurês, sintetizar informações e construir confiança, dando forma a uma marca que acredita que o avanço só acontece de forma coletiva.\n\nComo Designer Sênior, estive envolvido no desenvolvimento e desdobramento da identidade visual, brandbook, case e demais ativos visuais.',
+      en: 'Justos was created with the ambition of transforming an entire category. Designed to rethink the insurance market, the company set out to challenge industry conventions, engage drivers, and encourage safer and more conscious behavior on the road. Our role was to translate this purpose into a bold and activist identity capable of balancing technology, data intelligence, and human connection.\n\nWe developed a visual system inspired by the geometric language of traffic signs and road infrastructure, using universal symbols and codes to create a dynamic and accessible brand experience. A provocative yet straightforward verbal identity helped demystify insurance jargon, simplify information, and build trust, giving shape to a brand that believes meaningful progress can only happen collectively.\n\nAs a Senior Designer, I was involved in the development and rollout of the visual identity, brand guidelines, case study, and supporting visual assets.',
+    },
+    credits: [
+      [{ pt: 'Design',    en: 'Design' },      'Camilla Mattos, Gustavo André, Eduardo França, Mauricio Filho, Mariana Hermeto', { dir: 'Dandara Almeida' }],
+      [{ pt: 'Verbal',    en: 'Copywriting' }, 'Ana Cunha, Mila Bartilotti, Lourenço Araujo'],
+    ],
+    studio: 'Tátil Design',
+  },
+  phlor: {
+    client: 'Phlor',
+    detail: {
+      pt: 'A Phlor nasceu da ideia de que pequenos rituais podem transformar a forma como nos relacionamos com os espaços e com nós mesmos. Voltada para fragrâncias e produtos pensados para ambientes internos e externos, a marca buscava traduzir beleza, cuidado e individualidade por meio de uma identidade sensorial e sofisticada. Meu objetivo foi transformar esses atributos em uma linguagem visual capaz de expressar a essência da marca de forma singular e consistente.\n\nDesenvolvi uma identidade visual fundamentada no conceito de transformação. O logotipo combina símbolo e lettering proprietários para formar uma espiral em expansão, enquanto a tipografia faz referência ao movimento das chamas e à natureza mutável dos aromas. Inspiradas por elementos naturais, a paleta cromática e as ilustrações exclusivas geram padrões orgânicos que reforçam o caráter holístico e contemporâneo da marca em embalagens e demais pontos de contato.\n\nComo designer independente, conduzi todas as etapas do projeto, da concepção da marca ao desenvolvimento da identidade visual, do design de embalagens à direção de arte da fotografia dos produtos, garantindo consistência e autoria em toda a experiência da marca.',
+      en: 'Phlor was created around the idea that everyday rituals can transform the way we experience our homes and ourselves. Focused on fragrances and products designed for interior and exterior spaces, the brand sought to express beauty, care, and individuality through a refined and sensorial identity system. My goal was to translate these attributes into a visual language capable of expressing the brand\'s essence in a distinctive and meaningful way.\n\nI developed a visual identity rooted in the concept of transformation. The logo combines a custom symbol and wordmark to form an expanding spiral, while the typography references the movement of flames and the evolving nature of scent. Inspired by natural materials, the color palette and proprietary illustrations create organic patterns that reinforce the brand\'s holistic and contemporary character across packaging and communication.\n\nAs an independent designer, I led every stage of the project, from brand conception and visual identity development to packaging design and art direction for product photography, ensuring consistency and authorship across every touchpoint.',
+    },
+    credits: [
+      [{ pt: 'Design & Direção de Arte', en: 'Design & Art Direction' }, 'Mauricio Filho'],
+      [{ pt: 'Parceiros',               en: 'Partners' },               'Órix Media House — Fotografia'],
     ]
   },
-  justos:        { client: 'Justos' },
-  phlor:         { client: 'Phlor' },
+  '99': {
+    client: '99',
+    detail: {
+      pt: 'A 99 sempre ocupou um papel central na conexão entre pessoas, lugares e oportunidades em todo o Brasil. À medida que a empresa ampliava seu ecossistema e sua relevância, surgiu o desafio de traduzir um propósito mais claro para a marca: cuidar das pessoas abrindo caminhos para despertar novas histórias. Nosso trabalho foi transformar essa visão em uma identidade visual capaz de refletir tanto a escala da plataforma quanto a diversidade das comunidades que ela conecta.\n\nPartindo dos ativos já reconhecidos da marca, buscamos inspiração na linguagem visual das cidades, seus contornos, rotas e fluxos constantes. O sistema resultante combina padrões, texturas, mapas e elementos gráficos modulares para construir uma identidade flexível e expressiva. Próxima, inclusiva e adaptável, a linguagem visual reflete a complexidade da vida urbana ao mesmo tempo em que fortalece a conexão entre passageiros, motoristas e sociedade.\n\nComo Designer Sênior, estive envolvido no desenvolvimento e desdobramento do sistema de identidade visual, contribuindo para a construção de ativos gráficos, aplicações da marca e materiais de apresentação do projeto.',
+      en: '99 has always played a central role in connecting people, places, and opportunities across Brazil. As the company expanded its ecosystem and impact, the challenge was to evolve the brand around a clear purpose: caring for people by opening paths for new stories to happen. Our role was to translate this vision into a visual identity capable of reflecting both the scale of the platform and the diversity of the communities it serves.\n\nBuilding on existing brand assets, we drew inspiration from the visual language of cities, their routes, contours, and constant movement. The resulting system combines patterns, textures, maps, and modular graphic elements to create a flexible and expressive identity. Designed to be inclusive, recognizable, and adaptable, the visual language mirrors the complexity and dynamism of urban life while strengthening the connection between passengers, drivers, and society.\n\nAs a Senior Designer, I was involved in the development and rollout of the visual identity system, helping shape graphic assets, brand applications, and case study materials.',
+    },
+    credits: [
+      [{ pt: 'Design',      en: 'Design' },      'Gustavo André, Eduardo França, Mauricio Filho, Lays Santos', { dir: 'Dandara Almeida' }],
+      [{ pt: 'Estratégia',  en: 'Strategy' },    'Paula Marchiori, Carol Avari'],
+      [{ pt: 'Verbal',      en: 'Copywriting' }, 'Ana Cunha, Mila Bartilotti'],
+    ],
+    studio: 'Tátil Design',
+    recognition: [
+      'Brazil Design Award (BDA) 2022',
+      '🥉 Graphic Design',
+    ],
+  },
+  martorelli: {
+    client: 'Martorelli',
+    detail: {
+      pt: 'O Martorelli Advogados é um escritório construído sobre uma trajetória sólida e, ao mesmo tempo, em constante evolução. Referência em seu segmento, a marca buscava fortalecer seu posicionamento por meio de uma identidade capaz de expressar tanto sua história quanto sua visão de futuro. Nosso desafio foi traduzir esse equilíbrio entre tradição e transformação em um sistema visual contemporâneo e relevante.\n\nRedesenhamos a identidade visual para refletir a diversidade, a expertise e a cultura centrada nas pessoas que definem o escritório. O novo logotipo combina influências tipográficas clássicas e contemporâneas, expressando uma marca que respeita seu legado sem deixar de evoluir. A paleta cromática, a linguagem fotográfica focada nas relações humanas, a arquitetura de marcas e o tom de voz mais próximo trabalham em conjunto para construir uma experiência consistente e atual em todos os pontos de contato.\n\nComo Designer Sênior, estive envolvido no desenvolvimento e desdobramento da identidade visual, contribuindo para aplicações da marca, ativos visuais e materiais de apresentação do projeto.',
+      en: 'Martorelli Advogados is a firm built on a strong legacy while continuously evolving to meet new realities. Recognized as a reference in its field, the firm sought to strengthen its positioning through a brand capable of expressing both its history and its forward-looking vision. Our challenge was to translate this balance between tradition and transformation into a contemporary identity system.\n\nWe redesigned the visual identity to reflect the firm\'s diversity, expertise, and human-centered culture. The new logo combines classical and contemporary typographic influences, expressing a brand that respects its heritage while embracing change. A refined color palette, people-focused photography, a structured brand architecture, and a more approachable verbal language work together to create a cohesive and modern brand experience across every touchpoint.\n\nAs a Senior Designer, I was involved in the development and rollout of the visual identity system, contributing to brand applications, visual assets, and case study materials.',
+    },
+    credits: [
+      [{ pt: 'Design',      en: 'Design' },      'Camilla Mattos, Eduardo França, Gustavo André, Mauricio Filho, Priscila Czuka', { dir: 'Dandara Almeida' }],
+      [{ pt: 'Estratégia',  en: 'Strategy' },    'Amanda Gebara'],
+      [{ pt: 'Verbal',      en: 'Copywriting' }, 'Ana Cunha, Mila Bartilotti, Lourenço Araujo'],
+    ],
+    studio: 'Tátil Design',
+  },
   metallo:       { client: 'Metallo' },
   papeltec:      { client: 'Papeltec' },
   caixa:         { client: 'Caixa' },
@@ -315,6 +382,69 @@ function initWorkTable() {
     wrap.querySelectorAll('.wt-expand-inner[data-built]').forEach(el => delete el.dataset.built);
   });
 
+  // ── Case lightbox ────────────────────────────────────────────
+  const caseLb = document.createElement('div');
+  caseLb.id = 'case-lightbox';
+  caseLb.innerHTML = `
+    <button class="case-lb-close" aria-label="Fechar">✕</button>
+    <button class="case-lb-prev" aria-label="Anterior">‹</button>
+    <img class="case-lb-img" src="" alt="">
+    <button class="case-lb-next" aria-label="Próxima">›</button>
+    <div class="case-lb-dots"></div>
+  `;
+  document.body.appendChild(caseLb);
+
+  const clbImg   = caseLb.querySelector('.case-lb-img');
+  const clbDots  = caseLb.querySelector('.case-lb-dots');
+  const clbClose = caseLb.querySelector('.case-lb-close');
+  const clbPrev  = caseLb.querySelector('.case-lb-prev');
+  const clbNext  = caseLb.querySelector('.case-lb-next');
+  let clbImgs = [], clbIdx = 0;
+
+  function openCaseLightbox(imgs, startIdx) {
+    clbImgs = imgs.filter(s => !s.endsWith('.mp4'));
+    clbIdx  = Math.max(0, Math.min(startIdx, clbImgs.length - 1));
+    clbDots.innerHTML = '';
+    clbImgs.forEach((_, i) => {
+      const d = document.createElement('button');
+      d.className = 'case-lb-dot' + (i === clbIdx ? ' active' : '');
+      d.setAttribute('aria-label', `Imagem ${i + 1}`);
+      d.addEventListener('click', e => { e.stopPropagation(); showCaseSlide(i); });
+      clbDots.appendChild(d);
+    });
+    showCaseSlide(clbIdx, true);
+    caseLb.classList.add('visible');
+  }
+
+  function showCaseSlide(idx, instant) {
+    clbIdx = idx;
+    if (!instant) clbImg.classList.add('fading');
+    setTimeout(() => {
+      clbImg.src = clbImgs[idx];
+      clbImg.classList.remove('fading');
+      clbDots.querySelectorAll('.case-lb-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+    }, instant ? 0 : 150);
+  }
+
+  function closeCaseLightbox() { caseLb.classList.remove('visible'); }
+
+  clbClose.addEventListener('click', closeCaseLightbox);
+  caseLb.addEventListener('click', e => { if (e.target === caseLb) closeCaseLightbox(); });
+  clbPrev.addEventListener('click', e => {
+    e.stopPropagation();
+    showCaseSlide((clbIdx - 1 + clbImgs.length) % clbImgs.length);
+  });
+  clbNext.addEventListener('click', e => {
+    e.stopPropagation();
+    showCaseSlide((clbIdx + 1) % clbImgs.length);
+  });
+  document.addEventListener('keydown', e => {
+    if (!caseLb.classList.contains('visible')) return;
+    if (e.key === 'Escape')     closeCaseLightbox();
+    if (e.key === 'ArrowLeft')  showCaseSlide((clbIdx - 1 + clbImgs.length) % clbImgs.length);
+    if (e.key === 'ArrowRight') showCaseSlide((clbIdx + 1) % clbImgs.length);
+  });
+
   function openRow(row) {
     if (preview) preview.classList.remove('visible');
     row.classList.add('is-open');
@@ -333,11 +463,9 @@ function initWorkTable() {
     inner.innerHTML = '';
     inner.dataset.built = '1';
 
-    const project  = row.dataset.project;
-    const data     = PROJECT_DATA[project] || {};
-    const name     = row.querySelector('.wt-name')?.textContent || '';
-    const sector   = row.querySelector('.wt-sector')?.textContent || '';
-    const services = row.querySelector('.wt-services')?.textContent || '';
+    const project = row.dataset.project;
+    const data    = PROJECT_DATA[project] || {};
+    const isEN    = document.documentElement.lang === 'en';
 
     let imgs = [];
     try { imgs = JSON.parse(row.dataset.images || '[]'); } catch(e) {}
@@ -346,78 +474,185 @@ function initWorkTable() {
     const info = document.createElement('div');
     info.className = 'wt-info-panel';
 
-    const titleEl = document.createElement('h2');
-    titleEl.className = 'wt-expand-title';
-    titleEl.textContent = name;
-    info.appendChild(titleEl);
+    const detailText = data.detail
+      ? (typeof data.detail === 'object' ? (isEN ? data.detail.en : data.detail.pt) : data.detail)
+      : '';
 
-    const meta = document.createElement('div');
-    meta.className = 'wt-expand-meta';
-    const svcEl = document.createElement('span');
-    svcEl.className = 'wt-expand-svc';
-    svcEl.textContent = services;
-    meta.appendChild(svcEl);
-    info.appendChild(meta);
+    if (detailText) {
+      const overviewLabel = document.createElement('span');
+      overviewLabel.className = 'wt-overview-label';
+      overviewLabel.textContent = 'Overview';
+      info.appendChild(overviewLabel);
 
-    if (data.detail) {
       const desc = document.createElement('div');
       desc.className = 'wt-expand-desc';
-      desc.innerHTML = data.detail.split('\n\n').map(p =>
+      desc.innerHTML = detailText.split('\n\n').map(p =>
         `<p>${p.replace(/\n/g, '<br>')}</p>`
       ).join('');
       info.appendChild(desc);
     }
 
-    if (data.credits && data.credits.length) {
-      const isEN = document.documentElement.lang === 'en';
-      const credWrap = document.createElement('div');
-      credWrap.className = 'wt-credits';
+    function makeCreditsPanel(labelText, rows, studio, bodyFn) {
+      const wrap = document.createElement('div');
+      wrap.className = 'wt-credits';
 
-      const credToggle = document.createElement('button');
-      credToggle.className = 'wt-credits-toggle';
-      const credLabel = document.createElement('span');
-      credLabel.className = 'wt-credits-label';
-      credLabel.textContent = isEN ? 'Technical Sheet' : 'Ficha Técnica';
-      const credIcon = document.createElement('span');
-      credIcon.className = 'wt-credits-icon';
-      credIcon.textContent = '+';
-      credToggle.appendChild(credLabel);
-      credToggle.appendChild(credIcon);
+      const toggle = document.createElement('button');
+      toggle.className = 'wt-credits-toggle';
+      const lbl = document.createElement('span');
+      lbl.className = 'wt-credits-label';
+      lbl.textContent = labelText;
+      const icon = document.createElement('span');
+      icon.className = 'wt-credits-icon';
+      icon.textContent = '+';
+      toggle.appendChild(lbl);
+      toggle.appendChild(icon);
 
-      const credBody = document.createElement('div');
-      credBody.className = 'wt-credits-body';
+      const body = document.createElement('div');
+      body.className = 'wt-credits-body';
 
-      data.credits.forEach(([labelObj, ...values]) => {
-        const label = typeof labelObj === 'object' ? (isEN ? labelObj.en : labelObj.pt) : labelObj;
-        const credRow = document.createElement('div');
-        credRow.className = 'wt-credits-row';
-        const keyEl = document.createElement('span');
-        keyEl.className = 'wt-credits-key';
-        keyEl.textContent = label;
-        credRow.appendChild(keyEl);
-        values.forEach(v => {
-          const resolved = typeof v === 'object' ? (isEN ? v.en : v.pt) : v;
-          const valEl = document.createElement('span');
-          valEl.className = 'wt-credits-val';
-          valEl.textContent = resolved;
-          credRow.appendChild(valEl);
+      if (bodyFn) {
+        bodyFn(body);
+      } else {
+        rows.forEach(row => {
+          const rowEl = document.createElement('div');
+          rowEl.className = 'wt-credits-row';
+          if (row.key) {
+            const keyEl = document.createElement('span');
+            keyEl.className = 'wt-credits-key';
+            keyEl.textContent = row.key;
+            rowEl.appendChild(keyEl);
+          }
+          row.values.forEach(v => {
+            const valEl = document.createElement('span');
+            valEl.className = v.isDir ? 'wt-credits-dir' : 'wt-credits-val';
+            valEl.textContent = v.isDir
+              ? `${isEN ? 'Direction' : 'Direção'}: ${v.text}`
+              : v.text;
+            rowEl.appendChild(valEl);
+          });
+          body.appendChild(rowEl);
         });
-        credBody.appendChild(credRow);
+      }
+
+      toggle.addEventListener('click', () => {
+        // close other open panels in same info panel
+        info.querySelectorAll('.wt-credits.is-open').forEach(el => {
+          if (el !== wrap) {
+            el.classList.remove('is-open');
+            el.querySelector('.wt-credits-icon').textContent = '+';
+          }
+        });
+        const open = wrap.classList.toggle('is-open');
+        icon.textContent = open ? '−' : '+';
       });
 
-      credToggle.addEventListener('click', () => {
-        const open = credWrap.classList.toggle('is-open');
-        credIcon.textContent = open ? '−' : '+';
+      // close on outside click
+      document.addEventListener('click', function onOutside(e) {
+        if (!wrap.contains(e.target) && wrap.classList.contains('is-open')) {
+          wrap.classList.remove('is-open');
+          icon.textContent = '+';
+        }
       });
 
-      credWrap.appendChild(credToggle);
-      credWrap.appendChild(credBody);
-      info.appendChild(credWrap);
+      if (studio) {
+        const studioEl = document.createElement('p');
+        studioEl.className = 'wt-credits-studio';
+        const prefix = isEN ? 'Project developed at ' : 'Projeto desenvolvido na ';
+        studioEl.innerHTML = prefix + `<strong>${studio}</strong>`;
+        body.appendChild(studioEl);
+      }
+
+      wrap.appendChild(toggle);
+      wrap.appendChild(body);
+      return wrap;
+    }
+
+    const hasCredits = data.credits && data.credits.length;
+    const hasRecognition = data.recognition && data.recognition.length;
+    const hasBehance = !!data.behance;
+
+    if (hasCredits || hasRecognition || hasBehance) {
+      const btns = document.createElement('div');
+      btns.className = 'wt-credits-btns';
+
+      if (hasCredits) {
+        const rows = data.credits.map(([labelObj, ...values]) => {
+          const key = typeof labelObj === 'object' ? (isEN ? labelObj.en : labelObj.pt) : labelObj;
+          const vals = values.map(v => {
+            if (typeof v === 'object' && v.dir !== undefined) return { text: v.dir, isDir: true };
+            const text = typeof v === 'object' ? (isEN ? v.en : v.pt) : v;
+            return { text, isDir: false };
+          });
+          return { key, values: vals };
+        });
+        btns.appendChild(makeCreditsPanel(isEN ? 'Technical Sheet' : 'Ficha Técnica', rows, data.studio));
+      }
+
+      if (hasRecognition) {
+        const recogGroups = [];
+        let curGroup = null;
+        data.recognition.forEach(s => {
+          if (/^[🥇🥈🥉📕]/u.test(s)) {
+            if (curGroup) curGroup.items.push(s);
+          } else {
+            const m = s.match(/^(.*?)\s+(\d{4})$/);
+            curGroup = { name: m ? m[1] : s, year: m ? m[2] : null, items: [] };
+            recogGroups.push(curGroup);
+          }
+        });
+        btns.appendChild(makeCreditsPanel(
+          isEN ? 'Recognition' : 'Reconhecimento',
+          null, null,
+          body => {
+            recogGroups.forEach((g, i) => {
+              const gEl = document.createElement('div');
+              gEl.className = 'wt-recog-group' + (i > 0 ? ' wt-recog-group--sep' : '');
+              const nameEl = document.createElement('span');
+              nameEl.className = 'wt-recog-name';
+              nameEl.textContent = g.name;
+              gEl.appendChild(nameEl);
+              if (g.year) {
+                const yrEl = document.createElement('span');
+                yrEl.className = 'wt-recog-year';
+                yrEl.textContent = g.year;
+                gEl.appendChild(yrEl);
+              }
+              g.items.forEach(item => {
+                const itEl = document.createElement('span');
+                itEl.className = 'wt-recog-item';
+                itEl.textContent = item;
+                gEl.appendChild(itEl);
+              });
+              body.appendChild(gEl);
+            });
+          }
+        ));
+      }
+
+      if (hasBehance || true) {
+        const bLink = document.createElement('a');
+        bLink.className = 'wt-behance-btn';
+        bLink.href = data.behance || '#';
+        bLink.target = '_blank';
+        bLink.rel = 'noopener';
+        if (!data.behance) bLink.style.opacity = '0.4';
+        const bLabel = document.createElement('span');
+        bLabel.className = 'wt-behance-label';
+        bLabel.textContent = 'Behance';
+        const bArrow = document.createElement('span');
+        bArrow.className = 'wt-credits-icon';
+        bArrow.textContent = '↗';
+        bLink.appendChild(bLabel);
+        bLink.appendChild(bArrow);
+        btns.appendChild(bLink);
+      }
+
+      info.appendChild(btns);
     }
 
     inner.appendChild(info);
 
-    // ── Carousel wrap (cols 2–3, aligned to services col) ────────
+    // ── Carousel wrap (cols 2–3) ──────────────────────────────────
     const carouselWrap = document.createElement('div');
     carouselWrap.className = 'wt-carousel-wrap';
 
@@ -427,40 +662,53 @@ function initWorkTable() {
     const carousel = document.createElement('div');
     carousel.className = 'wt-carousel';
 
-    imgs.forEach(src => {
+    const imgOnlyIdxMap = []; // maps carousel child index → clbImgs index
+    let imgCount = 0;
+
+    imgs.forEach((src, carouselIdx) => {
       let el;
       if (src.endsWith('.mp4')) {
         el = document.createElement('video');
-        el.src      = src;
-        el.autoplay = true;
-        el.muted    = true;
-        el.loop     = true;
+        el.src       = src;
+        el.autoplay  = true;
+        el.muted     = true;
+        el.loop      = true;
         el.playsInline = true;
-        el.style.height = '100%';
-        el.style.width  = 'auto';
-        el.style.borderRadius = '6px';
-        el.style.flexShrink = '0';
-        el.style.display = 'block';
+        el.style.cssText = 'height:100%;width:auto;border-radius:6px;flex-shrink:0;display:block;';
+        imgOnlyIdxMap.push(-1);
       } else {
         el = document.createElement('img');
         el.src     = src;
         el.alt     = '';
         el.loading = 'lazy';
+        el.style.cursor = 'pointer';
+        const thisImgIdx = imgCount++;
+        el.addEventListener('click', () => openCaseLightbox(imgs, thisImgIdx));
+        imgOnlyIdxMap.push(thisImgIdx);
       }
       carousel.appendChild(el);
     });
+
     carouselOuter.appendChild(carousel);
     carouselWrap.appendChild(carouselOuter);
 
-    // Dots
+    // Dots + scroll hint
     if (imgs.length > 1) {
+      const dotsWrap = document.createElement('div');
+      dotsWrap.className = 'wt-dots-wrap';
+
+      const hint = document.createElement('span');
+      hint.className = 'wt-dots-hint';
+      hint.textContent = isEN ? 'scroll to see more' : 'arraste para ver mais';
+      dotsWrap.appendChild(hint);
+
       const dotsEl = document.createElement('div');
       dotsEl.className = 'wt-dots';
 
       const dots = imgs.map((_, i) => {
         const dot = document.createElement('button');
         dot.className = 'wt-dot' + (i === 0 ? ' active' : '');
-        dot.setAttribute('aria-label', `Image ${i + 1}`);
+        dot.setAttribute('aria-label', `Imagem ${i + 1}`);
         dot.addEventListener('click', e => {
           e.preventDefault();
           dot.blur();
@@ -481,7 +729,8 @@ function initWorkTable() {
         dots.forEach((d, i) => d.classList.toggle('active', i === best));
       }, { passive: true });
 
-      carouselWrap.appendChild(dotsEl);
+      dotsWrap.appendChild(dotsEl);
+      carouselWrap.appendChild(dotsWrap);
     }
 
     inner.appendChild(carouselWrap);
@@ -491,8 +740,8 @@ function initWorkTable() {
 /* ─── Gallery ────────────────────────────────────────────────────── */
 const GALLERY_DATA = [
   { project: 'enjoei',   label: 'Enjoei',
-    picks: ['assets/images/cases/enjoei/1.png','assets/images/cases/enjoei/5.png','assets/images/cases/enjoei/12.png'],
-    all:   ['assets/images/cases/enjoei/1.png','assets/images/cases/enjoei/2.jpg','assets/images/cases/enjoei/3.jpg','assets/images/cases/enjoei/4.jpg','assets/images/cases/enjoei/5.png','assets/images/cases/enjoei/6.jpg','assets/images/cases/enjoei/7.png','assets/images/cases/enjoei/8.png','assets/images/cases/enjoei/10.png','assets/images/cases/enjoei/11.jpg','assets/images/cases/enjoei/12.png','assets/images/cases/enjoei/14.png','assets/images/cases/enjoei/15.png','assets/images/cases/enjoei/16.jpg','assets/images/cases/enjoei/17.jpg','assets/images/cases/enjoei/18.jpg','assets/images/cases/enjoei/20.png','assets/images/cases/enjoei/21.png','assets/images/cases/enjoei/22.png'] },
+    picks: ['assets/images/cases/enjoei/1.png','assets/images/cases/enjoei/5.gif','assets/images/cases/enjoei/12.png'],
+    all:   ['assets/images/cases/enjoei/1.png','assets/images/cases/enjoei/2.jpg','assets/images/cases/enjoei/3.jpg','assets/images/cases/enjoei/4.jpg','assets/images/cases/enjoei/5.gif','assets/images/cases/enjoei/6.png','assets/images/cases/enjoei/7.png','assets/images/cases/enjoei/8b.png','assets/images/cases/enjoei/9.jpg','assets/images/cases/enjoei/10.png','assets/images/cases/enjoei/10 1.gif','assets/images/cases/enjoei/11.jpg','assets/images/cases/enjoei/12.png','assets/images/cases/enjoei/14.png','assets/images/cases/enjoei/15.png','assets/images/cases/enjoei/16.jpg','assets/images/cases/enjoei/17.jpg','assets/images/cases/enjoei/18.jpg','assets/images/cases/enjoei/20.png','assets/images/cases/enjoei/21.png','assets/images/cases/enjoei/22.png'] },
   { project: 'justos',   label: 'Justos',
     picks: ['assets/images/cases/justos/1.png','assets/images/cases/justos/6.png','assets/images/cases/justos/11.png'],
     all:   ['assets/images/cases/justos/1.png','assets/images/cases/justos/3.png','assets/images/cases/justos/6.png','assets/images/cases/justos/7.png','assets/images/cases/justos/9.png','assets/images/cases/justos/10.png','assets/images/cases/justos/11.png','assets/images/cases/justos/13.png','assets/images/cases/justos/15.png'] },
@@ -520,6 +769,12 @@ const GALLERY_DATA = [
   { project: 'mdesign',  label: 'MDesign',
     picks: ['assets/images/cases/mdesign/1.gif','assets/images/cases/mdesign/571399534.png','assets/images/cases/mdesign/Frame 84.png'],
     all:   ['assets/images/cases/mdesign/1.gif','assets/images/cases/mdesign/571399534.png','assets/images/cases/mdesign/571399535.png','assets/images/cases/mdesign/Envelope.png','assets/images/cases/mdesign/Frame 2.png','assets/images/cases/mdesign/Frame 3.png','assets/images/cases/mdesign/Frame 84.png'] },
+  { project: '99',       label: '99',
+    picks: ['assets/images/cases/99/imageye___-_6924204799d08a071d58f46b_tatil-99-nova-linguagem-visual-escalator-advertisement.webp','assets/images/cases/99/imageye___-_6924205edf44a64f77a34a72_tatil-99-nova-linguagem-visual-framed-posters-gallery.webp','assets/images/cases/99/imageye___-_692420b0ceb4d12ea2ac9faa_tatil-99-nova-linguagem-visual-map-of-sao-paulo.webp'],
+    all:   ['assets/images/cases/99/imageye___-_6924204799d08a071d58f46b_tatil-99-nova-linguagem-visual-escalator-advertisement.webp','assets/images/cases/99/imageye___-_69242056d05392e7c6377003_tatil-99-nova-linguagem-visual-bold-yellow-text.webp','assets/images/cases/99/imageye___-_6924205a73c8da16db0f5660_tatil-99-nova-linguagem-visual-smartphone-displaying-app.webp','assets/images/cases/99/imageye___-_6924205edf44a64f77a34a72_tatil-99-nova-linguagem-visual-framed-posters-gallery.webp','assets/images/cases/99/imageye___-_69242084e72288e44cd8981f_tatil-99-nova-linguagem-visual-notebook-with-yellow-design.webp','assets/images/cases/99/imageye___-_692420acdb6ccb7c5603d7ff_tatil-99-nova-linguagem-visual-open-book-with-yellow-pages.webp','assets/images/cases/99/imageye___-_692420b0ceb4d12ea2ac9faa_tatil-99-nova-linguagem-visual-map-of-sao-paulo.webp','assets/images/cases/99/imageye___-_692420b5b54d651606e73bfa_tatil-99-nova-linguagem-visual-collage-of-graphics-and-photos.webp','assets/images/cases/99/imageye___-_692420bf6219eca972b28b79_tatil-99-nova-linguagem-visual-yellow-graphic-design.webp','assets/images/cases/99/imageye___-_692420c563bdeb9ba92f8b11_tatil-99-nova-linguagem-visual-car-ride-experience.webp','assets/images/cases/99/imageye___-_692420cb09c8c9bc1c417079_tatil-99-nova-linguagem-visual-app-interface-for-women-drivers.webp','assets/images/cases/99/imageye___-_69331acb62c25635edf11e0b_tatil-99-nova-linguagem-visual-aerial-parking-lot.webp','assets/images/cases/99/10.mp4'] },
+  { project: 'martorelli', label: 'Martorelli',
+    picks: ['assets/images/cases/martorelli/1.png','assets/images/cases/martorelli/3.png','assets/images/cases/martorelli/5.png'],
+    all:   ['assets/images/cases/martorelli/1.png','assets/images/cases/martorelli/2.mov','assets/images/cases/martorelli/3.png','assets/images/cases/martorelli/4.png','assets/images/cases/martorelli/5.png','assets/images/cases/martorelli/6.mov','assets/images/cases/martorelli/9.png','assets/images/cases/martorelli/10.png','assets/images/cases/martorelli/11.png','assets/images/cases/martorelli/12.png','assets/images/cases/martorelli/13.png','assets/images/cases/martorelli/14.png','assets/images/cases/martorelli/15.png','assets/images/cases/martorelli/16.png'] },
 ];
 
 function initGallery() {
