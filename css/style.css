@@ -1256,10 +1256,10 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   justify-content: center;
   z-index: 500;
   font-family: var(--font-body);
-  font-size: clamp(2.5rem, 7vw, 6rem);
+  font-size: 3.5rem;
   font-weight: 600;
   letter-spacing: -0.02em;
-  color: var(--text);
+  color: #999;
   opacity: 0;
   transition: opacity 0.5s ease;
   pointer-events: none;

@@ -150,21 +150,29 @@ function initGalleryPage() {
       return;
     }
 
-    const W      = window.innerWidth - 80;
-    const H_STEP = 400;
-    const SIZES  = [300, 380, 460, 540, 620];
+    const W        = window.innerWidth - 80;
+    const H_STEP   = 560;
+    const SIZE_PCS = [0.25, 0.50, 1.0];   // 25 / 50 / 100% of available width
 
     const order = allItems.map((_, i) => i).sort(() => Math.random() - 0.5);
-    canvas.style.height = (order.length * H_STEP + 500) + 'px';
+    canvas.style.height = (order.length * H_STEP + 600) + 'px';
 
     order.forEach((srcIdx, plotIdx) => {
-      const item  = allItems[srcIdx];
-      const w     = SIZES[Math.floor(Math.random() * SIZES.length)];
-      const zone  = ZONES[plotIdx % ZONES.length];
-      const xMin  = W * zone[0];
-      const xMax  = W * zone[1] - w * 0.5;
-      const x     = Math.round(xMin + Math.random() * Math.max(0, xMax - xMin));
-      const y     = Math.round(plotIdx * H_STEP + Math.random() * 140);
+      const item   = allItems[srcIdx];
+      const sizePC = SIZE_PCS[Math.floor(Math.random() * SIZE_PCS.length)];
+      const w      = Math.round(W * sizePC);
+
+      let x;
+      if (sizePC >= 1.0) {
+        x = 0;
+      } else {
+        const zone = ZONES[plotIdx % ZONES.length];
+        const xMin = W * zone[0];
+        const xMax = W * zone[1] - w * 0.5;
+        x = Math.round(xMin + Math.random() * Math.max(0, xMax - xMin));
+      }
+
+      const y = Math.round(plotIdx * H_STEP + Math.random() * 180);
 
       item.style.position = 'absolute';
       item.style.width    = w + 'px';
