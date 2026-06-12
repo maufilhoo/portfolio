@@ -143,8 +143,6 @@
   .about-row { grid-template-columns: 1fr; gap: 1rem; }
   .about-clients-grid { grid-template-columns: repeat(2, 1fr); }
 
-  /* Gallery (legacy) */
-  .gallery-item img { height: 140px; max-width: 180px; }
 }
 
 /* ─── Small mobile (≤ 480px) ────────────────────────────────────── */

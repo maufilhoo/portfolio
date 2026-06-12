@@ -73,14 +73,13 @@ function initAudio() {
       e.stopPropagation();
       const idx = parseInt(opt.dataset.track);
       const wasPlaying = !audio.paused;
-      const currentTime = 0;
 
       popover.querySelectorAll('.track-opt').forEach(o => o.classList.remove('active'));
       opt.classList.add('active');
 
       audio.pause();
       audio.src = TRACKS[idx];
-      audio.currentTime = currentTime;
+      audio.currentTime = 0;
 
       if (wasPlaying) {
         audio.play().then(() => btn.classList.add('playing')).catch(() => {});
@@ -744,177 +743,6 @@ function initWorkTable() {
 
     inner.appendChild(carouselWrap);
   }
-}
-
-/* ─── Gallery ────────────────────────────────────────────────────── */
-const GALLERY_DATA = [
-  { project: 'enjoei',   label: 'Enjoei',
-    picks: ['assets/images/cases/enjoei/1.webp','assets/images/cases/enjoei/5.gif','assets/images/cases/enjoei/12.webp'],
-    all:   ['assets/images/cases/enjoei/1.webp','assets/images/cases/enjoei/2.webp','assets/images/cases/enjoei/3.webp','assets/images/cases/enjoei/4.webp','assets/images/cases/enjoei/5.gif','assets/images/cases/enjoei/6.webp','assets/images/cases/enjoei/7.webp','assets/images/cases/enjoei/8b.webp','assets/images/cases/enjoei/9.webp','assets/images/cases/enjoei/10.webp','assets/images/cases/enjoei/10 1.gif','assets/images/cases/enjoei/11.webp','assets/images/cases/enjoei/12.webp','assets/images/cases/enjoei/14.webp','assets/images/cases/enjoei/15.webp','assets/images/cases/enjoei/16.webp','assets/images/cases/enjoei/17.webp','assets/images/cases/enjoei/18.webp','assets/images/cases/enjoei/20.webp','assets/images/cases/enjoei/21.webp','assets/images/cases/enjoei/22.webp'] },
-  { project: 'justos',   label: 'Justos',
-    picks: ['assets/images/cases/justos/1.webp','assets/images/cases/justos/6.webp','assets/images/cases/justos/11.webp'],
-    all:   ['assets/images/cases/justos/1.webp','assets/images/cases/justos/3.webp','assets/images/cases/justos/6.webp','assets/images/cases/justos/7.webp','assets/images/cases/justos/9.webp','assets/images/cases/justos/10.webp','assets/images/cases/justos/11.webp','assets/images/cases/justos/13.webp','assets/images/cases/justos/15.webp'] },
-  { project: 'phlor',    label: 'Phlor',
-    picks: ['assets/images/cases/phlor/1.webp','assets/images/cases/phlor/5.webp','assets/images/cases/phlor/10.webp'],
-    all:   ['assets/images/cases/phlor/1.webp','assets/images/cases/phlor/2.webp','assets/images/cases/phlor/3.webp','assets/images/cases/phlor/4.webp','assets/images/cases/phlor/5.webp','assets/images/cases/phlor/6.webp','assets/images/cases/phlor/7.webp','assets/images/cases/phlor/8.webp','assets/images/cases/phlor/9.webp','assets/images/cases/phlor/10.webp','assets/images/cases/phlor/11.webp','assets/images/cases/phlor/12.webp','assets/images/cases/phlor/13.webp','assets/images/cases/phlor/14.webp','assets/images/cases/phlor/15.webp'] },
-  { project: 'metallo',  label: 'Metallo',
-    picks: ['assets/images/cases/metallo/1.webp','assets/images/cases/metallo/3.webp','assets/images/cases/metallo/5.webp'],
-    all:   ['assets/images/cases/metallo/1.webp','assets/images/cases/metallo/2.webp','assets/images/cases/metallo/3.webp','assets/images/cases/metallo/4.webp','assets/images/cases/metallo/5.webp','assets/images/cases/metallo/6.webp'] },
-  { project: 'papeltec', label: 'Papeltec',
-    picks: ['assets/images/cases/papeltec/1.webp','assets/images/cases/papeltec/4.webp','assets/images/cases/papeltec/7.webp'],
-    all:   ['assets/images/cases/papeltec/1.webp','assets/images/cases/papeltec/2.webp','assets/images/cases/papeltec/3.webp','assets/images/cases/papeltec/4.webp','assets/images/cases/papeltec/5.webp','assets/images/cases/papeltec/6.webp','assets/images/cases/papeltec/7.webp','assets/images/cases/papeltec/Frame 2629.webp','assets/images/cases/papeltec/Frame 2630.webp'] },
-  { project: 'caixa',    label: 'Caixa',
-    picks: ['assets/images/cases/caixa.webp'],
-    all:   ['assets/images/cases/caixa.webp'] },
-  { project: 'natura',   label: 'Natura',
-    picks: ['assets/images/cases/natura.webp'],
-    all:   ['assets/images/cases/natura.webp'] },
-  { project: 'ativa',    label: 'Ativa',
-    picks: ['assets/images/cases/ativa/1.webp','assets/images/cases/ativa/3.webp','assets/images/cases/ativa/5.webp'],
-    all:   ['assets/images/cases/ativa/1.webp','assets/images/cases/ativa/2.webp','assets/images/cases/ativa/3.webp','assets/images/cases/ativa/4.webp','assets/images/cases/ativa/5.webp','assets/images/cases/ativa/6.webp'] },
-  { project: 'vibra',    label: 'Vibra Picto',
-    picks: ['assets/images/cases/vibra/1.webp','assets/images/cases/vibra/3.webp','assets/images/cases/vibra/5.webp'],
-    all:   ['assets/images/cases/vibra/1.webp','assets/images/cases/vibra/2.webp','assets/images/cases/vibra/3.webp','assets/images/cases/vibra/4.webp','assets/images/cases/vibra/5.webp','assets/images/cases/vibra/6.webp','assets/images/cases/vibra/7.webp'] },
-  { project: 'mdesign',  label: 'MDesign',
-    picks: ['assets/images/cases/mdesign/1.gif','assets/images/cases/mdesign/571399534.webp','assets/images/cases/mdesign/Frame 84.webp'],
-    all:   ['assets/images/cases/mdesign/1.gif','assets/images/cases/mdesign/571399534.webp','assets/images/cases/mdesign/571399535.webp','assets/images/cases/mdesign/Envelope.webp','assets/images/cases/mdesign/Frame 2.webp','assets/images/cases/mdesign/Frame 3.webp','assets/images/cases/mdesign/Frame 84.webp'] },
-  { project: '99',       label: '99',
-    picks: ['assets/images/cases/99/imageye___-_6924204799d08a071d58f46b_tatil-99-nova-linguagem-visual-escalator-advertisement.webp','assets/images/cases/99/imageye___-_6924205edf44a64f77a34a72_tatil-99-nova-linguagem-visual-framed-posters-gallery.webp','assets/images/cases/99/imageye___-_692420b0ceb4d12ea2ac9faa_tatil-99-nova-linguagem-visual-map-of-sao-paulo.webp'],
-    all:   ['assets/images/cases/99/imageye___-_6924204799d08a071d58f46b_tatil-99-nova-linguagem-visual-escalator-advertisement.webp','assets/images/cases/99/imageye___-_69242056d05392e7c6377003_tatil-99-nova-linguagem-visual-bold-yellow-text.webp','assets/images/cases/99/imageye___-_6924205a73c8da16db0f5660_tatil-99-nova-linguagem-visual-smartphone-displaying-app.webp','assets/images/cases/99/imageye___-_6924205edf44a64f77a34a72_tatil-99-nova-linguagem-visual-framed-posters-gallery.webp','assets/images/cases/99/imageye___-_69242084e72288e44cd8981f_tatil-99-nova-linguagem-visual-notebook-with-yellow-design.webp','assets/images/cases/99/imageye___-_692420acdb6ccb7c5603d7ff_tatil-99-nova-linguagem-visual-open-book-with-yellow-pages.webp','assets/images/cases/99/imageye___-_692420b0ceb4d12ea2ac9faa_tatil-99-nova-linguagem-visual-map-of-sao-paulo.webp','assets/images/cases/99/imageye___-_692420b5b54d651606e73bfa_tatil-99-nova-linguagem-visual-collage-of-graphics-and-photos.webp','assets/images/cases/99/imageye___-_692420bf6219eca972b28b79_tatil-99-nova-linguagem-visual-yellow-graphic-design.webp','assets/images/cases/99/imageye___-_692420c563bdeb9ba92f8b11_tatil-99-nova-linguagem-visual-car-ride-experience.webp','assets/images/cases/99/imageye___-_692420cb09c8c9bc1c417079_tatil-99-nova-linguagem-visual-app-interface-for-women-drivers.webp','assets/images/cases/99/imageye___-_69331acb62c25635edf11e0b_tatil-99-nova-linguagem-visual-aerial-parking-lot.webp','assets/images/cases/99/10.mp4'] },
-  { project: 'martorelli', label: 'Martorelli',
-    picks: ['assets/images/cases/martorelli/1.webp','assets/images/cases/martorelli/3.webp','assets/images/cases/martorelli/5.webp'],
-    all:   ['assets/images/cases/martorelli/1.webp','assets/images/cases/martorelli/2.mov','assets/images/cases/martorelli/3.webp','assets/images/cases/martorelli/4.webp','assets/images/cases/martorelli/5.webp','assets/images/cases/martorelli/6.mov','assets/images/cases/martorelli/9.webp','assets/images/cases/martorelli/10.webp','assets/images/cases/martorelli/11.webp','assets/images/cases/martorelli/12.webp','assets/images/cases/martorelli/13.webp','assets/images/cases/martorelli/14.webp','assets/images/cases/martorelli/15.webp','assets/images/cases/martorelli/16.webp'] },
-];
-
-function initGallery() {
-  const section = document.getElementById('gallery');
-  if (!section) return;
-
-  // Label
-  const label = document.createElement('p');
-  label.className = 'gallery-label';
-  label.textContent = 'Gallery';
-  section.appendChild(label);
-
-  // Flat list of gallery items (shuffled)
-  const flat = [];
-  GALLERY_DATA.forEach(({ project, label: proj, picks, all }) => {
-    picks.forEach(src => flat.push({ src, project, label: proj, all }));
-  });
-  shuffle(flat);
-
-  // Scatter layout: 5 x-zones
-  const zones   = [3, 19, 38, 57, 73]; // % from left
-  const zoneY   = zones.map(() => 0);
-  const IMG_H   = 200; // fixed image height (px)
-  const CAP_H   = 24;
-  const GAP_MIN = 70;
-  const GAP_RND = 140;
-
-  const canvas = document.createElement('div');
-  canvas.className = 'gallery-canvas';
-  section.appendChild(canvas);
-
-  flat.forEach(item => {
-    // Place in shortest zone, with slight randomness to avoid strict ordering
-    const candidates = zoneY.map((y, i) => ({ i, y })).sort((a, b) => a.y - b.y).slice(0, 3);
-    const chosen = candidates[Math.floor(Math.random() * candidates.length)];
-    const zoneIdx = chosen.i;
-
-    const topGap  = GAP_MIN + Math.floor(Math.random() * GAP_RND);
-    const top     = zoneY[zoneIdx] + (zoneY[zoneIdx] === 0 ? Math.floor(Math.random() * 80) : topGap);
-
-    const el = document.createElement('div');
-    el.className = 'gallery-item';
-    el.style.left = zones[zoneIdx] + '%';
-    el.style.top  = top + 'px';
-    el.dataset.project = item.project;
-
-    const img = document.createElement('img');
-    img.src     = item.src;
-    img.alt     = '';
-    img.loading = 'lazy';
-
-    const cap = document.createElement('p');
-    cap.className   = 'gallery-item-caption';
-    cap.textContent = item.label;
-
-    el.appendChild(img);
-    el.appendChild(cap);
-    canvas.appendChild(el);
-
-    el.addEventListener('click', () => openLightbox(item.all, item.all.indexOf(item.src), item.label));
-
-    zoneY[zoneIdx] = top + IMG_H + CAP_H + GAP_MIN;
-  });
-
-  canvas.style.height = Math.max(...zoneY) + 80 + 'px';
-
-  // ── Lightbox ────────────────────────────────────────────────────
-  const lb      = document.createElement('div');
-  lb.className  = 'gallery-lightbox';
-  lb.innerHTML  = `
-    <button class="gallery-lb-close" aria-label="Close">✕</button>
-    <button class="gallery-lb-prev"  aria-label="Previous">←</button>
-    <img class="gallery-lightbox-img" src="" alt="" />
-    <button class="gallery-lb-next"  aria-label="Next">→</button>
-    <span class="gallery-lb-project"></span>
-    <span class="gallery-lb-counter"></span>
-  `;
-  document.body.appendChild(lb);
-
-  const lbImg     = lb.querySelector('.gallery-lightbox-img');
-  const lbCounter = lb.querySelector('.gallery-lb-counter');
-  const lbProject = lb.querySelector('.gallery-lb-project');
-  let lbImgs = [], lbIdx = 0;
-
-  function openLightbox(imgs, startIdx, projectLabel) {
-    lbImgs = imgs;
-    lbIdx  = Math.max(0, startIdx);
-    lbProject.textContent = projectLabel;
-    showLbSlide(lbIdx);
-    lb.classList.add('visible');
-  }
-
-  function showLbSlide(idx) {
-    lbImg.classList.add('fading');
-    setTimeout(() => {
-      lbImg.src = lbImgs[idx];
-      lbCounter.textContent = (idx + 1) + ' / ' + lbImgs.length;
-      lbImg.classList.remove('fading');
-    }, 160);
-  }
-
-  lb.querySelector('.gallery-lb-close').addEventListener('click', () => lb.classList.remove('visible'));
-  lb.addEventListener('click', e => { if (e.target === lb) lb.classList.remove('visible'); });
-
-  lb.querySelector('.gallery-lb-prev').addEventListener('click', e => {
-    e.stopPropagation();
-    lbIdx = (lbIdx - 1 + lbImgs.length) % lbImgs.length;
-    showLbSlide(lbIdx);
-  });
-  lb.querySelector('.gallery-lb-next').addEventListener('click', e => {
-    e.stopPropagation();
-    lbIdx = (lbIdx + 1) % lbImgs.length;
-    showLbSlide(lbIdx);
-  });
-
-  document.addEventListener('keydown', e => {
-    if (!lb.classList.contains('visible')) return;
-    if (e.key === 'Escape')      lb.classList.remove('visible');
-    if (e.key === 'ArrowLeft')   { lbIdx = (lbIdx - 1 + lbImgs.length) % lbImgs.length; showLbSlide(lbIdx); }
-    if (e.key === 'ArrowRight')  { lbIdx = (lbIdx + 1) % lbImgs.length; showLbSlide(lbIdx); }
-  });
-
-  let galleryTouchX = 0;
-  lb.addEventListener('touchstart', e => { galleryTouchX = e.touches[0].clientX; }, { passive: true });
-  lb.addEventListener('touchend', e => {
-    const dx = e.changedTouches[0].clientX - galleryTouchX;
-    if (Math.abs(dx) > 50) {
-      lbIdx = dx < 0 ? (lbIdx + 1) % lbImgs.length : (lbIdx - 1 + lbImgs.length) % lbImgs.length;
-      showLbSlide(lbIdx);
-    }
-  });
 }
 
 /* ─── Hero card gather animation ────────────────────────────────── */
