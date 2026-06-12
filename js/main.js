@@ -1038,6 +1038,11 @@ function initHelloGreeting(armGather) {
   const FIRST_VISIT_KEY = 'mf-intro-seen';
   const firstVisit = !localStorage.getItem(FIRST_VISIT_KEY);
 
+  // Greeting only on home page
+  const path = window.location.pathname;
+  const isHome = path === '/' || path.endsWith('index.html') || path === '';
+  if (!isHome) return;
+
   // Skip greeting when navigating directly to #work (or any hash anchor)
   if (window.location.hash) {
     if (stage)   stage.style.opacity   = '1';

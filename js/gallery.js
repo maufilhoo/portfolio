@@ -131,18 +131,6 @@ function initGalleryPage() {
   // ── Scatter + float ──────────────────────────────────────────────
   const FLOAT_ANIMS = ['float-a', 'float-b', 'float-c', 'float-d', 'float-e', 'float-f', 'float-g', 'float-h'];
 
-  // Zone bands (as fraction of W): alternating to spread items across canvas
-  const ZONES = [
-    [0.02, 0.44],   // left
-    [0.52, 0.94],   // right
-    [0.18, 0.60],   // center-left
-    [0.38, 0.80],   // center-right
-    [0.02, 0.38],   // far-left
-    [0.58, 0.94],   // far-right
-    [0.24, 0.68],   // center
-    [0.06, 0.50],   // mid-left
-  ];
-
   function doScatter() {
     const isMobile = window.innerWidth <= 768;
 
@@ -163,9 +151,9 @@ function initGalleryPage() {
       return;
     }
 
-    const W      = window.innerWidth - 80;
+    // Use actual canvas width (respects max-width + padding)
+    const W      = canvas.offsetWidth || (window.innerWidth - 80);
     const H_STEP = 210;
-    // 30% / 65% / 100% of canvas width — clear visual difference between sizes
     const SIZES  = [
       Math.round(W * 0.30),
       Math.round(W * 0.65),
@@ -178,17 +166,9 @@ function initGalleryPage() {
     order.forEach((srcIdx, plotIdx) => {
       const item = allItems[srcIdx];
       const w    = SIZES[Math.floor(Math.random() * SIZES.length)];
-      // x: full-width stays at 0, smaller images use zone system
-      let x;
-      if (w >= W * 0.95) {
-        x = 0;
-      } else {
-        const zone = ZONES[plotIdx % ZONES.length];
-        const xMin = W * zone[0];
-        const xMax = Math.min(W - w, W * zone[1]);
-        x = Math.round(xMin + Math.random() * Math.max(0, xMax - xMin));
-      }
-      const y = Math.round(plotIdx * H_STEP + Math.random() * 180);
+      const maxX = Math.max(0, W - w);
+      const x    = Math.round(Math.random() * maxX);
+      const y    = Math.round(plotIdx * H_STEP + Math.random() * 140);
 
       item.style.position = 'absolute';
       item.style.width    = w + 'px';
