@@ -224,7 +224,9 @@
     font-size: 1.35rem;
   }
 
-  /* Gallery scatter → 2-column grid on mobile (JS also handles this) */
+  .gallery-bg-word { display: none; }
+
+  /* Gallery scatter → 1-column grid on mobile (JS also handles this) */
   .gallery-scatter-canvas {
     overflow-x: hidden;
   }

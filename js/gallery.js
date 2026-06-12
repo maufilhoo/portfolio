@@ -137,7 +137,7 @@ function initGalleryPage() {
     if (isMobile) {
       canvas.style.position = 'relative';
       canvas.style.display  = 'grid';
-      canvas.style.gridTemplateColumns = '1fr 1fr';
+      canvas.style.gridTemplateColumns = '1fr';
       canvas.style.gap      = '12px';
       canvas.style.height   = 'auto';
       allItems.forEach(item => {

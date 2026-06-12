@@ -23,6 +23,15 @@
   /* Header */
   .site-header { height: 64px; }
 
+  /* Scrolled pill — maintain 44×44px min touch target (WCAG 2.5.5) */
+  .is-scrolled .audio-btn,
+  .is-scrolled .lang-round {
+    width: 44px;
+    height: 44px;
+  }
+  .is-scrolled .nav-fish-wrap { height: 44px; }
+  .is-scrolled .nav-fish-btn  { width: 44px; height: 44px; }
+
   /* Suppress hover/focus-within pill expansion — mobile uses .is-open toggle */
   .nav-fish-wrap:hover,
   .nav-fish-wrap:focus-within {
@@ -67,7 +76,7 @@
 
   /* Hero */
   .hero-section { padding-top: 120px; }
-  .hero-title span { font-size: clamp(1.5rem, 7vw, 2.5rem); }
+  .hero-title span { font-size: clamp(1.4rem, 6vw, 2.2rem); }
   .hero-photo-link { width: 110px; height: 110px; margin-top: 32px; }
   .welcome-tagline { font-size: 1rem; margin-top: 80px; }
 
@@ -87,6 +96,24 @@
   .work-table-head span:nth-child(4),
   .wt-services, .wt-sector { display: none; }
 
+  /* Credits dropdown → inline on mobile so it doesn't float over carousel */
+  .wt-credits-body {
+    display: none;
+    position: static;
+    opacity: 1 !important;
+    transform: none !important;
+    box-shadow: none;
+    width: 100%;
+    border-top: 1px solid var(--border);
+    margin-top: 0.5rem;
+    padding: 0.75rem 0;
+    max-height: none;
+  }
+  .wt-credits.is-open .wt-credits-body {
+    display: block;
+    pointer-events: auto;
+  }
+
   /* Case lightbox — bigger touch targets */
   .case-lb-prev,
   .case-lb-next {
@@ -100,6 +127,12 @@
     font-size: 1.35rem;
   }
 
+  /* Section spacing */
+  .feed-showcase   { margin-top: 1.5rem; }
+  .work-table-wrap { margin-top: 1.5rem; }
+  .site-footer     { padding-top: 3rem; }
+  .footer-top      { padding-bottom: 3rem; }
+
   /* Footer */
   .footer-top { grid-template-columns: 1fr; gap: 3rem; }
   .footer-wordmark { font-size: clamp(1rem, 5vw, 1.5rem); }
@@ -110,14 +143,15 @@
   .about-row { grid-template-columns: 1fr; gap: 1rem; }
   .about-clients-grid { grid-template-columns: repeat(2, 1fr); }
 
-  /* Gallery */
+  /* Gallery (legacy) */
   .gallery-item img { height: 140px; max-width: 180px; }
 }
 
 /* ─── Small mobile (≤ 480px) ────────────────────────────────────── */
 @media (max-width: 480px) {
   :root { --gutter: 1rem; }
-  .hero-title span { font-size: 1.5rem; }
+  .hero-title span { font-size: clamp(1.1rem, 5vw, 1.4rem); }
+  .bio-section { text-align: left; padding: 0; }
   .work-item--square { width: 180px; }
   .work-item--portrait { width: 150px; }
 }
