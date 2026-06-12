@@ -330,6 +330,7 @@ function initWorkTable() {
   function buildExpand(row) {
     const inner = row.querySelector('.wt-expand-inner');
     if (inner.dataset.built) return;
+    inner.innerHTML = '';
     inner.dataset.built = '1';
 
     const project  = row.dataset.project;
