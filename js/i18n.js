@@ -1,5 +1,5 @@
 const STORAGE_KEY = 'mf-lang';
-let currentLang = localStorage.getItem(STORAGE_KEY) || 'pt';
+let currentLang = localStorage.getItem(STORAGE_KEY) || 'en';
 let translations = {};
 
 async function loadTranslations(lang) {

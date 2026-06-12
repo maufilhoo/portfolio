@@ -1043,6 +1043,17 @@ function initHelloGreeting(armGather) {
     if (tagline) tagline.style.opacity = '1';
     if (title)   title.style.opacity   = '1';
     if (armGather) armGather();
+
+    const retGreeting = document.createElement('div');
+    retGreeting.className = 'hello-greeting';
+    retGreeting.textContent = getTranslation('hero_hello_return');
+    document.body.appendChild(retGreeting);
+    requestAnimationFrame(() => requestAnimationFrame(() => retGreeting.classList.add('visible')));
+    setTimeout(() => {
+      retGreeting.style.transition = 'opacity 0.5s ease';
+      retGreeting.style.opacity = '0';
+      setTimeout(() => retGreeting.remove(), 500);
+    }, 1400);
     return;
   }
 
