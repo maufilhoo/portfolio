@@ -1,14 +1,13 @@
 import { initI18n, getTranslation } from './i18n.js';
+import { initFooterMeta } from './footer.js';
 
 /* ─── Overlay ────────────────────────────────────────────────────── */
 function initOverlay() {
   const overlay = document.getElementById('overlay');
   if (!overlay) return;
-  window.addEventListener('load', () => {
-    requestAnimationFrame(() => {
-      overlay.classList.add('hidden');
-      setTimeout(() => overlay.remove(), 900);
-    });
+  requestAnimationFrame(() => {
+    overlay.classList.add('hidden');
+    setTimeout(() => overlay.remove(), 900);
   });
 }
 
@@ -165,29 +164,29 @@ function initBioFade() {
 
 /* ─── Feed items ─────────────────────────────────────────────────── */
 const FEED_ITEMS = [
-  'assets/images/feed/1.png',
-  'assets/images/feed/2.png',
-  'assets/images/feed/3.png',
-  'assets/images/feed/4.png',
-  'assets/images/feed/5.png',
+  'assets/images/feed/1.webp',
+  'assets/images/feed/2.webp',
+  'assets/images/feed/3.webp',
+  'assets/images/feed/4.webp',
+  'assets/images/feed/5.webp',
   'assets/images/feed/6.gif',
-  'assets/images/feed/7.png',
+  'assets/images/feed/7.webp',
   'assets/images/feed/8.gif',
-  'assets/images/feed/9.png',
+  'assets/images/feed/9.webp',
   'assets/images/feed/10.mp4',
-  'assets/images/feed/11.png',
+  'assets/images/feed/11.webp',
   'assets/images/feed/12.gif',
-  'assets/images/feed/13.png',
-  'assets/images/feed/14.png',
-  'assets/images/feed/15.jpg',
-  'assets/images/feed/16.png',
-  'assets/images/feed/17.jpg',
-  'assets/images/feed/18.png',
-  'assets/images/feed/19.png',
-  'assets/images/feed/20.png',
+  'assets/images/feed/13.webp',
+  'assets/images/feed/14.webp',
+  'assets/images/feed/15.webp',
+  'assets/images/feed/16.webp',
+  'assets/images/feed/17.webp',
+  'assets/images/feed/18.webp',
+  'assets/images/feed/19.webp',
+  'assets/images/feed/20.webp',
   'assets/images/feed/21.gif',
-  'assets/images/feed/22.png',
-  'assets/images/feed/23.png',
+  'assets/images/feed/22.webp',
+  'assets/images/feed/23.webp',
 ];
 
 function shuffle(arr) {
@@ -750,41 +749,41 @@ function initWorkTable() {
 /* ─── Gallery ────────────────────────────────────────────────────── */
 const GALLERY_DATA = [
   { project: 'enjoei',   label: 'Enjoei',
-    picks: ['assets/images/cases/enjoei/1.png','assets/images/cases/enjoei/5.gif','assets/images/cases/enjoei/12.png'],
-    all:   ['assets/images/cases/enjoei/1.png','assets/images/cases/enjoei/2.jpg','assets/images/cases/enjoei/3.jpg','assets/images/cases/enjoei/4.jpg','assets/images/cases/enjoei/5.gif','assets/images/cases/enjoei/6.png','assets/images/cases/enjoei/7.png','assets/images/cases/enjoei/8b.png','assets/images/cases/enjoei/9.jpg','assets/images/cases/enjoei/10.png','assets/images/cases/enjoei/10 1.gif','assets/images/cases/enjoei/11.jpg','assets/images/cases/enjoei/12.png','assets/images/cases/enjoei/14.png','assets/images/cases/enjoei/15.png','assets/images/cases/enjoei/16.jpg','assets/images/cases/enjoei/17.jpg','assets/images/cases/enjoei/18.jpg','assets/images/cases/enjoei/20.png','assets/images/cases/enjoei/21.png','assets/images/cases/enjoei/22.png'] },
+    picks: ['assets/images/cases/enjoei/1.webp','assets/images/cases/enjoei/5.gif','assets/images/cases/enjoei/12.webp'],
+    all:   ['assets/images/cases/enjoei/1.webp','assets/images/cases/enjoei/2.webp','assets/images/cases/enjoei/3.webp','assets/images/cases/enjoei/4.webp','assets/images/cases/enjoei/5.gif','assets/images/cases/enjoei/6.webp','assets/images/cases/enjoei/7.webp','assets/images/cases/enjoei/8b.webp','assets/images/cases/enjoei/9.webp','assets/images/cases/enjoei/10.webp','assets/images/cases/enjoei/10 1.gif','assets/images/cases/enjoei/11.webp','assets/images/cases/enjoei/12.webp','assets/images/cases/enjoei/14.webp','assets/images/cases/enjoei/15.webp','assets/images/cases/enjoei/16.webp','assets/images/cases/enjoei/17.webp','assets/images/cases/enjoei/18.webp','assets/images/cases/enjoei/20.webp','assets/images/cases/enjoei/21.webp','assets/images/cases/enjoei/22.webp'] },
   { project: 'justos',   label: 'Justos',
-    picks: ['assets/images/cases/justos/1.png','assets/images/cases/justos/6.png','assets/images/cases/justos/11.png'],
-    all:   ['assets/images/cases/justos/1.png','assets/images/cases/justos/3.png','assets/images/cases/justos/6.png','assets/images/cases/justos/7.png','assets/images/cases/justos/9.png','assets/images/cases/justos/10.png','assets/images/cases/justos/11.png','assets/images/cases/justos/13.png','assets/images/cases/justos/15.png'] },
+    picks: ['assets/images/cases/justos/1.webp','assets/images/cases/justos/6.webp','assets/images/cases/justos/11.webp'],
+    all:   ['assets/images/cases/justos/1.webp','assets/images/cases/justos/3.webp','assets/images/cases/justos/6.webp','assets/images/cases/justos/7.webp','assets/images/cases/justos/9.webp','assets/images/cases/justos/10.webp','assets/images/cases/justos/11.webp','assets/images/cases/justos/13.webp','assets/images/cases/justos/15.webp'] },
   { project: 'phlor',    label: 'Phlor',
-    picks: ['assets/images/cases/phlor/1.png','assets/images/cases/phlor/5.png','assets/images/cases/phlor/10.png'],
-    all:   ['assets/images/cases/phlor/1.png','assets/images/cases/phlor/2.png','assets/images/cases/phlor/3.png','assets/images/cases/phlor/4.png','assets/images/cases/phlor/5.png','assets/images/cases/phlor/6.png','assets/images/cases/phlor/7.png','assets/images/cases/phlor/8.png','assets/images/cases/phlor/9.png','assets/images/cases/phlor/10.png','assets/images/cases/phlor/11.png','assets/images/cases/phlor/12.png','assets/images/cases/phlor/13.png','assets/images/cases/phlor/14.png','assets/images/cases/phlor/15.png'] },
+    picks: ['assets/images/cases/phlor/1.webp','assets/images/cases/phlor/5.webp','assets/images/cases/phlor/10.webp'],
+    all:   ['assets/images/cases/phlor/1.webp','assets/images/cases/phlor/2.webp','assets/images/cases/phlor/3.webp','assets/images/cases/phlor/4.webp','assets/images/cases/phlor/5.webp','assets/images/cases/phlor/6.webp','assets/images/cases/phlor/7.webp','assets/images/cases/phlor/8.webp','assets/images/cases/phlor/9.webp','assets/images/cases/phlor/10.webp','assets/images/cases/phlor/11.webp','assets/images/cases/phlor/12.webp','assets/images/cases/phlor/13.webp','assets/images/cases/phlor/14.webp','assets/images/cases/phlor/15.webp'] },
   { project: 'metallo',  label: 'Metallo',
-    picks: ['assets/images/cases/metallo/1.png','assets/images/cases/metallo/3.png','assets/images/cases/metallo/5.png'],
-    all:   ['assets/images/cases/metallo/1.png','assets/images/cases/metallo/2.png','assets/images/cases/metallo/3.png','assets/images/cases/metallo/4.png','assets/images/cases/metallo/5.png','assets/images/cases/metallo/6.png'] },
+    picks: ['assets/images/cases/metallo/1.webp','assets/images/cases/metallo/3.webp','assets/images/cases/metallo/5.webp'],
+    all:   ['assets/images/cases/metallo/1.webp','assets/images/cases/metallo/2.webp','assets/images/cases/metallo/3.webp','assets/images/cases/metallo/4.webp','assets/images/cases/metallo/5.webp','assets/images/cases/metallo/6.webp'] },
   { project: 'papeltec', label: 'Papeltec',
-    picks: ['assets/images/cases/papeltec/1.png','assets/images/cases/papeltec/4.png','assets/images/cases/papeltec/7.png'],
-    all:   ['assets/images/cases/papeltec/1.png','assets/images/cases/papeltec/2.png','assets/images/cases/papeltec/3.png','assets/images/cases/papeltec/4.png','assets/images/cases/papeltec/5.png','assets/images/cases/papeltec/6.png','assets/images/cases/papeltec/7.png','assets/images/cases/papeltec/Frame 2629.png','assets/images/cases/papeltec/Frame 2630.png'] },
+    picks: ['assets/images/cases/papeltec/1.webp','assets/images/cases/papeltec/4.webp','assets/images/cases/papeltec/7.webp'],
+    all:   ['assets/images/cases/papeltec/1.webp','assets/images/cases/papeltec/2.webp','assets/images/cases/papeltec/3.webp','assets/images/cases/papeltec/4.webp','assets/images/cases/papeltec/5.webp','assets/images/cases/papeltec/6.webp','assets/images/cases/papeltec/7.webp','assets/images/cases/papeltec/Frame 2629.webp','assets/images/cases/papeltec/Frame 2630.webp'] },
   { project: 'caixa',    label: 'Caixa',
-    picks: ['assets/images/cases/caixa.png'],
-    all:   ['assets/images/cases/caixa.png'] },
+    picks: ['assets/images/cases/caixa.webp'],
+    all:   ['assets/images/cases/caixa.webp'] },
   { project: 'natura',   label: 'Natura',
-    picks: ['assets/images/cases/natura.png'],
-    all:   ['assets/images/cases/natura.png'] },
+    picks: ['assets/images/cases/natura.webp'],
+    all:   ['assets/images/cases/natura.webp'] },
   { project: 'ativa',    label: 'Ativa',
-    picks: ['assets/images/cases/ativa/1.png','assets/images/cases/ativa/3.png','assets/images/cases/ativa/5.png'],
-    all:   ['assets/images/cases/ativa/1.png','assets/images/cases/ativa/2.png','assets/images/cases/ativa/3.png','assets/images/cases/ativa/4.png','assets/images/cases/ativa/5.png','assets/images/cases/ativa/6.png'] },
+    picks: ['assets/images/cases/ativa/1.webp','assets/images/cases/ativa/3.webp','assets/images/cases/ativa/5.webp'],
+    all:   ['assets/images/cases/ativa/1.webp','assets/images/cases/ativa/2.webp','assets/images/cases/ativa/3.webp','assets/images/cases/ativa/4.webp','assets/images/cases/ativa/5.webp','assets/images/cases/ativa/6.webp'] },
   { project: 'vibra',    label: 'Vibra Picto',
-    picks: ['assets/images/cases/vibra/1.png','assets/images/cases/vibra/3.png','assets/images/cases/vibra/5.png'],
-    all:   ['assets/images/cases/vibra/1.png','assets/images/cases/vibra/2.png','assets/images/cases/vibra/3.png','assets/images/cases/vibra/4.png','assets/images/cases/vibra/5.png','assets/images/cases/vibra/6.png','assets/images/cases/vibra/7.png'] },
+    picks: ['assets/images/cases/vibra/1.webp','assets/images/cases/vibra/3.webp','assets/images/cases/vibra/5.webp'],
+    all:   ['assets/images/cases/vibra/1.webp','assets/images/cases/vibra/2.webp','assets/images/cases/vibra/3.webp','assets/images/cases/vibra/4.webp','assets/images/cases/vibra/5.webp','assets/images/cases/vibra/6.webp','assets/images/cases/vibra/7.webp'] },
   { project: 'mdesign',  label: 'MDesign',
-    picks: ['assets/images/cases/mdesign/1.gif','assets/images/cases/mdesign/571399534.png','assets/images/cases/mdesign/Frame 84.png'],
-    all:   ['assets/images/cases/mdesign/1.gif','assets/images/cases/mdesign/571399534.png','assets/images/cases/mdesign/571399535.png','assets/images/cases/mdesign/Envelope.png','assets/images/cases/mdesign/Frame 2.png','assets/images/cases/mdesign/Frame 3.png','assets/images/cases/mdesign/Frame 84.png'] },
+    picks: ['assets/images/cases/mdesign/1.gif','assets/images/cases/mdesign/571399534.webp','assets/images/cases/mdesign/Frame 84.webp'],
+    all:   ['assets/images/cases/mdesign/1.gif','assets/images/cases/mdesign/571399534.webp','assets/images/cases/mdesign/571399535.webp','assets/images/cases/mdesign/Envelope.webp','assets/images/cases/mdesign/Frame 2.webp','assets/images/cases/mdesign/Frame 3.webp','assets/images/cases/mdesign/Frame 84.webp'] },
   { project: '99',       label: '99',
     picks: ['assets/images/cases/99/imageye___-_6924204799d08a071d58f46b_tatil-99-nova-linguagem-visual-escalator-advertisement.webp','assets/images/cases/99/imageye___-_6924205edf44a64f77a34a72_tatil-99-nova-linguagem-visual-framed-posters-gallery.webp','assets/images/cases/99/imageye___-_692420b0ceb4d12ea2ac9faa_tatil-99-nova-linguagem-visual-map-of-sao-paulo.webp'],
     all:   ['assets/images/cases/99/imageye___-_6924204799d08a071d58f46b_tatil-99-nova-linguagem-visual-escalator-advertisement.webp','assets/images/cases/99/imageye___-_69242056d05392e7c6377003_tatil-99-nova-linguagem-visual-bold-yellow-text.webp','assets/images/cases/99/imageye___-_6924205a73c8da16db0f5660_tatil-99-nova-linguagem-visual-smartphone-displaying-app.webp','assets/images/cases/99/imageye___-_6924205edf44a64f77a34a72_tatil-99-nova-linguagem-visual-framed-posters-gallery.webp','assets/images/cases/99/imageye___-_69242084e72288e44cd8981f_tatil-99-nova-linguagem-visual-notebook-with-yellow-design.webp','assets/images/cases/99/imageye___-_692420acdb6ccb7c5603d7ff_tatil-99-nova-linguagem-visual-open-book-with-yellow-pages.webp','assets/images/cases/99/imageye___-_692420b0ceb4d12ea2ac9faa_tatil-99-nova-linguagem-visual-map-of-sao-paulo.webp','assets/images/cases/99/imageye___-_692420b5b54d651606e73bfa_tatil-99-nova-linguagem-visual-collage-of-graphics-and-photos.webp','assets/images/cases/99/imageye___-_692420bf6219eca972b28b79_tatil-99-nova-linguagem-visual-yellow-graphic-design.webp','assets/images/cases/99/imageye___-_692420c563bdeb9ba92f8b11_tatil-99-nova-linguagem-visual-car-ride-experience.webp','assets/images/cases/99/imageye___-_692420cb09c8c9bc1c417079_tatil-99-nova-linguagem-visual-app-interface-for-women-drivers.webp','assets/images/cases/99/imageye___-_69331acb62c25635edf11e0b_tatil-99-nova-linguagem-visual-aerial-parking-lot.webp','assets/images/cases/99/10.mp4'] },
   { project: 'martorelli', label: 'Martorelli',
-    picks: ['assets/images/cases/martorelli/1.png','assets/images/cases/martorelli/3.png','assets/images/cases/martorelli/5.png'],
-    all:   ['assets/images/cases/martorelli/1.png','assets/images/cases/martorelli/2.mov','assets/images/cases/martorelli/3.png','assets/images/cases/martorelli/4.png','assets/images/cases/martorelli/5.png','assets/images/cases/martorelli/6.mov','assets/images/cases/martorelli/9.png','assets/images/cases/martorelli/10.png','assets/images/cases/martorelli/11.png','assets/images/cases/martorelli/12.png','assets/images/cases/martorelli/13.png','assets/images/cases/martorelli/14.png','assets/images/cases/martorelli/15.png','assets/images/cases/martorelli/16.png'] },
+    picks: ['assets/images/cases/martorelli/1.webp','assets/images/cases/martorelli/3.webp','assets/images/cases/martorelli/5.webp'],
+    all:   ['assets/images/cases/martorelli/1.webp','assets/images/cases/martorelli/2.mov','assets/images/cases/martorelli/3.webp','assets/images/cases/martorelli/4.webp','assets/images/cases/martorelli/5.webp','assets/images/cases/martorelli/6.mov','assets/images/cases/martorelli/9.webp','assets/images/cases/martorelli/10.webp','assets/images/cases/martorelli/11.webp','assets/images/cases/martorelli/12.webp','assets/images/cases/martorelli/13.webp','assets/images/cases/martorelli/14.webp','assets/images/cases/martorelli/15.webp','assets/images/cases/martorelli/16.webp'] },
 ];
 
 function initGallery() {
@@ -1142,6 +1141,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initBioParallax();
   initFeedShowcase();
   initWorkTable();
+  initFooterMeta();
   await initI18n();
   initHelloGreeting(armGather);
   initCopyEmail();

@@ -1273,8 +1273,11 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   padding: 5rem var(--gutter) 0;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
   overflow: hidden;
 }
+
+.page-gallery .site-footer { background: var(--bg); }
 
 .footer-top {
   display: grid;
@@ -1380,30 +1383,29 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   font-size: 0.72rem;
   color: rgba(17,17,17,0.35);
   padding-top: 1rem;
-  border-top: 1px solid rgba(17,17,17,0.1);
 }
 
 /* Wordmark */
 .footer-wordmark {
-  font-family: 'NotoEmoji', var(--font-body);
-  font-weight: 300;
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
-  line-height: 1.5;
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: clamp(2rem, 7.5vw, 9rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
   color: var(--text);
   white-space: nowrap;
-  text-align: center;
-  margin: 2rem 0 0;
-  padding: 1rem var(--gutter);
+  margin-top: auto;
+  padding: 2rem 0 0;
   user-select: none;
+  overflow: hidden;
 }
 
 /* Bar */
 .footer-bar {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   padding: 1rem 0 1.5rem;
-  border-top: 1px solid rgba(17,17,17,0.1);
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .footer-scroll-top {
