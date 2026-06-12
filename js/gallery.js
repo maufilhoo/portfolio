@@ -40,8 +40,8 @@ function initCopyEmail() {
 
 /* ─── Audio ───────────────────────────────────────────────────────── */
 const TRACKS = [
-  'assets/audio/Os-Tincoas---Deixa-A-Gira-Girar-j-g-b-edit---millemon---electronic-_-world-music-youtube.mp3',
-  'assets/audio/Tom Misch - It Runs Through Me  INSTRUMENTAL - Shai Town (youtube).mp3'
+  'assets/audio/tincoas.mp3',
+  'assets/audio/tom-misch.mp3'
 ];
 function initAudio() {
   const btn = document.getElementById('audio-btn');
