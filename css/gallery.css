@@ -61,8 +61,8 @@
 
 .gallery-item img {
   display: block;
-  height: 100%;
-  width: auto;
+  width: 100%;
+  height: auto;
   border-radius: 3px;
   transition: opacity 0.22s ease;
 }

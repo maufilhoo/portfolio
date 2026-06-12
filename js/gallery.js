@@ -163,29 +163,36 @@ function initGalleryPage() {
       return;
     }
 
-    const W       = window.innerWidth - 80;
-    const H_STEP  = 560;
-    // 25% / 50% / 100% relative to case carousel height (340px)
-    const H_SIZES = [85, 170, 340];
+    const W      = window.innerWidth - 80;
+    const H_STEP = 480;
+    // 50% / 75% / 100% of canvas width
+    const SIZES  = [
+      Math.round(W * 0.50),
+      Math.round(W * 0.75),
+      Math.round(W * 1.00),
+    ];
 
     const order = allItems.map((_, i) => i).sort(() => Math.random() - 0.5);
     canvas.style.height = (order.length * H_STEP + 600) + 'px';
 
     order.forEach((srcIdx, plotIdx) => {
       const item = allItems[srcIdx];
-      const h    = H_SIZES[Math.floor(Math.random() * H_SIZES.length)];
-
-      // Estimate width for x-placement (assume average landscape ~4:3 ratio)
-      const estW = Math.round(h * 1.4);
-      const zone = ZONES[plotIdx % ZONES.length];
-      const xMin = W * zone[0];
-      const xMax = W * zone[1] - estW * 0.5;
-      const x    = Math.round(xMin + Math.random() * Math.max(0, xMax - xMin));
-      const y    = Math.round(plotIdx * H_STEP + Math.random() * 180);
+      const w    = SIZES[Math.floor(Math.random() * SIZES.length)];
+      // x: full-width stays at 0, smaller images use zone system
+      let x;
+      if (w >= W * 0.95) {
+        x = 0;
+      } else {
+        const zone = ZONES[plotIdx % ZONES.length];
+        const xMin = W * zone[0];
+        const xMax = Math.min(W - w, W * zone[1]);
+        x = Math.round(xMin + Math.random() * Math.max(0, xMax - xMin));
+      }
+      const y = Math.round(plotIdx * H_STEP + Math.random() * 180);
 
       item.style.position = 'absolute';
-      item.style.width    = 'auto';
-      item.style.height   = h + 'px';
+      item.style.width    = w + 'px';
+      item.style.height   = 'auto';
       item.style.left     = x + 'px';
       item.style.top      = y + 'px';
       item.style.zIndex   = plotIdx % 2 === 0 ? '3' : '1';
