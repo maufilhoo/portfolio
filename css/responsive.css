@@ -22,8 +22,48 @@
 
   /* Header */
   .site-header { height: 64px; }
-  .nav-fish-pill { display: none !important; }
-  .nav-fish-wrap:hover { padding-left: 0.3rem; }
+
+  /* Suppress hover/focus-within pill expansion — mobile uses .is-open toggle */
+  .nav-fish-wrap:hover,
+  .nav-fish-wrap:focus-within {
+    padding: 0 !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  .nav-fish-wrap:hover .nav-fish-pill:not(.is-open),
+  .nav-fish-wrap:focus-within .nav-fish-pill:not(.is-open) {
+    max-width: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  /* Fish pill → fixed dropdown toggled by JS via .is-open */
+  .nav-fish-pill {
+    position: fixed;
+    top: 68px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(248, 248, 248, 0.97);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid #e0e0e0;
+    border-radius: 100px;
+    padding: 10px 22px;
+    gap: 1.5rem;
+    max-width: none;
+    overflow: visible;
+    white-space: nowrap;
+    z-index: 99;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  .nav-fish-pill.is-open {
+    opacity: 1 !important;
+    pointer-events: auto;
+    max-width: none !important;
+  }
 
   /* Hero */
   .hero-section { padding-top: 120px; }
@@ -34,9 +74,31 @@
   /* Featured */
   .featured-media { aspect-ratio: 4/3; }
 
-  /* Work grid — keep horizontal scroll, just adjust item sizes */
+  /* Work grid */
   .work-item--square { width: 220px; }
   .work-item--portrait { width: 180px; }
+
+  /* Work table — bigger touch targets + smaller carousel */
+  .wt-row-head { padding: 1.1rem 0; }
+  .wt-carousel-outer { height: 220px; }
+  .work-table-head,
+  .wt-row-head { grid-template-columns: 1fr auto; column-gap: 1rem; }
+  .work-table-head span:nth-child(3),
+  .work-table-head span:nth-child(4),
+  .wt-services, .wt-sector { display: none; }
+
+  /* Case lightbox — bigger touch targets */
+  .case-lb-prev,
+  .case-lb-next {
+    padding: 1.75rem;
+    font-size: 2rem;
+  }
+  .case-lb-close {
+    top: 1rem;
+    right: 1rem;
+    padding: 0.75rem;
+    font-size: 1.35rem;
+  }
 
   /* Footer */
   .footer-top { grid-template-columns: 1fr; gap: 3rem; }
@@ -46,13 +108,7 @@
   /* About */
   .about-hero { grid-template-columns: 1fr; gap: 2rem; }
   .about-row { grid-template-columns: 1fr; gap: 1rem; }
-
-  /* Work table */
-  .work-table-head,
-  .wt-row-head { grid-template-columns: 1fr auto; column-gap: 1rem; }
-  .work-table-head span:nth-child(3),
-  .work-table-head span:nth-child(4),
-  .wt-services, .wt-sector { display: none; }
+  .about-clients-grid { grid-template-columns: repeat(2, 1fr); }
 
   /* Gallery */
   .gallery-item img { height: 140px; max-width: 180px; }

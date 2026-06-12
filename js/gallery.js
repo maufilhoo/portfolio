@@ -76,7 +76,7 @@ function initGalleryPage() {
   const lbClose   = document.getElementById('lb-close');
   const lbPrev    = document.getElementById('lb-prev');
   const lbNext    = document.getElementById('lb-next');
-  const countEl   = document.getElementById('gallery-count');
+  const countEl   = null; // removed
 
   const allItems  = [];
   const allSrcs   = [];
@@ -116,32 +116,65 @@ function initGalleryPage() {
   if (countEl) countEl.textContent = allItems.length + ' works';
 
   // ── Scatter + float ──────────────────────────────────────────────
-  const FLOAT_ANIMS = ['float-a', 'float-b', 'float-c', 'float-d'];
+  const FLOAT_ANIMS = ['float-a', 'float-b', 'float-c', 'float-d', 'float-e', 'float-f', 'float-g', 'float-h'];
+
+  // Zone bands (as fraction of W): alternating to spread items across canvas
+  const ZONES = [
+    [0.02, 0.44],   // left
+    [0.52, 0.94],   // right
+    [0.18, 0.60],   // center-left
+    [0.38, 0.80],   // center-right
+    [0.02, 0.38],   // far-left
+    [0.58, 0.94],   // far-right
+    [0.24, 0.68],   // center
+    [0.06, 0.50],   // mid-left
+  ];
 
   function doScatter() {
+    const isMobile = window.innerWidth <= 768;
+
+    if (isMobile) {
+      canvas.style.position = 'relative';
+      canvas.style.display  = 'grid';
+      canvas.style.gridTemplateColumns = '1fr 1fr';
+      canvas.style.gap      = '12px';
+      canvas.style.height   = 'auto';
+      allItems.forEach(item => {
+        item.style.position  = 'static';
+        item.style.left      = 'auto';
+        item.style.top       = 'auto';
+        item.style.width     = '100%';
+        item.style.animation = 'none';
+        item.style.zIndex    = '';
+      });
+      return;
+    }
+
     const W      = window.innerWidth - 80;
-    const H_STEP = 140;                              // middle ground spacing
-    const SIZES  = [180, 220, 280, 340, 400, 460];  // bigger images
+    const H_STEP = 400;
+    const SIZES  = [300, 380, 460, 540, 620];
 
     const order = allItems.map((_, i) => i).sort(() => Math.random() - 0.5);
-    canvas.style.height = (order.length * H_STEP + 300) + 'px';
+    canvas.style.height = (order.length * H_STEP + 500) + 'px';
 
     order.forEach((srcIdx, plotIdx) => {
-      const item = allItems[srcIdx];
-      const w    = SIZES[Math.floor(Math.random() * SIZES.length)];
-      const x    = Math.round(Math.random() * Math.max(0, W - w * 0.7));
-      const y    = Math.round(plotIdx * H_STEP + Math.random() * 100);
+      const item  = allItems[srcIdx];
+      const w     = SIZES[Math.floor(Math.random() * SIZES.length)];
+      const zone  = ZONES[plotIdx % ZONES.length];
+      const xMin  = W * zone[0];
+      const xMax  = W * zone[1] - w * 0.5;
+      const x     = Math.round(xMin + Math.random() * Math.max(0, xMax - xMin));
+      const y     = Math.round(plotIdx * H_STEP + Math.random() * 140);
 
       item.style.position = 'absolute';
       item.style.width    = w + 'px';
       item.style.left     = x + 'px';
       item.style.top      = y + 'px';
-      // ~40% of items go behind GALLERY word (z-index < 2), rest in front
-      item.style.zIndex   = Math.random() > 0.4 ? '3' : '1';
+      item.style.zIndex   = plotIdx % 2 === 0 ? '3' : '1';
 
       const anim = FLOAT_ANIMS[plotIdx % FLOAT_ANIMS.length];
-      const dur  = (12 + Math.random() * 10).toFixed(1);
-      const del  = (-(Math.random() * 14)).toFixed(1);
+      const dur  = (14 + Math.random() * 14).toFixed(1);
+      const del  = (-(Math.random() * 20)).toFixed(1);
       item.style.animation = `${anim} ${dur}s ${del}s ease-in-out infinite`;
     });
   }
@@ -189,7 +222,38 @@ function initGalleryPage() {
       if (e.key === 'ArrowLeft')  { lbIdx = (lbIdx - 1 + allSrcs.length) % allSrcs.length; showSlide(lbIdx); }
       if (e.key === 'ArrowRight') { lbIdx = (lbIdx + 1) % allSrcs.length; showSlide(lbIdx); }
     });
+
+    let touchX = 0;
+    lb.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+    lb.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - touchX;
+      if (Math.abs(dx) > 50) {
+        lbIdx = dx < 0 ? (lbIdx + 1) % allSrcs.length : (lbIdx - 1 + allSrcs.length) % allSrcs.length;
+        showSlide(lbIdx);
+      }
+    });
   }
+}
+
+/* ─── Mobile nav toggle ───────────────────────────────────────────── */
+function initMobileNav() {
+  const btn  = document.querySelector('.nav-fish-btn');
+  const pill = document.querySelector('.nav-fish-pill');
+  if (!btn || !pill) return;
+
+  btn.addEventListener('click', () => {
+    if (window.innerWidth > 768) return;
+    pill.classList.toggle('is-open');
+  });
+
+  pill.querySelectorAll('.nav-fish-link').forEach(link => {
+    link.addEventListener('click', () => pill.classList.remove('is-open'));
+  });
+
+  document.addEventListener('touchstart', e => {
+    if (window.innerWidth > 768) return;
+    if (!e.target.closest('.nav-fish-wrap')) pill.classList.remove('is-open');
+  }, { passive: true });
 }
 
 /* ─── Init ────────────────────────────────────────────────────────── */
@@ -201,4 +265,5 @@ document.addEventListener('DOMContentLoaded', async () => {
   initGalleryPage();
   await initI18n();
   initCopyEmail();
+  initMobileNav();
 });

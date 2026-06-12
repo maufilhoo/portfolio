@@ -142,6 +142,7 @@ function initHeaderScroll() {
   document.addEventListener('mousemove', e => {
     if (e.clientY < 80) showHeader();
   });
+  document.addEventListener('touchstart', () => showHeader(), { passive: true });
 
   update();
 }
@@ -443,6 +444,15 @@ function initWorkTable() {
     if (e.key === 'Escape')     closeCaseLightbox();
     if (e.key === 'ArrowLeft')  showCaseSlide((clbIdx - 1 + clbImgs.length) % clbImgs.length);
     if (e.key === 'ArrowRight') showCaseSlide((clbIdx + 1) % clbImgs.length);
+  });
+
+  let caseTouchX = 0;
+  caseLb.addEventListener('touchstart', e => { caseTouchX = e.touches[0].clientX; }, { passive: true });
+  caseLb.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - caseTouchX;
+    if (Math.abs(dx) > 50) dx < 0
+      ? showCaseSlide((clbIdx + 1) % clbImgs.length)
+      : showCaseSlide((clbIdx - 1 + clbImgs.length) % clbImgs.length);
   });
 
   function openRow(row) {
@@ -896,6 +906,16 @@ function initGallery() {
     if (e.key === 'ArrowLeft')   { lbIdx = (lbIdx - 1 + lbImgs.length) % lbImgs.length; showLbSlide(lbIdx); }
     if (e.key === 'ArrowRight')  { lbIdx = (lbIdx + 1) % lbImgs.length; showLbSlide(lbIdx); }
   });
+
+  let galleryTouchX = 0;
+  lb.addEventListener('touchstart', e => { galleryTouchX = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - galleryTouchX;
+    if (Math.abs(dx) > 50) {
+      lbIdx = dx < 0 ? (lbIdx + 1) % lbImgs.length : (lbIdx - 1 + lbImgs.length) % lbImgs.length;
+      showLbSlide(lbIdx);
+    }
+  });
 }
 
 /* ─── Hero card gather animation ────────────────────────────────── */
@@ -905,7 +925,7 @@ function initHeroCards() {
   const photoCard = hero ? hero.querySelector('.hero-photo-card') : null;
   if (!cards.length) return;
 
-  const UNIT     = 170;
+  const UNIT     = window.innerWidth <= 768 ? 85 : 170;
   const HOLD_MS  = 3000; // 3s spread before gathering
   let   autoTimer = null;
 
@@ -991,6 +1011,7 @@ function initHeroCards() {
 
 /* ─── Bio parallax scale ─────────────────────────────────────────── */
 function initBioParallax() {
+  if (window.innerWidth <= 768) return;
   const section = document.querySelector('.bio-section');
   if (!section) return;
 
@@ -1053,6 +1074,27 @@ function initHelloGreeting(armGather) {
   }, 1800);
 }
 
+/* ─── Mobile nav toggle ──────────────────────────────────────────── */
+function initMobileNav() {
+  const btn  = document.querySelector('.nav-fish-btn');
+  const pill = document.querySelector('.nav-fish-pill');
+  if (!btn || !pill) return;
+
+  btn.addEventListener('click', () => {
+    if (window.innerWidth > 768) return;
+    pill.classList.toggle('is-open');
+  });
+
+  pill.querySelectorAll('.nav-fish-link').forEach(link => {
+    link.addEventListener('click', () => pill.classList.remove('is-open'));
+  });
+
+  document.addEventListener('touchstart', e => {
+    if (window.innerWidth > 768) return;
+    if (!e.target.closest('.nav-fish-wrap')) pill.classList.remove('is-open');
+  }, { passive: true });
+}
+
 /* ─── Init ───────────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', async () => {
   window.scrollTo(0, 0);
@@ -1069,4 +1111,5 @@ document.addEventListener('DOMContentLoaded', async () => {
   await initI18n();
   initHelloGreeting(armGather);
   initCopyEmail();
+  initMobileNav();
 });
