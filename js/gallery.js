@@ -164,11 +164,11 @@ function initGalleryPage() {
     }
 
     const W      = window.innerWidth - 80;
-    const H_STEP = 480;
-    // 50% / 75% / 100% of canvas width
+    const H_STEP = 210;
+    // 30% / 65% / 100% of canvas width — clear visual difference between sizes
     const SIZES  = [
-      Math.round(W * 0.50),
-      Math.round(W * 0.75),
+      Math.round(W * 0.30),
+      Math.round(W * 0.65),
       Math.round(W * 1.00),
     ];
 
