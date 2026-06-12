@@ -1038,6 +1038,16 @@ function initHelloGreeting(armGather) {
   const FIRST_VISIT_KEY = 'mf-intro-seen';
   const firstVisit = !localStorage.getItem(FIRST_VISIT_KEY);
 
+  // Skip greeting when navigating directly to #work (or any hash anchor)
+  if (window.location.hash) {
+    if (stage)   stage.style.opacity   = '1';
+    if (tagline) tagline.style.opacity = '1';
+    if (title)   title.style.opacity   = '1';
+    if (!firstVisit && armGather) armGather();
+    else if (armGather) { localStorage.setItem(FIRST_VISIT_KEY, '1'); armGather(); }
+    return;
+  }
+
   if (!firstVisit) {
     [stage, tagline, title].forEach(el => {
       if (el) { el.style.opacity = '0'; el.style.transition = 'none'; }
