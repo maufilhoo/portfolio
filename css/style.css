@@ -498,6 +498,17 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 }
 .welcome-tagline.is-arrow {
   animation: bio-bounce 1.8s ease-in-out infinite;
+  font-size: 0;
+  line-height: 0;
+}
+.welcome-tagline.is-arrow::after {
+  content: '';
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translate(-2px, -2px);
 }
 .hero-strike {
   font-weight: 400;
@@ -654,13 +665,22 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 
 .bio-scroll-down {
   display: block;
-  font-family: var(--font-body);
-  font-size: 0.875rem;
   color: var(--text-muted);
   text-decoration: none;
   opacity: 0.4;
   animation: bio-bounce 1.8s ease-in-out infinite;
   transition: opacity 0.2s;
+  font-size: 0;
+  line-height: 0;
+}
+.bio-scroll-down::after {
+  content: '';
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translate(-2px, -2px);
 }
 .bio-scroll-down:hover { opacity: 0.7; }
 

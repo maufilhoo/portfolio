@@ -998,7 +998,7 @@ function initTaglineSequence() {
       fade(false, () => {
         setTimeout(() => {
           fade(true, () => {
-            tagline.textContent = '↓';
+            tagline.textContent = '';
             tagline.classList.add('is-arrow');
             fade(false);
           });
