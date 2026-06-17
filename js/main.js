@@ -978,6 +978,38 @@ function initHelloGreeting(armGather) {
   }, 1800);
 }
 
+/* ─── Welcome tagline sequence ───────────────────────────────────── */
+function initTaglineSequence() {
+  const tagline = document.querySelector('.welcome-tagline');
+  if (!tagline) return;
+
+  const step2 = getTranslation('hero_step2');
+
+  function fade(out, cb) {
+    tagline.style.transition = 'opacity 0.45s ease';
+    tagline.style.opacity = out ? '0' : '1';
+    setTimeout(cb, 500);
+  }
+
+  // Step 1 already visible — hold, then transition
+  setTimeout(() => {
+    fade(true, () => {
+      tagline.textContent = step2;
+      fade(false, () => {
+        setTimeout(() => {
+          fade(true, () => {
+            tagline.textContent = '↓';
+            tagline.classList.add('is-arrow');
+            fade(false);
+          });
+        }, 2200);
+      });
+    });
+  }, 1600);
+}
+
+document.addEventListener('welcome-done', initTaglineSequence);
+
 /* ─── Scroll reveal ──────────────────────────────────────────────── */
 function initReveal() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;

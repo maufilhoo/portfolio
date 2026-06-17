@@ -14,6 +14,7 @@ export function initWelcome(armGather) {
   if (window.location.hash) {
     [header, stage, tagline, title].forEach(el => { if (el) el.style.opacity = '1'; });
     if (armGather) armGather();
+    document.dispatchEvent(new CustomEvent('welcome-done'));
     return;
   }
 
@@ -239,6 +240,7 @@ export function initWelcome(armGather) {
     setTimeout(() => {
       ov.remove();
       if (armGather) armGather();
+      document.dispatchEvent(new CustomEvent('welcome-done'));
     }, 700);
   }
 }

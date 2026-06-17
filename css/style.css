@@ -496,6 +496,9 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   margin-top: 140px;
   opacity: 0;
 }
+.welcome-tagline.is-arrow {
+  animation: bio-bounce 1.8s ease-in-out infinite;
+}
 .hero-strike {
   font-weight: 400;
   text-decoration: line-through;
