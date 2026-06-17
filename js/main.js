@@ -141,6 +141,16 @@ function initHeaderScroll() {
 
   let hideTimer   = null;
   let lastScrollY = window.scrollY;
+  let isOnFooter  = false;
+
+  const footer = document.querySelector('.site-footer');
+  if (footer) {
+    new IntersectionObserver(([e]) => {
+      isOnFooter = e.isIntersecting;
+      header.classList.toggle('is-footer', isOnFooter);
+      if (isOnFooter) showHeader();
+    }, { threshold: 0.05 }).observe(footer);
+  }
 
   function showHeader() {
     clearTimeout(hideTimer);
@@ -148,6 +158,7 @@ function initHeaderScroll() {
   }
 
   function scheduleHide() {
+    if (isOnFooter) return;
     clearTimeout(hideTimer);
     hideTimer = setTimeout(() => header.classList.add('is-hidden'), 2000);
   }
@@ -993,8 +1004,9 @@ function initTaglineSequence() {
   const tagline = document.querySelector('.welcome-tagline');
   if (!tagline) return;
 
-  const step1 = getTranslation('hero_step1');
-  const pool  = [getTranslation('hero_step2'), getTranslation('hero_step3')];
+  const step1    = getTranslation('hero_step1');
+  const lastStep = getTranslation('hero_step2');
+  const pool     = [getTranslation('hero_step3')];
 
   tagline.innerHTML = wrapEmoji(step1);
 
@@ -1020,17 +1032,33 @@ function initTaglineSequence() {
     const steps = shuffle(pool);
     let i = 0;
 
+    function showFinal() {
+      tagline.classList.add('is-final');
+      tagline.innerHTML = `<span>${wrapEmoji(step1)}</span><span class="wt-final-arrow"></span>`;
+      fadeIn();
+      setTimeout(() => {
+        fadeOut(() => {
+          tagline.classList.remove('is-final');
+          runCycle(true);
+        });
+      }, 4000);
+    }
+
     function showStep() {
       if (i >= steps.length) {
-        tagline.classList.add('is-final');
-        tagline.innerHTML = `<span>${wrapEmoji(step1)}</span><span class="wt-final-arrow"></span>`;
+        tagline.innerHTML = wrapEmoji(lastStep);
+        tagline.style.cursor = 'pointer';
+        function onDiscoClick() {
+          const audioBtn = document.getElementById('audio-btn');
+          if (audioBtn) audioBtn.click();
+        }
+        tagline.addEventListener('click', onDiscoClick);
         fadeIn();
         setTimeout(() => {
-          fadeOut(() => {
-            tagline.classList.remove('is-final');
-            runCycle(true); // restart already faded — skip step1
-          });
-        }, 4000);
+          tagline.style.cursor = '';
+          tagline.removeEventListener('click', onDiscoClick);
+          fadeOut(showFinal);
+        }, 2000);
         return;
       }
       tagline.innerHTML = wrapEmoji(steps[i++]);
