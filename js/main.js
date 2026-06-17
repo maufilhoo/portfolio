@@ -287,6 +287,11 @@ function initFeedShowcase() {
     }
   }
 
+  section.addEventListener('click', () => {
+    clearTimeout(timer);
+    next();
+  });
+
   next();
 }
 

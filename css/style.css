@@ -644,7 +644,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 
 /* ─── Bio ───────────────────────────────────────────────────────── */
 .bio-section {
-  height: 100svh;
+  height: calc(100svh - 60px);
   scroll-snap-align: start;
   position: relative;
   display: flex;
