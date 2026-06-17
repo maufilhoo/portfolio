@@ -1011,39 +1011,32 @@ function initTaglineSequence() {
     return a;
   }
 
-  function runCycle(step1Visible) {
+  function runCycle(alreadyFaded) {
     const steps = shuffle(pool);
     let i = 0;
 
-    function next() {
+    function showStep() {
       if (i >= steps.length) {
-        // Final: Welcome✌ + arrow, hold 4s, then restart
-        fadeOut(() => {
-          tagline.classList.add('is-final');
-          tagline.innerHTML = `<span>${wrapEmoji(step1)}</span><span class="wt-final-arrow"></span>`;
-          fadeIn();
-          setTimeout(() => {
-            fadeOut(() => {
-              tagline.classList.remove('is-final');
-              tagline.innerHTML = wrapEmoji(step1);
-              fadeIn();
-              setTimeout(() => runCycle(true), 1500);
-            });
-          }, 4000);
-        });
+        tagline.classList.add('is-final');
+        tagline.innerHTML = `<span>${wrapEmoji(step1)}</span><span class="wt-final-arrow"></span>`;
+        fadeIn();
+        setTimeout(() => {
+          fadeOut(() => {
+            tagline.classList.remove('is-final');
+            runCycle(true); // restart already faded — skip step1
+          });
+        }, 4000);
         return;
       }
-      fadeOut(() => {
-        tagline.innerHTML = wrapEmoji(steps[i++]);
-        fadeIn();
-        setTimeout(next, 1500);
-      });
+      tagline.innerHTML = wrapEmoji(steps[i++]);
+      fadeIn();
+      setTimeout(() => fadeOut(showStep), 1500);
     }
 
-    step1Visible ? setTimeout(next, 1500) : next();
+    alreadyFaded ? showStep() : setTimeout(() => fadeOut(showStep), 1500);
   }
 
-  runCycle(true);
+  runCycle(false);
 }
 
 document.addEventListener('welcome-done', initTaglineSequence);
