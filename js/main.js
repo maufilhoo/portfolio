@@ -983,29 +983,41 @@ function initTaglineSequence() {
   const tagline = document.querySelector('.welcome-tagline');
   if (!tagline) return;
 
-  const step2 = getTranslation('hero_step2');
+  const steps = [
+    getTranslation('hero_step2'),
+    getTranslation('hero_step3'),
+  ];
 
-  function fade(out, cb) {
-    tagline.style.transition = 'opacity 0.45s ease';
-    tagline.style.opacity = out ? '0' : '1';
-    setTimeout(cb, 500);
+  function fadeOut(cb) {
+    tagline.style.transition = 'opacity 0.4s ease';
+    tagline.style.opacity = '0';
+    setTimeout(cb, 450);
+  }
+  function fadeIn() {
+    tagline.style.transition = 'opacity 0.4s ease';
+    tagline.style.opacity = '1';
   }
 
-  // Step 1 already visible — hold, then transition
-  setTimeout(() => {
-    fade(true, () => {
-      tagline.textContent = step2;
-      fade(false, () => {
-        setTimeout(() => {
-          fade(true, () => {
-            tagline.textContent = '';
-            tagline.classList.add('is-arrow');
-            fade(false);
-          });
-        }, 2200);
-      });
+  function showFinal() {
+    tagline.innerHTML = '<span class="wt-final-emoji">✌</span><span class="wt-final-arrow"></span>';
+    tagline.classList.add('is-final');
+    fadeIn();
+  }
+
+  function runStep(i) {
+    if (i >= steps.length) {
+      fadeOut(showFinal);
+      return;
+    }
+    fadeOut(() => {
+      tagline.textContent = steps[i];
+      fadeIn();
+      setTimeout(() => runStep(i + 1), 1500);
     });
-  }, 1600);
+  }
+
+  // Step 1 already visible — hold 1500ms then cycle
+  setTimeout(() => runStep(0), 1500);
 }
 
 document.addEventListener('welcome-done', initTaglineSequence);

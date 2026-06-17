@@ -103,6 +103,14 @@
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
+  unicode-range: U+00A9, U+00AE, U+203C, U+2049, U+2122, U+2139,
+    U+2194-2199, U+21A9-21AA, U+231A-231B, U+23CF, U+23E9-23FA,
+    U+24C2, U+25AA-25AB, U+25B6, U+25C0, U+25FB-25FE,
+    U+2600-27FF, U+2934-2935, U+2B00-2BFF,
+    U+1F000-1F02F, U+1F0A0-1F0FF, U+1F100-1F1FF,
+    U+1F200-1F2FF, U+1F300-1F6FF, U+1F700-1F77F,
+    U+1F780-1F7FF, U+1F800-1F8FF, U+1F900-1F9FF,
+    U+1FA00-1FA6F, U+1FA70-1FAFF;
 }
 
 /* ─── Reset ─────────────────────────────────────────────────────── */
@@ -496,19 +504,47 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   margin-top: 140px;
   opacity: 0;
 }
-.welcome-tagline.is-arrow {
-  animation: bio-bounce 1.8s ease-in-out infinite;
-  font-size: 0;
-  line-height: 0;
+.welcome-tagline.is-final {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.25rem;
 }
-.welcome-tagline.is-arrow::after {
+.wt-final-emoji {
+  font-family: 'NotoEmoji', sans-serif;
+  font-weight: 700;
+}
+.wt-final-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0.5;
+  animation: bio-bounce 1.8s ease-in-out infinite;
+}
+.wt-final-arrow::before {
   content: '';
-  display: inline-block;
-  width: 11px;
-  height: 11px;
+  display: block;
+  width: 1.5px;
+  height: 10px;
+  background: currentColor;
+  animation: shaft-fade 2.2s ease forwards;
+  transform-origin: top;
+}
+.wt-final-arrow::after {
+  content: '';
+  display: block;
+  width: 8px;
+  height: 8px;
   border-right: 2px solid currentColor;
   border-bottom: 2px solid currentColor;
   transform: rotate(45deg) translate(-2px, -2px);
+}
+@keyframes shaft-fade {
+  0%   { opacity: 0; transform: scaleY(0); }
+  20%  { opacity: 1; transform: scaleY(1); }
+  65%  { opacity: 1; transform: scaleY(1); }
+  100% { opacity: 0; transform: scaleY(1); }
 }
 .hero-strike {
   font-weight: 400;
@@ -653,7 +689,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 
 .bio-bottom {
   position: absolute;
-  bottom: 2.5rem;
+  bottom: 1rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
