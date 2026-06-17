@@ -13,6 +13,11 @@ function applyTranslations() {
     if (translations[key] !== undefined) el.textContent = translations[key];
   });
 
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.dataset.i18nHtml;
+    if (translations[key] !== undefined) el.innerHTML = translations[key];
+  });
+
   document.querySelectorAll('[data-i18n-href]').forEach(el => {
     const key = el.dataset.i18nHref;
     if (translations[key] !== undefined) el.href = translations[key];

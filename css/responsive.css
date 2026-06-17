@@ -149,7 +149,7 @@
 @media (max-width: 480px) {
   :root { --gutter: 1rem; }
   .hero-title span { font-size: clamp(1.1rem, 5vw, 1.4rem); }
-  .bio-section { text-align: left; padding: 0; }
+  .bio-section { text-align: left; padding: 4rem var(--gutter); }
   .work-item--square { width: 180px; }
   .work-item--portrait { width: 150px; }
 }

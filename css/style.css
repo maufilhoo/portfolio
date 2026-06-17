@@ -1,8 +1,36 @@
+/* ─── Custom cursor ─────────────────────────────────────────────── */
+*, *::before, *::after { cursor: none !important; }
+
+#custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  background: #fff;
+  border-radius: 50%;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-200px, -200px) translate(-50%, -50%);
+  transition: width 0.25s ease, height 0.25s ease, opacity 0.15s ease;
+  will-change: transform;
+}
+
+#custom-cursor.is-hovering {
+  width: 48px;
+  height: 48px;
+}
+
+#custom-cursor.is-hidden {
+  opacity: 0;
+}
+
 /* ─── Variables ─────────────────────────────────────────────────── */
 :root {
-  --bg:          #f8f8f8;
+  --bg:          #FFFFFE;
   --text:        #111111;
-  --text-muted:  #888888;
+  --text-muted:  #555555;
   --border:      #e0e0e0;
   --accent:      #F2F7B5;
 
@@ -79,7 +107,7 @@
 
 /* ─── Reset ─────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { font-size: 16px; scroll-behavior: smooth; }
+html { font-size: 16px; scroll-behavior: smooth; scroll-snap-type: y proximity; }
 body {
   background: var(--bg);
   color: var(--text);
@@ -272,6 +300,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 
 .audio-disc {
   font-family: 'NotoEmoji', sans-serif;
+  font-weight: 700;
   font-size: 1.35rem;
   line-height: 1;
   display: block;
@@ -392,12 +421,14 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 
 .nav-fish-btn {
   font-family: 'NotoEmoji', sans-serif;
+  font-weight: 700;
   font-size: 1.55rem;
   width: 54px; height: 54px;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
   background: none; border: none; cursor: pointer; padding: 0;
   line-height: 1;
+  border-radius: 50%;
 }
 
 .lang-round {
@@ -417,6 +448,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 
 .lang-flag {
   font-family: 'NotoEmoji', sans-serif;
+  font-weight: 700;
   font-size: 1.35rem;
   line-height: 1;
 }
@@ -431,6 +463,8 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   text-align: center;
   position: relative;
   z-index: 2;
+  height: 100svh;
+  scroll-snap-align: start;
 }
 
 .hero-title {
@@ -445,7 +479,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   font-weight: 600;
   font-size: 3.5rem;
   line-height: 1.04;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.03em;
   color: var(--text);
   text-align: center;
 }
@@ -472,6 +506,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   font-family: 'NotoEmoji', sans-serif;
   font-style: normal;
   font-weight: normal;
+  margin-left: -0.15em;
 }
 
 /* Hero photo */
@@ -536,6 +571,24 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   overflow: hidden;
   box-shadow: 0 8px 32px rgba(0,0,0,0.15);
 }
+.hero-photo-wrap::after {
+  content: 'About →';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.hero-photo-link:hover .hero-photo-wrap::after {
+  opacity: 1;
+}
 .hero-photo-wrap img {
   width: 100%; height: 100%;
   object-fit: cover;
@@ -567,33 +620,116 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 
 /* ─── Bio ───────────────────────────────────────────────────────── */
 .bio-section {
-  padding: 0 var(--gutter);
-  margin-top: 56px;
-  max-width: 663px;
+  height: 100svh;
+  scroll-snap-align: start;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 6rem var(--gutter);
+  width: 100%;
+  max-width: 900px;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
   will-change: transform, opacity;
 }
 
-.bio-divider {
-  width: 1px;
-  height: 96px;
-  background: var(--border);
-  margin: 28px auto 0;
-  mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+.bio-bottom {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  white-space: nowrap;
 }
-.bio-section p {
+
+.bio-scroll-down {
+  display: block;
   font-family: var(--font-body);
   font-size: 0.875rem;
-  font-weight: 600;
-  line-height: 1.4;
-  letter-spacing: -0.01em;
-  color: var(--text);
-  margin-bottom: 1rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  opacity: 0.4;
+  animation: bio-bounce 1.8s ease-in-out infinite;
+  transition: opacity 0.2s;
 }
-.bio-section p:last-child { margin-bottom: 0; }
+.bio-scroll-down:hover { opacity: 0.7; }
+
+@keyframes bio-bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(5px); }
+}
+
+.bio-divider {
+  display: none;
+}
+
+.bio-head {
+  font-family: var(--font-body);
+  font-size: clamp(1.5rem, 2.64vw, 2.375rem);
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin: 0;
+}
+
+.bio-body {
+  display: flex;
+  flex-direction: column;
+  max-width: 560px;
+  width: 100%;
+}
+
+.bio-body-text {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.52;
+  letter-spacing: -0.02em;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.bio-body-text strong {
+  font-weight: 700;
+  color: inherit;
+}
+
+.bio-body-awards {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.52;
+  letter-spacing: -0.02em;
+  color: var(--text-muted);
+  margin: 1.75rem 0 0;
+}
+
+.bio-cta-btn {
+  background: none;
+  border: none;
+  cursor: none;
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  padding: 0;
+  transition: opacity 0.2s ease;
+}
+.bio-cta-btn:hover { opacity: 0.6; }
+
+.bio-emoji {
+  font-family: 'NotoEmoji', sans-serif;
+  font-weight: 700;
+}
 
 /* ─── Feed Showcase ──────────────────────────────────────────────── */
 .feed-showcase {
@@ -1247,24 +1383,98 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   line-height: 1.65;
 }
 
-/* ─── Hello greeting overlay ─────────────────────────────────────── */
-.hello-greeting {
+/* ─── Welcome animation ──────────────────────────────────────────── */
+.wl-overlay {
   position: fixed;
   inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 500;
-  font-family: var(--font-body);
-  font-size: 3.5rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  color: #999;
-  opacity: 0;
-  transition: opacity 0.5s ease;
+  background: #F2F7B5;
+  z-index: 9990;
   pointer-events: none;
 }
-.hello-greeting.visible { opacity: 1; }
+
+.wl-fish {
+  position: fixed;
+  top: 50%;
+  left: -60px;
+  transform: translate(-50%, -50%) scaleX(-1);
+  font-family: 'NotoEmoji', sans-serif;
+  font-weight: 700;
+  font-size: 96px;
+  line-height: 1;
+  z-index: 9991;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.wl-counter {
+  position: fixed;
+  left: 50%;
+  top: 85%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  z-index: 9991;
+  pointer-events: none;
+}
+
+.wl-hello {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, calc(-50% + 24px));
+  font-family: var(--font-body);
+  font-size: clamp(6rem, 14.4vw, 10.8rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  z-index: 9992;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  white-space: nowrap;
+}
+.wl-hello.visible {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+}
+
+.wl-clip {
+  overflow: hidden;
+  padding-bottom: 0.2em;
+  margin-bottom: -0.2em;
+}
+
+@keyframes wl-swim-bob {
+  from { transform: translate(-50%, calc(-50% - 8px)) scaleX(-1); }
+  to   { transform: translate(-50%, calc(-50% + 8px)) scaleX(-1); }
+}
+.wl-fish.is-swimming {
+  animation: wl-swim-bob 0.5s ease-in-out infinite alternate;
+}
+
+/* ─── Scroll reveal ──────────────────────────────────────────────── */
+.rv-clip {
+  overflow: hidden;
+}
+.rv-v {
+  transform: translateY(110%);
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.rv-v.rv-in {
+  transform: translateY(0);
+}
+.rv-h {
+  opacity: 0;
+  transform: translateX(-24px);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.rv-h.rv-in {
+  opacity: 1;
+  transform: translateX(0);
+}
 
 /* ─── Footer ────────────────────────────────────────────────────── */
 .site-footer {

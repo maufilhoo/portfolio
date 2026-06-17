@@ -1,5 +1,7 @@
 import { initI18n, getTranslation } from './i18n.js';
 import { initFooterMeta } from './footer.js';
+import { initCursor } from './cursor.js';
+import { initWelcome } from './welcome.js';
 
 /* ─── Overlay ────────────────────────────────────────────────────── */
 function initOverlay() {
@@ -18,6 +20,32 @@ function initScrollTop() {
 }
 
 /* ─── Copy email ─────────────────────────────────────────────────── */
+function spawnSparkles(btn) {
+  const rect = btn.getBoundingClientRect();
+  const cx = rect.left + rect.width  / 2;
+  const cy = rect.top  + rect.height / 2;
+  Array.from({ length: 6 }, (_, i) => {
+    const el = document.createElement('div');
+    el.textContent = '✨';
+    el.style.cssText = [
+      'position:fixed', 'font-size:1rem', 'pointer-events:none', 'z-index:9999',
+      `top:${cy}px`, `left:${cx}px`,
+      'transform:translate(-50%,-50%)',
+      'opacity:1',
+      "font-family:'NotoEmoji',sans-serif", 'font-weight:700',
+      'transition:transform 0.65s ease, opacity 0.65s ease',
+    ].join(';');
+    document.body.appendChild(el);
+    const angle = (i / 6) * Math.PI * 2;
+    const d = 44 + Math.random() * 22;
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      el.style.transform = `translate(calc(-50% + ${Math.cos(angle)*d}px), calc(-50% + ${Math.sin(angle)*d}px))`;
+      el.style.opacity   = '0';
+    }));
+    setTimeout(() => el.remove(), 750);
+  });
+}
+
 function initCopyEmail() {
   const btns = document.querySelectorAll('#copy-email, [data-copy-email]');
   btns.forEach(btn => {
@@ -34,6 +62,21 @@ function initCopyEmail() {
     });
     if (!btn.dataset.i18n) btn.dataset.origText = btn.textContent;
   });
+
+  const bioBtn = document.getElementById('bio-lets-talk');
+  if (bioBtn) {
+    bioBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText('talkmauriciof@gmail.com')
+        .then(() => {
+          spawnSparkles(bioBtn);
+          const orig = bioBtn.innerHTML;
+          bioBtn.style.color = '#aaa';
+          bioBtn.innerHTML = 'E-mail copied! <span style="font-family:\'NotoEmoji\',sans-serif;font-weight:700;font-size:0.7em">✨</span>';
+          setTimeout(() => { bioBtn.innerHTML = orig; bioBtn.style.color = ''; }, 2000);
+        })
+        .catch(() => { window.location.href = 'mailto:talkmauriciof@gmail.com'; });
+    });
+  }
 }
 
 /* ─── Work grid reveal ───────────────────────────────────────────── */
@@ -257,7 +300,7 @@ const PROJECT_DATA = {
     },
     credits: [
       [{ pt: 'Design',      en: 'Design' },      'Eduardo França, Gustavo André, Mauricio Filho, Mariana Hermeto', { dir: 'Dandara Almeida' }],
-      [{ pt: 'Estratégia',  en: 'Strategy' },    'Anna Carla, Carol Polli, Sarah Stutz', { dir: 'Paula Marchiori' }],
+      [{ pt: 'Estratégia',  en: 'Strategy' },    'Anna Carla, Carol Polli, Sarah Stutz, Paula Marchiori'],
       [{ pt: 'Verbal',      en: 'Copywriting' }, 'Elen Campos, Vallécia Carvalho'],
       [{ pt: 'Parceiros',   en: 'Partners' },    'Blackletra: Enjoei Display', 'André Burnier: Programação Criativa', 'Consoante: Identidade Sonora'],
     ],
@@ -935,6 +978,47 @@ function initHelloGreeting(armGather) {
   }, 1800);
 }
 
+/* ─── Scroll reveal ──────────────────────────────────────────────── */
+function initReveal() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  // Vertical clip reveal — same effect as hero title
+  const vSelectors = [
+    '.bio-head',
+    '.bio-body-text',
+    '.bio-body-awards',
+    '.work-table-head',
+    '.footer-tagline',
+    '.footer-wordmark',
+  ];
+  const vEls = vSelectors.flatMap(sel => [...document.querySelectorAll(sel)]);
+
+  vEls.forEach(el => {
+    const clip = document.createElement('div');
+    clip.className = 'rv-clip';
+    el.parentNode.insertBefore(clip, el);
+    clip.appendChild(el);
+    el.classList.add('rv-v');
+  });
+
+  // Horizontal reveal for work table rows
+  const hEls = document.querySelectorAll('.wt-row');
+  hEls.forEach(el => el.classList.add('rv-h'));
+
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const inner = entry.target.querySelector('.rv-v');
+      if (inner) inner.classList.add('rv-in');
+      else entry.target.classList.add('rv-in');
+      obs.unobserve(entry.target);
+    });
+  }, { threshold: 0.15 });
+
+  vEls.forEach(el => obs.observe(el.parentNode)); // observe the clip wrapper
+  hEls.forEach(el => obs.observe(el));
+}
+
 /* ─── Mobile nav toggle ──────────────────────────────────────────── */
 function initMobileNav() {
   const btn  = document.querySelector('.nav-fish-btn');
@@ -971,7 +1055,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   initWorkTable();
   initFooterMeta();
   await initI18n();
-  initHelloGreeting(armGather);
+  initWelcome(armGather);
+  initReveal();
   initCopyEmail();
   initMobileNav();
+  initCursor();
 });

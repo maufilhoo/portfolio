@@ -1,5 +1,6 @@
 import { initI18n, getTranslation } from './i18n.js';
 import { initFooterMeta } from './footer.js';
+import { initCursor } from './cursor.js';
 
 /* ─── Overlay ─────────────────────────────────────────────────────── */
 function initOverlay() {
@@ -289,4 +290,5 @@ document.addEventListener('DOMContentLoaded', async () => {
   await initI18n();
   initCopyEmail();
   initMobileNav();
+  initCursor();
 });
