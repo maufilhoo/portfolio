@@ -34,8 +34,8 @@
   --border:      #e0e0e0;
   --accent:      #F2F7B5;
 
-  --font-display: 'NeueMontreal', system-ui, sans-serif;
-  --font-body:    'GoogleSansFlex', system-ui, sans-serif;
+  --font-display: 'NeueMontreal', 'NotoEmoji', system-ui, sans-serif;
+  --font-body:    'GoogleSansFlex', 'NotoEmoji', system-ui, sans-serif;
   --font-main:    var(--font-body);
 
   --max-width:  1400px;
