@@ -1,3 +1,5 @@
+import { getTranslation } from './i18n.js';
+
 export function initWelcome(armGather) {
   const path   = window.location.pathname;
   const isHome = path === '/' || path.endsWith('index.html') || path === '';
@@ -102,7 +104,9 @@ export function initWelcome(armGather) {
       counter.textContent = '100%';
       fish.style.left = cx + 'px';
       fish.style.top  = cy + 'px';
-      phase2();
+      fish.style.transition = 'transform 0.4s ease';
+      fish.style.transform  = 'translate(-50%, -50%) scaleX(1)';
+      setTimeout(phase2, 450);
     }
   });
 
@@ -114,7 +118,7 @@ export function initWelcome(armGather) {
     // Spiral spin — pure rotation, scaleX unchanged (no squash/flatten during spin)
     void fish.offsetWidth;
     fish.style.transition = 'transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-    fish.style.transform  = 'translate(-50%, -50%) rotate(720deg) scaleX(-1)';
+    fish.style.transform  = 'translate(-50%, -50%) rotate(720deg) scaleX(1)';
 
     // After spiral + brief pause → fly to nav button
     setTimeout(() => {
@@ -139,7 +143,7 @@ export function initWelcome(armGather) {
       // "Hello!" — appears simultaneously with fish flying up
       const hello = document.createElement('div');
       hello.className = 'wl-hello';
-      hello.textContent = 'Hello!';
+      hello.textContent = getTranslation('hero_hello');
       ov.appendChild(hello);
       requestAnimationFrame(() => requestAnimationFrame(() => {
         hello.classList.add('visible');

@@ -71,7 +71,7 @@ function initCopyEmail() {
           spawnSparkles(bioBtn);
           const orig = bioBtn.innerHTML;
           bioBtn.style.color = '#aaa';
-          bioBtn.innerHTML = 'E-mail copied! <span style="font-family:\'NotoEmoji\',sans-serif;font-weight:700;font-size:0.7em">✨</span>';
+          bioBtn.innerHTML = `${getTranslation('bio_copied')} <span style="font-family:'NotoEmoji',sans-serif;font-weight:700;font-size:0.7em">✨</span>`;
           setTimeout(() => { bioBtn.innerHTML = orig; bioBtn.style.color = ''; }, 2000);
         })
         .catch(() => { window.location.href = 'mailto:talkmauriciof@gmail.com'; });
@@ -532,7 +532,7 @@ function initWorkTable() {
     if (detailText) {
       const overviewLabel = document.createElement('span');
       overviewLabel.className = 'wt-overview-label';
-      overviewLabel.textContent = 'Overview';
+      overviewLabel.textContent = isEN ? 'Overview' : 'Visão Geral';
       info.appendChild(overviewLabel);
 
       const desc = document.createElement('div');

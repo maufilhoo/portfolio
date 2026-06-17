@@ -30,7 +30,7 @@
 :root {
   --bg:          #FFFFFE;
   --text:        #111111;
-  --text-muted:  #555555;
+  --text-muted:  #6B6B6B;
   --border:      #e0e0e0;
   --accent:      #F2F7B5;
 
@@ -699,7 +699,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 
 .bio-body-text strong {
   font-weight: 700;
-  color: inherit;
+  color: #9E9E9E;
 }
 
 .bio-body-awards {
