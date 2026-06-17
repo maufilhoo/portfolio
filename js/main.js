@@ -989,12 +989,8 @@ function initTaglineSequence() {
   if (!tagline) return;
 
   const step1 = getTranslation('hero_step1');
-  const steps = [
-    getTranslation('hero_step2'),
-    getTranslation('hero_step3'),
-  ];
+  const pool  = [getTranslation('hero_step2'), getTranslation('hero_step3')];
 
-  // Wrap emoji in step1 already shown by i18n
   tagline.innerHTML = wrapEmoji(step1);
 
   function fadeOut(cb) {
@@ -1006,26 +1002,48 @@ function initTaglineSequence() {
     tagline.style.transition = 'opacity 0.4s ease';
     tagline.style.opacity = '1';
   }
-
-  function showFinal() {
-    tagline.innerHTML = `<span class="wt-final-text">${wrapEmoji(step1)}</span><span class="wt-final-arrow"></span>`;
-    tagline.classList.add('is-final');
-    fadeIn();
-  }
-
-  function runStep(i) {
-    if (i >= steps.length) {
-      fadeOut(showFinal);
-      return;
+  function shuffle(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
     }
-    fadeOut(() => {
-      tagline.innerHTML = wrapEmoji(steps[i]);
-      fadeIn();
-      setTimeout(() => runStep(i + 1), 1500);
-    });
+    return a;
   }
 
-  setTimeout(() => runStep(0), 1500);
+  function runCycle(step1Visible) {
+    const steps = shuffle(pool);
+    let i = 0;
+
+    function next() {
+      if (i >= steps.length) {
+        // Final: Welcome✌ + arrow, hold 4s, then restart
+        fadeOut(() => {
+          tagline.classList.add('is-final');
+          tagline.innerHTML = `<span>${wrapEmoji(step1)}</span><span class="wt-final-arrow"></span>`;
+          fadeIn();
+          setTimeout(() => {
+            fadeOut(() => {
+              tagline.classList.remove('is-final');
+              tagline.innerHTML = wrapEmoji(step1);
+              fadeIn();
+              setTimeout(() => runCycle(true), 1500);
+            });
+          }, 4000);
+        });
+        return;
+      }
+      fadeOut(() => {
+        tagline.innerHTML = wrapEmoji(steps[i++]);
+        fadeIn();
+        setTimeout(next, 1500);
+      });
+    }
+
+    step1Visible ? setTimeout(next, 1500) : next();
+  }
+
+  runCycle(true);
 }
 
 document.addEventListener('welcome-done', initTaglineSequence);
