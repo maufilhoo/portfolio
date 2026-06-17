@@ -865,11 +865,16 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 }
 .wt-row.is-open .wt-name { font-weight: 700; }
 .wt-row.is-open .wt-name::before {
-  content: '\25B6';
-  font-family: inherit;
-  margin-right: 0.3em;
-  font-weight: 400;
-  font-size: 0.65em;
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  margin-right: 0.4em;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
 }
 .wt-sector {
   font-family: var(--font-body);
