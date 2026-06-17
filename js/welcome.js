@@ -18,6 +18,39 @@ export function initWelcome(armGather) {
     return;
   }
 
+  const FIRST_VISIT_KEY = 'mf-intro-seen';
+  const firstVisit = !localStorage.getItem(FIRST_VISIT_KEY);
+
+  // Return visit: skip fish animation, show greeting then reveal
+  if (!firstVisit) {
+    [header, stage, tagline, title].forEach(el => {
+      if (el) { el.style.opacity = '0'; el.style.transition = 'none'; }
+    });
+    const retGreeting = document.createElement('div');
+    retGreeting.className = 'hello-greeting';
+    retGreeting.textContent = getTranslation('hero_hello_return');
+    document.body.appendChild(retGreeting);
+    requestAnimationFrame(() => requestAnimationFrame(() => retGreeting.classList.add('visible')));
+    setTimeout(() => {
+      retGreeting.style.transition = 'opacity 0.5s ease';
+      retGreeting.style.opacity = '0';
+      setTimeout(() => {
+        retGreeting.remove();
+        [header, title, stage, tagline].forEach(el => {
+          if (!el) return;
+          el.style.transition = 'opacity 0.6s ease';
+          el.style.opacity = '1';
+        });
+        if (armGather) armGather();
+        document.dispatchEvent(new CustomEvent('welcome-done'));
+      }, 500);
+    }, 1400);
+    return;
+  }
+
+  // First visit: full fish animation — set flag
+  localStorage.setItem(FIRST_VISIT_KEY, '1');
+
   // Safety fallback — if anything breaks, reveal content after 7s
   const safetyTimer = setTimeout(() => revealHome(), 7000);
 
