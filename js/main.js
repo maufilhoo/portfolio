@@ -979,14 +979,23 @@ function initHelloGreeting(armGather) {
 }
 
 /* ─── Welcome tagline sequence ───────────────────────────────────── */
+function wrapEmoji(text) {
+  return text.replace(/([\u{1F000}-\u{1FFFF}]|[\u{2600}-\u{27FF}])/gu,
+    m => `<span class="emoji-noto">${m}</span>`);
+}
+
 function initTaglineSequence() {
   const tagline = document.querySelector('.welcome-tagline');
   if (!tagline) return;
 
+  const step1 = getTranslation('hero_step1');
   const steps = [
     getTranslation('hero_step2'),
     getTranslation('hero_step3'),
   ];
+
+  // Wrap emoji in step1 already shown by i18n
+  tagline.innerHTML = wrapEmoji(step1);
 
   function fadeOut(cb) {
     tagline.style.transition = 'opacity 0.4s ease';
@@ -999,7 +1008,7 @@ function initTaglineSequence() {
   }
 
   function showFinal() {
-    tagline.innerHTML = '<span class="wt-final-emoji">✌</span><span class="wt-final-arrow"></span>';
+    tagline.innerHTML = `<span class="wt-final-text">${wrapEmoji(step1)}</span><span class="wt-final-arrow"></span>`;
     tagline.classList.add('is-final');
     fadeIn();
   }
@@ -1010,13 +1019,12 @@ function initTaglineSequence() {
       return;
     }
     fadeOut(() => {
-      tagline.textContent = steps[i];
+      tagline.innerHTML = wrapEmoji(steps[i]);
       fadeIn();
       setTimeout(() => runStep(i + 1), 1500);
     });
   }
 
-  // Step 1 already visible — hold 1500ms then cycle
   setTimeout(() => runStep(0), 1500);
 }
 
