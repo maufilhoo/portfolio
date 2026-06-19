@@ -81,5 +81,7 @@
   "wt_projects": "Projects",
   "wt_services": "Services",
   "wt_year": "Year",
-  "wt_credits": "Technical Sheet"
+  "wt_credits": "Technical Sheet",
+
+  "cookie_text": "This site uses only necessary cookies."
 }

@@ -1513,6 +1513,27 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   transform: translate(-50%, -50%);
 }
 
+.hello-greeting {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, calc(-50% + 24px));
+  font-family: var(--font-body);
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  z-index: 9992;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  white-space: nowrap;
+}
+.hello-greeting.visible {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+}
+
 .wl-clip {
   overflow: hidden;
   padding-bottom: 0.2em;
@@ -1677,12 +1698,32 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   align-items: center;
   justify-content: center;
   min-height: 200px;
+  overflow: hidden;
 }
 
 .footer-fish {
   font-size: clamp(5rem, 10vw, 8rem);
   display: inline-block;
   line-height: 1;
+  scale: -1 1;
+  transition: scale 0.5s ease;
+  animation: fish-swim-x 10s ease-in-out infinite alternate,
+             fish-bob 3s ease-in-out infinite;
+}
+
+.footer-fish.facing-left {
+  scale: 1 1;
+}
+
+@keyframes fish-swim-x {
+  from { transform: translateX(-35vw); }
+  to   { transform: translateX(35vw); }
+}
+
+@keyframes fish-bob {
+  0%, 100% { translate: 0 0; }
+  40%       { translate: 0 -14px; }
+  70%       { translate: 0 8px; }
 }
 
 /* ─── Gallery ───────────────────────────────────────────────────── */
@@ -1826,5 +1867,52 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   text-underline-offset: 3px;
   opacity: 0.7;
   transition: opacity var(--transition);
+}
+
+/* ─── Cookie Bar ─────────────────────────────────────────────── */
+.cookie-bar {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  background: rgba(252, 251, 250, 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.75rem 0.45rem 1.25rem;
+  white-space: nowrap;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.cookie-bar.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cookie-bar-text {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: var(--text);
+}
+
+.cookie-bar-close {
+  background: none;
+  border: none;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.78rem;
+  color: var(--text);
+  line-height: 1;
+  font-family: var(--font-body);
+  opacity: 0.45;
+  transition: opacity 0.2s ease;
+}
+
+.cookie-bar-close:hover {
+  opacity: 1;
 }
 .about-contacts a:hover { opacity: 1; }

@@ -1,19 +1,20 @@
-/* ─── Static background word ────────────────────────────────────── */
+/* ─── Background word (inside scatter canvas) ───────────────────── */
 .gallery-bg-word {
-  position: fixed;
-  top: 50%;
+  position: absolute;
+  top: 0;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   font-family: var(--font-body);
-  font-size: clamp(3.5rem, 8vw, 9rem);
-  font-weight: 700;
-  letter-spacing: -0.03em;
+  font-size: clamp(8rem, 20vw, 22rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
   color: var(--text);
-  opacity: 0.12;
+  opacity: 0.9;
   pointer-events: none;
   user-select: none;
-  z-index: 2;
+  z-index: 0;
   white-space: nowrap;
+  line-height: 1;
 }
 
 /* ─── Gallery page ───────────────────────────────────────────────── */

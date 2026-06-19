@@ -130,13 +130,10 @@
   /* Section spacing */
   .feed-showcase   { margin-top: 1.5rem; }
   .work-table-wrap { margin-top: 1.5rem; }
-  .site-footer     { padding-top: 3rem; }
-  .footer-top      { padding-bottom: 3rem; }
-
   /* Footer */
-  .footer-top { grid-template-columns: 1fr; gap: 3rem; }
-  .footer-wordmark { font-size: clamp(1rem, 5vw, 1.5rem); }
-  .footer-col-right { grid-template-columns: 1fr 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; padding: 3rem var(--gutter) 3rem; }
+  .footer-meta-col { text-align: left; }
+  .footer-nav-big-link { font-size: clamp(1.6rem, 5vw, 2.5rem); }
 
   /* About */
   .about-hero { grid-template-columns: 1fr; gap: 2rem; }

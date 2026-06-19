@@ -1136,10 +1136,45 @@ function initMobileNav() {
   }, { passive: true });
 }
 
+/* ─── Cookie Bar ─────────────────────────────────────────────────── */
+function initCookieBar() {
+  const bar = document.getElementById('cookie-bar');
+  if (!bar) return;
+
+  let dismissed = false;
+
+  function dismiss() {
+    if (dismissed) return;
+    dismissed = true;
+    bar.classList.add('is-hidden');
+    setTimeout(() => bar.remove(), 500);
+  }
+
+  const timer = setTimeout(dismiss, 3000);
+
+  document.getElementById('cookie-close').addEventListener('click', () => {
+    clearTimeout(timer);
+    dismiss();
+  });
+
+  const hero = document.querySelector('.hero-section');
+  const threshold = hero ? hero.offsetHeight : window.innerHeight;
+
+  function onScroll() {
+    if (window.scrollY >= threshold) {
+      clearTimeout(timer);
+      dismiss();
+      window.removeEventListener('scroll', onScroll);
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+}
+
 /* ─── Init ───────────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', async () => {
   window.scrollTo(0, 0);
   initOverlay();
+  initCookieBar();
   const armGather = initHeroCards();
   initScrollTop();
   initWorkReveal();

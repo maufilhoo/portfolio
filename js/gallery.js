@@ -121,6 +121,10 @@ function initGalleryPage() {
   canvas.className = 'gallery-scatter-canvas';
   pageEl.appendChild(canvas);
 
+  // Move bg-word into canvas so it anchors at y=0 with the first items
+  const bgWord = pageEl.querySelector('.gallery-bg-word');
+  if (bgWord) canvas.appendChild(bgWord);
+
   allItems.forEach((item, i) => {
     canvas.appendChild(item);
     item.addEventListener('click', () => openCaseLightbox(allProjects[i]));

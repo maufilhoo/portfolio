@@ -2,6 +2,19 @@ export function initFooterMeta() {
   updateDatetime();
   setInterval(updateDatetime, 60_000);
   fetchLocation();
+  initFishSwim();
+}
+
+function initFishSwim() {
+  const fish = document.querySelector('.footer-fish');
+  if (!fish) return;
+
+  // Toggle facing direction at each half-cycle of the swim animation
+  fish.addEventListener('animationiteration', e => {
+    if (e.animationName === 'fish-swim-x') {
+      fish.classList.toggle('facing-left');
+    }
+  });
 }
 
 function updateDatetime() {
