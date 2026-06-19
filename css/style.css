@@ -766,7 +766,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 }
 
 .bio-body-text + .bio-body-text {
-  margin-top: 0.75rem;
+  margin-top: 1.75rem;
 }
 
 .bio-body-awards {
