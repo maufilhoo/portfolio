@@ -906,93 +906,14 @@ function initBioParallax() {
   function update() {
     const rect = section.getBoundingClientRect();
     const vh = window.innerHeight;
-    // 0 when element top hits bottom of screen, 1 when it reaches 30% from top
     const progress = Math.min(1, Math.max(0, (vh - rect.top) / (vh * 0.7)));
     const scale = 0.6 + progress * 0.4;
     section.style.transform = `scale(${scale})`;
-    section.style.opacity = progress;
   }
 
   window.addEventListener('scroll', update, { passive: true });
 }
 
-/* ─── Hello greeting (first visit only) ─────────────────────────── */
-function initHelloGreeting(armGather) {
-  const stage   = document.querySelector('.hero-card-stage');
-  const tagline = document.querySelector('.welcome-tagline');
-  const title   = document.querySelector('.hero-title');
-  const FIRST_VISIT_KEY = 'mf-intro-seen';
-  const firstVisit = !localStorage.getItem(FIRST_VISIT_KEY);
-
-  // Greeting only on home page
-  const path = window.location.pathname;
-  const isHome = path === '/' || path.endsWith('index.html') || path === '';
-  if (!isHome) return;
-
-  // Skip greeting when navigating directly to #work (or any hash anchor)
-  if (window.location.hash) {
-    if (stage)   stage.style.opacity   = '1';
-    if (tagline) tagline.style.opacity = '1';
-    if (title)   title.style.opacity   = '1';
-    if (!firstVisit && armGather) armGather();
-    else if (armGather) { localStorage.setItem(FIRST_VISIT_KEY, '1'); armGather(); }
-    return;
-  }
-
-  if (!firstVisit) {
-    [stage, tagline, title].forEach(el => {
-      if (el) { el.style.opacity = '0'; el.style.transition = 'none'; }
-    });
-
-    const retGreeting = document.createElement('div');
-    retGreeting.className = 'hello-greeting';
-    retGreeting.textContent = getTranslation('hero_hello_return');
-    document.body.appendChild(retGreeting);
-    requestAnimationFrame(() => requestAnimationFrame(() => retGreeting.classList.add('visible')));
-
-    setTimeout(() => {
-      retGreeting.style.transition = 'opacity 0.5s ease';
-      retGreeting.style.opacity = '0';
-      setTimeout(() => {
-        retGreeting.remove();
-        [title, stage, tagline].forEach(el => {
-          if (!el) return;
-          el.style.transition = 'opacity 0.6s ease';
-          el.style.opacity = '1';
-        });
-        if (armGather) armGather();
-      }, 500);
-    }, 1400);
-    return;
-  }
-
-  localStorage.setItem(FIRST_VISIT_KEY, '1');
-
-  [stage, tagline, title].forEach(el => {
-    if (el) { el.style.opacity = '0'; el.style.transition = 'none'; }
-  });
-
-  const greeting = document.createElement('div');
-  greeting.className = 'hello-greeting';
-  greeting.textContent = getTranslation('hero_hello');
-  document.body.appendChild(greeting);
-
-  requestAnimationFrame(() => requestAnimationFrame(() => greeting.classList.add('visible')));
-
-  setTimeout(() => {
-    greeting.style.transition = 'opacity 0.5s ease';
-    greeting.style.opacity = '0';
-    setTimeout(() => {
-      greeting.remove();
-      [title, stage, tagline].forEach(el => {
-        if (!el) return;
-        el.style.transition = 'opacity 0.6s ease';
-        el.style.opacity = '1';
-      });
-      if (armGather) armGather();
-    }, 500);
-  }, 1800);
-}
 
 /* ─── Welcome tagline sequence ───────────────────────────────────── */
 function wrapEmoji(text) {

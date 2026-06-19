@@ -18,40 +18,7 @@ export function initWelcome(armGather) {
     return;
   }
 
-  const FIRST_VISIT_KEY = 'mf-intro-seen';
-  const firstVisit = !localStorage.getItem(FIRST_VISIT_KEY);
-
-  // Return visit: skip fish animation, show greeting then reveal
-  if (!firstVisit) {
-    [header, stage, tagline, title].forEach(el => {
-      if (el) { el.style.opacity = '0'; el.style.transition = 'none'; }
-    });
-    const retGreeting = document.createElement('div');
-    retGreeting.className = 'hello-greeting';
-    retGreeting.textContent = getTranslation('hero_hello_return');
-    document.body.appendChild(retGreeting);
-    requestAnimationFrame(() => requestAnimationFrame(() => retGreeting.classList.add('visible')));
-    setTimeout(() => {
-      retGreeting.style.transition = 'opacity 0.5s ease';
-      retGreeting.style.opacity = '0';
-      setTimeout(() => {
-        retGreeting.remove();
-        [header, title, stage, tagline].forEach(el => {
-          if (!el) return;
-          el.style.transition = 'opacity 0.6s ease';
-          el.style.opacity = '1';
-        });
-        if (armGather) armGather();
-        document.dispatchEvent(new CustomEvent('welcome-done'));
-      }, 500);
-    }, 1400);
-    return;
-  }
-
-  // First visit: full fish animation — set flag
-  localStorage.setItem(FIRST_VISIT_KEY, '1');
-
-  // Safety fallback — if anything breaks, reveal content after 7s
+  // Safety fallback — reveal content after 7s if animation fails
   const safetyTimer = setTimeout(() => revealHome(), 7000);
 
   // Hide header + hero content
@@ -100,12 +67,12 @@ export function initWelcome(armGather) {
 
   function ease(t) { return t < 0.5 ? 2*t*t : -1 + (4 - 2*t)*t; }
 
-  // Viewport center — used for fish path calculations
   const cx = window.innerWidth  / 2;
   const cy = window.innerHeight / 2;
 
-  // Fish starts off-screen left; position driven by rAF each frame
-  fish.style.left      = '-60px';
+  // Fish starts just inside the left edge — visible from frame 1
+  const startX = Math.max(32, window.innerWidth * 0.04);
+  fish.style.left      = startX + 'px';
   fish.style.top       = cy + 'px';
   fish.style.fontSize  = '24px';
   fish.style.transform = 'translate(-50%, -50%) scaleX(-1)';
@@ -117,15 +84,13 @@ export function initWelcome(armGather) {
     const p   = ease(raw);
     counter.textContent = Math.round(p * 100) + '%';
 
-    // Gradient: white bleaches in from top as counter climbs
     const gR = Math.round(242 + 13 * p);
     const gG = Math.round(247 + 8  * p);
     const gB = Math.round(181 + 73 * p);
     ov.style.background = `linear-gradient(to bottom, rgb(${gR},${gG},${gB}) 0%, #F2F7B5 100%)`;
 
-    // Fish path: gentle sine wave from left → center, amplitude tapers to 0 on arrival
-    const fX  = -60 + (cx + 60) * ease(raw);
-    const amp = 24 * (1 - ease(raw) * 0.92);            // 24px → ~2px at center
+    const fX  = startX + (cx - startX) * ease(raw);
+    const amp = 24 * (1 - ease(raw) * 0.92);
     const fY  = cy + Math.sin(raw * Math.PI * 2 * 1.6) * amp;
     fish.style.left      = fX + 'px';
     fish.style.top       = fY + 'px';
@@ -149,14 +114,11 @@ export function initWelcome(armGather) {
     counter.style.transition = 'opacity 0.3s ease';
     counter.style.opacity    = '0';
 
-    // Spiral spin — pure rotation, scaleX unchanged (no squash/flatten during spin)
     void fish.offsetWidth;
     fish.style.transition = 'transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
     fish.style.transform  = 'translate(-50%, -50%) rotate(720deg) scaleX(1)';
 
-    // After spiral + brief pause → fly to nav button
     setTimeout(() => {
-      // Snap orientation after spin completes (instant — rotation is at 720°=0° visually)
       fish.style.transition = 'none';
       fish.style.transform  = 'translate(-50%, -50%) scaleX(1)';
       void fish.offsetWidth;
@@ -174,7 +136,6 @@ export function initWelcome(armGather) {
         fish.style.fontSize = '1.55rem';
       }
 
-      // "Hello!" — appears simultaneously with fish flying up
       const hello = document.createElement('div');
       hello.className = 'wl-hello';
       hello.textContent = getTranslation('hero_hello');
@@ -189,7 +150,6 @@ export function initWelcome(armGather) {
         hello.style.opacity    = '0';
       }, 700);
 
-      // After fish lands: show header, draw circles, reveal home
       setTimeout(() => {
         if (header) { header.style.transition = 'opacity 0.2s ease'; header.style.opacity = '1'; }
 
@@ -203,7 +163,7 @@ export function initWelcome(armGather) {
         setTimeout(() => revealHome(), 700);
       }, 520);
 
-    }, 1100); // 1000ms spin + 100ms pause
+    }, 1100);
   }
 
   /* ── Draw SVG circle clockwise over a nav button ────────────────── */
@@ -240,7 +200,6 @@ export function initWelcome(armGather) {
     svg.appendChild(circle);
     document.body.appendChild(svg);
 
-    // Trigger draw (double rAF ensures reflow)
     requestAnimationFrame(() => requestAnimationFrame(() => {
       circle.style.transition       = 'stroke-dashoffset 0.5s ease';
       circle.style.strokeDashoffset = '0';
@@ -256,7 +215,6 @@ export function initWelcome(armGather) {
     ov.style.transition = 'opacity 0.5s ease, background 0s';
     ov.style.opacity    = '0';
 
-    // Clip reveal on hero title spans — staggered per line
     if (title) {
       title.style.opacity = '1';
       Array.from(title.querySelectorAll('span')).forEach((span, i) => {
