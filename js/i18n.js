@@ -1,5 +1,4 @@
-const STORAGE_KEY = 'mf-lang';
-let currentLang = localStorage.getItem(STORAGE_KEY) || 'en';
+let currentLang = 'en';
 let translations = {};
 
 async function loadTranslations(lang) {
@@ -42,7 +41,6 @@ function applyTranslations() {
 
 async function setLang(lang) {
   currentLang = lang;
-  localStorage.setItem(STORAGE_KEY, lang);
   await loadTranslations(lang);
   applyTranslations();
 }
