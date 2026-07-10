@@ -127,8 +127,9 @@
     font-size: 1.35rem;
   }
 
-  /* Hero — clip spreading cards at section boundary */
-  .hero-section { overflow: hidden; }
+  /* Hero — hide spread cards on mobile, show only photo */
+  .hero-card { display: none; }
+  .hero-section { overflow: visible; }
 
   /* Bio — left-align for readability on mobile */
   .bio-section { text-align: left; }
@@ -146,6 +147,16 @@
   }
   .footer-nav-big-link { font-size: clamp(1.6rem, 5vw, 2.5rem); }
   .footer-bottom-bar { flex-direction: column; align-items: flex-start; gap: 0.25rem; }
+
+  /* Cookie banner */
+  .cookie-bar {
+    white-space: normal;
+    max-width: calc(100% - 2rem);
+    border-radius: 16px;
+    left: 1rem;
+    right: 1rem;
+    transform: none;
+  }
 
   /* About */
   .about-hero { grid-template-columns: 1fr; gap: 2rem; }

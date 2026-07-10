@@ -10,8 +10,8 @@ export function initWelcome(armGather) {
   const tagline = document.querySelector('.welcome-tagline');
   const title   = document.querySelector('.hero-title');
 
-  // Skip on hash navigation — reveal immediately
-  if (window.location.hash) {
+  // Skip on hash navigation or mobile — reveal immediately
+  if (window.location.hash || window.innerWidth <= 768) {
     [header, stage, tagline, title].forEach(el => { if (el) el.style.opacity = '1'; });
     if (armGather) armGather();
     document.dispatchEvent(new CustomEvent('welcome-done'));
