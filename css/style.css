@@ -1681,24 +1681,6 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   letter-spacing: 0.01em;
 }
 
-/* Fish band */
-.footer-fish-band {
-  flex: 1;
-  position: relative;
-  overflow: hidden;
-  min-height: 180px;
-}
-
-.footer-fish {
-  font-size: clamp(5rem, 10vw, 8rem);
-  display: inline-block;
-  line-height: 1;
-  position: absolute;
-  bottom: 24px;
-  left: 0;
-  scale: -1 1;
-  transform: translateX(-120px);
-}
 
 .footer-bottom-bar {
   display: flex;
