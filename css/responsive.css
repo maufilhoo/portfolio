@@ -127,13 +127,25 @@
     font-size: 1.35rem;
   }
 
+  /* Hero — clip spreading cards at section boundary */
+  .hero-section { overflow: hidden; }
+
+  /* Bio — left-align for readability on mobile */
+  .bio-section { text-align: left; }
+  .bio-head { text-align: left; }
+
   /* Section spacing */
   .feed-showcase   { margin-top: 1.5rem; }
   .work-table-wrap { margin-top: 1.5rem; }
-  /* Footer */
-  .footer-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; padding: 3rem var(--gutter) 3rem; }
-  .footer-meta-col { text-align: left; }
+
+  /* Footer — stack to 1 column */
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    padding: 3rem var(--gutter);
+  }
   .footer-nav-big-link { font-size: clamp(1.6rem, 5vw, 2.5rem); }
+  .footer-bottom-bar { flex-direction: column; align-items: flex-start; gap: 0.25rem; }
 
   /* About */
   .about-hero { grid-template-columns: 1fr; gap: 2rem; }
@@ -146,7 +158,9 @@
 @media (max-width: 480px) {
   :root { --gutter: 1rem; }
   .hero-title span { font-size: clamp(1.1rem, 5vw, 1.4rem); }
-  .bio-section { text-align: left; padding: 4rem var(--gutter); }
+  .bio-section { padding: 4rem var(--gutter); }
   .work-item--square { width: 180px; }
   .work-item--portrait { width: 150px; }
+  .footer-bottom-bar { font-size: 0.7rem; }
+  .wl-hello { font-size: clamp(3rem, 14.4vw, 6rem); }
 }
