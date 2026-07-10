@@ -1588,7 +1588,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 32% 1fr;
   gap: 2rem;
   padding: 4rem var(--gutter) 4rem;
 }
