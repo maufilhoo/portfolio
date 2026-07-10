@@ -872,8 +872,9 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 }
 .work-table-head span:last-child { text-align: right; }
 
-.wt-row { border-top: 1px solid var(--border); }
+.wt-row { border-top: 1px solid var(--border); position: relative; z-index: 0; }
 .wt-row:last-child { border-bottom: 1px solid var(--border); }
+.wt-row.is-open { z-index: 1; }
 
 .wt-row-head {
   align-items: center;
