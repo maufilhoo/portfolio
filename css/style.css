@@ -1687,6 +1687,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   justify-content: space-between;
   align-items: center;
   padding: 1rem var(--gutter);
+  margin-top: auto;
 }
 
 .footer-bottom-bar span {
