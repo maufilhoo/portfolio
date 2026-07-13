@@ -1,3 +1,9 @@
+/* ─── Mobile-only elements — hidden by default ───────────────────── */
+.mobile-header-bar,
+.mobile-hero-row,
+.mobile-work-heading,
+.mobile-menu-overlay { display: none; }
+
 /* ─── Tablet (≤ 1024px) ─────────────────────────────────────────── */
 @media (max-width: 1024px) {
   :root { --gutter: 1.5rem; }
@@ -29,6 +35,7 @@
 
   /* Header */
   .site-header { height: 56px; }
+  .header-btns-group { display: none !important; }
 
   /* ── Nav: always-visible links, no fish button ───────────────────── */
   .nav-fish-btn { display: none !important; }
@@ -146,17 +153,25 @@
     font-size: 1.35rem;
   }
 
-  /* Hero — hide spread cards on mobile, show only photo */
+  /* Hero — hidden on mobile */
+  .hero-section { display: none !important; }
   .hero-card { display: none; }
-  .hero-section { overflow: visible; }
 
-  /* Bio — left-align for readability on mobile */
-  .bio-section { text-align: left; }
+  /* Bio */
+  .bio-section {
+    text-align: left;
+    height: auto;
+    align-items: flex-start;
+    padding: calc(56px + 1.5rem) var(--gutter) 3rem;
+    gap: 1.5rem;
+  }
   .bio-head { text-align: left; }
+  .bio-bottom { position: static; transform: none; left: auto; align-self: flex-start; white-space: normal; }
+  .bio-scroll-down { display: none; }
 
   /* Section spacing */
-  .feed-showcase   { margin-top: 1.5rem; }
-  .work-table-wrap { margin-top: 1.5rem; }
+  .feed-showcase   { display: none; }
+  .work-table-wrap { margin-top: 0; }
 
   /* Footer — stack to 1 column */
   .footer-grid {
@@ -182,13 +197,146 @@
   .about-row { grid-template-columns: 1fr; gap: 1rem; }
   .about-clients-grid { grid-template-columns: repeat(2, 1fr); }
 
+  /* ── Mobile header bar ───────────────────────────────────────────── */
+  .mobile-header-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--gutter);
+    height: 100%;
+  }
+  .mobile-logo { font-size: 1.4rem; line-height: 1; }
+  .mobile-menu-btn {
+    font-size: 0.8rem;
+    font-weight: 600;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text);
+    letter-spacing: 0.03em;
+    padding: 0.5rem 0;
+  }
+
+  /* ── Mobile hero row (name + photo) ─────────────────────────────── */
+  .mobile-hero-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1.25rem;
+    align-items: start;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  .mobile-hero-name {
+    font-size: clamp(1.8rem, 7vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin: 0 0 0.4rem;
+    letter-spacing: -0.02em;
+  }
+  .mobile-hero-sub {
+    font-size: 0.85rem;
+    opacity: 0.55;
+    line-height: 1.45;
+    margin: 0;
+  }
+  .mobile-hero-photo {
+    width: 88px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+
+  /* ── Mobile work heading ─────────────────────────────────────────── */
+  .mobile-work-heading {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.4;
+    padding: 1.5rem var(--gutter) 0;
+    margin: 0;
+  }
+
+  /* ── Mobile menu overlay ─────────────────────────────────────────── */
+  .mobile-menu-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9000;
+    background: linear-gradient(160deg, #cde435 0%, #a3b91c 100%);
+    display: flex;
+    flex-direction: column;
+    padding: 0 var(--gutter) calc(var(--gutter) * 2);
+    transform: translateY(-100%);
+    transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .mobile-menu-overlay.is-open { transform: translateY(0); }
+  .mobile-menu-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    flex-shrink: 0;
+  }
+  .mobile-menu-logo { font-size: 1.4rem; line-height: 1; }
+  .mobile-menu-close {
+    font-size: 1.2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #1a1a00;
+    padding: 0.5rem;
+    margin-right: -0.5rem;
+    opacity: 0.8;
+  }
+  .mobile-menu-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    flex: 1;
+    justify-content: center;
+  }
+  .mobile-menu-link {
+    font-size: clamp(2.2rem, 9vw, 3.5rem);
+    font-weight: 700;
+    color: #1a1a00;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    padding: 0.1rem 0;
+    line-height: 1.1;
+    display: block;
+    letter-spacing: -0.02em;
+  }
+  .mobile-menu-link:active { opacity: 0.7; }
+  .mobile-menu-footer {
+    display: flex;
+    align-items: center;
+    padding-top: 1.5rem;
+    flex-shrink: 0;
+  }
+  .mobile-menu-lang {
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: rgba(0, 0, 0, 0.15);
+    border: none;
+    border-radius: 20px;
+    padding: 0.35rem 1rem;
+    cursor: pointer;
+    color: #1a1a00;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
 }
 
 /* ─── Small mobile (≤ 480px) ────────────────────────────────────── */
 @media (max-width: 480px) {
   :root { --gutter: 1rem; }
   .hero-title span { font-size: clamp(1.1rem, 5vw, 1.4rem); }
-  .bio-section { padding: 4rem var(--gutter); }
+  .bio-section { padding: calc(56px + 1rem) var(--gutter) 2rem; }
   .work-item--square { width: 180px; }
   .work-item--portrait { width: 150px; }
   .footer-bottom-bar { font-size: 0.7rem; }

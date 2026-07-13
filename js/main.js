@@ -1052,23 +1052,44 @@ function initMobileRowThumbs() {
 }
 
 function initMobileNav() {
-  const btn  = document.querySelector('.nav-fish-btn');
-  const pill = document.querySelector('.nav-fish-pill');
-  if (!btn || !pill) return;
+  const menuBtn  = document.getElementById('mobile-menu-btn');
+  const overlay  = document.getElementById('mobile-menu-overlay');
+  const closeBtn = document.getElementById('mobile-menu-close');
+  const letsBtn  = document.getElementById('mobile-menu-letstalk');
+  const langBtn  = document.getElementById('mobile-menu-lang');
+  const mainLang = document.getElementById('lang-round');
 
-  btn.addEventListener('click', () => {
-    if (window.innerWidth > 768) return;
-    pill.classList.toggle('is-open');
+  if (!menuBtn || !overlay) return;
+
+  function openMenu()  { overlay.classList.add('is-open'); document.body.style.overflow = 'hidden'; }
+  function closeMenu() { overlay.classList.remove('is-open'); document.body.style.overflow = ''; }
+
+  menuBtn.addEventListener('click', openMenu);
+  closeBtn?.addEventListener('click', closeMenu);
+
+  letsBtn?.addEventListener('click', () => {
+    navigator.clipboard.writeText('talkmauriciof@gmail.com')
+      .then(() => {
+        const orig = letsBtn.textContent;
+        letsBtn.textContent = 'Copiado ✉️';
+        setTimeout(() => { letsBtn.textContent = orig; closeMenu(); }, 1200);
+      })
+      .catch(() => { closeMenu(); window.location.href = 'mailto:talkmauriciof@gmail.com'; });
   });
 
-  pill.querySelectorAll('.nav-fish-link').forEach(link => {
-    link.addEventListener('click', () => pill.classList.remove('is-open'));
+  function updateLangBtn() {
+    if (langBtn) langBtn.textContent = document.documentElement.lang === 'en' ? 'PT' : 'EN';
+  }
+
+  langBtn?.addEventListener('click', () => { mainLang?.click(); updateLangBtn(); });
+  mainLang?.addEventListener('click', updateLangBtn);
+  updateLangBtn();
+
+  overlay.querySelectorAll('.mobile-menu-link').forEach(link => {
+    if (link.tagName === 'A') link.addEventListener('click', closeMenu);
   });
 
-  document.addEventListener('touchstart', e => {
-    if (window.innerWidth > 768) return;
-    if (!e.target.closest('.nav-fish-wrap')) pill.classList.remove('is-open');
-  }, { passive: true });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 }
 
 /* ─── Cookie Bar ─────────────────────────────────────────────────── */

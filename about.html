@@ -6,8 +6,8 @@
   <meta name="description" content="About Mauricio Filho — Independent Brand & Visual Designer. São Paulo." />
   <title>About — Mauricio Filho</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐡</text></svg>">
-  <link rel="stylesheet" href="css/style.css?v=20260713b" />
-  <link rel="stylesheet" href="css/responsive.css?v=20260713b" />
+  <link rel="stylesheet" href="css/style.css?v=20260713c" />
+  <link rel="stylesheet" href="css/responsive.css?v=20260713c" />
 </head>
 <body class="page-about">
 
@@ -38,6 +38,10 @@
           <span class="lang-flag">🇧🇷</span>
         </button>
       </div>
+    </div>
+    <div class="mobile-header-bar">
+      <span class="mobile-logo">🐡</span>
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menu">Menu +</button>
     </div>
   </header>
 
@@ -197,6 +201,22 @@
     </div>
   </footer>
 
-  <script type="module" src="js/main.js?v=20260713b"></script>
+  <div class="mobile-menu-overlay" id="mobile-menu-overlay" role="dialog" aria-modal="true">
+    <div class="mobile-menu-top">
+      <span class="mobile-menu-logo">🐡</span>
+      <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Fechar menu">✕</button>
+    </div>
+    <nav class="mobile-menu-nav">
+      <a href="index.html" class="mobile-menu-link">Home</a>
+      <a href="about.html" class="mobile-menu-link">About</a>
+      <button class="mobile-menu-link" id="mobile-menu-letstalk">Let's Talk</button>
+      <a href="https://www.linkedin.com/in/mauriciodesignbr/" target="_blank" rel="noopener" class="mobile-menu-link">Linkedin ↗</a>
+    </nav>
+    <div class="mobile-menu-footer">
+      <button class="mobile-menu-lang" id="mobile-menu-lang">EN</button>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js?v=20260713c"></script>
 </body>
 </html>
