@@ -1037,6 +1037,20 @@ function initReveal() {
 }
 
 /* ─── Mobile nav toggle ──────────────────────────────────────────── */
+function initMobileRowThumbs() {
+  if (window.innerWidth > 768) return;
+  document.querySelectorAll('.wt-row[data-project]').forEach(row => {
+    const project = row.dataset.project;
+    const head = row.querySelector('.wt-row-head');
+    if (!head) return;
+    const img = document.createElement('img');
+    img.src = `assets/images/cases/${project}.webp`;
+    img.alt = '';
+    img.className = 'wt-row-thumb';
+    head.prepend(img);
+  });
+}
+
 function initMobileNav() {
   const btn  = document.querySelector('.nav-fish-btn');
   const pill = document.querySelector('.nav-fish-pill');
@@ -1110,6 +1124,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initWelcome(armGather);
   initReveal();
   initCopyEmail();
+  initMobileRowThumbs();
   initMobileNav();
   initCursor();
 });
