@@ -32,8 +32,8 @@ export function initWelcome(armGather) {
       position: absolute;
       top: 1.5rem;
       left: 2rem;
-      font-size: 0.78rem;
-      font-weight: 700;
+      font-size: 2.85rem;
+      font-weight: 400;
       color: #181818;
       font-family: system-ui, sans-serif;
       z-index: 2;
@@ -46,9 +46,8 @@ export function initWelcome(armGather) {
       font-size: 0.7rem;
       color: rgba(24,24,24,0.45);
       font-family: system-ui, sans-serif;
-      max-width: 200px;
+      white-space: nowrap;
       text-align: right;
-      line-height: 1.45;
       z-index: 2;
     }
     .wl-logo-wrap {
@@ -64,26 +63,29 @@ export function initWelcome(armGather) {
       display: block;
       -webkit-mask-image: linear-gradient(
         to top,
-        black calc(var(--wl-p) * 80%),
+        black calc(var(--wl-p) * 50%),
         transparent calc(var(--wl-p) * 100%)
       );
       mask-image: linear-gradient(
         to top,
-        black calc(var(--wl-p) * 80%),
+        black calc(var(--wl-p) * 50%),
         transparent calc(var(--wl-p) * 100%)
       );
     }
     .wl-fish {
       position: absolute;
-      width: 140px;
+      width: 180px;
       height: auto;
-      top: 38%;
-      left: -140px;
-      animation: wl-swim 4.5s linear infinite;
+      top: 62%;
+      left: -180px;
+      animation: wl-swim 4s linear infinite;
     }
     @keyframes wl-swim {
-      from { transform: translateX(0) scaleX(-1); }
-      to   { transform: translateX(calc(100vw + 140px)) scaleX(-1); }
+      0%   { transform: translateX(0)                scaleX(-1) translateY(0px);   }
+      25%  { transform: translateX(calc(25vw + 45px))  scaleX(-1) translateY(-14px); }
+      50%  { transform: translateX(calc(50vw + 90px))  scaleX(-1) translateY(0px);   }
+      75%  { transform: translateX(calc(75vw + 135px)) scaleX(-1) translateY(-14px); }
+      100% { transform: translateX(calc(100vw + 180px)) scaleX(-1) translateY(0px);  }
     }
     #wl-screen.is-done {
       transition: opacity 0.6s ease;
@@ -98,11 +100,13 @@ export function initWelcome(armGather) {
   pctEl.textContent = '0%';
 
   const lang = document.documentElement.lang;
+
   const cookieEl = document.createElement('div');
   cookieEl.className = 'wl-cookie';
   cookieEl.textContent = lang === 'en'
     ? 'This site uses necessary cookies. By browsing, you agree to their use.'
     : 'Este site usa cookies necessários. Ao navegar, você concorda com seu uso.';
+
 
   const logoWrap = document.createElement('div');
   logoWrap.className = 'wl-logo-wrap';
@@ -122,7 +126,7 @@ export function initWelcome(armGather) {
   screen.appendChild(logoWrap);
   screen.appendChild(fish);
 
-  const DURATION = 2500;
+  const DURATION = 2700;
   let startTime = null;
 
   requestAnimationFrame(function tick(ts) {
@@ -133,7 +137,7 @@ export function initWelcome(armGather) {
     if (pct < 100) {
       requestAnimationFrame(tick);
     } else {
-      setTimeout(finish, 500);
+      setTimeout(finish, 200);
     }
   });
 

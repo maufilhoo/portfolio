@@ -146,26 +146,38 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 }
 .site-header.is-hidden   { opacity: 0; pointer-events: none; }
 
-/* Buttons group — spread: audio left, fish center, lang right */
+/* Buttons group — spread at top, pill on scroll */
 .header-btns-group {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   background: transparent;
+  border-radius: 0;
   padding: 0;
+  transition: background 0.3s ease, padding 0.3s ease, border-radius 0.3s ease;
 }
 
-/* Scrolled state: no changes to layout, just slightly stronger button bg */
+/* Scrolled: collapse to centered pill */
+.is-scrolled .header-btns-group {
+  width: auto;
+  justify-content: center;
+  gap: 4px;
+  background: rgba(252,251,250,0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 100px;
+  padding: 6px;
+  margin: 0 auto;
+}
+
+/* Scrolled state: button sizes */
 .is-scrolled .audio-btn,
 .is-scrolled .lang-round {
   width: 38px;
   height: 38px;
   border: none;
   font-size: 1rem;
-  background: rgba(252,251,250,0.5);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
 }
 .is-scrolled .nav-fish-wrap {
   height: 38px;
@@ -183,6 +195,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   padding: 0 0 0 0.85rem;
 }
 .is-scrolled .audio-disc { font-size: 1.1rem; }
+
 
 /* Footer mode — grid layout, no background, fish hidden */
 .site-header.is-footer {
@@ -303,10 +316,8 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   display: flex; align-items: center; justify-content: center;
   width: 48px; height: 48px;
   border-radius: 50%;
-  border: 1px solid rgba(24,24,24,0.12);
-  background: rgba(255,255,255,0.35);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(24,24,24,0.22);
+  background: transparent;
   cursor: pointer;
   padding: 0;
   transition: opacity var(--transition);
@@ -384,10 +395,8 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   width: fit-content;
   height: 54px;
   border-radius: 100px;
-  border: 1px solid rgba(24,24,24,0.12);
-  background: rgba(255,255,255,0.35);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(24,24,24,0.22);
+  background: transparent;
   padding: 0;
   overflow: hidden;
   transition: padding 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
@@ -396,7 +405,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 .nav-fish-wrap:hover,
 .nav-fish-wrap:focus-within {
   padding: 0 0 0 1.25rem;
-  background: rgba(255,255,255,0.55);
+  background: rgba(255,255,255,0.18);
 }
 .nav-fish-pill { order: 1; }
 .nav-fish-btn  { order: 2; flex-shrink: 0; }
@@ -482,7 +491,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   z-index: 2;
   height: 100svh;
   scroll-snap-align: start;
-  background: var(--accent);
+  background: var(--bg);
   overflow: hidden;
 }
 
@@ -516,9 +525,9 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   display: block;
   font-family: var(--font-body);
   font-weight: 600;
-  font-size: 3.5rem;
-  line-height: 1.04;
-  letter-spacing: -0.03em;
+  font-size: 2.85rem;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
   color: var(--text);
   text-align: center;
 }
@@ -532,7 +541,8 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   line-height: 1.04;
   letter-spacing: -0.01em;
   color: var(--text);
-  margin-top: 140px;
+  margin-top: auto;
+  margin-bottom: 2.5rem;
   opacity: 0;
 }
 .welcome-tagline.is-final {
@@ -687,7 +697,8 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   width: 150px;
   height: 150px;
   flex-shrink: 0;
-  margin-bottom: 0.5rem;
+  margin-top: -3rem;
+  margin-bottom: 3rem;
 }
 
 /* ─── Bio ───────────────────────────────────────────────────────── */
@@ -699,8 +710,8 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2rem;
-  padding: 6rem var(--gutter);
+  gap: 1.25rem;
+  padding: 5rem var(--gutter);
   width: 100%;
   max-width: 900px;
   margin-left: auto;
@@ -753,7 +764,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 
 .bio-head {
   font-family: var(--font-body);
-  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+  font-size: clamp(1.05rem, 1.75vw, 1.5rem);
   font-weight: 500;
   line-height: 1.18;
   letter-spacing: -0.02em;
@@ -764,13 +775,13 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 .bio-body {
   display: flex;
   flex-direction: column;
-  max-width: 560px;
+  max-width: 500px;
   width: 100%;
 }
 
 .bio-body-text {
   font-family: var(--font-body);
-  font-size: 0.875rem;
+  font-size: 0.78rem;
   font-weight: 400;
   line-height: 1.52;
   letter-spacing: -0.02em;
@@ -789,7 +800,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 
 .bio-body-awards {
   font-family: var(--font-body);
-  font-size: 0.875rem;
+  font-size: 0.78rem;
   font-weight: 400;
   line-height: 1.52;
   letter-spacing: -0.02em;
@@ -1702,11 +1713,15 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 
 
 .footer-bottom-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem var(--gutter);
-  margin-top: auto;
+  z-index: 2;
 }
 
 .footer-bottom-bar span {
@@ -1717,14 +1732,13 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 /* ─── Footer MAU section ─────────────────────────────────────────── */
 .footer-mau-section {
   position: relative;
-  background: var(--bg);
   overflow: hidden;
-  height: 260px;
-  margin-top: 2rem;
+  height: 380px;
+  margin-top: auto;
 }
 .footer-mau-logo-wrap {
   position: absolute;
-  bottom: 0;
+  top: 0;
   left: 0;
   width: 100%;
   pointer-events: none;
@@ -1736,7 +1750,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 }
 .footer-mau-fish {
   position: absolute;
-  bottom: 20px;
+  bottom: calc(5% + 20px);
   right: 4%;
   width: 150px;
   height: auto;
@@ -1745,13 +1759,6 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 @keyframes footer-fish-float {
   0%, 100% { transform: translateY(0) rotate(-2deg); }
   50%       { transform: translateY(-12px) rotate(2deg); }
-}
-.footer-mau-credit {
-  position: absolute;
-  bottom: 1.25rem;
-  left: var(--gutter);
-  font-size: 0.72rem;
-  color: rgba(24,24,24,0.4);
 }
 
 /* ─── Gallery ───────────────────────────────────────────────────── */
@@ -1774,82 +1781,145 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   margin: 0 auto;
 }
 
-/* Hero */
-.about-hero {
+.about-page-fade {
+  width: 100%;
+  height: 180px;
+  background: linear-gradient(to bottom, var(--accent), var(--bg));
+  margin-top: -2rem;
+  pointer-events: none;
+}
+
+/* Two-column layout */
+.about-layout {
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 4rem;
-  padding-bottom: 4rem;
+  grid-template-columns: 5fr 8fr;
+  gap: 5rem;
   align-items: start;
 }
 
-.img-placeholder {
-  background: rgba(24,24,24,0.1);
-  border-radius: var(--radius);
-  display: block;
+/* Sticky sidebar */
+.about-sidebar {
+  position: sticky;
+  top: calc(72px + 2rem);
 }
 
 .about-photo-tall {
   width: 100%;
   aspect-ratio: 3/4;
   border-radius: 14px;
-  background: rgba(24,24,24,0.1);
+  object-fit: cover;
+  object-position: center top;
+  display: block;
 }
 
-.about-hero-text { padding-top: 0.5rem; }
+.about-hero-fish {
+  display: block;
+  width: 80px;
+  height: auto;
+  margin-top: 1.5rem;
+  pointer-events: none;
+  animation: about-fish-float 3s ease-in-out infinite;
+}
+
+@keyframes about-fish-float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+/* Content column */
+.about-content { min-width: 0; }
+
+.about-content-header {
+  padding-bottom: 3rem;
+}
 
 .about-page-title {
   font-family: var(--font-body);
   font-weight: 700;
-  font-size: clamp(3.5rem, 8vw, 9rem);
+  font-size: clamp(1.8rem, 3vw, 3rem);
   line-height: 1;
   letter-spacing: -0.03em;
   color: var(--text);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.4rem;
 }
 
 .about-page-sub {
-  font-size: clamp(0.85rem, 1.2vw, 1rem);
+  font-size: clamp(0.68rem, 0.85vw, 0.78rem);
   color: var(--text);
   opacity: 0.55;
 }
 
+.about-hero-bio {
+  margin-top: 1.75rem;
+  font-size: clamp(0.7rem, 0.85vw, 0.78rem);
+  line-height: 1.75;
+  color: var(--text);
+  opacity: 0.7;
+}
+.about-hero-bio p { margin-bottom: 0.75rem; }
+.about-hero-bio p:last-child { margin-bottom: 0; }
+
 /* Info rows */
 .about-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  padding: 3rem 0;
+  grid-template-columns: 130px 1fr;
+  gap: 2rem;
+  padding: 1.5rem 0;
   border-top: 1px solid rgba(24,24,24,0.15);
 }
 .about-row--last {
   border-bottom: 1px solid rgba(24,24,24,0.15);
-  margin-bottom: 5rem;
+  margin-bottom: 3rem;
 }
 
 .about-row-label {
   font-family: var(--font-body);
   font-weight: 700;
-  font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   color: var(--text);
+  opacity: 0.45;
+  padding-top: 0.15rem;
 }
 
 .about-row-content {
-  font-size: clamp(0.9rem, 1.2vw, 1.05rem);
-  line-height: 1.75;
+  font-size: clamp(0.75rem, 0.9vw, 0.82rem);
+  line-height: 1.7;
   color: var(--text);
 }
-.about-row-content p { margin-bottom: 1rem; }
-.about-row-content p:last-child { margin-bottom: 0; }
 
-.about-plain-list { list-style: none; line-height: 2; }
+.about-plain-list { list-style: none; line-height: 2.1; }
+
+/* Recognition list */
+.about-rec-list { list-style: none; width: 100%; }
+.about-rec-entry {
+  display: grid;
+  grid-template-columns: 2rem 1fr auto;
+  gap: 0.75rem 1.25rem;
+  align-items: baseline;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(24,24,24,0.08);
+  font-size: clamp(0.72rem, 0.88vw, 0.8rem);
+}
+.about-rec-entry:last-child { border-bottom: none; }
+.rec-count {
+  opacity: 0.4;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.68rem;
+}
+.rec-project {
+  opacity: 0.5;
+  white-space: nowrap;
+  font-size: 0.68rem;
+}
 
 .about-exp-list { width: 100%; }
 .about-exp-entry {
   display: flex;
   justify-content: space-between;
-  font-size: clamp(0.875rem, 1.1vw, 1rem);
-  padding: 0.5rem 0;
+  font-size: clamp(0.75rem, 0.9vw, 0.82rem);
+  padding: 0.4rem 0;
   border-bottom: 1px solid rgba(24,24,24,0.1);
 }
 .about-exp-entry:last-child { border-bottom: none; }
@@ -1858,43 +1928,29 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 .about-clients-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0.5rem;
+  gap: 0.4rem;
 }
 .about-client-card {
   background: rgba(24,24,24,0.07);
-  border-radius: 10px;
-  padding: 1.5rem 1rem;
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.875rem;
+  font-size: 0.72rem;
   font-weight: 500;
   text-align: center;
-  min-height: 80px;
+  min-height: 48px;
 }
 
 .about-sub-label {
   font-weight: 700;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  opacity: 0.45;
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.about-contacts {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-.about-contacts a {
-  font-size: clamp(0.875rem, 1.1vw, 1rem);
-  font-weight: 500;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  opacity: 0.7;
-  transition: opacity var(--transition);
+  opacity: 0.4;
+  margin-top: 1.25rem;
+  margin-bottom: 0.4rem;
 }
 
 /* ─── Cookie Bar ─────────────────────────────────────────────── */

@@ -956,6 +956,14 @@ function initTaglineSequence() {
     function showFinal() {
       tagline.classList.add('is-final');
       tagline.innerHTML = `<span>${wrapEmoji(step1)}</span><span class="wt-final-arrow"></span>`;
+      const arrow = tagline.querySelector('.wt-final-arrow');
+      if (arrow) {
+        arrow.style.cursor = 'pointer';
+        arrow.addEventListener('click', () => {
+          const next = document.querySelector('.bio-section');
+          if (next) next.scrollIntoView({ behavior: 'smooth' });
+        });
+      }
       fadeIn();
       setTimeout(() => {
         fadeOut(() => {
@@ -987,7 +995,7 @@ function initTaglineSequence() {
       setTimeout(() => fadeOut(showStep), 1500);
     }
 
-    alreadyFaded ? showStep() : setTimeout(() => fadeOut(showStep), 1500);
+    alreadyFaded ? showStep() : setTimeout(showStep, 80);
   }
 
   runCycle(false);

@@ -85,5 +85,37 @@
   "wt_year": "Ano",
   "wt_credits": "Ficha Técnica",
 
-  "cookie_text": "Este site usa cookies necessários. Ao continuar navegando, você concorda com seu uso."
+  "cookie_text": "Este site usa cookies necessários. Ao continuar navegando, você concorda com seu uso.",
+
+  "about_page_title": "Sobre",
+  "about_page_sub": "Designer Sênior de Marca & Visual, São Paulo.",
+
+  "about_label_aboutme": "Sobre mim",
+  "about_label_activities": "Atividades Principais",
+  "about_label_recognition": "Reconhecimentos",
+  "about_label_experience": "Experiência",
+  "about_label_clients": "Clientes Selecionados",
+  "about_label_education": "Formação",
+  "about_courses_label": "Cursos",
+
+  "about_me_p1": "Prazer, sou Mauricio Filho, designer brasileiro multidisciplinar e diretor de arte baseado em São Paulo. Com foco em branding e identidade visual, já trabalhei com marcas de diferentes portes e setores no Brasil e no exterior.",
+  "about_me_p2": "Nasci em uma pequena cidade do interior de São Paulo. Cresci desenhando, colecionando revistas e histórias em quadrinhos, sempre observando tudo ao meu redor. Muito antes de pensar no design como profissão, a curiosidade já fazia parte da forma como eu enxergava o mundo.",
+  "about_me_p3": "Hoje, vejo o design como uma ferramenta para resolver problemas e construir significado. A estética importa, mas ela sempre nasce de uma intenção. Gosto de equilibrar pensamento estratégico e sensibilidade para criar marcas humanas, divertidas e impactantes. Tenho um interesse especial por projetos que não têm medo de assumir uma personalidade marcante.",
+  "about_me_p4": "Pesquisar e construir conceitos é uma das partes que mais gosto do processo. Depois de alguns anos atuando em agências de branding de diferentes perfis, decidi seguir um caminho independente para participar mais de perto das decisões, aprofundar processos e ampliar meu repertório criativo.",
+  "about_me_p5": "Meu trabalho une estratégia, pesquisa profunda e direção visual para transformar ideias em sistemas de marca consistentes, pensados para evoluir e permanecer relevantes ao longo do tempo.",
+
+  "about_recognition": "Bienal Brasileira de Design Gráfico (02× Enjoei, 2024), Latin American Design Awards (02× Enjoei 2023, 01× Vibra 2022), Brazil Design Awards (04× Enjoei 2023, 02× Vibra 2022, 01× 99 App 2022)",
+  "about_rec_bbdg": "Bienal Brasileira de Design Gráfico",
+
+  "about_act_1": "Branding",
+  "about_act_2": "Identidade Visual",
+  "about_act_3": "Embalagem",
+  "about_act_4": "Sinalização",
+  "about_act_5": "Campanhas",
+  "about_act_6": "Direção de Arte",
+  "about_act_7": "Ilustração",
+
+  "about_course_1": "Ilustração para Marcas, Platô Studio",
+  "about_course_2": "Sistematizando Marcas no Figma, Platô Studio",
+  "about_course_3": "UI Design, Tera"
 }

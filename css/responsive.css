@@ -193,8 +193,13 @@
   }
 
   /* About */
-  .about-hero { grid-template-columns: 1fr; gap: 2rem; }
-  .about-row { grid-template-columns: 1fr; gap: 1rem; }
+  .about-layout { grid-template-columns: 1fr; gap: 2rem; }
+  .about-sidebar { position: static; }
+  .about-photo-tall { aspect-ratio: 4/3; }
+  .about-content-header { padding-bottom: 2rem; }
+  .about-row { grid-template-columns: 1fr; gap: 0.5rem; }
+  .about-row-label { opacity: 0.4; padding-top: 0; }
+  .about-rec-entry { grid-template-columns: 1.5rem 1fr auto; gap: 0.5rem 0.75rem; }
   .about-clients-grid { grid-template-columns: repeat(2, 1fr); }
 
   /* ── Mobile header bar ───────────────────────────────────────────── */
