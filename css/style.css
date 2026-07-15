@@ -140,37 +140,32 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   padding: 0 var(--gutter);
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   background: transparent;
   transition: background 0.3s ease, opacity 0.4s ease;
 }
 .site-header.is-hidden   { opacity: 0; pointer-events: none; }
 
-/* Buttons group — always centered pill */
+/* Buttons group — spread: audio left, fish center, lang right */
 .header-btns-group {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 2px;
-  background: rgba(252,251,250,0.25);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-radius: 100px;
-  padding: 6px;
-  width: auto;
+  justify-content: space-between;
+  width: 100%;
+  background: transparent;
+  padding: 0;
 }
 
-.is-scrolled .header-btns-group {
-  background: rgba(252,251,250,0.45);
-}
-
-/* Buttons inside pill — no borders, 38px */
+/* Scrolled state: no changes to layout, just slightly stronger button bg */
 .is-scrolled .audio-btn,
 .is-scrolled .lang-round {
   width: 38px;
   height: 38px;
   border: none;
   font-size: 1rem;
+  background: rgba(252,251,250,0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 .is-scrolled .nav-fish-wrap {
   height: 38px;
@@ -308,8 +303,10 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   display: flex; align-items: center; justify-content: center;
   width: 48px; height: 48px;
   border-radius: 50%;
-  border: 1px solid #DFDEDE;
-  background: transparent;
+  border: 1px solid rgba(24,24,24,0.12);
+  background: rgba(255,255,255,0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   cursor: pointer;
   padding: 0;
   transition: opacity var(--transition);
@@ -387,8 +384,10 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   width: fit-content;
   height: 54px;
   border-radius: 100px;
-  border: 1px solid #DFDEDE;
-  background: transparent;
+  border: 1px solid rgba(24,24,24,0.12);
+  background: rgba(255,255,255,0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   padding: 0;
   overflow: hidden;
   transition: padding 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
@@ -397,9 +396,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 .nav-fish-wrap:hover,
 .nav-fish-wrap:focus-within {
   padding: 0 0 0 1.25rem;
-  background: rgba(255,255,255,0.22);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.55);
 }
 .nav-fish-pill { order: 1; }
 .nav-fish-btn  { order: 2; flex-shrink: 0; }
@@ -456,13 +453,15 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   width: 54px;
   height: 54px;
   border-radius: 50%;
-  border: 1px solid #DFDEDE;
-  background: transparent;
+  border: 1px solid rgba(24,24,24,0.12);
+  background: rgba(255,255,255,0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   cursor: pointer;
   padding: 0;
   transition: background var(--transition), border-color var(--transition);
 }
-.lang-round:hover { background: var(--accent); border-color: rgba(24,24,24,0.18); }
+.lang-round:hover { background: rgba(255,255,255,0.7); border-color: rgba(24,24,24,0.18); }
 
 .lang-flag {
   font-family: 'NotoEmoji', sans-serif;
