@@ -10,7 +10,6 @@ export function initWelcome(armGather) {
     return;
   }
 
-  // Skip on hash navigation or mobile
   if (window.location.hash || window.innerWidth <= 768) {
     screen.remove();
     if (armGather) armGather();
@@ -20,7 +19,6 @@ export function initWelcome(armGather) {
 
   const safetyTimer = setTimeout(revealHome, 8000);
 
-  // Inject styles
   const style = document.createElement('style');
   style.textContent = `
     #wl-screen {
@@ -41,6 +39,18 @@ export function initWelcome(armGather) {
       z-index: 2;
       letter-spacing: 0.04em;
     }
+    .wl-cookie {
+      position: absolute;
+      top: 1.5rem;
+      right: 2rem;
+      font-size: 0.7rem;
+      color: rgba(17,17,17,0.45);
+      font-family: system-ui, sans-serif;
+      max-width: 200px;
+      text-align: right;
+      line-height: 1.45;
+      z-index: 2;
+    }
     .wl-logo-wrap {
       position: absolute;
       bottom: 0;
@@ -48,26 +58,32 @@ export function initWelcome(armGather) {
       width: 100%;
     }
     .wl-logo-img {
+      --wl-p: 0;
       width: 100%;
       height: auto;
       display: block;
-      -webkit-mask-image: linear-gradient(to bottom, black 20%, black 55%, transparent 95%);
-      mask-image: linear-gradient(to bottom, black 20%, black 55%, transparent 95%);
+      -webkit-mask-image: linear-gradient(
+        to top,
+        black calc(var(--wl-p) * 80%),
+        transparent calc(var(--wl-p) * 100%)
+      );
+      mask-image: linear-gradient(
+        to top,
+        black calc(var(--wl-p) * 80%),
+        transparent calc(var(--wl-p) * 100%)
+      );
     }
     .wl-fish {
       position: absolute;
-      width: 160px;
+      width: 140px;
       height: auto;
       top: 38%;
-      left: 50%;
-      animation: wl-swim 5s ease-in-out infinite;
+      left: -140px;
+      animation: wl-swim 4.5s linear infinite;
     }
     @keyframes wl-swim {
-      0%   { transform: translateX(calc(-50vw - 110px)) scaleX(1); }
-      47%  { transform: translateX(calc(50vw - 70px))  scaleX(1); }
-      50%  { transform: translateX(calc(50vw - 70px))  scaleX(-1); }
-      97%  { transform: translateX(calc(-50vw - 110px)) scaleX(-1); }
-      100% { transform: translateX(calc(-50vw - 110px)) scaleX(1); }
+      from { transform: translateX(0); }
+      to   { transform: translateX(calc(100vw + 140px)); }
     }
     #wl-screen.is-done {
       transition: opacity 0.6s ease;
@@ -77,10 +93,16 @@ export function initWelcome(armGather) {
   `;
   document.head.appendChild(style);
 
-  // Build content
   const pctEl = document.createElement('div');
   pctEl.className = 'wl-pct';
   pctEl.textContent = '0%';
+
+  const lang = document.documentElement.lang;
+  const cookieEl = document.createElement('div');
+  cookieEl.className = 'wl-cookie';
+  cookieEl.textContent = lang === 'en'
+    ? 'This site uses necessary cookies. By browsing, you agree to their use.'
+    : 'Este site usa cookies necessários. Ao navegar, você concorda com seu uso.';
 
   const logoWrap = document.createElement('div');
   logoWrap.className = 'wl-logo-wrap';
@@ -96,10 +118,10 @@ export function initWelcome(armGather) {
   fish.className = 'wl-fish';
 
   screen.appendChild(pctEl);
+  screen.appendChild(cookieEl);
   screen.appendChild(logoWrap);
   screen.appendChild(fish);
 
-  // Count percentage over 2.5s
   const DURATION = 2500;
   let startTime = null;
 
@@ -107,6 +129,7 @@ export function initWelcome(armGather) {
     if (!startTime) startTime = ts;
     const pct = Math.min(100, Math.round(((ts - startTime) / DURATION) * 100));
     pctEl.textContent = pct + '%';
+    logoImg.style.setProperty('--wl-p', pct / 100);
     if (pct < 100) {
       requestAnimationFrame(tick);
     } else {

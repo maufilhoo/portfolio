@@ -141,22 +141,24 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--bg);
+  background: transparent;
   transition: background 0.3s ease, opacity 0.4s ease;
 }
-.site-header.is-scrolled { background: transparent; }
 .site-header.is-hidden   { opacity: 0; pointer-events: none; }
 
-/* Buttons group — grid keeps fish centered, collapses to pill on scroll */
+/* Buttons group — always centered pill */
 .header-btns-group {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
   align-items: center;
-  width: 100%;
+  justify-content: center;
+  gap: 2px;
+  background: rgba(252,251,250,0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 100px;
+  padding: 6px;
+  width: auto;
 }
-.header-btns-group .nav-center-util { justify-self: start; }
-.header-btns-group .nav-left        { justify-self: center; }
-.header-btns-group .nav-right       { justify-self: end; }
 
 /* Scroll pill — transparent frosted, no individual borders */
 .is-scrolled .header-btns-group {
@@ -172,9 +174,9 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   border-radius: 100px;
   padding: 6px;
 }
-.is-scrolled .header-btns-group .nav-center-util,
-.is-scrolled .header-btns-group .nav-left,
-.is-scrolled .header-btns-group .nav-right { justify-self: auto; }
+.is-scrolled .header-btns-group {
+  background: rgba(252,251,250,0.45);
+}
 
 /* Buttons inside pill — no borders, 38px */
 .is-scrolled .audio-btn,
@@ -489,19 +491,43 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: 157px var(--gutter) 0;
+  padding: 140px var(--gutter) 0;
   text-align: center;
   position: relative;
   z-index: 2;
   height: 100svh;
   scroll-snap-align: start;
+  background: var(--accent);
+  overflow: hidden;
 }
+
+/* MAU logo background inside hero */
+.hero-mau-bg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-mau-logo {
+  width: 100%;
+  height: auto;
+  display: block;
+  -webkit-mask-image: linear-gradient(to bottom, black 10%, black 55%, transparent 95%);
+  mask-image: linear-gradient(to bottom, black 10%, black 55%, transparent 95%);
+}
+
+/* Hide card stage in v2 */
+.hero-card-stage { display: none; }
 
 .hero-title {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0;
+  position: relative;
+  z-index: 1;
 }
 .hero-title span {
   display: block;
@@ -1693,6 +1719,43 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 
 .footer-bottom-bar span {
   font-size: 0.75rem;
+  color: rgba(17,17,17,0.4);
+}
+
+/* ─── Footer MAU section ─────────────────────────────────────────── */
+.footer-mau-section {
+  position: relative;
+  background: var(--accent);
+  overflow: hidden;
+  height: 260px;
+  margin-top: 2rem;
+}
+.footer-mau-logo-wrap {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+}
+.footer-mau-logo {
+  width: 100%;
+  height: auto;
+  display: block;
+  -webkit-mask-image: linear-gradient(to bottom, black 10%, black 60%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 10%, black 60%, transparent 100%);
+}
+.footer-mau-fish {
+  position: absolute;
+  bottom: 0;
+  right: 4%;
+  width: 150px;
+  height: auto;
+}
+.footer-mau-credit {
+  position: absolute;
+  bottom: 1.25rem;
+  left: var(--gutter);
+  font-size: 0.72rem;
   color: rgba(17,17,17,0.4);
 }
 
