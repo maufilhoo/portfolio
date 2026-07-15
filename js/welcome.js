@@ -82,8 +82,8 @@ export function initWelcome(armGather) {
       animation: wl-swim 4.5s linear infinite;
     }
     @keyframes wl-swim {
-      from { transform: translateX(0); }
-      to   { transform: translateX(calc(100vw + 140px)); }
+      from { transform: translateX(0) scaleX(-1); }
+      to   { transform: translateX(calc(100vw + 140px)) scaleX(-1); }
     }
     #wl-screen.is-done {
       transition: opacity 0.6s ease;
