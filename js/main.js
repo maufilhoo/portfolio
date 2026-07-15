@@ -807,7 +807,7 @@ function initWorkTable() {
 /* ─── Hero card gather animation ────────────────────────────────── */
 function initHeroCards() {
   const cards     = document.querySelectorAll('.hero-card');
-  const hero      = document.querySelector('.hero-section');
+  const hero      = document.querySelector('.bio-section');
   const photoCard = hero ? hero.querySelector('.hero-photo-card') : null;
   if (!cards.length) return;
 

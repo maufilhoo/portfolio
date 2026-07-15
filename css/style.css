@@ -29,7 +29,7 @@
 /* ─── Variables ─────────────────────────────────────────────────── */
 :root {
   --bg:          #FFFFFE;
-  --text:        #111111;
+  --text:        #181818;
   --text-muted:  #6B6B6B;
   --border:      #e0e0e0;
   --accent:      #F2F7B5;
@@ -160,20 +160,6 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   width: auto;
 }
 
-/* Scroll pill — transparent frosted, no individual borders */
-.is-scrolled .header-btns-group {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: auto;
-  gap: 2px;
-  background: rgba(252,251,250,0.35);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: none;
-  border-radius: 100px;
-  padding: 6px;
-}
 .is-scrolled .header-btns-group {
   background: rgba(252,251,250,0.45);
 }
@@ -262,7 +248,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   border-radius: 5px;
   font-size: 0.52rem;
   font-weight: 600;
-  color: #111;
+  color: #181818;
   white-space: nowrap;
   box-shadow: 1px 2px 8px rgba(0,0,0,0.1);
   transform: rotate(4deg);
@@ -476,7 +462,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   padding: 0;
   transition: background var(--transition), border-color var(--transition);
 }
-.lang-round:hover { background: var(--accent); border-color: rgba(17,17,17,0.18); }
+.lang-round:hover { background: var(--accent); border-color: rgba(24,24,24,0.18); }
 
 .lang-flag {
   font-family: 'NotoEmoji', sans-serif;
@@ -518,8 +504,6 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   mask-image: linear-gradient(to bottom, black 10%, black 55%, transparent 95%);
 }
 
-/* Hide card stage in v2 */
-.hero-card-stage { display: none; }
 
 .hero-title {
   display: flex;
@@ -635,7 +619,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   padding: 0.75rem;
   font-size: 0.6rem;
   font-weight: 600;
-  color: #111;
+  color: #181818;
   text-align: center;
   line-height: 1.4;
   overflow: hidden;
@@ -696,6 +680,15 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 .explore-icon {
   font-family: 'NotoEmoji', sans-serif;
   font-size: 0.75rem;
+}
+
+/* ─── Bio cards strip ───────────────────────────────────────────── */
+.bio-cards-wrap {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  flex-shrink: 0;
+  margin-bottom: 0.5rem;
 }
 
 /* ─── Bio ───────────────────────────────────────────────────────── */
@@ -1233,7 +1226,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: rgba(17,17,17,0.18);
+  background: rgba(24,24,24,0.18);
   border: none;
   cursor: pointer;
   flex-shrink: 0;
@@ -1243,7 +1236,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 .wt-dot.active {
   width: 18px;
   border-radius: 100px;
-  background: rgba(17,17,17,0.5);
+  background: rgba(24,24,24,0.5);
 }
 
 /* ─── Case lightbox ──────────────────────────────────────────────── */
@@ -1345,7 +1338,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  background: rgba(17,17,17,0.06);
+  background: rgba(24,24,24,0.06);
   border-radius: 100px;
   padding: 8px 14px;
 }
@@ -1360,7 +1353,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   width: 7px;
   height: 7px;
   border-radius: 100px;
-  background: rgba(17,17,17,0.2);
+  background: rgba(24,24,24,0.2);
   border: none;
   cursor: pointer;
   flex-shrink: 0;
@@ -1370,7 +1363,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 }
 .gallery-dot.active {
   width: 22px;
-  background: rgba(17,17,17,0.55);
+  background: rgba(24,24,24,0.55);
 }
 
 .work-gallery-track {
@@ -1661,7 +1654,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 
 .footer-email-link {
   font-size: 0.85rem;
-  color: rgba(17,17,17,0.5);
+  color: rgba(24,24,24,0.5);
   text-decoration: none;
   transition: color 0.2s;
 }
@@ -1669,7 +1662,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 
 .footer-email-btn {
   font-size: 0.85rem;
-  color: rgba(17,17,17,0.5);
+  color: rgba(24,24,24,0.5);
   background: none;
   border: none;
   padding: 0;
@@ -1695,7 +1688,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 
 .footer-connect-link {
   font-size: 0.85rem;
-  color: rgba(17,17,17,0.5);
+  color: rgba(24,24,24,0.5);
   text-decoration: none;
   transition: color 0.2s;
 }
@@ -1703,7 +1696,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 
 .footer-datetime {
   font-size: 0.82rem;
-  color: rgba(17,17,17,0.5);
+  color: rgba(24,24,24,0.5);
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.01em;
 }
@@ -1719,13 +1712,13 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 
 .footer-bottom-bar span {
   font-size: 0.75rem;
-  color: rgba(17,17,17,0.4);
+  color: rgba(24,24,24,0.4);
 }
 
 /* ─── Footer MAU section ─────────────────────────────────────────── */
 .footer-mau-section {
   position: relative;
-  background: var(--accent);
+  background: var(--bg);
   overflow: hidden;
   height: 260px;
   margin-top: 2rem;
@@ -1741,22 +1734,25 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   width: 100%;
   height: auto;
   display: block;
-  -webkit-mask-image: linear-gradient(to bottom, black 10%, black 60%, transparent 100%);
-  mask-image: linear-gradient(to bottom, black 10%, black 60%, transparent 100%);
 }
 .footer-mau-fish {
   position: absolute;
-  bottom: 0;
+  bottom: 20px;
   right: 4%;
   width: 150px;
   height: auto;
+  animation: footer-fish-float 3s ease-in-out infinite;
+}
+@keyframes footer-fish-float {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50%       { transform: translateY(-12px) rotate(2deg); }
 }
 .footer-mau-credit {
   position: absolute;
   bottom: 1.25rem;
   left: var(--gutter);
   font-size: 0.72rem;
-  color: rgba(17,17,17,0.4);
+  color: rgba(24,24,24,0.4);
 }
 
 /* ─── Gallery ───────────────────────────────────────────────────── */
@@ -1789,7 +1785,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 }
 
 .img-placeholder {
-  background: rgba(17,17,17,0.1);
+  background: rgba(24,24,24,0.1);
   border-radius: var(--radius);
   display: block;
 }
@@ -1798,7 +1794,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   width: 100%;
   aspect-ratio: 3/4;
   border-radius: 14px;
-  background: rgba(17,17,17,0.1);
+  background: rgba(24,24,24,0.1);
 }
 
 .about-hero-text { padding-top: 0.5rem; }
@@ -1825,10 +1821,10 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
   padding: 3rem 0;
-  border-top: 1px solid rgba(17,17,17,0.15);
+  border-top: 1px solid rgba(24,24,24,0.15);
 }
 .about-row--last {
-  border-bottom: 1px solid rgba(17,17,17,0.15);
+  border-bottom: 1px solid rgba(24,24,24,0.15);
   margin-bottom: 5rem;
 }
 
@@ -1855,7 +1851,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   justify-content: space-between;
   font-size: clamp(0.875rem, 1.1vw, 1rem);
   padding: 0.5rem 0;
-  border-bottom: 1px solid rgba(17,17,17,0.1);
+  border-bottom: 1px solid rgba(24,24,24,0.1);
 }
 .about-exp-entry:last-child { border-bottom: none; }
 .about-exp-yr { opacity: 0.5; }
@@ -1866,7 +1862,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   gap: 0.5rem;
 }
 .about-client-card {
-  background: rgba(17,17,17,0.07);
+  background: rgba(24,24,24,0.07);
   border-radius: 10px;
   padding: 1.5rem 1rem;
   display: flex;

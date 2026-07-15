@@ -34,7 +34,7 @@ export function initWelcome(armGather) {
       left: 2rem;
       font-size: 0.78rem;
       font-weight: 700;
-      color: #111;
+      color: #181818;
       font-family: system-ui, sans-serif;
       z-index: 2;
       letter-spacing: 0.04em;
@@ -44,7 +44,7 @@ export function initWelcome(armGather) {
       top: 1.5rem;
       right: 2rem;
       font-size: 0.7rem;
-      color: rgba(17,17,17,0.45);
+      color: rgba(24,24,24,0.45);
       font-family: system-ui, sans-serif;
       max-width: 200px;
       text-align: right;
