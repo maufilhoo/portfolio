@@ -66,15 +66,9 @@ function initCopyEmail() {
   const bioBtn = document.getElementById('bio-lets-talk');
   if (bioBtn) {
     bioBtn.addEventListener('click', () => {
-      navigator.clipboard.writeText('talkmauriciof@gmail.com')
-        .then(() => {
-          spawnSparkles(bioBtn);
-          const orig = bioBtn.innerHTML;
-          bioBtn.style.color = '#aaa';
-          bioBtn.innerHTML = `${getTranslation('bio_copied')} <span style="font-family:'NotoEmoji',sans-serif;font-weight:700;font-size:0.7em">✨</span>`;
-          setTimeout(() => { bioBtn.innerHTML = orig; bioBtn.style.color = ''; }, 2000);
-        })
-        .catch(() => { window.location.href = 'mailto:talkmauriciof@gmail.com'; });
+      spawnSparkles(bioBtn);
+      const footer = document.querySelector('.site-footer');
+      if (footer) footer.scrollIntoView({ behavior: 'smooth' });
     });
   }
 }
@@ -91,45 +85,33 @@ function initWorkReveal() {
 }
 
 /* ─── Audio player ───────────────────────────────────────────────── */
-const TRACKS = [
-  'assets/audio/tincoas.mp3',
-  'assets/audio/tom-misch.mp3'
-];
-
 function initAudio() {
-  const btn     = document.getElementById('audio-btn');
-  const audio   = document.getElementById('bg-audio');
-  const popover = document.getElementById('audio-track-popover');
-  if (!btn || !audio || !popover) return;
+  const btn   = document.getElementById('audio-btn');
+  const audio = document.getElementById('bg-audio');
+  if (!btn || !audio) return;
 
-  btn.addEventListener('click', () => {
+  function toggle() {
     if (audio.paused) {
-      audio.play().then(() => btn.classList.add('playing')).catch(() => {});
+      audio.play().then(() => {
+        btn.classList.add('playing');
+        btn.setAttribute('aria-pressed', 'true');
+      }).catch(() => {});
     } else {
       audio.pause();
       btn.classList.remove('playing');
+      btn.setAttribute('aria-pressed', 'false');
     }
-  });
+  }
 
-  popover.querySelectorAll('.track-opt').forEach(opt => {
-    opt.addEventListener('click', e => {
-      e.stopPropagation();
-      const idx = parseInt(opt.dataset.track);
-      const wasPlaying = !audio.paused;
+  btn.addEventListener('click', toggle);
 
-      popover.querySelectorAll('.track-opt').forEach(o => o.classList.remove('active'));
-      opt.classList.add('active');
-
-      audio.pause();
-      audio.src = TRACKS[idx];
-      audio.currentTime = 0;
-
-      if (wasPlaying) {
-        audio.play().then(() => btn.classList.add('playing')).catch(() => {});
-      } else {
-        btn.classList.remove('playing');
-      }
-    });
+  // Barra de espaço liga/desliga o som em qualquer ponto da página
+  document.addEventListener('keydown', e => {
+    if (e.code !== 'Space' || e.repeat) return;
+    const t = e.target;
+    if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+    e.preventDefault();
+    toggle();
   });
 }
 
@@ -294,7 +276,7 @@ function initFeedShowcase() {
 
     if (!isVideo) {
       clearTimeout(timer);
-      timer = setTimeout(next, 4500);
+      timer = setTimeout(next, 2500);
     }
   }
 
@@ -308,93 +290,398 @@ function initFeedShowcase() {
 
 /* ─── Project data ───────────────────────────────────────────────── */
 const PROJECT_DATA = {
-  enjoei: {
-    client: 'Enjoei',
-    detail: {
-      pt: 'Enjoei veio até nós em um momento de virada. Nascida da linguagem da internet, a marca havia acumulado múltiplas referências, códigos e personalidades, mas precisava de mais critério e maturidade para acompanhar um público que também evoluiu. Nosso trabalho foi organizar esse excesso sem perder a irreverência, criando um sistema de identidade flexível, contemporâneo e vivo.\n\nRedesenhamos o logotipo, desenvolvemos assets proprietários e criamos a Enjoei Display, tipografia feita sob medida para sustentar diferentes climas e expressões. A tecnologia ampliou o craft por meio de uma plataforma criativa que transforma letras em padrões, estampas e composições infinitas para o dia a dia da marca.\n\nComo Designer Sênior, estive profundamente envolvido em todas as frentes do projeto, da identidade visual à criação da tipografia proprietária, plataforma criativa, case e demais elementos visuais.',
-      en: 'Enjoei came to us at a turning point. Born from internet culture, the brand had accumulated multiple references, codes, and personalities, but needed clearer structure and maturity to evolve alongside a growing audience. Our role was to organize this abundance without losing its irreverence, shaping a flexible, contemporary, and living identity system.\n\nWe redesigned the logo, developed proprietary assets, and created Enjoei Display, a custom typeface built to support multiple moods and expressions. Technology extended the craft through a creative platform that turns letters into patterns, prints, and infinite compositions for everyday use.\n\nAs a Senior Designer, I was deeply involved across all aspects of the project, from visual identity and typography to the creative platform, case development, and visual assets.',
+  "enjoei": {
+    "client": "Enjoei",
+    "detail": {
+      "pt": "Enjoei veio até nós em um momento de virada. Nascida da linguagem da internet, a marca havia acumulado múltiplas referências, códigos e personalidades, mas precisava de mais critério e maturidade para acompanhar um público que também evoluiu. Nosso trabalho foi organizar esse excesso sem perder a irreverência, criando um sistema de identidade flexível, contemporâneo e vivo.\n\nRedesenhamos o logotipo, desenvolvemos assets proprietários e criamos a Enjoei Display, tipografia feita sob medida para sustentar diferentes climas e expressões. A tecnologia ampliou o craft por meio de uma plataforma criativa que transforma letras em padrões, estampas e composições infinitas para o dia a dia da marca.\n\nComo Designer Sênior, estive profundamente envolvido em todas as frentes do projeto, da identidade visual à criação da tipografia proprietária, plataforma criativa, case e demais elementos visuais.",
+      "en": "Enjoei came to us at a turning point. Born from internet culture, the brand had accumulated multiple references, codes, and personalities, but needed clearer structure and maturity to evolve alongside a growing audience. Our role was to organize this abundance without losing its irreverence, shaping a flexible, contemporary, and living identity system.\n\nWe redesigned the logo, developed proprietary assets, and created Enjoei Display, a custom typeface built to support multiple moods and expressions. Technology extended the craft through a creative platform that turns letters into patterns, prints, and infinite compositions for everyday use.\n\nAs a Senior Designer, I was deeply involved across all aspects of the project, from visual identity and typography to the creative platform, case development, and visual assets."
     },
-    credits: [
-      [{ pt: 'Design',      en: 'Design' },      'Eduardo França, Gustavo André, Mauricio Filho, Mariana Hermeto', { dir: 'Dandara Almeida' }],
-      [{ pt: 'Estratégia',  en: 'Strategy' },    'Anna Carla, Carol Polli, Sarah Stutz, Paula Marchiori'],
-      [{ pt: 'Verbal',      en: 'Copywriting' }, 'Elen Campos, Vallécia Carvalho'],
-      [{ pt: 'Parceiros',   en: 'Partners' },    'Blackletra: Enjoei Display', 'André Burnier: Programação Criativa', 'Consoante: Identidade Sonora'],
+    "credits": [
+      [
+        {
+          "pt": "Design",
+          "en": "Design"
+        },
+        "Eduardo França, Gustavo André, Mauricio Filho, Mariana Hermeto",
+        {
+          "dir": "Dandara Almeida"
+        }
+      ],
+      [
+        {
+          "pt": "Estratégia",
+          "en": "Strategy"
+        },
+        "Anna Carla, Carol Polli, Sarah Stutz",
+        {
+          "dir": "Paula Marchiori"
+        }
+      ],
+      [
+        {
+          "pt": "Verbal",
+          "en": "Copywriting"
+        },
+        "Elen Campos, Vallécia Carvalho"
+      ],
+      [
+        {
+          "pt": "Parceiros",
+          "en": "Partners"
+        },
+        "Blackletra — Enjoei Display",
+        "André Burnier — Programação Criativa",
+        "Consoante — Identidade Sonora"
+      ]
     ],
-    studio: 'Tátil Design',
-    recognition: [
-      'Brazil Design Award (BDA) 2023',
-      '🥇 Craft for Design / Typography',
-      '🥈 Graphic Design / Brand Design',
-      '🥈 Branding / Creative Programming',
-      '🥉 Graphic Design / Brand Design',
-      'Latin American Design Awards (LAD) 2023',
-      '🥇 Typography / Kinetic',
-      '🥈 Digital / Experimental',
-      'ADG Brazilian Graphic Design Biennial 2024',
-      '📕 Enjoei Display Variable Font',
+    "studio": "Tátil Design",
+    "recognition": [
+      "Brazil Design Award (BDA) 2023",
+      "🥇 Craft for Design / Typography",
+      "🥈 Graphic Design / Brand Design",
+      "🥈 Branding / Creative Programming",
+      "🥉 Graphic Design / Brand Design",
+      "Latin American Design Awards (LAD) 2023",
+      "🥇 Typography / Kinetic",
+      "🥈 Digital / Experimental",
+      "ADG Brazilian Graphic Design Biennial 2024",
+      "📕 Enjoei Display Variable Font"
     ],
+    "behance": "https://www.behance.net/gallery/167548923/Enjoei"
   },
-  justos: {
-    client: 'Justos',
-    detail: {
-      pt: 'A Justos surgiu com a ambição de transformar uma categoria inteira. Criada para repensar o mercado de seguros, a marca nasceu para desafiar convenções, engajar motoristas e incentivar um trânsito mais tranquilo e consciente. Nosso papel foi traduzir esse propósito em uma identidade bold e ativista, capaz de equilibrar tecnologia, inteligência de dados e conexão humana.\n\nDesenvolvemos um sistema visual inspirado na linguagem geométrica da sinalização viária e dos elementos do trânsito, utilizando códigos e símbolos universais para construir uma experiência de marca dinâmica e acessível. Um tom de voz provocativo e direto ajudou a descomplicar o segurês, sintetizar informações e construir confiança, dando forma a uma marca que acredita que o avanço só acontece de forma coletiva.\n\nComo Designer Sênior, estive envolvido no desenvolvimento e desdobramento da identidade visual, brandbook, case e demais ativos visuais.',
-      en: 'Justos was created with the ambition of transforming an entire category. Designed to rethink the insurance market, the company set out to challenge industry conventions, engage drivers, and encourage safer and more conscious behavior on the road. Our role was to translate this purpose into a bold and activist identity capable of balancing technology, data intelligence, and human connection.\n\nWe developed a visual system inspired by the geometric language of traffic signs and road infrastructure, using universal symbols and codes to create a dynamic and accessible brand experience. A provocative yet straightforward verbal identity helped demystify insurance jargon, simplify information, and build trust, giving shape to a brand that believes meaningful progress can only happen collectively.\n\nAs a Senior Designer, I was involved in the development and rollout of the visual identity, brand guidelines, case study, and supporting visual assets.',
+  "justos": {
+    "client": "Justos",
+    "detail": {
+      "pt": "A Justos surgiu com a ambição de transformar uma categoria inteira. Criada para repensar o mercado de seguros, a marca nasceu para desafiar convenções, engajar motoristas e incentivar um trânsito mais tranquilo e consciente. Nosso papel foi traduzir esse propósito em uma identidade bold e ativista, capaz de equilibrar tecnologia, inteligência de dados e conexão humana.\n\nDesenvolvemos um sistema visual inspirado na linguagem geométrica da sinalização viária e dos elementos do trânsito, utilizando códigos e símbolos universais para construir uma experiência de marca dinâmica e acessível. Um tom de voz provocativo e direto ajudou a descomplicar o segurês, sintetizar informações e construir confiança, dando forma a uma marca que acredita que o avanço só acontece de forma coletiva.\n\nComo Designer Sênior, estive envolvido no desenvolvimento e desdobramento da identidade visual, brandbook, case e demais ativos visuais.",
+      "en": "Justos was created with the ambition of transforming an entire category. Designed to rethink the insurance market, the company set out to challenge industry conventions, engage drivers, and encourage safer and more conscious behavior on the road. Our role was to translate this purpose into a bold and activist identity capable of balancing technology, data intelligence, and human connection.\n\nWe developed a visual system inspired by the geometric language of traffic signs and road infrastructure, using universal symbols and codes to create a dynamic and accessible brand experience. A provocative yet straightforward verbal identity helped demystify insurance jargon, simplify information, and build trust, giving shape to a brand that believes meaningful progress can only happen collectively.\n\nAs a Senior Designer, I was involved in the development and rollout of the visual identity, brand guidelines, case study, and supporting visual assets."
     },
-    credits: [
-      [{ pt: 'Design',    en: 'Design' },      'Camilla Mattos, Gustavo André, Eduardo França, Mauricio Filho, Mariana Hermeto', { dir: 'Dandara Almeida' }],
-      [{ pt: 'Verbal',    en: 'Copywriting' }, 'Ana Cunha, Mila Bartilotti, Lourenço Araujo'],
+    "credits": [
+      [
+        {
+          "pt": "Design",
+          "en": "Design"
+        },
+        "Camilla Mattos, Gustavo André, Eduardo França, Mauricio Filho, Mariana Hermeto",
+        {
+          "dir": "Dandara Almeida"
+        }
+      ],
+      [
+        {
+          "pt": "Verbal",
+          "en": "Copywriting"
+        },
+        "Ana Cunha, Mila Bartilotti, Lourenço Araujo"
+      ]
     ],
-    studio: 'Tátil Design',
+    "studio": "Tátil Design",
+    "behance": "https://www.behance.net/gallery/192085867/Justos"
   },
-  phlor: {
-    client: 'Phlor',
-    detail: {
-      pt: 'A Phlor nasceu da ideia de que pequenos rituais podem transformar a forma como nos relacionamos com os espaços e com nós mesmos. Voltada para fragrâncias e produtos pensados para ambientes internos e externos, a marca buscava traduzir beleza, cuidado e individualidade por meio de uma identidade sensorial e sofisticada. Meu objetivo foi transformar esses atributos em uma linguagem visual capaz de expressar a essência da marca de forma singular e consistente.\n\nDesenvolvi uma identidade visual fundamentada no conceito de transformação. O logotipo combina símbolo e lettering proprietários para formar uma espiral em expansão, enquanto a tipografia faz referência ao movimento das chamas e à natureza mutável dos aromas. Inspiradas por elementos naturais, a paleta cromática e as ilustrações exclusivas geram padrões orgânicos que reforçam o caráter holístico e contemporâneo da marca em embalagens e demais pontos de contato.\n\nComo designer independente, conduzi todas as etapas do projeto, da concepção da marca ao desenvolvimento da identidade visual, do design de embalagens à direção de arte da fotografia dos produtos, garantindo consistência e autoria em toda a experiência da marca.',
-      en: 'Phlor was created around the idea that everyday rituals can transform the way we experience our homes and ourselves. Focused on fragrances and products designed for interior and exterior spaces, the brand sought to express beauty, care, and individuality through a refined and sensorial identity system. My goal was to translate these attributes into a visual language capable of expressing the brand\'s essence in a distinctive and meaningful way.\n\nI developed a visual identity rooted in the concept of transformation. The logo combines a custom symbol and wordmark to form an expanding spiral, while the typography references the movement of flames and the evolving nature of scent. Inspired by natural materials, the color palette and proprietary illustrations create organic patterns that reinforce the brand\'s holistic and contemporary character across packaging and communication.\n\nAs an independent designer, I led every stage of the project, from brand conception and visual identity development to packaging design and art direction for product photography, ensuring consistency and authorship across every touchpoint.',
+  "phlor": {
+    "client": "Phlor",
+    "detail": {
+      "pt": "A Phlor nasceu da ideia de que pequenos rituais podem transformar a forma como nos relacionamos com os espaços e com nós mesmos. Voltada para fragrâncias e produtos pensados para ambientes internos e externos, a marca buscava traduzir beleza, cuidado e individualidade por meio de uma identidade sensorial e sofisticada. Meu objetivo foi transformar esses atributos em uma linguagem visual capaz de expressar a essência da marca de forma singular e consistente.\n\nDesenvolvi uma identidade visual fundamentada no conceito de transformação. O logotipo combina símbolo e lettering proprietários para formar uma espiral em expansão, enquanto a tipografia faz referência ao movimento das chamas e à natureza mutável dos aromas. Inspiradas por elementos naturais, a paleta cromática e as ilustrações exclusivas geram padrões orgânicos que reforçam o caráter holístico e contemporâneo da marca em embalagens e demais pontos de contato.\n\nComo designer independente, conduzi todas as etapas do projeto, da concepção da marca ao desenvolvimento da identidade visual, do design de embalagens à direção de arte da fotografia dos produtos, garantindo consistência e autoria em toda a experiência da marca.",
+      "en": "Phlor was created around the idea that everyday rituals can transform the way we experience our homes and ourselves. Focused on fragrances and products designed for interior and exterior spaces, the brand sought to express beauty, care, and individuality through a refined and sensorial identity system. My goal was to translate these attributes into a visual language capable of expressing the brand’s essence in a distinctive and meaningful way.\n\nI developed a visual identity rooted in the concept of transformation. The logo combines a custom symbol and wordmark to form an expanding spiral, while the typography references the movement of flames and the evolving nature of scent. Inspired by natural materials, the color palette and proprietary illustrations create organic patterns that reinforce the brand’s holistic and contemporary character across packaging and communication.\n\nAs an independent designer, I led every stage of the project, from brand conception and visual identity development to packaging design and art direction for product photography, ensuring consistency and authorship across every touchpoint."
     },
-    credits: [
-      [{ pt: 'Design & Direção de Arte', en: 'Design & Art Direction' }, 'Mauricio Filho'],
-      [{ pt: 'Parceiros',               en: 'Partners' },               'Órix Media House: Fotografia'],
+    "credits": [
+      [
+        {
+          "pt": "Design & Direção de Arte",
+          "en": "Design & Art Direction"
+        },
+        "Mauricio Filho"
+      ],
+      [
+        {
+          "pt": "Parceiros",
+          "en": "Partners"
+        },
+        "Órix Media House — Fotografia"
+      ]
+    ],
+    "behance": "https://www.behance.net/gallery/206100963/Phlor"
+  },
+  "99": {
+    "client": "99",
+    "detail": {
+      "pt": "A 99 sempre ocupou um papel central na conexão entre pessoas, lugares e oportunidades em todo o Brasil. À medida que a empresa ampliava seu ecossistema e sua relevância, surgiu o desafio de traduzir um propósito mais claro para a marca: cuidar das pessoas abrindo caminhos para despertar novas histórias. Nosso trabalho foi transformar essa visão em uma identidade visual capaz de refletir tanto a escala da plataforma quanto a diversidade das comunidades que ela conecta.\n\nPartindo dos ativos já reconhecidos da marca, buscamos inspiração na linguagem visual das cidades, seus contornos, rotas e fluxos constantes. O sistema resultante combina padrões, texturas, mapas e elementos gráficos modulares para construir uma identidade flexível e expressiva. Próxima, inclusiva e adaptável, a linguagem visual reflete a complexidade da vida urbana ao mesmo tempo em que fortalece a conexão entre passageiros, motoristas e sociedade.\n\nComo Designer Sênior, estive envolvido no desenvolvimento e desdobramento do sistema de identidade visual, contribuindo para a construção de ativos gráficos, aplicações da marca e materiais de apresentação do projeto.",
+      "en": "99 has always played a central role in connecting people, places, and opportunities across Brazil. As the company expanded its ecosystem and impact, the challenge was to evolve the brand around a clear purpose: caring for people by opening paths for new stories to happen. Our role was to translate this vision into a visual identity capable of reflecting both the scale of the platform and the diversity of the communities it serves.\n\nBuilding on existing brand assets, we drew inspiration from the visual language of cities, their routes, contours, and constant movement. The resulting system combines patterns, textures, maps, and modular graphic elements to create a flexible and expressive identity. Designed to be inclusive, recognizable, and adaptable, the visual language mirrors the complexity and dynamism of urban life while strengthening the connection between passengers, drivers, and society.\n\nAs a Senior Designer, I was involved in the development and rollout of the visual identity system, helping shape graphic assets, brand applications, and case study materials."
+    },
+    "credits": [
+      [
+        {
+          "pt": "Design",
+          "en": "Design"
+        },
+        "Gustavo André, Eduardo França, Mauricio Filho, Lays Santos",
+        {
+          "dir": "Dandara Almeida"
+        }
+      ],
+      [
+        {
+          "pt": "Estratégia",
+          "en": "Strategy"
+        },
+        "Paula Marchiori, Carol Avari"
+      ],
+      [
+        {
+          "pt": "Verbal",
+          "en": "Copywriting"
+        },
+        "Ana Cunha, Mila Bartilotti"
+      ]
+    ],
+    "studio": "Tátil Design",
+    "recognition": [
+      "Brazil Design Award (BDA) 2022",
+      "🥉 Graphic Design"
+    ],
+    "behance": "https://www.behance.net/gallery/152582735/99-nova-linguagem-visual"
+  },
+  "martorelli": {
+    "client": "Martorelli",
+    "detail": {
+      "pt": "O Martorelli Advogados é um escritório construído sobre uma trajetória sólida e, ao mesmo tempo, em constante evolução. Referência em seu segmento, a marca buscava fortalecer seu posicionamento por meio de uma identidade capaz de expressar tanto sua história quanto sua visão de futuro. Nosso desafio foi traduzir esse equilíbrio entre tradição e transformação em um sistema visual contemporâneo e relevante.\n\nRedesenhamos a identidade visual para refletir a diversidade, a expertise e a cultura centrada nas pessoas que definem o escritório. O novo logotipo combina influências tipográficas clássicas e contemporâneas, expressando uma marca que respeita seu legado sem deixar de evoluir. A paleta cromática, a linguagem fotográfica focada nas relações humanas, a arquitetura de marcas e o tom de voz mais próximo trabalham em conjunto para construir uma experiência consistente e atual em todos os pontos de contato.\n\nComo Designer Sênior, estive envolvido no desenvolvimento e desdobramento da identidade visual, contribuindo para aplicações da marca, ativos visuais e materiais de apresentação do projeto.",
+      "en": "Martorelli Advogados is a firm built on a strong legacy while continuously evolving to meet new realities. Recognized as a reference in its field, the firm sought to strengthen its positioning through a brand capable of expressing both its history and its forward-looking vision. Our challenge was to translate this balance between tradition and transformation into a contemporary identity system.\n\nWe redesigned the visual identity to reflect the firm's diversity, expertise, and human-centered culture. The new logo combines classical and contemporary typographic influences, expressing a brand that respects its heritage while embracing change. A refined color palette, people-focused photography, a structured brand architecture, and a more approachable verbal language work together to create a cohesive and modern brand experience across every touchpoint.\n\nAs a Senior Designer, I was involved in the development and rollout of the visual identity system, contributing to brand applications, visual assets, and case study materials."
+    },
+    "credits": [
+      [
+        {
+          "pt": "Design",
+          "en": "Design"
+        },
+        "Camilla Mattos, Eduardo França, Gustavo André, Mauricio Filho, Priscila Czuka",
+        {
+          "dir": "Dandara Almeida"
+        }
+      ],
+      [
+        {
+          "pt": "Estratégia",
+          "en": "Strategy"
+        },
+        "Amanda Gebara"
+      ],
+      [
+        {
+          "pt": "Verbal",
+          "en": "Copywriting"
+        },
+        "Ana Cunha, Mila Bartilotti, Lourenço Araujo"
+      ]
+    ],
+    "studio": "Tátil Design",
+    "behance": "https://www.behance.net/gallery/186776133/Matorelli-Advogados"
+  },
+  "metallo": {
+    "client": "Metallo",
+    "detail": {
+      "pt": "A Metallo nasceu em 2020, marca dedicada à criação de móveis e objetos sob medida em metal e madeira. Desde o início, o sistema visual já era sólido, preciso e arejado, com uma intervenção sutil na letra T que remetia à sombra de uma mesa — um gesto discreto que traduzia sofisticação e contemporaneidade. Anos depois, o desafio foi revisitar essa base: algumas de suas qualidades ainda não estavam totalmente explícitas, e a atualização partiu justamente desse ajuste de foco, em busca de mais ousadia e distinção sem abrir mão da elegância original.\n\nA revisão reforça materialidade, peso e processo como eixos centrais da marca. O azul cobalto profundo passa a operar como campo estrutural, enquanto texturas metálicas e enquadramentos rígidos organizam uma lógica construtiva coerente com o que a Metallo produz. A tipografia assume o protagonismo — imperfeita e precisa, moldada pelo próprio processo de fabricação — e a paleta se apoia em tons de metal, madeira e branco para sustentar diferentes climas. O logotipo foi preservado: as decisões aconteceram ao seu redor, por meio de cor, escala e ritmo, em busca de maior coerência entre forma e discurso.\n\nComo designer independente, conduzi todas as etapas do projeto, da concepção original em 2020 à atualização da linguagem, definindo direção de arte, sistema visual e aplicações. O resultado mantém a sofisticação que sempre definiu a Metallo, agora com mais presença, distinção e maturidade.",
+      "en": "Metallo was founded in 2020 as a brand dedicated to custom-made furniture and objects in metal and wood. From the start, its visual system was already solid, precise, and airy, with a subtle intervention on the letter T that evoked the shadow of a table — a discreet gesture expressing sophistication and a contemporary spirit. Years later, the challenge was to revisit this foundation: some of its qualities were not yet fully explicit, and the refresh began precisely with that adjustment in focus, seeking greater boldness and distinction without giving up the original elegance.\n\nThe refresh reinforces materiality, weight, and process as the brand's central axes. Deep cobalt blue becomes a structural field, while metallic textures and rigid framing organize a constructive logic aligned with what Metallo makes. Typography takes the lead — imperfect and precise, shaped by the manufacturing process itself — while a palette of metal, wood, and white tones supports different moods. The logo was preserved: decisions happened around it, through color, scale, and rhythm, in search of greater coherence between form and discourse.\n\nAs an independent designer, I led every stage of the project, from the original 2020 concept to the evolution of the visual language, defining art direction, visual system, and applications. The result preserves the sophistication that has always defined Metallo, now with greater presence, distinction, and maturity."
+    },
+    "credits": [
+      [
+        {
+          "pt": "Design & Direção de Arte",
+          "en": "Design & Art Direction"
+        },
+        "Mauricio Filho"
+      ]
     ]
   },
-  '99': {
-    client: '99',
-    detail: {
-      pt: 'A 99 sempre ocupou um papel central na conexão entre pessoas, lugares e oportunidades em todo o Brasil. À medida que a empresa ampliava seu ecossistema e sua relevância, surgiu o desafio de traduzir um propósito mais claro para a marca: cuidar das pessoas abrindo caminhos para despertar novas histórias. Nosso trabalho foi transformar essa visão em uma identidade visual capaz de refletir tanto a escala da plataforma quanto a diversidade das comunidades que ela conecta.\n\nPartindo dos ativos já reconhecidos da marca, buscamos inspiração na linguagem visual das cidades, seus contornos, rotas e fluxos constantes. O sistema resultante combina padrões, texturas, mapas e elementos gráficos modulares para construir uma identidade flexível e expressiva. Próxima, inclusiva e adaptável, a linguagem visual reflete a complexidade da vida urbana ao mesmo tempo em que fortalece a conexão entre passageiros, motoristas e sociedade.\n\nComo Designer Sênior, estive envolvido no desenvolvimento e desdobramento do sistema de identidade visual, contribuindo para a construção de ativos gráficos, aplicações da marca e materiais de apresentação do projeto.',
-      en: '99 has always played a central role in connecting people, places, and opportunities across Brazil. As the company expanded its ecosystem and impact, the challenge was to evolve the brand around a clear purpose: caring for people by opening paths for new stories to happen. Our role was to translate this vision into a visual identity capable of reflecting both the scale of the platform and the diversity of the communities it serves.\n\nBuilding on existing brand assets, we drew inspiration from the visual language of cities, their routes, contours, and constant movement. The resulting system combines patterns, textures, maps, and modular graphic elements to create a flexible and expressive identity. Designed to be inclusive, recognizable, and adaptable, the visual language mirrors the complexity and dynamism of urban life while strengthening the connection between passengers, drivers, and society.\n\nAs a Senior Designer, I was involved in the development and rollout of the visual identity system, helping shape graphic assets, brand applications, and case study materials.',
+  "papeltec": {
+    "client": "Papeltec",
+    "detail": {
+      "pt": "A Papeltec é uma fabricante de embalagens de papel — de sacolas a embalagens personalizadas — que enxerga o papel como mais do que matéria-prima: um compromisso com a sustentabilidade e uma ponte entre marcas e clientes. O desafio era traduzir esse propósito em uma identidade à altura, deixando para trás uma imagem mais industrial e genérica para assumir um posicionamento humano, acolhedor e conectado ao valor que a marca gera em cada entrega.\n\nO rebranding parte da ideia de que cada embalagem carrega uma narrativa única. O novo logotipo troca o peso industrial por um símbolo de broto, leve e orgânico, reforçando o vínculo com a natureza e a renovação. A tipografia arredondada e amigável, somada a uma paleta de verdes vivos e tons terrosos, constrói uma presença acolhedora e contemporânea. Ilustrações e setas trazem movimento ao sistema, evidenciando o papel da marca como conectora e impulsionadora — alguém que ajuda outras marcas a alcançarem um lugar de protagonismo. Tudo se sintetiza na plataforma verbal: Sua história, nosso papel.\n\nComo designer independente, conduzi o rebranding da marca, da estratégia e do redesenho do logotipo à construção do sistema visual, tipografia, paleta, ilustrações e plataforma verbal, garantindo consistência em todos os pontos de contato.",
+      "en": "Papeltec is a paper packaging manufacturer — from shopping bags to custom packaging — that sees paper as more than raw material: a commitment to sustainability and a bridge between brands and their customers. The challenge was to translate this purpose into an identity that lived up to it, leaving behind a more industrial, generic image to embrace a human, welcoming positioning connected to the value the brand creates with every delivery.\n\nThe rebranding starts from the idea that every package carries a unique narrative. The new logo trades industrial weight for a sprout symbol — light and organic — reinforcing the bond with nature and renewal. Rounded, friendly typography, combined with a palette of vivid greens and earthy tones, builds a welcoming and contemporary presence. Illustrations and arrows bring movement to the system, highlighting the brand's role as a connector and enabler — one that helps other brands reach a leading position. It all comes together in the verbal platform: Sua história, nosso papel (Your story, our paper — and our role).\n\nAs an independent designer, I led the brand's rebranding — from strategy and logo redesign to the visual system, typography, color palette, illustrations, and verbal platform — ensuring consistency across every touchpoint."
     },
-    credits: [
-      [{ pt: 'Design',      en: 'Design' },      'Gustavo André, Eduardo França, Mauricio Filho, Lays Santos', { dir: 'Dandara Almeida' }],
-      [{ pt: 'Estratégia',  en: 'Strategy' },    'Paula Marchiori, Carol Avari'],
-      [{ pt: 'Verbal',      en: 'Copywriting' }, 'Ana Cunha, Mila Bartilotti'],
-    ],
-    studio: 'Tátil Design',
-    recognition: [
-      'Brazil Design Award (BDA) 2022',
-      '🥉 Graphic Design',
-    ],
+    "credits": [
+      [
+        {
+          "pt": "Design & Direção de Arte",
+          "en": "Design & Art Direction"
+        },
+        "Mauricio Filho"
+      ]
+    ]
   },
-  martorelli: {
-    client: 'Martorelli',
-    detail: {
-      pt: 'O Martorelli Advogados é um escritório construído sobre uma trajetória sólida e, ao mesmo tempo, em constante evolução. Referência em seu segmento, a marca buscava fortalecer seu posicionamento por meio de uma identidade capaz de expressar tanto sua história quanto sua visão de futuro. Nosso desafio foi traduzir esse equilíbrio entre tradição e transformação em um sistema visual contemporâneo e relevante.\n\nRedesenhamos a identidade visual para refletir a diversidade, a expertise e a cultura centrada nas pessoas que definem o escritório. O novo logotipo combina influências tipográficas clássicas e contemporâneas, expressando uma marca que respeita seu legado sem deixar de evoluir. A paleta cromática, a linguagem fotográfica focada nas relações humanas, a arquitetura de marcas e o tom de voz mais próximo trabalham em conjunto para construir uma experiência consistente e atual em todos os pontos de contato.\n\nComo Designer Sênior, estive envolvido no desenvolvimento e desdobramento da identidade visual, contribuindo para aplicações da marca, ativos visuais e materiais de apresentação do projeto.',
-      en: 'Martorelli Advogados is a firm built on a strong legacy while continuously evolving to meet new realities. Recognized as a reference in its field, the firm sought to strengthen its positioning through a brand capable of expressing both its history and its forward-looking vision. Our challenge was to translate this balance between tradition and transformation into a contemporary identity system.\n\nWe redesigned the visual identity to reflect the firm\'s diversity, expertise, and human-centered culture. The new logo combines classical and contemporary typographic influences, expressing a brand that respects its heritage while embracing change. A refined color palette, people-focused photography, a structured brand architecture, and a more approachable verbal language work together to create a cohesive and modern brand experience across every touchpoint.\n\nAs a Senior Designer, I was involved in the development and rollout of the visual identity system, contributing to brand applications, visual assets, and case study materials.',
+  "caixa": {
+    "client": "Caixa"
+  },
+  "natura-homem": {
+    "client": "Natura",
+    "detail": {
+      "pt": "Natura Homem é a linha de perfumaria masculina de uma das maiores marcas de beleza do Brasil. O projeto consistiu em um rebranding de toda a linha, com o objetivo de integrar as comunicações e traduzir as múltiplas personalidades do homem contemporâneo. O desafio era construir um sistema capaz de acolher diferentes intensidades e facetas — do homem que busca leveza ao que marca presença — sob uma mesma ideia condutora: cuidar de si e do outro como uma forma de potência.\n\nO sistema organiza as fragrâncias em plataformas complementares, cada uma traduzindo uma faceta desse homem e um momento da sua rotina. A direção de arte deu forma visual a cada conceito, transformando-o em imagem por meio de casting, still e captação hipersensorial. Luz, styling, paleta e materialidade foram calibrados linha a linha para que cada uma tivesse expressão própria, mantendo a coerência do conjunto. O resultado é uma linguagem integrada, sensorial e contemporânea, que acompanha o homem em suas diferentes intensidades.\n\nComo Designer Sênior na Tátil, atuei no design e na direção de arte das fotografias, traduzindo cada conceito da linha em imagem — do casting ao still e à captação hipersensorial —, garantindo uma expressão visual própria para cada faceta e coerente com o sistema.",
+      "en": "Natura Homem is the men's fragrance line of one of Brazil's largest beauty brands. The project was a rebranding of the entire line, aiming to integrate its communications and translate the multiple personalities of the contemporary man. The challenge was to build a system able to hold different intensities and facets — from the man who seeks lightness to the one who makes a bold statement — under a single guiding idea: caring for oneself and others as a form of strength.\n\nThe system organizes the fragrances into complementary platforms, each translating a facet of this man and a moment of his routine. Art direction gave visual form to each concept, turning it into image through casting, still life, and hypersensorial capture. Light, styling, palette, and materiality were calibrated line by line so that each one had its own expression while keeping the whole cohesive. The result is an integrated, sensorial, and contemporary language that follows the man across his different intensities.\n\nAs a Senior Designer at Tátil, I led the design and art direction of the photography, translating each concept of the line into image — from casting to still life and hypersensorial capture — ensuring a distinct visual expression for each facet, coherent with the system."
     },
-    credits: [
-      [{ pt: 'Design',      en: 'Design' },      'Camilla Mattos, Eduardo França, Gustavo André, Mauricio Filho, Priscila Czuka', { dir: 'Dandara Almeida' }],
-      [{ pt: 'Estratégia',  en: 'Strategy' },    'Amanda Gebara'],
-      [{ pt: 'Verbal',      en: 'Copywriting' }, 'Ana Cunha, Mila Bartilotti, Lourenço Araujo'],
+    "credits": [
+      [
+        {
+          "pt": "Direção Criativa",
+          "en": "Creative Direction"
+        },
+        "Julia Liberati, Beto Bicesto"
+      ],
+      [
+        {
+          "pt": "Gerência de Criação",
+          "en": "Creative Management"
+        },
+        "Hudson Girundi"
+      ],
+      [
+        {
+          "pt": "Design",
+          "en": "Design"
+        },
+        "Cahue Abatipietro, Carolina Pinheiro, Gustavo Crivellari, Mauricio Filho"
+      ],
+      [
+        {
+          "pt": "Design 3D",
+          "en": "3D Design"
+        },
+        "Arthur Figueiredo"
+      ],
+      [
+        {
+          "pt": "Redação",
+          "en": "Copywriting"
+        },
+        "Daniela Varanda"
+      ],
+      [
+        {
+          "pt": "Produção Executiva",
+          "en": "Executive Production"
+        },
+        "Gazpacho Produções"
+      ],
+      [
+        {
+          "pt": "Fotografia (Casting)",
+          "en": "Photography (Casting)"
+        },
+        "Ivan Erick"
+      ],
+      [
+        {
+          "pt": "Fotografia (Still)",
+          "en": "Photography (Still)"
+        },
+        "Thiago Justo"
+      ]
     ],
-    studio: 'Tátil Design',
+    "studio": "Tátil Design"
   },
-  metallo:       { client: 'Metallo' },
-  papeltec:      { client: 'Papeltec' },
-  caixa:         { client: 'Caixa' },
-  'natura-homem':{ client: 'Natura' },
-  'natura-pais': { client: 'Natura' },
-  ativa:         { client: 'Ativa' },
-  vibra:         { client: 'Vibra' },
-  mdesign:       { client: 'MDesign' },
+  "natura-pais": {
+    "client": "Natura",
+    "detail": {
+      "pt": "Como parte do universo Natura Homem, a campanha de Dia dos Pais nasceu de uma provocação: como falar de masculinidade e paternidade sem cair no óbvio? Aproveitando o mote do lançamento de uma nova fragrância da linha, o desafio foi transformar uma ideia delicada em imagem — a de que a verdadeira força de um pai pode ser suave. Ele não precisa provar; precisa estar.\n\nA paternidade passa a ser tratada como uma das expressões desse homem: mais presente, afetivo, leve e verdadeiro. Criamos uma linguagem visual que acolhe o íntimo, o silêncio e o afeto — um convite a enxergar o homem em evolução, com camadas mais profundas do que força ou rigidez. Um abraço apertado, um olhar que sente, a leveza que toca: cada imagem foi construída para revelar essa sensibilidade, atualizando o tom da marca com mais presença e vínculo.\n\nComo Designer Sênior na Tátil, atuei na direção de arte e no design da campanha de Dia dos Pais, dando forma visual ao conceito e traduzindo em imagem essa nova expressão da paternidade.",
+      "en": "As part of the Natura Homem universe, the Father's Day campaign began with a provocation: how do you talk about masculinity and fatherhood without falling into the obvious? Building on the launch of a new fragrance in the line, the challenge was to turn a delicate idea into image — that a father's true strength can be gentle. He doesn't need to prove himself; he needs to be there.\n\nFatherhood becomes one of the expressions of this man: more present, affectionate, light, and true. We created a visual language that embraces intimacy, silence, and affection — an invitation to see the man in evolution, with layers deeper than strength or rigidity. A tight hug, a gaze that feels, a lightness that touches: every image was built to reveal this sensitivity, updating the brand's tone with greater presence and connection.\n\nAs a Senior Designer at Tátil, I led the art direction and design of the Father's Day campaign, giving visual form to the concept and translating this new expression of fatherhood into image."
+    },
+    "credits": [
+      [
+        {
+          "pt": "Direção Criativa",
+          "en": "Creative Direction"
+        },
+        "Julia Liberati, Beto Bicesto"
+      ],
+      [
+        {
+          "pt": "Gerência de Criação",
+          "en": "Creative Management"
+        },
+        "Rodrigo Godin"
+      ],
+      [
+        {
+          "pt": "Design",
+          "en": "Design"
+        },
+        "Mauricio Filho, Gabriel Kalani"
+      ],
+      [
+        {
+          "pt": "Design 3D",
+          "en": "3D Design"
+        },
+        "Arthur Figueiredo"
+      ],
+      [
+        {
+          "pt": "Redação",
+          "en": "Copywriting"
+        },
+        "Daniela Varanda"
+      ],
+      [
+        {
+          "pt": "Produção Executiva",
+          "en": "Executive Production"
+        },
+        "Gazpacho Produções"
+      ],
+      [
+        {
+          "pt": "Fotografia (Casting)",
+          "en": "Photography (Casting)"
+        },
+        "Ivan Erick"
+      ]
+    ],
+    "studio": "Tátil Design + Natura"
+  },
+  "vibra": {
+    "client": "Vibra",
+    "detail": {
+      "pt": "A VIBRA é uma das maiores distribuidoras de energia do Brasil, presente no dia a dia de milhões de pessoas por meio de uma ampla rede de pontos de contato. Dentro de um projeto mais amplo de rebranding e sinalização, um dos desafios era construir um sistema de wayfinding próprio — capaz de orientar com clareza e, ao mesmo tempo, carregar a personalidade da marca. Para isso, foi desenvolvida uma família iconográfica sob medida, que traduzisse a linguagem VIBRA para a escala da sinalização.\n\nA família de pictogramas nasce da própria estrutura da marca. O movimento — traço central da VIBRA — é representado por diagonais de espessuras e angulações variadas, enquanto as terminações chanfradas suavizam as formas e criam contraste. Todas as formas circulares são ovais, conectando-se ao caráter humanista da identidade. A partir desses princípios, o sistema cobre pictogramas identificativos, direcionais, de acessibilidade (PNE), transporte e reciclagem — estes últimos seguindo os padrões normativos (CONAMA / NBR) —, formando um conjunto coeso, funcional e com identidade própria.\n\nComo designer na Tátil, atuei no desdobramento (rollout) da marca e, em especial, no desenvolvimento da família iconográfica completa para o sistema de sinalização, do conceito à construção e padronização de cada pictograma.",
+      "en": "VIBRA is one of the largest energy distributors in Brazil, part of the daily lives of millions of people through an extensive network of touchpoints. Within a broader rebranding and signage project, one of the challenges was to build a proprietary wayfinding system — able to guide clearly while carrying the brand's personality. To achieve this, a custom iconographic family was developed to translate the VIBRA language into the scale of signage.\n\nThe pictogram family stems from the brand's own structure. Movement — VIBRA's core trait — is expressed through diagonals of varying thickness and angle, while beveled terminations soften the forms and create contrast. All circular shapes are oval, connecting to the humanist character of the identity. Building on these principles, the system covers identification, directional, accessibility, transportation, and recycling pictograms — the latter following regulatory standards (CONAMA / NBR) — forming a cohesive, functional set with its own identity.\n\nAs a designer at Tátil, I worked on the brand's rollout and, in particular, on developing the complete iconographic family for the signage system — from concept to the construction and standardization of each pictogram."
+    },
+    "credits": [
+      [
+        {
+          "pt": "Design",
+          "en": "Design"
+        },
+        "Mauricio Filho, Carlos Teles, Hudson Girundi"
+      ],
+      [
+        {
+          "pt": "Direção Criativa",
+          "en": "Creative Direction"
+        },
+        "Renan Benvenutti"
+      ],
+      [
+        {
+          "pt": "Negócios",
+          "en": "Business"
+        },
+        "Karla Ribeiro, Vanessa Clark"
+      ]
+    ],
+    "studio": "Tátil Design"
+  },
+  "mdesign": {
+    "client": "M Design Studio",
+    "detail": {
+      "pt": "Fundada no Brasil, a M Design Studio nasce de um sólido saber-fazer em marcenaria e mobiliário sob medida, com linguagem contemporânea e alto nível de personalização. O desafio surgiu ao levar essa proposta para o mercado americano, onde \"moderno e bem-feito\" já não basta para se destacar e o termo \"custom\" virou um atalho comercial — na prática, soluções padronizadas que geram espaços genéricos, nos quais as pessoas se adaptam ao que é oferecido, e não o contrário. Traduzir personalização, qualidade e autoria em códigos que fizessem sentido nesse novo contexto, sem perder o caráter contemporâneo do estúdio, era o ponto de partida.\n\nA identidade parte do que o estúdio já faz de melhor: tratar cada projeto como único, concebido a partir das rotinas reais de quem vai habitá-lo. Mais do que uma marcenaria, a M Design Studio passa a se apresentar como um estúdio de design dedicado a marcenaria e mobiliário sob medida, com envolvimento próximo em todas as etapas. O sistema visual segue essa mesma lógica: enraizado em contextos técnicos e processos criativos, expressa método e precisão ao mesmo tempo em que introduz uma dimensão humana por meio do craft e da expressão tipográfica. O resultado sustenta o trabalho do estúdio sem se sobrepor a ele, reforçando o posicionamento de construir do zero, e não adaptar soluções.\n\nComo designer independente, conduzi todo o rebranding, do reposicionamento à identidade visual e ao motion. Um estúdio feito para fazer sentido — para o espaço e para as pessoas que vivem nele.",
+      "en": "Founded in Brazil, M Design Studio is built on a solid mastery of bespoke cabinetry and millwork, with a contemporary language and a high level of customization. The challenge arose when bringing this proposition to the American market, where \"modern and well-made\" is no longer enough to stand out and \"custom\" has become a commercial shortcut — in practice, cookie-cutter systems that produce generic spaces, where people adapt to what is offered instead of the other way around. Translating customization, quality, and authorship into codes that make sense in this new context, without losing the studio's contemporary character, was the starting point.\n\nThe identity builds on what the studio already does best: treating each project as unique, conceived around the real-life routines of the people who will live in it. More than a carpentry workshop, M Design Studio now presents itself as a design studio focused on bespoke cabinetry and millwork, with close involvement throughout the entire process. The visual system follows the same logic: rooted in technical contexts and creative processes, it expresses method and precision while introducing a human dimension through craft and typographic expression. The result supports the studio's work without overshadowing it, reinforcing its positioning: building from scratch, not adapting solutions.\n\nAs an independent designer, I led the entire rebranding, from positioning to visual identity and motion. A studio made to make sense — for the space and for the people who live in it."
+    },
+    "credits": [
+      [
+        {
+          "pt": "Estratégia, Design & Motion",
+          "en": "Strategy, Design & Motion"
+        },
+        "Mauricio Filho"
+      ]
+    ]
+  }
 };
 
 /* ─── Work table ─────────────────────────────────────────────────── */

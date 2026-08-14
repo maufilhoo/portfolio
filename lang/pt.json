@@ -1,49 +1,39 @@
 {
   "nav_menu": "Menu",
   "nav_lang": "EN",
-
   "hero_script": "Defina o tom. Fique à vontade.",
   "hero_step1": "Bem-vindo✌",
   "hero_step2": "📀 Ligue o som.",
   "hero_step3": "Aproveite a visita.",
-  "hero_line1": "Olá — Sou o Mauricio Filho, ✌️",
-  "hero_line2": "Designer de Marca & Visual Independente",
+  "hero_line1": "Sou Mauricio Filho,",
+  "hero_line2": "Brand & Visual Designer",
   "hero_link": "Quem é esse cara?",
-
   "project_enjoei_year": "2023",
   "project_enjoei_title": "Enjoei",
   "project_enjoei_desc": "Identidade de marca com estrutura e coerência. Tipografia customizada e ferramentas de design generativo que mantêm a voz irreverente da marca.",
   "project_enjoei_tag": "Identidade de Marca",
-
   "project_justos_year": "2024",
   "project_justos_title": "Justos",
   "project_justos_desc": "Identidade para marca de seguros. Design bold e otimista com formas inspiradas no trânsito e ícones customizados para uma experiência mais simples e humana.",
   "project_justos_tag": "Identidade de Marca",
-
   "project_phlor_year": "2023",
   "project_phlor_title": "Phlor",
   "project_phlor_desc": "Identidade para marca de bem-estar. A tipografia se expande com suavidade e os layouts abraçam o silêncio, priorizando escolhas essenciais de design.",
   "project_phlor_tag": "Identidade de Marca",
-
   "explore_label": "Explore meu trabalho",
-
   "project_enjoei_bold": "Identidade de marca com estrutura e coerência.",
   "project_enjoei_muted": "Tipografia customizada e ferramentas de design generativo que mantêm a voz irreverente da marca.",
   "project_enjoei_tags": "Identidade de Marca, Tipografia Custom, Design Generativo",
-
   "project_justos_bold": "Identidade bold e otimista para marca de seguros.",
   "project_justos_muted": "Formas inspiradas no trânsito e ícones customizados para uma experiência mais simples e humana.",
   "project_justos_tags": "Identidade de Marca, Formas & Ícones, Experiência",
-
   "project_phlor_bold": "Identidade para marca de bem-estar.",
   "project_phlor_muted": "A tipografia se expande com suavidade e os layouts abraçam o silêncio, priorizando o essencial.",
   "project_phlor_tags": "Identidade de Marca, Tipografia, Wellness",
-
   "scroll_top": "↑ topo",
   "footer_tagline": "Fim da página, não das ideias✦",
   "footer_contact_email": "E-mail",
   "footer_contact_whatsapp": "WhatsApp",
-
   "nav_greeting": "Oi. Sou Mauricio Filho",
   "nav_who": "Quem é esse cara?",
   "nav_cta": "Vamos trabalhar juntos",
@@ -58,14 +48,10 @@
   "hero_hello": "Olá!",
   "hero_hello_return": "Bom te ver novamente.",
   "nav_copy": "Copiar e-mail",
-  "hero_line1": "Sou Mauricio Filho,",
-  "hero_line2": "Brand & Visual Designer",
   "hero_line3": "em São Paulo.",
   "footer_line1": "Fim da página, não das ideias.",
   "footer_line2": "Vamos Conversar.",
-
   "hero_tagline": "Construo marcas &\nidentidades visuais.",
-
   "bio_text": "Designer Multidisciplinar, com foco em Branding & Digital. Atualmente independente.",
   "bio_text2": "Ex-Senior Designer na Tatil Design. Colaborou com agências como R/GA, Monigle (EUA), Marcas com Sal, entre outras. 9+ anos construindo logos, identidades visuais, tipografia, iconografia, embalagens, sinalização e direção de arte para marcas como Itaú, Ambev, Natura, Avon, Google, Danone, C6, Caixa, Enjoei, Vibra e 99 App. Reconhecido na Bienal Brasileira de Design Gráfico, Latin American Design Awards e Brazil Design Awards.",
   "bio_head": "Designer Multidisciplinar<br>com foco em branding e digital.",
@@ -75,15 +61,39 @@
   "bio_cta": "Vamos Conversar",
   "bio_copied": "E-mail copiado!",
   "explore_cta": "explore meu trabalho",
-
   "footer_big": "Vamos construir algo juntos.",
   "footer_new_work": "Novos Projetos:",
   "footer_available": "Disponível para projetos:",
-
   "wt_projects": "Projetos",
   "wt_services": "Serviços",
   "wt_year": "Ano",
   "wt_credits": "Ficha Técnica",
-
-  "cookie_text": "Este site usa cookies necessários. Ao continuar navegando, você concorda com seu uso."
+  "cookie_text": "Este site usa cookies necessários. Ao continuar navegando, você concorda com seu uso.",
+  "about_page_title": "Sobre",
+  "about_page_sub": "Designer Sênior de Marca & Visual, São Paulo.",
+  "about_label_aboutme": "Sobre mim",
+  "about_label_activities": "Atividades Principais",
+  "about_label_recognition": "Reconhecimentos",
+  "about_label_experience": "Experiência",
+  "about_label_clients": "Clientes Selecionados",
+  "about_label_education": "Formação",
+  "about_courses_label": "Cursos",
+  "about_me_p1": "Prazer, sou Mauricio Filho, designer brasileiro multidisciplinar e diretor de arte baseado em São Paulo. Com foco em branding e identidade visual, já trabalhei com marcas de diferentes portes e setores no Brasil e no exterior.",
+  "about_me_p2": "Nasci em uma pequena cidade do interior de São Paulo. Cresci desenhando, colecionando revistas e histórias em quadrinhos, sempre observando tudo ao meu redor. Muito antes de pensar no design como profissão, a curiosidade já fazia parte da forma como eu enxergava o mundo.",
+  "about_me_p3": "Hoje, vejo o design como uma ferramenta para resolver problemas e construir significado. A estética importa, mas ela sempre nasce de uma intenção. Gosto de equilibrar pensamento estratégico e sensibilidade para criar marcas humanas, divertidas e impactantes. Tenho um interesse especial por projetos que não têm medo de assumir uma personalidade marcante.",
+  "about_me_p4": "Pesquisar e construir conceitos é uma das partes que mais gosto do processo. Depois de alguns anos atuando em agências de branding de diferentes perfis, decidi seguir um caminho independente para participar mais de perto das decisões, aprofundar processos e ampliar meu repertório criativo.",
+  "about_me_p5": "Meu trabalho une estratégia, pesquisa profunda e direção visual para transformar ideias em sistemas de marca consistentes, pensados para evoluir e permanecer relevantes ao longo do tempo.",
+  "about_recognition": "Bienal Brasileira de Design Gráfico (02× Enjoei, 2024), Latin American Design Awards (02× Enjoei 2023, 01× Vibra 2022), Brazil Design Awards (04× Enjoei 2023, 02× Vibra 2022, 01× 99 App 2022)",
+  "about_rec_bbdg": "Bienal Brasileira de Design Gráfico",
+  "about_act_1": "Branding",
+  "about_act_2": "Identidade Visual",
+  "about_act_3": "Embalagem",
+  "about_act_4": "Sinalização",
+  "about_act_5": "Campanhas",
+  "about_act_6": "Direção de Arte",
+  "about_act_7": "Ilustração",
+  "about_course_1": "Ilustração para Marcas, Platô Studio",
+  "about_course_2": "Sistematizando Marcas no Figma, Platô Studio",
+  "about_course_3": "UI Design, Tera",
+  "about_label_contact": "Contato"
 }

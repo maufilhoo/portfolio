@@ -1,4 +1,4 @@
-let currentLang = 'en';
+let currentLang = localStorage.getItem('site-lang') || 'en';
 let translations = {};
 
 async function loadTranslations(lang) {
@@ -41,6 +41,7 @@ function applyTranslations() {
 
 async function setLang(lang) {
   currentLang = lang;
+  localStorage.setItem('site-lang', lang);
   await loadTranslations(lang);
   applyTranslations();
 }

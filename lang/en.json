@@ -1,47 +1,37 @@
 {
   "nav_menu": "Menu",
   "nav_lang": "PT",
-
   "hero_script": "Set the tone. Stay a while.",
   "hero_step1": "Welcome✌",
   "hero_step2": "📀 Set the tone.",
   "hero_step3": "Stay a while.",
   "hero_link": "Who's this guy?",
-
   "project_enjoei_year": "2023",
   "project_enjoei_title": "Enjoei",
   "project_enjoei_desc": "Brand identity built on structure and coherence. Custom typography and generative design tools that maintain the brand's irreverent voice.",
   "project_enjoei_tag": "Brand Identity",
-
   "project_justos_year": "2024",
   "project_justos_title": "Justos",
   "project_justos_desc": "Insurance brand identity. Bold, optimistic design with traffic-inspired shapes and custom icons for a simpler, more human experience.",
   "project_justos_tag": "Brand Identity",
-
   "project_phlor_year": "2023",
   "project_phlor_title": "Phlor",
   "project_phlor_desc": "Wellness brand identity. Typography expands gently and layouts embrace silence, focusing on essential design choices.",
   "project_phlor_tag": "Brand Identity",
-
   "explore_label": "Explore my work",
-
   "project_enjoei_bold": "Brand identity built on structure and coherence.",
   "project_enjoei_muted": "Custom typography and generative design tools that maintain the brand's irreverent voice.",
   "project_enjoei_tags": "Brand Identity, Custom Type, Generative Design",
-
   "project_justos_bold": "Bold, optimistic identity for an insurance brand.",
   "project_justos_muted": "Traffic-inspired shapes and custom icons for a simpler, more human experience.",
   "project_justos_tags": "Brand Identity, Shapes & Icons, Experience",
-
   "project_phlor_bold": "Identity for a wellness brand.",
   "project_phlor_muted": "Typography expands gently and layouts embrace silence, focusing on the essential.",
   "project_phlor_tags": "Brand Identity, Typography, Wellness",
-
   "scroll_top": "↑ top",
   "footer_tagline": "End of the page, not of ideas✦",
   "footer_contact_email": "E-mail",
   "footer_contact_whatsapp": "WhatsApp",
-
   "nav_greeting": "Hi. I'm Mauricio Filho",
   "nav_who": "Who's this guy?",
   "nav_cta": "Let's work together",
@@ -61,9 +51,7 @@
   "hero_line3": "based in São Paulo.",
   "footer_line1": "End the page, not ideas.",
   "footer_line2": "Let's Talk.",
-
   "hero_tagline": "I shape brands &\nbuild visual identities.",
-
   "bio_text": "Multidisciplinary Designer, focused on Brand & Digital. Currently independent.",
   "bio_text2": "Formerly Senior Designer at Tatil Design. Collaborated with agencies and consultancies like R/GA, Monigle (US), Marcas com Sal, among others. 9+ years building logos, visual identities, typography, iconography, packaging, signage, and campaign art direction for brands like Itaú, Ambev, Natura, Avon, Google, Danone, C6, Caixa, Enjoei, Vibra and 99 App. Recognized at the Brazilian Graphic Design Biennial, Latin American Design Awards and Brazil Design Awards.",
   "bio_head": "Multidisciplinary Designer and<br>Art Director, focused on brand & digital.",
@@ -73,15 +61,39 @@
   "bio_cta": "Let's Talk",
   "bio_copied": "E-mail copied!",
   "explore_cta": "explore my work",
-
   "footer_big": "Let's build something together.",
   "footer_new_work": "New Work:",
   "footer_available": "Available for projects:",
-
   "wt_projects": "Projects",
   "wt_services": "Services",
   "wt_year": "Year",
   "wt_credits": "Technical Sheet",
-
-  "cookie_text": "This site uses necessary cookies. By browsing, you agree to their use."
+  "cookie_text": "This site uses necessary cookies. By browsing, you agree to their use.",
+  "about_page_title": "About",
+  "about_page_sub": "Senior Brand & Visual Designer, São Paulo.",
+  "about_label_aboutme": "About me",
+  "about_label_activities": "Main Activities",
+  "about_label_recognition": "Recognition",
+  "about_label_experience": "Experience",
+  "about_label_clients": "Selected Clients",
+  "about_label_education": "Education",
+  "about_courses_label": "Courses",
+  "about_me_p1": "Nice to meet you, I'm Mauricio Filho, a Brazilian multidisciplinary designer and art director based in São Paulo. With a focus on branding and visual identity, I've worked with brands of different sizes and industries across Brazil and internationally.",
+  "about_me_p2": "I grew up in a small town in the countryside of São Paulo. Drawing, collecting magazines and comic books, and paying attention to everything around me were part of my everyday life. Long before I thought of design as a career, curiosity had already shaped the way I saw the world.",
+  "about_me_p3": "Today, I see design as a way to solve problems and create meaning. Aesthetics matter, but they should always be driven by intention. I enjoy balancing strategic thinking with sensitivity to create brands that feel human, distinctive and memorable. I'm especially drawn to projects that aren't afraid to embrace a strong personality.",
+  "about_me_p4": "Research and concept development are my favorite parts of the process. After several years working at branding agencies of different sizes and profiles, I chose to become an independent designer so I could be more involved in key decisions, dive deeper into the process, and keep expanding my creative perspective.",
+  "about_me_p5": "My work combines strategy, in-depth research and visual direction to turn ideas into cohesive brand systems designed to evolve and stay relevant over time.",
+  "about_recognition": "Brazilian Biennial of Graphic Design (02× Enjoei, 2024), Latin American Design Awards (02× Enjoei 2023, 01× Vibra 2022), Brazil Design Awards (04× Enjoei 2023, 02× Vibra 2022, 01× 99 App 2022)",
+  "about_rec_bbdg": "Brazilian Biennial of Graphic Design",
+  "about_act_1": "Branding",
+  "about_act_2": "Visual Identity",
+  "about_act_3": "Packaging",
+  "about_act_4": "Signage",
+  "about_act_5": "Campaigns",
+  "about_act_6": "Art Direction",
+  "about_act_7": "Illustration",
+  "about_course_1": "Brand Illustration, Platô Studio",
+  "about_course_2": "Brand Systems in Figma, Platô Studio",
+  "about_course_3": "UI Design, Tera",
+  "about_label_contact": "Contact"
 }

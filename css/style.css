@@ -540,6 +540,10 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   display: block;
   opacity: 0.45;
   animation: bio-bounce 1.8s ease-in-out infinite;
+  /* área de clique generosa — a seta visível tem só 9px */
+  padding: 14px;
+  margin: -8px;
+  cursor: pointer;
 }
 .wt-final-arrow::after {
   content: '';
@@ -712,6 +716,10 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   transition: opacity 0.2s;
   font-size: 0;
   line-height: 0;
+  /* área de clique generosa — a seta visível tem só 11px */
+  padding: 14px;
+  margin: -8px;
+  cursor: pointer;
 }
 .bio-scroll-down::after {
   content: '';
