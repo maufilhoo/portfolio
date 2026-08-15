@@ -342,3 +342,71 @@
   .footer-bottom-bar { font-size: 0.7rem; }
   .wl-hello { font-size: clamp(3rem, 14.4vw, 6rem); }
 }
+
+/* ─── Aviso mobile ────────────────────────────────────────────────
+   Abaixo de 768px o site mostra só uma página branca simples pedindo
+   para abrir no desktop; todo o resto da página fica oculto.        */
+.mobile-gate { display: none; }
+
+@media (max-width: 768px) {
+  html, body {
+    background: #FFFFFF !important;
+    overflow: hidden !important;
+  }
+  *, *::before, *::after { cursor: auto !important; }
+
+  body > *:not(.mobile-gate) { display: none !important; }
+
+  .mobile-gate {
+    display: flex;
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    align-items: center;
+    justify-content: center;
+    background: #FFFFFF;
+    padding: 2rem 1.75rem;
+    text-align: center;
+  }
+  .mobile-gate-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    max-width: 22rem;
+  }
+  .mobile-gate-fish { font-size: 2.25rem; line-height: 1; }
+  .mobile-gate-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.75rem;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: #111111;
+  }
+  .mobile-gate-role {
+    font-size: 0.9rem;
+    color: #6B6B6B;
+  }
+  .mobile-gate-msg {
+    margin-top: 0.75rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #111111;
+  }
+  .mobile-gate-mail {
+    margin-top: 1.25rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #111111;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .mobile-gate-links {
+    display: flex;
+    gap: 1.25rem;
+    margin-top: 0.25rem;
+    font-size: 0.85rem;
+    color: #6B6B6B;
+  }
+}

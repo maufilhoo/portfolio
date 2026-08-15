@@ -983,7 +983,7 @@ function initWorkTable() {
         ));
       }
 
-      if (hasBehance || true) {
+      if (hasBehance) {
         const bLink = document.createElement('a');
         bLink.className = 'wt-behance-btn';
         bLink.href = data.behance || '#';

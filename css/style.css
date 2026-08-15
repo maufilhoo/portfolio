@@ -1894,3 +1894,22 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   opacity: 1;
 }
 .about-contacts a:hover { opacity: 1; }
+
+/* Colaborações freelance aninhadas dentro do período independente */
+.about-exp-sub {
+  padding-left: 1rem;
+  border-left: 1px solid rgba(24,24,24,0.15);
+  margin: 0.35rem 0 0.5rem;
+}
+.about-exp-sub-label {
+  font-size: clamp(0.68rem, 0.8vw, 0.72rem);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.45;
+  padding: 0.2rem 0;
+}
+.about-exp-sub .about-exp-entry {
+  border-bottom: none;
+  padding: 0.2rem 0;
+  opacity: 0.8;
+}

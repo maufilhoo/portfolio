@@ -6,13 +6,29 @@
   <meta name="description" content="About Mauricio Filho — Independent Brand & Visual Designer. São Paulo." />
   <title>About — Mauricio Filho</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐡</text></svg>">
-  <link rel="stylesheet" href="css/style.css?v=20260713c" />
-  <link rel="stylesheet" href="css/responsive.css?v=20260713c" />
+  <link rel="stylesheet" href="css/style.css?v=20260814" />
+  <link rel="stylesheet" href="css/responsive.css?v=20260814" />
 </head>
 <body class="page-about">
 
   <audio id="bg-audio" src="assets/audio/tom-misch.mp3" loop></audio>
   <div id="overlay"></div>
+
+  <!-- ─── Aviso mobile — versão simples, pede para abrir no desktop ── -->
+  <div class="mobile-gate">
+    <div class="mobile-gate-inner">
+      <span class="mobile-gate-fish">🐡</span>
+      <h1 class="mobile-gate-name">Mauricio Filho</h1>
+      <p class="mobile-gate-role" data-i18n="mobile_gate_role">Brand &amp; Visual Designer, São Paulo.</p>
+      <p class="mobile-gate-msg" data-i18n="mobile_gate_msg">This portfolio was built for larger screens. Please open it on a desktop to see the full experience.</p>
+      <a class="mobile-gate-mail" href="mailto:talkmauriciof@gmail.com">talkmauriciof@gmail.com</a>
+      <div class="mobile-gate-links">
+        <a href="https://www.linkedin.com/in/mauriciodesignbr/" target="_blank" rel="noopener">Linkedin ↗</a>
+        <a href="https://www.behance.net/mauriciolpf" target="_blank" rel="noopener">Behance ↗</a>
+      </div>
+    </div>
+  </div>
+
 
   <!-- ─── Header ──────────────────────────────────────────────────── -->
   <header class="site-header">
@@ -101,10 +117,13 @@
       <div class="about-row-content">
         <div class="about-exp-list">
           <div class="about-exp-entry"><span>Independent</span><span class="about-exp-yr">2025 –</span></div>
-          <div class="about-exp-entry about-exp-entry--sub"><span>FutureBrand · Senior Brand Designer</span><span class="about-exp-yr">2026</span></div>
-          <div class="about-exp-entry about-exp-entry--sub"><span>R/GA · Senior Digital Designer</span><span class="about-exp-yr">2026</span></div>
-          <div class="about-exp-entry about-exp-entry--sub"><span>Marcas com Sal · Senior Brand Designer</span><span class="about-exp-yr">2026</span></div>
-          <div class="about-exp-entry about-exp-entry--sub"><span>Arco Educação · Brand Designer Specialist</span><span class="about-exp-yr">2025</span></div>
+          <div class="about-exp-sub">
+            <p class="about-exp-sub-label" data-i18n="about_exp_freelance">Freelance collaborations</p>
+            <div class="about-exp-entry about-exp-entry--sub"><span>FutureBrand · Senior Brand Designer</span><span class="about-exp-yr">2026</span></div>
+            <div class="about-exp-entry about-exp-entry--sub"><span>R/GA · Senior Digital Designer</span><span class="about-exp-yr">2026</span></div>
+            <div class="about-exp-entry about-exp-entry--sub"><span>Marcas com Sal · Senior Brand Designer</span><span class="about-exp-yr">2026</span></div>
+            <div class="about-exp-entry about-exp-entry--sub"><span>Arco Educação · Brand Designer Specialist</span><span class="about-exp-yr">2025</span></div>
+          </div>
           <div class="about-exp-entry"><span>Tátil Design</span><span class="about-exp-yr">2021 – 25</span></div>
           <div class="about-exp-entry"><span>Marcas com Sal</span><span class="about-exp-yr">2021</span></div>
           <div class="about-exp-entry"><span>Pib Club</span><span class="about-exp-yr">2019 – 20</span></div>
@@ -119,23 +138,24 @@
       <div class="about-row-label" data-i18n="about_label_clients">Selected Clients</div>
       <div class="about-row-content">
         <div class="about-clients-grid">
-          <div class="about-client-card">Itaú</div>
+          <div class="about-client-card">99 App</div>
           <div class="about-client-card">Ambev</div>
+          <div class="about-client-card">Arco Educação</div>
           <div class="about-client-card">Avon</div>
-          <div class="about-client-card">Natura</div>
+          <div class="about-client-card">C6</div>
           <div class="about-client-card">Caixa</div>
           <div class="about-client-card">Danone</div>
+          <div class="about-client-card">Dotz</div>
+          <div class="about-client-card">Enjoei</div>
+          <div class="about-client-card">Febraban</div>
+          <div class="about-client-card">Google</div>
+          <div class="about-client-card">Itaú</div>
+          <div class="about-client-card">Justos</div>
+          <div class="about-client-card">Natura</div>
           <div class="about-client-card">Raízen</div>
+          <div class="about-client-card">Smiles</div>
           <div class="about-client-card">Suzano</div>
           <div class="about-client-card">Tim</div>
-          <div class="about-client-card">99 App</div>
-          <div class="about-client-card">C6</div>
-          <div class="about-client-card">Enjoei</div>
-          <div class="about-client-card">Justos</div>
-          <div class="about-client-card">Dotz</div>
-          <div class="about-client-card">Smiles</div>
-          <div class="about-client-card">Febraban</div>
-          <div class="about-client-card">Arco Educação</div>
         </div>
       </div>
     </div>
@@ -221,6 +241,6 @@
     </div>
   </div>
 
-  <script type="module" src="js/main.js?v=20260713c"></script>
+  <script type="module" src="js/main.js?v=20260814"></script>
 </body>
 </html>
