@@ -98,5 +98,7 @@
   "about_label_contact": "Contact",
   "about_exp_freelance": "Freelance collaborations",
   "mobile_gate_role": "Brand & Visual Designer, São Paulo.",
-  "mobile_gate_msg": "This portfolio was built for larger screens. Please open it on a desktop to see the full experience."
+  "mobile_gate_msg": "This portfolio was built for larger screens. Please open it on a desktop to see the full experience.",
+  "view_list": "List",
+  "view_grid": "Grid"
 }

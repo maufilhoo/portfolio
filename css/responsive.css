@@ -345,7 +345,7 @@
 
 /* ─── Aviso mobile ────────────────────────────────────────────────
    Abaixo de 768px o site mostra só uma página branca simples pedindo
-   para abrir no desktop; todo o resto da página fica oculto.        */
+   para abrir no desktop, com uma faixa de cases rolando embaixo.     */
 .mobile-gate { display: none; }
 
 @media (max-width: 768px) {
@@ -362,11 +362,13 @@
     position: fixed;
     inset: 0;
     z-index: 99999;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
     background: #FFFFFF;
-    padding: 2rem 1.75rem;
+    padding: 2.5rem 0 0;
     text-align: center;
+    /* tipografia toda em Google Sans */
+    font-family: var(--font-body);
   }
   .mobile-gate-inner {
     display: flex;
@@ -374,10 +376,17 @@
     align-items: center;
     gap: 0.75rem;
     max-width: 22rem;
+    margin: auto;
+    padding: 0 1.75rem;
   }
-  .mobile-gate-fish { font-size: 2.25rem; line-height: 1; }
+  /* único elemento em Noto: o baiacu */
+  .mobile-gate-fish {
+    font-family: 'NotoEmoji', sans-serif;
+    font-size: 2.25rem;
+    line-height: 1;
+  }
   .mobile-gate-name {
-    font-family: var(--font-display);
+    font-family: var(--font-body);
     font-weight: 700;
     font-size: 1.75rem;
     line-height: 1.1;
@@ -409,4 +418,37 @@
     font-size: 0.85rem;
     color: #6B6B6B;
   }
+
+  /* Faixa de cases: largura total da tela, 1/3 da altura */
+  .mobile-gate-strip {
+    width: 100%;
+    height: 33vh;
+    overflow: hidden;
+    flex-shrink: 0;
+    margin-top: 1.5rem;
+  }
+  .mobile-gate-track {
+    display: flex;
+    gap: 0.5rem;
+    height: 100%;
+    width: max-content;
+    padding: 0 0.5rem;
+    animation: gate-scroll 45s linear infinite;
+  }
+  .mobile-gate-track img {
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+  }
+  /* a lista aparece duplicada, então -50% reinicia sem emenda */
+  @keyframes gate-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-gate-track { animation: none; }
 }
