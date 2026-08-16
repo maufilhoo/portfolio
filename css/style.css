@@ -831,9 +831,11 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 /* ─── Work Table ─────────────────────────────────────────────────── */
 .work-table-wrap {
   position: relative;
-  padding: 0 var(--gutter);
+  padding: 0 var(--gutter) 4rem;
   margin-top: 2.5rem;
 }
+/* na grade os cards terminam sem borda, então pede mais respiro */
+.work-table-wrap.is-grid { padding-bottom: 7rem; }
 
 .wt-hover-preview {
   position: fixed;
