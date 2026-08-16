@@ -4,3 +4,7 @@ node_modules/
 *.mp4
 *.avi
 *.mkv
+
+# Os vídeos dos cases e do feed precisam ir para o site (já comprimidos,
+# abaixo do limite de 25MB por arquivo do Cloudflare Pages).
+!assets/images/**/*.mp4

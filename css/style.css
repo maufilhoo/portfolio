@@ -1245,7 +1245,8 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   opacity: 1;
   pointer-events: auto;
 }
-.case-lb-img {
+.case-lb-img,
+.case-lb-video {
   max-width: 80vw;
   max-height: 80vh;
   object-fit: contain;
@@ -1254,6 +1255,10 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   transition: opacity 0.18s ease;
   box-shadow: 0 24px 64px rgba(0,0,0,0.5);
 }
+/* O vídeo do lightbox usa os controles nativos, então precisa do cursor
+   normal para dar play/pause (o site esconde o cursor por padrão). */
+.case-lb-video { display: none; }
+.case-lb-video, .case-lb-video::-webkit-media-controls-panel { cursor: auto !important; }
 .case-lb-img.fading { opacity: 0; }
 .case-lb-close {
   position: absolute;

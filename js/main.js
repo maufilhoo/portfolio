@@ -734,26 +734,30 @@ function initWorkTable() {
     <button class="case-lb-close" aria-label="Fechar">✕</button>
     <button class="case-lb-prev" aria-label="Anterior">‹</button>
     <img class="case-lb-img" src="" alt="">
+    <video class="case-lb-video" controls loop muted playsinline></video>
     <button class="case-lb-next" aria-label="Próxima">›</button>
     <div class="case-lb-dots"></div>
   `;
   document.body.appendChild(caseLb);
 
   const clbImg   = caseLb.querySelector('.case-lb-img');
+  const clbVideo = caseLb.querySelector('.case-lb-video');
   const clbDots  = caseLb.querySelector('.case-lb-dots');
   const clbClose = caseLb.querySelector('.case-lb-close');
   const clbPrev  = caseLb.querySelector('.case-lb-prev');
   const clbNext  = caseLb.querySelector('.case-lb-next');
-  let clbImgs = [], clbIdx = 0;
+  let clbItems = [], clbIdx = 0;
 
-  function openCaseLightbox(imgs, startIdx) {
-    clbImgs = imgs.filter(s => !s.endsWith('.mp4'));
-    clbIdx  = Math.max(0, Math.min(startIdx, clbImgs.length - 1));
+  // O lightbox mostra imagens e vídeos. Vídeo abre com controles nativos,
+  // para dar play/pause; GIF continua sendo imagem, sem controles.
+  function openCaseLightbox(items, startIdx) {
+    clbItems = items;
+    clbIdx   = Math.max(0, Math.min(startIdx, clbItems.length - 1));
     clbDots.innerHTML = '';
-    clbImgs.forEach((_, i) => {
+    clbItems.forEach((_, i) => {
       const d = document.createElement('button');
       d.className = 'case-lb-dot' + (i === clbIdx ? ' active' : '');
-      d.setAttribute('aria-label', `Imagem ${i + 1}`);
+      d.setAttribute('aria-label', `Item ${i + 1}`);
       d.addEventListener('click', e => { e.stopPropagation(); showCaseSlide(i); });
       clbDots.appendChild(d);
     });
@@ -763,31 +767,47 @@ function initWorkTable() {
 
   function showCaseSlide(idx, instant) {
     clbIdx = idx;
+    const src = clbItems[idx];
     if (!instant) clbImg.classList.add('fading');
     setTimeout(() => {
-      clbImg.src = clbImgs[idx];
+      if (src.endsWith('.mp4')) {
+        clbImg.style.display = 'none';
+        clbImg.removeAttribute('src');
+        clbVideo.style.display = 'block';
+        clbVideo.src = src;
+        clbVideo.play().catch(() => {});
+      } else {
+        clbVideo.pause();
+        clbVideo.removeAttribute('src');
+        clbVideo.style.display = 'none';
+        clbImg.style.display = 'block';
+        clbImg.src = src;
+      }
       clbImg.classList.remove('fading');
       clbDots.querySelectorAll('.case-lb-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
     }, instant ? 0 : 150);
   }
 
-  function closeCaseLightbox() { caseLb.classList.remove('visible'); }
+  function closeCaseLightbox() {
+    caseLb.classList.remove('visible');
+    clbVideo.pause();
+  }
 
   clbClose.addEventListener('click', closeCaseLightbox);
   caseLb.addEventListener('click', e => { if (e.target === caseLb) closeCaseLightbox(); });
   clbPrev.addEventListener('click', e => {
     e.stopPropagation();
-    showCaseSlide((clbIdx - 1 + clbImgs.length) % clbImgs.length);
+    showCaseSlide((clbIdx - 1 + clbItems.length) % clbItems.length);
   });
   clbNext.addEventListener('click', e => {
     e.stopPropagation();
-    showCaseSlide((clbIdx + 1) % clbImgs.length);
+    showCaseSlide((clbIdx + 1) % clbItems.length);
   });
   document.addEventListener('keydown', e => {
     if (!caseLb.classList.contains('visible')) return;
     if (e.key === 'Escape')     closeCaseLightbox();
-    if (e.key === 'ArrowLeft')  showCaseSlide((clbIdx - 1 + clbImgs.length) % clbImgs.length);
-    if (e.key === 'ArrowRight') showCaseSlide((clbIdx + 1) % clbImgs.length);
+    if (e.key === 'ArrowLeft')  showCaseSlide((clbIdx - 1 + clbItems.length) % clbItems.length);
+    if (e.key === 'ArrowRight') showCaseSlide((clbIdx + 1) % clbItems.length);
   });
 
   let caseTouchX = 0;
@@ -795,8 +815,8 @@ function initWorkTable() {
   caseLb.addEventListener('touchend', e => {
     const dx = e.changedTouches[0].clientX - caseTouchX;
     if (Math.abs(dx) > 50) dx < 0
-      ? showCaseSlide((clbIdx + 1) % clbImgs.length)
-      : showCaseSlide((clbIdx - 1 + clbImgs.length) % clbImgs.length);
+      ? showCaseSlide((clbIdx + 1) % clbItems.length)
+      : showCaseSlide((clbIdx - 1 + clbItems.length) % clbItems.length);
   });
 
   function openRow(row) {
@@ -809,6 +829,9 @@ function initWorkTable() {
   function closeRow(row) {
     row.classList.remove('is-open');
     row.querySelector('.wt-expand').classList.remove('is-open');
+    const stopVideos = () => row.querySelectorAll('video').forEach(v => v.pause());
+    stopVideos();
+    setTimeout(stopVideos, 700); // de novo depois da animação de fechar
   }
 
   function buildExpand(row) {
@@ -1016,35 +1039,59 @@ function initWorkTable() {
     const carousel = document.createElement('div');
     carousel.className = 'wt-carousel';
 
-    const imgOnlyIdxMap = []; // maps carousel child index → clbImgs index
-    let imgCount = 0;
+    const videos = [];
 
-    imgs.forEach((src, carouselIdx) => {
+    imgs.forEach((src, idx) => {
       let el;
       if (src.endsWith('.mp4')) {
         el = document.createElement('video');
         el.src       = src;
-        el.autoplay  = true;
         el.muted     = true;
         el.loop      = true;
         el.playsInline = true;
-        el.style.cssText = 'height:100%;width:auto;border-radius:6px;flex-shrink:0;display:block;';
-        imgOnlyIdxMap.push(-1);
+        el.preload   = 'metadata';
+        el.style.cssText = 'height:100%;width:auto;border-radius:6px;flex-shrink:0;display:block;cursor:pointer;';
+        videos.push(el);
       } else {
         el = document.createElement('img');
         el.src     = src;
         el.alt     = '';
         el.loading = 'lazy';
         el.style.cursor = 'pointer';
-        const thisImgIdx = imgCount++;
-        el.addEventListener('click', () => openCaseLightbox(imgs, thisImgIdx));
-        imgOnlyIdxMap.push(thisImgIdx);
+        // Reserva largura enquanto a imagem não carrega: sem isso a img fica
+        // com 0px e o carrossel calcula a rolagem e os dots errados.
+        el.style.minWidth = '240px';
+        el.addEventListener('load', () => { el.style.minWidth = ''; }, { once: true });
       }
+      el.addEventListener('click', () => openCaseLightbox(imgs, idx));
       carousel.appendChild(el);
     });
 
     carouselOuter.appendChild(carousel);
     carouselWrap.appendChild(carouselOuter);
+
+    // Vídeo fora da área visível do carrossel fica congelado no 1º frame
+    // (o Chrome não dá autoplay em quem está fora da tela). Toca só o que
+    // está à vista e pausa o resto — também evita travar a página.
+    if (videos.length) {
+      const syncVideos = () => {
+        const box = carouselOuter.getBoundingClientRect();
+        if (!box.width || !box.height) { // linha fechada: nada toca
+          videos.forEach(v => { if (!v.paused) v.pause(); });
+          return;
+        }
+        videos.forEach(v => {
+          const r = v.getBoundingClientRect();
+          const visible = r.right > box.left + 20 && r.left < box.right - 20;
+          if (visible) { if (v.paused) v.play().catch(() => {}); }
+          else if (!v.paused) v.pause();
+        });
+      };
+      carouselOuter.addEventListener('scroll', syncVideos, { passive: true });
+      window.addEventListener('resize', syncVideos);
+      setTimeout(syncVideos, 120);
+      setTimeout(syncVideos, 700); // depois da animação de abertura
+    }
 
     // Dots + scroll hint
     if (imgs.length > 1) {
