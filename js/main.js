@@ -893,13 +893,20 @@ function initWorkTable() {
         clbImg.removeAttribute('src');
         clbVideo.style.display = 'block';
         clbVideo.src = src;
-        clbVideo.play().catch(() => {});
+        clbVideo.muted = false;
+        pausarMusicaDeFundo();
+        // se o navegador barrar o autoplay com som, toca no mudo
+        clbVideo.play().catch(() => {
+          clbVideo.muted = true;
+          clbVideo.play().catch(() => {});
+        });
       } else {
         clbVideo.pause();
         clbVideo.removeAttribute('src');
         clbVideo.style.display = 'none';
         clbImg.style.display = 'block';
         clbImg.src = src;
+        retomarMusicaDeFundo();
       }
       clbImg.classList.remove('fading');
       clbDots.querySelectorAll('.case-lb-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
@@ -909,6 +916,30 @@ function initWorkTable() {
   function closeCaseLightbox() {
     caseLb.classList.remove('visible');
     clbVideo.pause();
+    retomarMusicaDeFundo();
+  }
+
+  // Vídeo com som e música de fundo não podem tocar juntos: a música sai
+  // de cena enquanto o vídeo roda e volta depois, se estava tocando.
+  let musicaEstavaTocando = false;
+
+  function pausarMusicaDeFundo() {
+    const bg = document.getElementById('bg-audio');
+    if (bg && !bg.paused) {
+      musicaEstavaTocando = true;
+      bg.pause();
+      document.getElementById('audio-btn')?.classList.remove('playing');
+    }
+  }
+
+  function retomarMusicaDeFundo() {
+    const bg = document.getElementById('bg-audio');
+    if (bg && musicaEstavaTocando) {
+      musicaEstavaTocando = false;
+      bg.play().then(() => {
+        document.getElementById('audio-btn')?.classList.add('playing');
+      }).catch(() => {});
+    }
   }
 
   clbClose.addEventListener('click', closeCaseLightbox);
