@@ -1489,13 +1489,57 @@ function initReveal() {
 }
 
 /* ─── Faixa de cases do aviso mobile ─────────────────────────────── */
-const CASE_SLUGS = ['enjoei', 'mdesign', 'justos', 'metallo', '99', 'phlor',
-  'natura-homem', 'natura-pais', 'caixa', 'martorelli', 'papeltec', 'vibra'];
+// Imagens reais dos cases (não os thumbs), sorteadas a cada visita.
+const CASE_STRIP_IMAGES = [
+  "assets/images/cases/enjoei/1.2.webp",
+  "assets/images/cases/enjoei/8.1.webp",
+  "assets/images/cases/enjoei/13.webp",
+  "assets/images/cases/mdesign/2.webp",
+  "assets/images/cases/mdesign/6.webp",
+  "assets/images/cases/mdesign/10.webp",
+  "assets/images/cases/justos/2.webp",
+  "assets/images/cases/justos/7.webp",
+  "assets/images/cases/justos/11.webp",
+  "assets/images/cases/metallo/1.webp",
+  "assets/images/cases/metallo/3.webp",
+  "assets/images/cases/metallo/5.webp",
+  "assets/images/cases/99/2.webp",
+  "assets/images/cases/99/6.webp",
+  "assets/images/cases/99/8.webp",
+  "assets/images/cases/phlor/1.webp",
+  "assets/images/cases/phlor/6.webp",
+  "assets/images/cases/phlor/11.webp",
+  "assets/images/cases/natura-homem/1.webp",
+  "assets/images/cases/natura-homem/8.webp",
+  "assets/images/cases/natura-homem/14.webp",
+  "assets/images/cases/natura-pais/1.webp",
+  "assets/images/cases/natura-pais/3.webp",
+  "assets/images/cases/natura-pais/5.webp",
+  "assets/images/cases/caixa/1.webp",
+  "assets/images/cases/caixa/4.webp",
+  "assets/images/cases/caixa/6.webp",
+  "assets/images/cases/martorelli/1.webp",
+  "assets/images/cases/martorelli/9.webp",
+  "assets/images/cases/martorelli/13.webp",
+  "assets/images/cases/papeltec/1.webp",
+  "assets/images/cases/papeltec/4.webp",
+  "assets/images/cases/papeltec/7.webp",
+  "assets/images/cases/vibra/0.webp",
+  "assets/images/cases/vibra/2.webp",
+  "assets/images/cases/vibra/4.webp"
+];
 
 function initMobileGateStrip() {
   const gate = document.querySelector('.mobile-gate');
   if (!gate || window.innerWidth > 768) return;
   if (gate.querySelector('.mobile-gate-strip')) return;
+
+  const sorteadas = [...CASE_STRIP_IMAGES];
+  for (let i = sorteadas.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [sorteadas[i], sorteadas[j]] = [sorteadas[j], sorteadas[i]];
+  }
+  const escolhidas = sorteadas.slice(0, 12);
 
   const strip = document.createElement('div');
   strip.className = 'mobile-gate-strip';
@@ -1504,9 +1548,9 @@ function initMobileGateStrip() {
   const track = document.createElement('div');
   track.className = 'mobile-gate-track';
   // lista duplicada: a animação volta ao início sem emenda
-  [...CASE_SLUGS, ...CASE_SLUGS].forEach(slug => {
+  [...escolhidas, ...escolhidas].forEach(src => {
     const img = document.createElement('img');
-    img.src = `assets/images/cases/${slug}.webp`;
+    img.src = src;
     img.alt = '';
     track.appendChild(img);
   });
