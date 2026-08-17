@@ -3,6 +3,14 @@ import { initFooterMeta } from './footer.js';
 import { initCursor } from './cursor.js';
 import { initWelcome } from './welcome.js';
 
+/* ─── Versão das mídias ──────────────────────────────────────────────
+   Imagens e vídeos ficam 4h no cache do navegador. Sem uma versão na
+   URL, trocar um thumb ou reencodar um vídeo não chega em quem já
+   visitou o site. Suba MEDIA_VERSION sempre que substituir um arquivo
+   de assets/images/ mantendo o mesmo nome.                            */
+const MEDIA_VERSION = '20260816g';
+const mediaUrl = src => src + (src.includes('?') ? '&' : '?') + 'v=' + MEDIA_VERSION;
+
 /* ─── Overlay ────────────────────────────────────────────────────── */
 function initOverlay() {
   const overlay = document.getElementById('overlay');
@@ -254,11 +262,11 @@ function initFeedShowcase() {
       el.muted = true;
       el.playsInline = true;
       el.loop = false;
-      el.src = src;
+      el.src = mediaUrl(src);
       el.addEventListener('ended', () => { clearTimeout(timer); next(); });
     } else {
       el = document.createElement('img');
-      el.src = src;
+      el.src = mediaUrl(src);
       el.alt = '';
     }
     el.className = 'feed-media';
@@ -302,10 +310,14 @@ const PROJECT_DATA = {
           "pt": "Design",
           "en": "Design"
         },
-        "Eduardo França, Gustavo André, Mauricio Filho, Mariana Hermeto",
+        "Eduardo França, Gustavo André, Mauricio Filho, Mariana Hermeto"
+      ],
+      [
         {
-          "dir": "Dandara Almeida"
-        }
+          "pt": "Direção Criativa",
+          "en": "Creative Direction"
+        },
+        "Dandara Almeida"
       ],
       [
         {
@@ -377,10 +389,14 @@ const PROJECT_DATA = {
           "pt": "Design",
           "en": "Design"
         },
-        "Camilla Mattos, Gustavo André, Eduardo França, Mauricio Filho, Mariana Hermeto",
+        "Camilla Mattos, Gustavo André, Eduardo França, Mauricio Filho, Mariana Hermeto"
+      ],
+      [
         {
-          "dir": "Dandara Almeida"
-        }
+          "pt": "Direção Criativa",
+          "en": "Creative Direction"
+        },
+        "Dandara Almeida"
       ],
       [
         {
@@ -421,10 +437,14 @@ const PROJECT_DATA = {
           "pt": "Design",
           "en": "Design"
         },
-        "Gustavo André, Eduardo França, Mauricio Filho, Lays Santos",
+        "Gustavo André, Eduardo França, Mauricio Filho, Lays Santos"
+      ],
+      [
         {
-          "dir": "Dandara Almeida"
-        }
+          "pt": "Direção Criativa",
+          "en": "Creative Direction"
+        },
+        "Dandara Almeida"
       ],
       [
         {
@@ -481,10 +501,10 @@ const PROJECT_DATA = {
     "credits": [
       [
         {
-          "pt": "Direção Criativa",
-          "en": "Creative Direction"
+          "pt": "Design",
+          "en": "Design"
         },
-        "Julia Liberati, Beto Bicesto"
+        "Cahue Abatipietro, Carolina Pinheiro, Gustavo Crivellari, Mauricio Filho"
       ],
       [
         {
@@ -495,10 +515,10 @@ const PROJECT_DATA = {
       ],
       [
         {
-          "pt": "Design",
-          "en": "Design"
+          "pt": "Direção Criativa",
+          "en": "Creative Direction"
         },
-        "Cahue Abatipietro, Carolina Pinheiro, Gustavo Crivellari, Mauricio Filho"
+        "Julia Liberati, Beto Bicesto"
       ],
       [
         {
@@ -547,10 +567,10 @@ const PROJECT_DATA = {
     "credits": [
       [
         {
-          "pt": "Direção Criativa",
-          "en": "Creative Direction"
+          "pt": "Design",
+          "en": "Design"
         },
-        "Julia Liberati, Beto Bicesto"
+        "Mauricio Filho, Gabriel Kalani"
       ],
       [
         {
@@ -561,10 +581,10 @@ const PROJECT_DATA = {
       ],
       [
         {
-          "pt": "Design",
-          "en": "Design"
+          "pt": "Direção Criativa",
+          "en": "Creative Direction"
         },
-        "Mauricio Filho, Gabriel Kalani"
+        "Julia Liberati, Beto Bicesto"
       ],
       [
         {
@@ -606,10 +626,10 @@ const PROJECT_DATA = {
     "credits": [
       [
         {
-          "pt": "Direção Criativa",
-          "en": "Creative Direction"
+          "pt": "Design",
+          "en": "Design"
         },
-        "Beto Bicesto"
+        "Adson Rodrigues, Gabriel Kalani, Mauricio Filho"
       ],
       [
         {
@@ -620,10 +640,10 @@ const PROJECT_DATA = {
       ],
       [
         {
-          "pt": "Design",
-          "en": "Design"
+          "pt": "Direção Criativa",
+          "en": "Creative Direction"
         },
-        "Adson Rodrigues, Gabriel Kalani, Mauricio Filho"
+        "Beto Bicesto"
       ],
       [
         {
@@ -708,10 +728,14 @@ const PROJECT_DATA = {
           "pt": "Design",
           "en": "Design"
         },
-        "Camilla Mattos, Eduardo França, Gustavo André, Mauricio Filho, Priscila Czuka",
+        "Camilla Mattos, Eduardo França, Gustavo André, Mauricio Filho, Priscila Czuka"
+      ],
+      [
         {
-          "dir": "Dandara Almeida"
-        }
+          "pt": "Direção Criativa",
+          "en": "Creative Direction"
+        },
+        "Dandara Almeida"
       ],
       [
         {
@@ -758,7 +782,7 @@ function initWorkTable() {
           // Usa a capa do case, não o 1º item do carrossel — que pode ser
           // um vídeo e deixaria o preview quebrado.
           if (imgs.length) {
-            previewImg.src = `assets/images/cases/${row.dataset.project}.webp`;
+            previewImg.src = mediaUrl(`assets/images/cases/${row.dataset.project}.webp`);
             preview.classList.add('visible');
           }
         } catch(e) {}
@@ -791,7 +815,7 @@ function initWorkTable() {
 
       const img = document.createElement('img');
       img.className = 'wt-card-img';
-      img.src = `assets/images/cases/${row.dataset.project}.webp`;
+      img.src = mediaUrl(`assets/images/cases/${row.dataset.project}.webp`);
       img.alt = '';
       img.loading = 'lazy';
 
@@ -810,9 +834,22 @@ function initWorkTable() {
       sector.className = 'wt-card-sector';
       sector.textContent = row.querySelector('.wt-sector').textContent;
 
+      // Serviços viram pílulas, no mesmo desenho do menu do header
+      const tags = document.createElement('span');
+      tags.className = 'wt-card-tags';
+      row.querySelector('.wt-services').textContent.split('·').forEach(t => {
+        const txt = t.trim();
+        if (!txt) return;
+        const tag = document.createElement('span');
+        tag.className = 'wt-card-tag';
+        tag.textContent = txt;
+        tags.appendChild(tag);
+      });
+
       card.appendChild(img);
       card.appendChild(info);
       card.appendChild(sector);
+      card.appendChild(tags);
 
       // Clicar no card volta para a lista já com o case aberto
       card.addEventListener('click', () => {
@@ -892,7 +929,7 @@ function initWorkTable() {
         clbImg.style.display = 'none';
         clbImg.removeAttribute('src');
         clbVideo.style.display = 'block';
-        clbVideo.src = src;
+        clbVideo.src = mediaUrl(src);
         clbVideo.muted = false;
         pausarMusicaDeFundo();
         // se o navegador barrar o autoplay com som, toca no mudo
@@ -905,7 +942,7 @@ function initWorkTable() {
         clbVideo.removeAttribute('src');
         clbVideo.style.display = 'none';
         clbImg.style.display = 'block';
-        clbImg.src = src;
+        clbImg.src = mediaUrl(src);
         retomarMusicaDeFundo();
       }
       clbImg.classList.remove('fading');
@@ -1194,7 +1231,7 @@ function initWorkTable() {
       let el;
       if (src.endsWith('.mp4')) {
         el = document.createElement('video');
-        el.src       = src;
+        el.src       = mediaUrl(src);
         el.muted     = true;
         el.loop      = true;
         el.playsInline = true;
@@ -1203,7 +1240,7 @@ function initWorkTable() {
         videos.push(el);
       } else {
         el = document.createElement('img');
-        el.src     = src;
+        el.src     = mediaUrl(src);
         el.alt     = '';
         el.loading = 'lazy';
         el.style.cursor = 'pointer';
@@ -1581,7 +1618,7 @@ function initMobileGateStrip() {
   // lista duplicada: a animação volta ao início sem emenda
   [...escolhidas, ...escolhidas].forEach(src => {
     const img = document.createElement('img');
-    img.src = src;
+    img.src = mediaUrl(src);
     img.alt = '';
     track.appendChild(img);
   });
@@ -1598,7 +1635,7 @@ function initMobileRowThumbs() {
     const head = row.querySelector('.wt-row-head');
     if (!head) return;
     const img = document.createElement('img');
-    img.src = `assets/images/cases/${project}.webp`;
+    img.src = mediaUrl(`assets/images/cases/${project}.webp`);
     img.alt = '';
     img.className = 'wt-row-thumb';
     head.prepend(img);
