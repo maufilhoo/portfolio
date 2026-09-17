@@ -1449,7 +1449,16 @@ function initTaglineSequence() {
   const lastStep = getTranslation('hero_step2');
   const pool     = [getTranslation('hero_step3')];
 
-  tagline.innerHTML = wrapEmoji(step1);
+  tagline.classList.add('is-final');
+  tagline.innerHTML = `<span class="wt-text"></span><span class="wt-final-arrow"></span>`;
+  const textEl  = tagline.querySelector('.wt-text');
+  const arrowEl = tagline.querySelector('.wt-final-arrow');
+  arrowEl.addEventListener('click', e => {
+    e.stopPropagation();
+    const next = document.querySelector('.bio-section');
+    if (next) next.scrollIntoView({ behavior: 'smooth' });
+  });
+  textEl.innerHTML = wrapEmoji(step1);
 
   function fadeOut(cb) {
     tagline.style.transition = 'opacity 0.4s ease';
@@ -1474,22 +1483,19 @@ function initTaglineSequence() {
     let i = 0;
 
     function showFinal() {
-      tagline.classList.add('is-final');
-      tagline.innerHTML = `<span>${wrapEmoji(step1)}</span><span class="wt-final-arrow"></span>`;
+      textEl.innerHTML = wrapEmoji(step1);
       fadeIn();
       setTimeout(() => {
-        fadeOut(() => {
-          tagline.classList.remove('is-final');
-          runCycle(true);
-        });
+        fadeOut(() => runCycle(true));
       }, 4000);
     }
 
     function showStep() {
       if (i >= steps.length) {
-        tagline.innerHTML = wrapEmoji(lastStep);
+        textEl.innerHTML = wrapEmoji(lastStep);
         tagline.style.cursor = 'pointer';
-        function onDiscoClick() {
+        function onDiscoClick(e) {
+          if (e.target.closest('.wt-final-arrow')) return;
           const audioBtn = document.getElementById('audio-btn');
           if (audioBtn) audioBtn.click();
         }
@@ -1502,7 +1508,7 @@ function initTaglineSequence() {
         }, 2000);
         return;
       }
-      tagline.innerHTML = wrapEmoji(steps[i++]);
+      textEl.innerHTML = wrapEmoji(steps[i++]);
       fadeIn();
       setTimeout(() => fadeOut(showStep), 1500);
     }
