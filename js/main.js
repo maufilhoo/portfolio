@@ -342,7 +342,14 @@ function initFeedShowcase() {
       while (rowWidth < targetW) {
         const exclude = new Set();
         if (lastProject) exclude.add(lastProject);
-        if (aboveRow && aboveRow[i]) exclude.add(aboveRow[i].project);
+        // Many qualifying images end up similar widths, so tiles often line
+        // up into real columns — check the row above's diagonal neighbors
+        // too, or the same case ends up touching corner-to-corner.
+        if (aboveRow) {
+          for (const j of [i - 1, i, i + 1]) {
+            if (aboveRow[j]) exclude.add(aboveRow[j].project);
+          }
+        }
         const item = feedPool.take(exclude);
         lastProject = item.project;
         rowItems.push(item);
@@ -1116,6 +1123,14 @@ function initWorkTable() {
   function renderSlider() {
     if (!clbSlideEls.length || clbSpan <= 0) return;
 
+    // Keep current/target from drifting into huge numbers when a lot of
+    // dragging happens without the rAF loop ever getting to run this.
+    if (clbCurrent > clbSpan || clbCurrent < -clbSpan) {
+      const shift = Math.trunc(clbCurrent / clbSpan) * clbSpan;
+      clbCurrent -= shift;
+      clbTarget   -= shift;
+    }
+
     const w = clbSlider.clientWidth || window.innerWidth;
     const half = w / 2;
 
@@ -1136,11 +1151,6 @@ function initWorkTable() {
 
   function tickSlider() {
     if (clbSpan > 0) {
-      if (clbCurrent > clbSpan || clbCurrent < -clbSpan) {
-        const shift = Math.trunc(clbCurrent / clbSpan) * clbSpan;
-        clbCurrent -= shift;
-        clbTarget   -= shift;
-      }
       clbCurrent += (clbTarget - clbCurrent) * CLB_EASE;
       renderSlider();
     }
