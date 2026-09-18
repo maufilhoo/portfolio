@@ -205,33 +205,6 @@ function initBioFade() {
   update();
 }
 
-/* ─── Feed items ─────────────────────────────────────────────────── */
-const FEED_ITEMS = [
-  'assets/images/feed/1.webp',
-  'assets/images/feed/2.webp',
-  'assets/images/feed/3.webp',
-  'assets/images/feed/4.webp',
-  'assets/images/feed/5.webp',
-  'assets/images/feed/6.gif',
-  'assets/images/feed/7.webp',
-  'assets/images/feed/8.gif',
-  'assets/images/feed/9.webp',
-  'assets/images/feed/10.mp4',
-  'assets/images/feed/11.webp',
-  'assets/images/feed/12.gif',
-  'assets/images/feed/13.webp',
-  'assets/images/feed/14.webp',
-  'assets/images/feed/15.webp',
-  'assets/images/feed/16.webp',
-  'assets/images/feed/17.webp',
-  'assets/images/feed/18.webp',
-  'assets/images/feed/19.webp',
-  'assets/images/feed/20.webp',
-  'assets/images/feed/21.gif',
-  'assets/images/feed/22.webp',
-  'assets/images/feed/23.webp',
-];
-
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -240,60 +213,291 @@ function shuffle(arr) {
   return arr;
 }
 
-/* ─── Feed showcase (random auto-play) ──────────────────────────── */
+/* ─── Feed showcase (draggable grid) ─────────────────────────────── */
+function mulberry32(seed) {
+  let a = seed >>> 0;
+  return () => {
+    a = (a + 0x6d2b79f5) >>> 0;
+    let t = a;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+// Shuffled pool of case media the feed draws tiles from, refilling and
+// reshuffling once exhausted; `take` skips items from `excludeProject` so a
+// project's own images don't land right next to each other.
+function makeFeedPool(items, seed) {
+  const rand = mulberry32(seed);
+  let queue = [];
+  function refill() {
+    queue = items.slice();
+    for (let i = queue.length - 1; i > 0; i--) {
+      const j = Math.floor(rand() * (i + 1));
+      [queue[i], queue[j]] = [queue[j], queue[i]];
+    }
+  }
+  refill();
+  return {
+    // `exclude` is a Set of project slugs that must not be picked (the
+    // left neighbor and whatever sits directly above, so the same case
+    // never stacks next to or on top of itself).
+    take(exclude) {
+      for (let attempt = 0; attempt < items.length * 2; attempt++) {
+        if (queue.length === 0) refill();
+        const idx = queue.findIndex(it => !exclude.has(it.project));
+        if (idx !== -1) return queue.splice(idx, 1)[0];
+        refill();
+      }
+      // Every shuffled draw kept landing on an excluded project — fall back
+      // to a full scan of the whole pool rather than ever breaking the rule.
+      const idx = queue.findIndex(it => !exclude.has(it.project));
+      if (idx !== -1) return queue.splice(idx, 1)[0];
+      const fallback = items.find(it => !exclude.has(it.project));
+      return fallback || queue.pop();
+    }
+  };
+}
+
 function initFeedShowcase() {
   const section = document.getElementById('work');
   if (!section) return;
 
-  const items = [...FEED_ITEMS];
-  let idx = 0;
-  let current = null;
-  let timer = null;
+  const ROW_H        = 200;
+  const GAP          = 10;
+  const ROWS         = 8;
+  const MAX_PER_CASE = 5;
+  const MIN_RATIO    = 1.3; // roughly landscape, in the spirit of 16:9
 
-  function next() {
-    if (idx >= items.length) { idx = 0; }
-    const src = items[idx++];
-    const isVideo = src.endsWith('.mp4');
+  // Each case contributes at most its 5 most landscape-leaning images —
+  // portraits and squares are skipped entirely.
+  const candidatesByProject = new Map();
+  document.querySelectorAll('.work-table .wt-row[data-project]').forEach(row => {
+    const project = row.dataset.project;
+    let imgs = [];
+    try { imgs = JSON.parse(row.dataset.images || '[]'); } catch (e) {}
+    const list = imgs.filter(src => !src.endsWith('.mp4')).map(src => ({ src, project, ratio: 1 }));
+    if (list.length) candidatesByProject.set(project, list);
+  });
+  if (!candidatesByProject.size) return;
+  const allCandidates = [].concat(...candidatesByProject.values());
 
-    let el;
-    if (isVideo) {
-      el = document.createElement('video');
-      el.autoplay = true;
-      el.muted = true;
-      el.playsInline = true;
-      el.loop = false;
-      el.src = mediaUrl(src);
-      el.addEventListener('ended', () => { clearTimeout(timer); next(); });
+  const viewport = document.createElement('div');
+  viewport.className = 'feed-viewport';
+  section.appendChild(viewport);
+
+  const grid = document.createElement('div');
+  grid.className = 'feed-grid';
+  viewport.appendChild(grid);
+
+  const scrollDown = document.createElement('button');
+  scrollDown.className = 'feed-scroll-down';
+  scrollDown.setAttribute('aria-label', 'Ver mais trabalhos');
+  scrollDown.addEventListener('click', () => {
+    const next = document.querySelector('.work-table-wrap');
+    if (next) next.scrollIntoView({ behavior: 'smooth' });
+  });
+  section.appendChild(scrollDown);
+
+  const ROW_STEP = ROW_H + GAP;
+  const SPAN_Y   = ROWS * ROW_STEP;
+
+  let x = 0, y = 0;
+  let minX = 0, maxX = 0;
+  let initialized = false;
+  let rowEls = [];
+  let feedPool = null;
+
+  function clamp(v, mn, mx) { return Math.min(Math.max(v, mn), mx); }
+  function wrapVal(v, span) { return ((v % span) + span) % span; }
+
+  // Rows loop vertically forever — each row is positioned independently so
+  // it can wrap back to the top the instant it scrolls past the bottom.
+  function render() {
+    rowEls.forEach((rowEl, r) => {
+      const rawY = r * ROW_STEP + y;
+      const wrappedY = wrapVal(rawY + ROW_STEP, SPAN_Y) - ROW_STEP;
+      rowEl.style.transform = `translate3d(${x}px, ${wrappedY}px, 0)`;
+    });
+  }
+
+  function buildGrid() {
+    const w = viewport.clientWidth;
+    const targetW = w * 2;
+
+    grid.innerHTML = '';
+    rowEls = [];
+    let gridW = 0;
+    let aboveRow = null;
+
+    for (let r = 0; r < ROWS; r++) {
+      const rowEl = document.createElement('div');
+      rowEl.className = 'feed-row';
+
+      let rowWidth = 0;
+      const rowItems = [];
+      let lastProject = null;
+      let i = 0;
+      while (rowWidth < targetW) {
+        const exclude = new Set();
+        if (lastProject) exclude.add(lastProject);
+        if (aboveRow && aboveRow[i]) exclude.add(aboveRow[i].project);
+        const item = feedPool.take(exclude);
+        lastProject = item.project;
+        rowItems.push(item);
+
+        const tileW = Math.max(60, Math.round(ROW_H * item.ratio));
+        const tile = document.createElement('div');
+        tile.className = 'feed-tile';
+        tile.style.width = tileW + 'px';
+        tile.dataset.project = item.project;
+        tile.dataset.src = item.src;
+
+        const img = document.createElement('img');
+        img.src = mediaUrl(item.src);
+        img.alt = '';
+        tile.appendChild(img);
+
+        const infoRow = document.querySelector(
+          `.work-table .wt-row[data-project="${item.project}"]`
+        );
+        if (infoRow) {
+          const info = document.createElement('div');
+          info.className = 'feed-tile-info';
+          const name = document.createElement('span');
+          name.className = 'feed-tile-name';
+          name.textContent = infoRow.querySelector('.wt-name').textContent;
+          const year = document.createElement('span');
+          year.className = 'feed-tile-year';
+          year.textContent = infoRow.querySelector('.wt-year').textContent;
+          info.appendChild(name);
+          info.appendChild(year);
+          tile.appendChild(info);
+        }
+
+        rowEl.appendChild(tile);
+        rowWidth += tileW + GAP;
+        i++;
+      }
+
+      aboveRow = rowItems;
+      gridW = Math.max(gridW, rowWidth - GAP);
+      grid.appendChild(rowEl);
+      rowEls.push(rowEl);
+    }
+
+    maxX = 0;
+    minX = Math.min(0, w - gridW - GAP);
+
+    // start midway so there's room to drag in every direction right away
+    x = initialized ? clamp(x, minX, maxX) : minX / 2;
+    initialized = true;
+    render();
+  }
+
+  // Real aspect ratios are needed before picking which images qualify as
+  // landscape — tiles then keep the row height fixed and let width follow
+  // each image's natural proportions.
+  Promise.all(allCandidates.map(item => new Promise(resolve => {
+    const probe = new Image();
+    probe.onload  = () => { item.ratio = (probe.naturalWidth / probe.naturalHeight) || 1; resolve(); };
+    probe.onerror = () => resolve();
+    probe.src = mediaUrl(item.src);
+  }))).then(() => {
+    const finalPool = [];
+    candidatesByProject.forEach(list => {
+      finalPool.push(...list.filter(it => it.ratio >= MIN_RATIO).slice(0, MAX_PER_CASE));
+    });
+    if (!finalPool.length) return;
+    feedPool = makeFeedPool(finalPool, 0xc0ffee);
+    buildGrid();
+  });
+
+  window.addEventListener('resize', () => { if (feedPool) buildGrid(); });
+
+  // ── Drag (pointer) with momentum — Y is unbounded, it just loops ──
+  let dragging = false;
+  let startX = 0, startY = 0, startTx = 0, startTy = 0;
+  let lastX = 0, lastY = 0, lastT = 0;
+  let vx = 0, vy = 0;
+  let momentumFrame = null;
+
+  function stopMomentum() {
+    if (momentumFrame) { cancelAnimationFrame(momentumFrame); momentumFrame = null; }
+  }
+
+  function runMomentum() {
+    vx *= 0.94;
+    vy *= 0.94;
+    x = clamp(x + vx, minX, maxX);
+    y += vy;
+    render();
+    if (Math.abs(vx) > 0.05 || Math.abs(vy) > 0.05) {
+      momentumFrame = requestAnimationFrame(runMomentum);
     } else {
-      el = document.createElement('img');
-      el.src = mediaUrl(src);
-      el.alt = '';
-    }
-    el.className = 'feed-media';
-    section.appendChild(el);
-
-    const old = current;
-    current = el;
-
-    requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('visible')));
-
-    if (old) {
-      old.classList.remove('visible');
-      setTimeout(() => { if (old.parentNode) old.remove(); }, 750);
-    }
-
-    if (!isVideo) {
-      clearTimeout(timer);
-      timer = setTimeout(next, 2500);
+      momentumFrame = null;
     }
   }
 
-  section.addEventListener('click', () => {
-    clearTimeout(timer);
-    next();
+  viewport.addEventListener('pointerdown', e => {
+    stopMomentum();
+    dragging = true;
+    viewport.classList.add('is-dragging');
+    startX = lastX = e.clientX;
+    startY = lastY = e.clientY;
+    startTx = x; startTy = y;
+    lastT = performance.now();
+    vx = 0; vy = 0;
+    viewport.setPointerCapture(e.pointerId);
   });
 
-  next();
+  viewport.addEventListener('pointermove', e => {
+    if (!dragging) return;
+    const now = performance.now();
+    const dt = Math.max(1, now - lastT);
+    x = clamp(startTx + (e.clientX - startX), minX, maxX);
+    y = startTy + (e.clientY - startY);
+    vx = (e.clientX - lastX) / dt * 16;
+    vy = (e.clientY - lastY) / dt * 16;
+    lastX = e.clientX; lastY = e.clientY; lastT = now;
+    render();
+  });
+
+  function endDrag(e) {
+    if (!dragging) return;
+    dragging = false;
+    viewport.classList.remove('is-dragging');
+    const moved = Math.hypot(e.clientX - startX, e.clientY - startY);
+    if (moved > 5) {
+      momentumFrame = requestAnimationFrame(runMomentum);
+    }
+  }
+  viewport.addEventListener('pointerup', endDrag);
+  viewport.addEventListener('pointercancel', endDrag);
+
+  // ── Wheel pan ────────────────────────────────────────────────────
+  viewport.addEventListener('wheel', e => {
+    e.preventDefault();
+    stopMomentum();
+    x = clamp(x - e.deltaX, minX, maxX);
+    y -= e.deltaY;
+    render();
+  }, { passive: false });
+
+  // ── Double-click opens the case in the full-screen slider ─────────
+  viewport.addEventListener('dblclick', e => {
+    const tile = e.target.closest('.feed-tile');
+    if (!tile || !window.__openCaseLightbox) return;
+    const project = tile.dataset.project;
+    const src = tile.dataset.src;
+    const row = document.querySelector(`.work-table .wt-row[data-project="${project}"]`);
+    if (!row) return;
+    let items = [];
+    try { items = JSON.parse(row.dataset.images || '[]'); } catch (err) {}
+    const idx = Math.max(0, items.indexOf(src));
+    window.__openCaseLightbox(items, idx, project);
+  });
 }
 
 /* ─── Project data ───────────────────────────────────────────────── */
@@ -800,210 +1004,234 @@ function initWorkTable() {
     });
   });
 
-  // ── Alternar entre lista e grade ──────────────────────────────
-  (function initViewToggle() {
-    const toolbar = wrap.querySelector('.wt-toolbar');
-    const table   = wrap.querySelector('.work-table');
-    if (!toolbar || !table) return;
-
-    const grid = document.createElement('div');
-    grid.className = 'work-grid';
-
-    rows.forEach(row => {
-      const card = document.createElement('button');
-      card.className = 'wt-card';
-
-      const img = document.createElement('img');
-      img.className = 'wt-card-img';
-      img.src = mediaUrl(`assets/images/cases/${row.dataset.project}.webp`);
-      img.alt = '';
-      img.loading = 'lazy';
-
-      const info = document.createElement('span');
-      info.className = 'wt-card-info';
-      const name = document.createElement('span');
-      name.className = 'wt-card-name';
-      name.textContent = row.querySelector('.wt-name').textContent;
-      const year = document.createElement('span');
-      year.className = 'wt-card-year';
-      year.textContent = row.querySelector('.wt-year').textContent;
-      info.appendChild(name);
-      info.appendChild(year);
-
-      const sector = document.createElement('span');
-      sector.className = 'wt-card-sector';
-      sector.textContent = row.querySelector('.wt-sector').textContent;
-
-      // Serviços viram pílulas, no mesmo desenho do menu do header
-      const tags = document.createElement('span');
-      tags.className = 'wt-card-tags';
-      row.querySelector('.wt-services').textContent.split('·').forEach(t => {
-        const txt = t.trim();
-        if (!txt) return;
-        const tag = document.createElement('span');
-        tag.className = 'wt-card-tag';
-        tag.textContent = txt;
-        tags.appendChild(tag);
-      });
-
-      card.appendChild(img);
-      card.appendChild(info);
-      card.appendChild(sector);
-      card.appendChild(tags);
-
-      // Clicar no card volta para a lista já com o case aberto
-      card.addEventListener('click', () => {
-        setView('list');
-        if (!row.classList.contains('is-open')) row.querySelector('.wt-row-head').click();
-        requestAnimationFrame(() => row.scrollIntoView({ behavior: 'smooth', block: 'start' }));
-      });
-
-      grid.appendChild(card);
-    });
-
-    table.after(grid);
-
-    function setView(view) {
-      wrap.classList.toggle('is-grid', view === 'grid');
-      toolbar.querySelectorAll('.wt-view-btn').forEach(b =>
-        b.classList.toggle('is-active', b.dataset.view === view));
-      localStorage.setItem('work-view', view);
-      if (view === 'grid' && activeRow) { closeRow(activeRow); activeRow = null; }
-    }
-
-    toolbar.querySelectorAll('.wt-view-btn').forEach(b =>
-      b.addEventListener('click', () => setView(b.dataset.view)));
-
-    setView(localStorage.getItem('work-view') === 'grid' ? 'grid' : 'list');
-  })();
-
   document.getElementById('lang-round')?.addEventListener('click', () => {
     if (activeRow) { closeRow(activeRow); activeRow = null; }
     wrap.querySelectorAll('.wt-expand-inner[data-built]').forEach(el => delete el.dataset.built);
   });
 
-  // ── Case lightbox ────────────────────────────────────────────
+  // ── Case lightbox — smooth-scroll slider ─────────────────────────
   const caseLb = document.createElement('div');
   caseLb.id = 'case-lightbox';
   caseLb.innerHTML = `
     <button class="case-lb-close" aria-label="Fechar">✕</button>
-    <button class="case-lb-prev" aria-label="Anterior">‹</button>
-    <img class="case-lb-img" src="" alt="">
-    <video class="case-lb-video" controls loop muted playsinline></video>
-    <button class="case-lb-next" aria-label="Próxima">›</button>
-    <div class="case-lb-dots"></div>
+    <div class="case-lb-progress"><div class="case-lb-progress-fill"></div></div>
+    <button class="case-lb-more" type="button" data-i18n="case_lb_more">Learn more →</button>
+    <div class="case-lb-slider"></div>
   `;
   document.body.appendChild(caseLb);
 
-  const clbImg   = caseLb.querySelector('.case-lb-img');
-  const clbVideo = caseLb.querySelector('.case-lb-video');
-  const clbDots  = caseLb.querySelector('.case-lb-dots');
-  const clbClose = caseLb.querySelector('.case-lb-close');
-  const clbPrev  = caseLb.querySelector('.case-lb-prev');
-  const clbNext  = caseLb.querySelector('.case-lb-next');
-  let clbItems = [], clbIdx = 0;
+  const clbClose    = caseLb.querySelector('.case-lb-close');
+  const clbMore     = caseLb.querySelector('.case-lb-more');
+  const clbSlider   = caseLb.querySelector('.case-lb-slider');
+  const clbProgress = caseLb.querySelector('.case-lb-progress-fill');
 
-  // O lightbox mostra imagens e vídeos. Vídeo abre com controles nativos,
-  // para dar play/pause; GIF continua sendo imagem, sem controles.
-  function openCaseLightbox(items, startIdx) {
-    clbItems = items;
-    clbIdx   = Math.max(0, Math.min(startIdx, clbItems.length - 1));
-    clbDots.innerHTML = '';
-    clbItems.forEach((_, i) => {
-      const d = document.createElement('button');
-      d.className = 'case-lb-dot' + (i === clbIdx ? ' active' : '');
-      d.setAttribute('aria-label', `Item ${i + 1}`);
-      d.addEventListener('click', e => { e.stopPropagation(); showCaseSlide(i); });
-      clbDots.appendChild(d);
+  const CLB_GAP       = 32;
+  const CLB_EASE      = 0.08;
+  const CLB_MAX_SCALE = 1.05;
+  const CLB_MIN_SCALE = 0.9;
+  const CLB_DIM       = 0.5;
+  const CLB_RATIO_FALLBACK = 16 / 9;
+
+  const clbRatioCache = new Map();
+
+  let clbSlideEls  = [];  // { el, baseX, w }
+  let clbUnitSpan  = 0;   // width of one full pass through the real items
+  let clbSpan      = 0;   // width of the fully repeated, rendered sequence
+  let clbTarget = 0, clbCurrent = 0;
+  let clbRafId = null;
+  let clbPointerId = null, clbLastX = 0;
+
+  function clbWrapVal(v, span) { return ((v % span) + span) % span; }
+  function clbClampVal(v, mn, mx) { return Math.min(mx, Math.max(mn, v)); }
+
+  function clbGetRatio(src) {
+    if (src.endsWith('.mp4')) return Promise.resolve(clbRatioCache.get(src) || CLB_RATIO_FALLBACK);
+    if (clbRatioCache.has(src)) return Promise.resolve(clbRatioCache.get(src));
+    return new Promise(resolve => {
+      const probe = new Image();
+      probe.onload  = () => {
+        const r = (probe.naturalWidth / probe.naturalHeight) || CLB_RATIO_FALLBACK;
+        clbRatioCache.set(src, r);
+        resolve(r);
+      };
+      probe.onerror = () => resolve(CLB_RATIO_FALLBACK);
+      probe.src = mediaUrl(src);
     });
-    showCaseSlide(clbIdx, true);
-    caseLb.classList.add('visible');
   }
 
-  function showCaseSlide(idx, instant) {
-    clbIdx = idx;
-    const src = clbItems[idx];
-    if (!instant) clbImg.classList.add('fading');
-    setTimeout(() => {
-      if (src.endsWith('.mp4')) {
-        clbImg.style.display = 'none';
-        clbImg.removeAttribute('src');
-        clbVideo.style.display = 'block';
-        clbVideo.src = mediaUrl(src);
-        clbVideo.muted = false;
-        pausarMusicaDeFundo();
-        // se o navegador barrar o autoplay com som, toca no mudo
-        clbVideo.play().catch(() => {
-          clbVideo.muted = true;
-          clbVideo.play().catch(() => {});
-        });
-      } else {
-        clbVideo.pause();
-        clbVideo.removeAttribute('src');
-        clbVideo.style.display = 'none';
-        clbImg.style.display = 'block';
-        clbImg.src = mediaUrl(src);
-        retomarMusicaDeFundo();
-      }
-      clbImg.classList.remove('fading');
-      clbDots.querySelectorAll('.case-lb-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
-    }, instant ? 0 : 150);
+  async function buildSlides(items, slideH) {
+    const ratios = await Promise.all(items.map(clbGetRatio));
+
+    let cum = 0;
+    const unit = items.map((src, i) => {
+      const w = Math.round(slideH * ratios[i]);
+      const offset = cum;
+      cum += w + CLB_GAP;
+      return { src, w, offset };
+    });
+    clbUnitSpan = cum;
+
+    const viewportW = clbSlider.clientWidth || window.innerWidth;
+    const repeats = Math.max(1, Math.ceil((viewportW * 3) / clbUnitSpan));
+    clbSpan = repeats * clbUnitSpan;
+
+    clbSlider.innerHTML = '';
+    clbSlideEls = [];
+    for (let r = 0; r < repeats; r++) {
+      unit.forEach(u => {
+        const slide = document.createElement('div');
+        slide.className = 'case-lb-slide';
+        slide.style.width  = u.w + 'px';
+        slide.style.height = slideH + 'px';
+        let el;
+        if (u.src.endsWith('.mp4')) {
+          el = document.createElement('video');
+          el.autoplay = true;
+          el.muted = true;
+          el.loop = true;
+          el.playsInline = true;
+          el.src = mediaUrl(u.src);
+          const tag = document.createElement('span');
+          tag.className = 'case-lb-video-tag';
+          slide.appendChild(tag);
+        } else {
+          el = document.createElement('img');
+          el.src = mediaUrl(u.src);
+          el.alt = '';
+        }
+        slide.appendChild(el);
+        clbSlider.appendChild(slide);
+        if (el.tagName === 'VIDEO') el.play().catch(() => {});
+        clbSlideEls.push({ el: slide, baseX: r * clbUnitSpan + u.offset, w: u.w });
+      });
+    }
+    return unit;
   }
+
+  // Paints the slides for whatever `clbCurrent` is right now. Called both
+  // from the rAF loop (for the eased settle) and directly from input
+  // handlers — rAF gets throttled to zero while the tab is hidden/occluded,
+  // and without a direct call too the slider would freeze until it's
+  // visible again instead of tracking the drag or wheel live.
+  function renderSlider() {
+    if (!clbSlideEls.length || clbSpan <= 0) return;
+
+    const w = clbSlider.clientWidth || window.innerWidth;
+    const half = w / 2;
+
+    clbSlideEls.forEach(s => {
+      const raw  = s.baseX - clbCurrent;
+      const x    = clbWrapVal(raw + clbUnitSpan, clbSpan) - clbUnitSpan;
+      const norm = clbClampVal(Math.abs(x + s.w / 2 - half) / half, 0, 1);
+      const scale = CLB_MAX_SCALE - (CLB_MAX_SCALE - CLB_MIN_SCALE) * norm;
+      s.el.style.transform = `translate3d(${x}px, -50%, 0) scale(${scale})`;
+      s.el.style.filter    = `brightness(${1 - norm * CLB_DIM})`;
+      s.el.style.zIndex    = String(Math.round((1 - norm) * 100));
+    });
+
+    if (clbProgress) {
+      clbProgress.style.width = (clbWrapVal(clbCurrent, clbUnitSpan) / clbUnitSpan * 100) + '%';
+    }
+  }
+
+  function tickSlider() {
+    if (clbSpan > 0) {
+      if (clbCurrent > clbSpan || clbCurrent < -clbSpan) {
+        const shift = Math.trunc(clbCurrent / clbSpan) * clbSpan;
+        clbCurrent -= shift;
+        clbTarget   -= shift;
+      }
+      clbCurrent += (clbTarget - clbCurrent) * CLB_EASE;
+      renderSlider();
+    }
+    clbRafId = requestAnimationFrame(tickSlider);
+  }
+
+  function startSliderLoop() {
+    if (clbRafId) cancelAnimationFrame(clbRafId);
+    clbRafId = requestAnimationFrame(tickSlider);
+  }
+  function stopSliderLoop() {
+    if (clbRafId) cancelAnimationFrame(clbRafId);
+    clbRafId = null;
+  }
+
+  // If the tab was hidden/occluded mid-drag, rAF was paused and the last
+  // frame can be stale — repaint the instant it's visible again.
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && caseLb.classList.contains('visible')) renderSlider();
+  });
+
+  async function openCaseLightbox(items, startIdx, project) {
+    caseLb.dataset.project = project || '';
+    caseLb.classList.add('visible');
+    const slideH = Math.round(clbClampVal((clbSlider.clientHeight || window.innerHeight) * 0.62, 260, 560));
+    const unit = await buildSlides(items, slideH);
+    if (!caseLb.classList.contains('visible')) return; // closed while loading
+    const idx = Math.max(0, Math.min(startIdx || 0, unit.length - 1));
+    const viewportW = clbSlider.clientWidth || window.innerWidth;
+    clbTarget = clbCurrent = unit[idx].offset + unit[idx].w / 2 - viewportW / 2;
+    renderSlider();
+    startSliderLoop();
+  }
+  window.__openCaseLightbox = openCaseLightbox;
 
   function closeCaseLightbox() {
     caseLb.classList.remove('visible');
-    clbVideo.pause();
-    retomarMusicaDeFundo();
-  }
-
-  // Vídeo com som e música de fundo não podem tocar juntos: a música sai
-  // de cena enquanto o vídeo roda e volta depois, se estava tocando.
-  let musicaEstavaTocando = false;
-
-  function pausarMusicaDeFundo() {
-    const bg = document.getElementById('bg-audio');
-    if (bg && !bg.paused) {
-      musicaEstavaTocando = true;
-      bg.pause();
-      document.getElementById('audio-btn')?.classList.remove('playing');
-    }
-  }
-
-  function retomarMusicaDeFundo() {
-    const bg = document.getElementById('bg-audio');
-    if (bg && musicaEstavaTocando) {
-      musicaEstavaTocando = false;
-      bg.play().then(() => {
-        document.getElementById('audio-btn')?.classList.add('playing');
-      }).catch(() => {});
-    }
+    stopSliderLoop();
+    clbSlider.querySelectorAll('video').forEach(v => v.pause());
   }
 
   clbClose.addEventListener('click', closeCaseLightbox);
   caseLb.addEventListener('click', e => { if (e.target === caseLb) closeCaseLightbox(); });
-  clbPrev.addEventListener('click', e => {
+
+  clbMore.addEventListener('click', e => {
     e.stopPropagation();
-    showCaseSlide((clbIdx - 1 + clbItems.length) % clbItems.length);
+    const project = caseLb.dataset.project;
+    const row = project ? wrap.querySelector(`.wt-row[data-project="${project}"]`) : null;
+    closeCaseLightbox();
+    if (!row) return;
+    if (activeRow && activeRow !== row) closeRow(activeRow);
+    if (!row.classList.contains('is-open')) { openRow(row); activeRow = row; }
+    requestAnimationFrame(() => row.scrollIntoView({ behavior: 'smooth', block: 'start' }));
   });
-  clbNext.addEventListener('click', e => {
-    e.stopPropagation();
-    showCaseSlide((clbIdx + 1) % clbItems.length);
-  });
+
   document.addEventListener('keydown', e => {
     if (!caseLb.classList.contains('visible')) return;
     if (e.key === 'Escape')     closeCaseLightbox();
-    if (e.key === 'ArrowLeft')  showCaseSlide((clbIdx - 1 + clbItems.length) % clbItems.length);
-    if (e.key === 'ArrowRight') showCaseSlide((clbIdx + 1) % clbItems.length);
+    if (e.key === 'ArrowLeft')  clbTarget -= 300;
+    if (e.key === 'ArrowRight') clbTarget += 300;
   });
 
-  let caseTouchX = 0;
-  caseLb.addEventListener('touchstart', e => { caseTouchX = e.touches[0].clientX; }, { passive: true });
-  caseLb.addEventListener('touchend', e => {
-    const dx = e.changedTouches[0].clientX - caseTouchX;
-    if (Math.abs(dx) > 50) dx < 0
-      ? showCaseSlide((clbIdx + 1) % clbItems.length)
-      : showCaseSlide((clbIdx - 1 + clbItems.length) % clbItems.length);
+  clbSlider.addEventListener('wheel', e => {
+    e.preventDefault();
+    const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+    clbTarget += delta * 0.6;
+    clbCurrent += (clbTarget - clbCurrent) * CLB_EASE;
+    renderSlider();
+  }, { passive: false });
+
+  clbSlider.addEventListener('pointerdown', e => {
+    clbPointerId = e.pointerId;
+    clbLastX = e.clientX;
+    clbSlider.setPointerCapture(e.pointerId);
+    clbSlider.classList.add('is-dragging');
   });
+  clbSlider.addEventListener('pointermove', e => {
+    if (clbPointerId !== e.pointerId) return;
+    const dx = e.clientX - clbLastX;
+    clbLastX = e.clientX;
+    clbTarget -= dx * 1.4;
+    clbCurrent = clbTarget; // drag tracks 1:1, no lag
+    renderSlider();
+  });
+  function clbEndDrag(e) {
+    if (clbPointerId !== e.pointerId) return;
+    clbPointerId = null;
+    clbSlider.classList.remove('is-dragging');
+  }
+  clbSlider.addEventListener('pointerup', clbEndDrag);
+  clbSlider.addEventListener('pointercancel', clbEndDrag);
 
   function openRow(row) {
     if (preview) preview.classList.remove('visible');
@@ -1249,7 +1477,7 @@ function initWorkTable() {
         el.style.minWidth = '240px';
         el.addEventListener('load', () => { el.style.minWidth = ''; }, { once: true });
       }
-      el.addEventListener('click', () => openCaseLightbox(imgs, idx));
+      el.addEventListener('click', () => openCaseLightbox(imgs, idx, project));
       carousel.appendChild(el);
     });
 
