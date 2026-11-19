@@ -60,7 +60,13 @@ const KEY = `bf:${config.slug}`;
 /* ─── Estado + localStorage ──────────────────────────────────────── */
 const newId = () => (crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`);
 
-const fresh = () => ({ v: VERSION, answers: {}, visited: [], screen: 'intro', current: null, editing: false, token: data.token, id: newId(), savedAt: Date.now() });
+/* Perguntas de texto com "default" começam preenchidas (ex.: resumo do que já se sabe). */
+const defaults = () => Object.fromEntries(
+  config.questions
+    .filter(q => (q.type === 'text' || q.type === 'textarea') && typeof q.default === 'string' && q.default)
+    .map(q => [q.id, q.default]));
+
+const fresh = () => ({ v: VERSION, answers: defaults(), visited: [], screen: 'intro', current: null, editing: false, token: data.token, id: newId(), savedAt: Date.now() });
 
 function load() {
   try {
@@ -83,7 +89,8 @@ let state = load() || fresh();
 
 /* ─── Navegação ──────────────────────────────────────────────────── */
 const visible = () => visibleQuestions(config, state.answers);
-const hasProgress = () => Object.keys(state.answers).some(k => byId[k] && isAnswered(byId[k], state.answers[k]));
+// Progresso = já passou por alguma pergunta (respostas pré-preenchidas não contam).
+const hasProgress = () => state.visited.length > 0 || (state.screen !== 'intro' && Object.keys(state.answers).some(k => byId[k] && isAnswered(byId[k], state.answers[k])));
 
 let screen = null;   // componente atual
 let screenId = 0;
@@ -287,6 +294,7 @@ function render() {
   const mount = () => {
     if (id !== screenId) return;
     root.replaceChildren(view.el);
+    if (view.onMount) view.onMount();
     screen = view;
     window.scrollTo(0, 0);
     busy = false;

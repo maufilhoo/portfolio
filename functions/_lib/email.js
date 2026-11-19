@@ -50,7 +50,8 @@ export function buildEmail(config, answers, meta) {
     const rows = [];
     for (const q of visible.filter(x => x.step === s.id)) {
       const a = answers[q.id];
-      const value = isAnswered(q, a) ? formatAnswer(q, a) : '—';
+      let value = isAnswered(q, a) ? formatAnswer(q, a) : '—';
+      if (typeof q.default === 'string' && typeof a === 'string' && a.trim() === q.default.trim()) value += '\n(sem alterações)';
       text.push(q.label, value, '');
       rows.push(`
         <tr><td style="padding:0 0 4px;color:#6B6B6B;font-size:13px;line-height:1.4;">${esc(q.label)}</td></tr>

@@ -1,0 +1,239 @@
+{
+  "$schema": "./schema.json",
+  "slug": "colmeia-4ms4",
+  "name": "ENXAME + FAVO",
+  "lang": "pt",
+  "title": "Vamos construir os próximos capítulos da Colmeia?",
+  "intro": "Já conversamos sobre os dois novos projetos e reunimos algumas informações iniciais. Agora, precisamos alinhar alguns detalhes sobre as entregas, aplicações e prazos para preparar uma proposta que faça sentido para cada necessidade.",
+  "duration": "cerca de 5 minutos",
+  "progress": "steps",
+  "recipientEmail": "talkmauriciof@gmail.com",
+  "emailSubject": "Briefing {name}: Colmeia",
+  "ui": {
+    "optional": "",
+    "reviewIntro": "Todas as perguntas são opcionais. Se algo mudou, é só editar antes de enviar."
+  },
+  "success": {
+    "title": "Obrigado!",
+    "text": "Com essas respostas, preparo a proposta dos dois projetos e envio em breve.",
+    "link": { "label": "Conhecer meu trabalho", "href": "/" }
+  },
+  "steps": [
+    { "id": "enxame", "title": "Projeto 01 · ENXAME" },
+    { "id": "favo", "title": "Projeto 02 · FAVO / FAVINHO" },
+    { "id": "final", "title": "Finalização" }
+  ],
+  "questions": [
+    {
+      "id": "enxame-resumo",
+      "step": "enxame",
+      "type": "textarea",
+      "label": "Identidade visual para o festival de boards da Colmeia. Isto é o que já sabemos:",
+      "help": "Edite, complemente ou corrija o que precisar.",
+      "default": "- O ENXAME será um festival de boards, inspirado na dinâmica do Lord of the Boards.\n- O foco é a confraternização, não a competição.\n- A ideia é incentivar a comunidade a escalar em conjunto, compartilhar betas, dicas e experiências.\n- O evento terá dinâmicas de classificatórias, abertas a diferentes níveis.\n- Outras atrações e detalhes da programação serão definidos posteriormente.\n- A primeira comunicação está prevista para a primeira semana de dezembro de 2026."
+    },
+    {
+      "id": "enxame-recorrencia",
+      "step": "enxame",
+      "type": "single",
+      "label": "O ENXAME será um evento recorrente ou uma edição pontual?",
+      "options": [
+        { "value": "recorrente", "label": "Recorrente" },
+        { "value": "pontual", "label": "Edição pontual" },
+        { "value": "indefinido", "label": "Ainda não sabemos" }
+      ]
+    },
+    {
+      "id": "enxame-identidade",
+      "step": "enxame",
+      "type": "single",
+      "label": "Vocês imaginam uma identidade com logo ou lettering próprio, ou uma expressão gráfica derivada da Colmeia?",
+      "options": [
+        { "value": "propria", "label": "Logo ou lettering próprio" },
+        { "value": "derivada", "label": "Expressão gráfica derivada da Colmeia" },
+        { "value": "recomendacao", "label": "Gostaríamos de uma recomendação" }
+      ]
+    },
+    {
+      "id": "enxame-pecas",
+      "step": "enxame",
+      "type": "multi",
+      "label": "Quais peças precisam ser desenvolvidas?",
+      "options": [
+        { "value": "posts", "label": "Posts" },
+        { "value": "stories", "label": "Stories" },
+        { "value": "cartazes", "label": "Cartazes" },
+        { "value": "camisetas", "label": "Camisetas" },
+        { "value": "sinalizacao", "label": "Sinalização" },
+        { "value": "classificatorias", "label": "Materiais para classificatórias" },
+        { "value": "brindes", "label": "Brindes" },
+        { "value": "outras", "label": "Outras", "other": true }
+      ]
+    },
+    {
+      "id": "enxame-quantidade",
+      "step": "enxame",
+      "type": "text",
+      "label": "Quantas peças ou formatos vocês imaginam precisar inicialmente?",
+      "help": "Pode ser aproximado.",
+      "placeholder": "Ex.: uns 10, entre posts, stories e cartazes"
+    },
+    {
+      "id": "enxame-templates",
+      "step": "enxame",
+      "type": "single",
+      "label": "Precisam de templates editáveis para que a equipe produza novos materiais?",
+      "options": [
+        { "value": "sim", "label": "Sim" },
+        { "value": "nao", "label": "Não" },
+        { "value": "entender", "label": "Talvez, gostaríamos de entender melhor" }
+      ]
+    },
+    {
+      "id": "enxame-datas",
+      "step": "enxame",
+      "type": "text",
+      "label": "Qual a data do festival e quando precisam receber as primeiras entregas?",
+      "placeholder": "Ex.: festival em fevereiro; primeiras peças até 1º de dezembro"
+    },
+    {
+      "id": "favo-resumo",
+      "step": "favo",
+      "type": "textarea",
+      "label": "Identidade visual para a comunicação infantil da Colmeia. Isto é o que já sabemos:",
+      "help": "Edite, complemente ou corrija o que precisar.",
+      "default": "- A intenção é desenvolver um universo visual voltado ao público infantil, partindo da identidade existente da Colmeia.\n- A referência mencionada foi a UBT Kids, pela capacidade de diferenciar a comunicação infantil da marca principal.\n- A identidade deverá facilitar o reconhecimento de conteúdos para crianças e famílias.\n- Entre os usos previstos estão colônia de férias e eventos infantis."
+    },
+    {
+      "id": "favo-nome",
+      "step": "favo",
+      "type": "single",
+      "label": "Qual será o nome oficial dessa frente?",
+      "options": [
+        { "value": "favo", "label": "FAVO" },
+        { "value": "favinho", "label": "FAVINHO" },
+        { "value": "ambos", "label": "Ambos" },
+        { "value": "indefinido", "label": "Ainda indefinido" }
+      ]
+    },
+    {
+      "id": "favo-idade",
+      "step": "favo",
+      "type": "multi",
+      "label": "Qual a faixa etária principal do público?",
+      "options": [
+        { "value": "ate-5", "label": "Até 5 anos" },
+        { "value": "6-9", "label": "6 a 9 anos" },
+        { "value": "10-12", "label": "10 a 12 anos" },
+        { "value": "13-15", "label": "13 a 15 anos" },
+        { "value": "outra", "label": "Outra", "other": true }
+      ]
+    },
+    {
+      "id": "favo-uso",
+      "step": "favo",
+      "type": "single",
+      "label": "Essa identidade será usada permanentemente em aulas, colônias de férias e eventos, ou apenas em ações pontuais?",
+      "options": [
+        { "value": "permanente", "label": "Permanentemente" },
+        { "value": "pontual", "label": "Apenas em ações pontuais" },
+        { "value": "indefinido", "label": "Ainda não sabemos" }
+      ]
+    },
+    {
+      "id": "favo-logo",
+      "step": "favo",
+      "type": "single",
+      "label": "Vocês imaginam um logotipo infantil próprio ou apenas uma adaptação da linguagem visual da Colmeia?",
+      "options": [
+        { "value": "proprio", "label": "Logotipo infantil próprio" },
+        { "value": "adaptacao", "label": "Adaptação da linguagem da Colmeia" },
+        { "value": "recomendacao", "label": "Gostaríamos de uma recomendação" }
+      ]
+    },
+    {
+      "id": "favo-mascote",
+      "step": "favo",
+      "type": "single",
+      "label": "Existe interesse na criação de um mascote, personagem ou ilustrações próprias?",
+      "options": [
+        { "value": "mascote", "label": "Sim, um mascote ou personagem" },
+        { "value": "ilustracoes", "label": "Ilustrações próprias, sem personagem" },
+        { "value": "nao", "label": "Não por enquanto" },
+        { "value": "conversar", "label": "Gostaríamos de conversar sobre isso" }
+      ]
+    },
+    {
+      "id": "favo-materiais",
+      "step": "favo",
+      "type": "multi",
+      "label": "Quais materiais precisam ser desenvolvidos?",
+      "options": [
+        { "value": "posts", "label": "Posts" },
+        { "value": "stories", "label": "Stories" },
+        { "value": "camisetas", "label": "Camisetas" },
+        { "value": "certificados", "label": "Certificados" },
+        { "value": "impressos", "label": "Materiais impressos" },
+        { "value": "sinalizacao", "label": "Sinalização" },
+        { "value": "adesivos", "label": "Adesivos" },
+        { "value": "outros", "label": "Outros", "other": true }
+      ]
+    },
+    {
+      "id": "favo-templates",
+      "step": "favo",
+      "type": "single",
+      "label": "Vocês precisam de templates editáveis para produzir novas comunicações internamente?",
+      "options": [
+        { "value": "sim", "label": "Sim" },
+        { "value": "nao", "label": "Não" },
+        { "value": "entender", "label": "Talvez, gostaríamos de entender melhor" }
+      ]
+    },
+    {
+      "id": "favo-prazo",
+      "step": "favo",
+      "type": "text",
+      "label": "Existe alguma data de lançamento ou prazo desejado?",
+      "placeholder": "Ex.: antes da colônia de férias de janeiro"
+    },
+    {
+      "id": "prioridade",
+      "step": "final",
+      "type": "single",
+      "label": "Existe alguma prioridade entre os dois projetos?",
+      "options": [
+        { "value": "enxame", "label": "ENXAME primeiro" },
+        { "value": "favo", "label": "FAVO / FAVINHO primeiro" },
+        { "value": "juntos", "label": "Os dois ao mesmo tempo" },
+        { "value": "sem", "label": "Sem prioridade definida" }
+      ]
+    },
+    {
+      "id": "referencias",
+      "step": "final",
+      "type": "textarea",
+      "label": "Há alguma referência visual ou material que gostariam de compartilhar?",
+      "help": "Um link por linha: Instagram, Pinterest, pastas no Drive.",
+      "placeholder": "https://"
+    },
+    {
+      "id": "adicional",
+      "step": "final",
+      "type": "textarea",
+      "label": "Existe alguma informação adicional importante para considerar na proposta?",
+      "placeholder": "Opcional"
+    },
+    {
+      "id": "contato",
+      "step": "final",
+      "type": "contact",
+      "label": "Quem está respondendo?",
+      "help": "Opcional, só para eu saber com quem falar sobre a proposta.",
+      "fields": [
+        { "id": "nome", "label": "Nome", "type": "text", "autocomplete": "name" },
+        { "id": "email", "label": "E-mail", "type": "email", "autocomplete": "email" }
+      ]
+    }
+  ]
+}

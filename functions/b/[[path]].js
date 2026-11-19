@@ -122,8 +122,16 @@ async function submit({ request, env }, config) {
   }
 
   const id = typeof body.id === 'string' && /^[a-zA-Z0-9-]{8,64}$/.test(body.id) ? body.id : null;
+  // Arquivo das respostas: se houver KV (BRIEFING_KV), guarda cada envio para consulta.
+  const at = Date.now();
+  if (env.BRIEFING_KV) {
+    const key = `sub:${config.slug}:${new Date(at).toISOString()}:${id || 'x'}`;
+    try { await env.BRIEFING_KV.put(key, JSON.stringify({ slug: config.slug, at, answers })); }
+    catch (err) { console.error('[briefing] falha ao arquivar:', err.message); }
+  }
+
   try {
-    await sendEmail(env, config, buildEmail(config, answers, { at: Date.now() }), id && `briefing-${config.slug}-${id}`);
+    await sendEmail(env, config, buildEmail(config, answers, { at }), id && `briefing-${config.slug}-${id}`);
   } catch (err) {
     console.error('[briefing] falha no envio:', err.message);
     return json({ error: 'send_failed' }, 502);

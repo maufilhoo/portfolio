@@ -99,6 +99,7 @@
         "label": { "type": "string", "description": "A pergunta." },
         "help": { "type": "string", "description": "Texto de apoio, abaixo da pergunta." },
         "placeholder": { "type": "string" },
+        "default": { "type": "string", "description": "Só text/textarea: texto já preenchido e editável (ex.: resumo do que já se sabe). No e-mail, aparece marcado quando não foi alterado." },
         "required": { "type": "boolean", "default": false },
         "maxLength": { "type": "integer", "minimum": 1 },
         "showIf": { "$ref": "#/$defs/condition" },

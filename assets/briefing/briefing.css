@@ -212,6 +212,12 @@
   min-height: 3.2em;
 }
 
+.bf-textarea--summary {
+  font-size: clamp(1.05rem, 2.2vw, 1.2rem);
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+}
 .bf-input--other {
   font-size: clamp(1.05rem, 2.6vw, 1.25rem);
 }
@@ -430,6 +436,7 @@
 
   .bf-field { margin-top: 2rem; }
   .bf-input { font-size: 1.5rem; }
+  .bf-textarea--summary { font-size: 1.1rem; }
   .bf-input--other,
   .bf-input--field { font-size: 1.35rem; }
   .bf-label { font-size: 0.95rem; }

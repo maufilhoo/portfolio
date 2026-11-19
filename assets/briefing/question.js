@@ -23,7 +23,7 @@ export function Question(q, ctx) {
   const head = [
     h('p', { class: 'bf-eyebrow' },
       h('span', { class: 'bf-num' }, step.number), step.title,
-      !q.required && q.type !== 'contact'
+      ui.optional && !q.required && q.type !== 'contact'
         ? [h('span', { class: 'bf-dot', 'aria-hidden': 'true' }, '·'), ui.optional]
         : null),
     title,
@@ -40,6 +40,7 @@ export function Question(q, ctx) {
   const slot = (key, anchor, input) => { slots[key] = { anchor, input }; };
 
   let body;
+  let onMount = () => {};
   let focusFirst = () => title.focus({ preventScroll: true });
 
   const onEnter = e => {
@@ -66,7 +67,7 @@ export function Question(q, ctx) {
 
     case 'textarea': {
       const input = h('textarea', {
-        class: 'bf-input bf-textarea', rows: '2',
+        class: q.default ? 'bf-input bf-textarea bf-textarea--summary' : 'bf-input bf-textarea', rows: '2',
         placeholder: q.placeholder || ui.textPlaceholder,
         maxlength: q.maxLength || LIMITS.textarea,
         'aria-labelledby': titleId, 'aria-describedby': describedBy.join(' ') || null,
@@ -79,7 +80,7 @@ export function Question(q, ctx) {
       });
       input.value = answer || '';
       const grow = () => { input.style.height = 'auto'; input.style.height = `${input.scrollHeight}px`; };
-      requestAnimationFrame(grow);
+      onMount = grow; // só mede depois que a tela entra no DOM
       body = h('div', { class: 'bf-field' }, input);
       slot('_', body, input);
       focusFirst = () => {
@@ -232,7 +233,7 @@ export function Question(q, ctx) {
         inputs.push(input);
         const row = h('div', { class: 'bf-row' },
           h('label', { class: 'bf-label', for: id }, f.label,
-            f.required ? null : h('span', { class: 'bf-label-opt' }, ui.optional.toLowerCase())),
+            f.required || !ui.optional ? null : h('span', { class: 'bf-label-opt' }, ui.optional.toLowerCase())),
           input);
         slot(f.id, row, input);
         return row;
@@ -285,5 +286,5 @@ export function Question(q, ctx) {
   // Digitar limpa o erro do campo.
   el.addEventListener('input', () => { if (shown.length) clearErrors(); });
 
-  return { el, focus: () => (isCoarse() ? title.focus({ preventScroll: true }) : focusFirst()), showErrors };
+  return { el, onMount: () => onMount(), focus: () => (isCoarse() ? title.focus({ preventScroll: true }) : focusFirst()), showErrors };
 }
