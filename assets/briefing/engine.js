@@ -256,12 +256,12 @@ function build() {
     // Progresso por etapa: "1 de 5". A linha avança dentro da etapa também.
     const si = steps.findIndex(s => s.id === q.step);
     const inStep = list.filter(x => x.step === q.step);
-    const within = inStep.findIndex(x => x.id === q.id) / inStep.length;
+    const within = (inStep.findIndex(x => x.id === q.id) + 1) / (inStep.length + 1);
     const label = ui.stepProgress.replace('{n}', si + 1).replace('{total}', steps.length);
     setProgress({ ratio: (si + within) / steps.length, label, announce: `${label}. ${step.title}.` });
   } else {
     setProgress({
-      ratio: i / total,
+      ratio: (i + 1) / (total + 1),
       label: `${pad(n)} / ${pad(total)}`,
       announce: `${ui.progress.replace('{n}', n).replace('{total}', total)}. ${step.title}.`,
     });

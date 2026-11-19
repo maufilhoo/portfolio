@@ -2,6 +2,7 @@
    O anúncio para leitores de tela vai para a região aria-live da página. */
 
 const bar = () => document.getElementById('bf-bar');
+const track = () => document.getElementById('bf-track');
 const count = () => document.getElementById('bf-count');
 const live = () => document.getElementById('bf-live');
 
@@ -11,6 +12,9 @@ export function setProgress({ ratio = 0, label = '', announce = '' } = {}) {
     b.style.transform = `scaleX(${Math.max(0, Math.min(1, ratio))})`;
     b.classList.toggle('is-empty', ratio <= 0);
   }
+  // Sem rótulo (abertura e tela final) a barra some.
+  const t = track();
+  if (t) t.hidden = !label;
   const c = count();
   if (c) c.textContent = label;
   if (announce) announceLive(announce);

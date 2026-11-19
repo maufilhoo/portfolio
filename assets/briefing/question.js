@@ -16,7 +16,10 @@ export function Question(q, ctx) {
   const helpId = uid('bf-help');
   const describedBy = [];
 
-  const title = h('h1', { class: 'bf-q', id: titleId, tabindex: '-1' }, q.label);
+  // Perguntas longas ganham corpo menor para não pesar na tela.
+  const len = q.label.length;
+  const size = len > 140 ? ' bf-q--xlong' : len > 70 ? ' bf-q--long' : '';
+  const title = h('h1', { class: `bf-q${size}`, id: titleId, tabindex: '-1' }, q.label);
   const head = [
     h('p', { class: 'bf-eyebrow' },
       h('span', { class: 'bf-num' }, step.number), step.title,

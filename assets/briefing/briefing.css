@@ -26,7 +26,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.35rem var(--gutter) 1rem;
+  padding: 1.35rem var(--gutter) 1.15rem;
   background: var(--bg);
   font-family: var(--font-body);
   font-size: 0.8rem;
@@ -58,11 +58,21 @@
   opacity: 0.45;
 }
 
+/* Barra de progresso: trilho claro sob o topo, preenchimento no preto do site */
+.bf-track {
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: 0;
+  height: 3px;
+  border-radius: 3px;
+  background: #ECECEA;
+  overflow: hidden;
+}
+.bf-track[hidden] { display: none; }
 .bf-bar {
-  position: fixed;
-  inset: 0 0 auto 0;
-  z-index: 11;
-  height: 2px;
+  height: 100%;
+  border-radius: 3px;
   background: var(--text);
   transform: scaleX(0);
   transform-origin: left center;
@@ -120,7 +130,7 @@
 .bf-dot { opacity: 0.6; }
 
 .bf-title {
-  font-size: clamp(2.5rem, 9vw, 5rem);
+  font-size: clamp(2.25rem, 7vw, 4.25rem);
   font-weight: 600;
   line-height: 1.02;
   letter-spacing: -0.035em;
@@ -130,12 +140,27 @@
 .bf-title--review { max-width: 18ch; }
 
 .bf-q {
-  font-size: clamp(1.75rem, 5.6vw, 3rem);
+  font-size: clamp(1.6rem, 4.4vw, 2.5rem);
   font-weight: 600;
-  line-height: 1.08;
+  line-height: 1.1;
   letter-spacing: -0.03em;
   max-width: 24ch;
   text-wrap: balance;
+}
+/* Perguntas longas (> 70 e > 140 caracteres): corpo menor, linha mais aberta */
+.bf-q--long {
+  font-size: clamp(1.4rem, 3.2vw, 2rem);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  max-width: 30ch;
+}
+.bf-q--xlong {
+  font-size: clamp(1.25rem, 2.6vw, 1.6rem);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  max-width: 38ch;
+  text-wrap: pretty;
 }
 .bf-title:focus,
 .bf-q:focus { outline: none; }
@@ -391,13 +416,15 @@
     padding-top: 6rem;
     padding-bottom: calc(3.5rem + env(safe-area-inset-bottom));
   }
-  .bf-top { padding-top: 1.15rem; font-size: 0.95rem; }
+  .bf-top { padding-top: 1.15rem; padding-bottom: 1rem; font-size: 0.95rem; }
   .bf-brand-fish { font-size: 1.35rem; }
   .bf-count { font-size: 0.9rem; }
 
   .bf-eyebrow { font-size: 0.95rem; margin-bottom: 1rem; }
-  .bf-title { font-size: clamp(2.75rem, 13vw, 3.75rem); }
-  .bf-q { font-size: clamp(2rem, 8.6vw, 2.75rem); }
+  .bf-title { font-size: clamp(2.4rem, 11vw, 3.25rem); }
+  .bf-q { font-size: clamp(1.75rem, 7.6vw, 2.25rem); }
+  .bf-q--long { font-size: 1.5rem; }
+  .bf-q--xlong { font-size: 1.3rem; }
   .bf-lede { font-size: 1.25rem; }
   .bf-help { font-size: 1.05rem; }
 
@@ -428,8 +455,10 @@
 
 /* Telas bem estreitas (≤ 360px) */
 @media (max-width: 360px) {
-  .bf-title { font-size: 2.5rem; }
-  .bf-q { font-size: 1.85rem; }
+  .bf-title { font-size: 2.2rem; }
+  .bf-q { font-size: 1.6rem; }
+  .bf-q--long { font-size: 1.4rem; }
+  .bf-q--xlong { font-size: 1.2rem; }
   .bf-opt { font-size: 1.2rem; }
 }
 
