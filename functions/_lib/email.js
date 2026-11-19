@@ -1,6 +1,6 @@
 /* ─── Briefing · e-mail via Resend ───────────────────────────────────
    Sem SDK: uma chamada fetch para a API REST do Resend.               */
-import { visibleQuestions, visibleSteps, formatAnswer, isAnswered } from '../../assets/briefing/logic.js';
+import { visibleQuestions, visibleSteps, formatAnswer, isAnswered, splitEmails } from '../../assets/briefing/logic.js';
 import { esc } from './pages.js';
 
 const oneLine = s => String(s ?? '').replace(/\s+/g, ' ').trim();
@@ -27,6 +27,10 @@ function replyToFrom(config, answers) {
     if (q.type !== 'contact' || !answers[q.id]) continue;
     const f = (q.fields || []).find(x => x.type === 'email');
     if (f && answers[q.id][f.id]) return answers[q.id][f.id];
+  }
+  // Senão, uma pergunta de lista de e-mails (todos entram no reply-to).
+  for (const q of config.questions) {
+    if (q.format === 'emails' && answers[q.id]) return splitEmails(answers[q.id]).slice(0, 5);
   }
   return null;
 }

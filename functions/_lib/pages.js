@@ -2,7 +2,7 @@
    Reaproveita css/style.css e css/responsive.css do site (tokens,
    fontes, reset, cursor) e soma assets/briefing/briefing.css.         */
 
-export const ASSET_VERSION = '20261119h';
+export const ASSET_VERSION = '20261119i';
 
 export const esc = s =>
   String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);

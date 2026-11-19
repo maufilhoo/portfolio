@@ -102,6 +102,7 @@
         "default": { "type": "string", "description": "Só text/textarea: texto já preenchido e editável (ex.: resumo do que já se sabe). No e-mail, aparece marcado quando não foi alterado." },
         "required": { "type": "boolean", "default": false },
         "maxLength": { "type": "integer", "minimum": 1 },
+        "format": { "enum": ["emails"], "description": "Só text: aceita um ou mais e-mails separados por vírgula e valida cada um." },
         "showIf": { "$ref": "#/$defs/condition" },
         "options": {
           "type": "array",

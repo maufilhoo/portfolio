@@ -16,6 +16,7 @@ export const MESSAGES = {
   otherRequired: 'Conte qual é a outra opção.',
   fieldRequired: 'Campo obrigatório.',
   email: 'Confira o e-mail. Ex.: nome@empresa.com',
+  emails: 'Confira os e-mails. Separe cada um com vírgula.',
   tel: 'Confira o número, com DDD. Ex.: (11) 91234-5678',
   tooLong: 'Texto longo demais.',
   invalid: 'Resposta inválida.',
@@ -24,6 +25,9 @@ export const MESSAGES = {
 const EMAIL_RE = /^[^\s@<>()",;]+@[^\s@<>()",;]+\.[^\s@<>()",;]{2,}$/;
 
 const str = v => (typeof v === 'string' ? v : '');
+
+/* "a@x.com, b@y.com; c@z.com" → ["a@x.com", "b@y.com", "c@z.com"] */
+export const splitEmails = s => str(s).split(/[\s,;]+/).map(x => x.trim()).filter(Boolean);
 
 /* Valor usado pelas condições showIf. */
 export function answerValue(q, a) {
@@ -98,6 +102,7 @@ export function validate(q, a, msg = MESSAGES) {
       const s = str(a).trim();
       if (!s) { if (q.required) e._ = msg.required; break; }
       if (s.length > limit) e._ = msg.tooLong;
+      else if (q.format === 'emails' && !splitEmails(s).every(x => EMAIL_RE.test(x))) e._ = msg.emails;
       break;
     }
     case 'single': {

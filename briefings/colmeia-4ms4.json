@@ -347,11 +347,39 @@
       ]
     },
     {
+      "id": "favo-lancamento",
+      "step": "favo",
+      "type": "single",
+      "label": "Existe alguma expectativa de lançamento para a comunicação infantil?",
+      "options": [
+        {
+          "value": "data",
+          "label": "Sim, já temos uma data"
+        },
+        {
+          "value": "janela",
+          "label": "Temos uma janela, como a próxima colônia de férias"
+        },
+        {
+          "value": "sem-data",
+          "label": "Ainda sem data"
+        }
+      ]
+    },
+    {
       "id": "favo-prazo",
       "step": "favo",
       "type": "text",
-      "label": "Existe alguma data de lançamento ou prazo desejado?",
-      "placeholder": "Ex.: antes da colônia de férias de janeiro"
+      "label": "Qual seria essa data ou período?",
+      "help": "Se houver, conte também quando precisariam das primeiras peças.",
+      "placeholder": "Ex.: colônia de férias em janeiro; peças até meados de dezembro",
+      "showIf": {
+        "q": "favo-lancamento",
+        "in": [
+          "data",
+          "janela"
+        ]
+      }
     },
     {
       "id": "prioridade",
@@ -393,25 +421,48 @@
       "placeholder": "Opcional"
     },
     {
+      "id": "orcamento-envio",
+      "step": "final",
+      "type": "single",
+      "label": "Como preferem receber os orçamentos?",
+      "options": [
+        {
+          "value": "juntos",
+          "label": "Os dois juntos"
+        },
+        {
+          "value": "enxame-primeiro",
+          "label": "Primeiro o do ENXAME, depois o do FAVO / FAVINHO"
+        },
+        {
+          "value": "tanto-faz",
+          "label": "Tanto faz"
+        }
+      ]
+    },
+    {
       "id": "contato",
       "step": "final",
       "type": "contact",
       "label": "Quem está respondendo?",
-      "help": "Opcional, só para eu saber com quem falar sobre a proposta.",
+      "help": "Só para eu saber com quem falar sobre a proposta.",
       "fields": [
         {
           "id": "nome",
           "label": "Nome",
           "type": "text",
           "autocomplete": "name"
-        },
-        {
-          "id": "email",
-          "label": "E-mail",
-          "type": "email",
-          "autocomplete": "email"
         }
       ]
+    },
+    {
+      "id": "orcamento-emails",
+      "step": "final",
+      "type": "text",
+      "format": "emails",
+      "label": "Para qual e-mail envio os orçamentos?",
+      "help": "Pode ser mais de um. Separe cada e-mail com vírgula.",
+      "placeholder": "nome@colmeia.com, outro@colmeia.com"
     }
   ]
 }

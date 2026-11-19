@@ -55,7 +55,10 @@ export function Question(q, ctx) {
         maxlength: q.maxLength || LIMITS.text,
         'aria-labelledby': titleId, 'aria-describedby': describedBy.join(' ') || null,
         'aria-required': q.required ? 'true' : null,
-        autocomplete: 'off', enterkeyhint: 'next',
+        autocomplete: q.format === 'emails' ? 'email' : 'off', enterkeyhint: 'next',
+        inputmode: q.format === 'emails' ? 'email' : null,
+        autocapitalize: q.format === 'emails' ? 'off' : null,
+        spellcheck: q.format === 'emails' ? 'false' : null,
         oninput: () => { answer = input.value; commit(); },
         onkeydown: onEnter,
       });
