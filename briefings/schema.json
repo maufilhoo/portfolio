@@ -31,6 +31,11 @@
       "pattern": "^[A-Z0-9_]+$",
       "description": "Opcional. NOME da variável de ambiente com a senha (ex.: BRIEFING_PASS_ACME), nunca a senha."
     },
+    "progress": {
+      "enum": ["questions", "steps"],
+      "default": "questions",
+      "description": "Contador do topo: por pergunta (\"04 / 11\") ou por etapa (\"1 de 5\")."
+    },
     "minSeconds": {
       "type": "integer",
       "minimum": 0,

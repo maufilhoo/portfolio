@@ -34,6 +34,7 @@ export const UI = {
   sending: 'Enviando…',
   sentEyebrow: 'Enviado',
   progress: 'Pergunta {n} de {total}',
+  stepProgress: '{n} de {total}',
   messages: {},
   errors: {
     network: 'Não foi possível enviar. Confira sua conexão e tente de novo. Suas respostas continuam salvas.',
@@ -251,11 +252,20 @@ function build() {
   const total = list.length;
   const step = steps.find(s => s.id === q.step);
   const pad = x => String(x).padStart(2, '0');
-  setProgress({
-    ratio: i / total,
-    label: `${pad(n)} / ${pad(total)}`,
-    announce: `${ui.progress.replace('{n}', n).replace('{total}', total)}. ${step.title}.`,
-  });
+  if (config.progress === 'steps') {
+    // Progresso por etapa: "1 de 5". A linha avança dentro da etapa também.
+    const si = steps.findIndex(s => s.id === q.step);
+    const inStep = list.filter(x => x.step === q.step);
+    const within = inStep.findIndex(x => x.id === q.id) / inStep.length;
+    const label = ui.stepProgress.replace('{n}', si + 1).replace('{total}', steps.length);
+    setProgress({ ratio: (si + within) / steps.length, label, announce: `${label}. ${step.title}.` });
+  } else {
+    setProgress({
+      ratio: i / total,
+      label: `${pad(n)} / ${pad(total)}`,
+      announce: `${ui.progress.replace('{n}', n).replace('{total}', total)}. ${step.title}.`,
+    });
+  }
   return Question(q, {
     ui, step,
     answer: state.answers[q.id],

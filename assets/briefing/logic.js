@@ -225,6 +225,7 @@ export function publicConfig(c) {
     title: c.title,
     intro: c.intro,
     duration: c.duration,
+    progress: c.progress === 'steps' ? 'steps' : 'questions',
     steps: c.steps,
     questions: c.questions,
     success: c.success,

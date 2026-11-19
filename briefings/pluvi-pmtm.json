@@ -3,310 +3,134 @@
   "slug": "pluvi-pmtm",
   "name": "Branding",
   "lang": "pt",
-  "title": "Vamos entender o projeto da Pluvi?",
-  "intro": "Isabelle, as respostas ajudam a preparar uma proposta adequada ao momento e às necessidades da Pluvi.",
-  "duration": "3 a 5 minutos",
+  "title": "Isabelle, vamos entender o projeto da PLUVI?",
+  "intro": "Obrigado pelo contato. Suas respostas me ajudam a montar uma proposta sob medida para a PLUVI. Não há resposta certa.",
+  "duration": "5 a 8 minutos",
+  "progress": "steps",
   "recipientEmail": "talkmauriciof@gmail.com",
-  "emailSubject": "Briefing {name}: Pluvi",
+  "emailSubject": "Briefing {name}: PLUVI",
+  "password": "BRIEFING_PASS_PLUVI_PMTM",
   "success": {
-    "title": "Obrigado.",
-    "text": "Recebi suas respostas. Retorno em breve com os próximos passos.",
-    "link": {
-      "label": "Conhecer meu trabalho",
-      "href": "/"
-    }
+    "title": "Obrigado, Isabelle.",
+    "text": "A partir das suas respostas, envio os dois orçamentos: um para 1 marca e outro para 3 marcas.",
+    "link": { "label": "Conhecer meu trabalho", "href": "/" }
   },
   "steps": [
-    {
-      "id": "projeto",
-      "title": "Sobre o projeto"
-    },
-    {
-      "id": "transformacao",
-      "title": "Sobre a transformação"
-    },
-    {
-      "id": "marcas",
-      "title": "Sobre as marcas"
-    },
-    {
-      "id": "estrategia",
-      "title": "Estratégia e legado"
-    },
-    {
-      "id": "entregas",
-      "title": "Entregas"
-    },
-    {
-      "id": "contato",
-      "title": "Prazos e contato"
-    }
+    { "id": "rebranding", "title": "Rebranding da PLUVI" },
+    { "id": "marcas", "title": "Marcas associadas" },
+    { "id": "estrategia", "title": "Estratégia e legado" },
+    { "id": "entregas", "title": "Entregas" },
+    { "id": "prazo", "title": "Prazo" }
   ],
   "questions": [
     {
-      "id": "marca",
-      "step": "projeto",
-      "type": "text",
-      "label": "A marca se chama Pluvi ou o projeto envolve outro nome?",
-      "placeholder": "Pluvi",
-      "required": false,
-      "help": "Se for só Pluvi, pode seguir em frente."
-    },
-    {
-      "id": "tipo",
-      "step": "projeto",
-      "type": "single",
-      "label": "Que tipo de projeto vocês têm em mente?",
-      "required": true,
-      "options": [
-        {
-          "value": "nova",
-          "label": "Criação de uma nova marca"
-        },
-        {
-          "value": "redesign",
-          "label": "Redesign de uma marca existente"
-        },
-        {
-          "value": "evolucao",
-          "label": "Evolução da identidade visual"
-        },
-        {
-          "value": "outro",
-          "label": "Outro",
-          "other": true
-        }
-      ]
-    },
-    {
-      "id": "objetivo",
-      "step": "projeto",
-      "type": "textarea",
-      "label": "O que vocês fazem e qual é o principal objetivo do projeto?",
-      "placeholder": "Conte com suas palavras",
-      "required": true
-    },
-    {
       "id": "transformacao",
-      "step": "transformacao",
+      "step": "rebranding",
       "type": "single",
-      "label": "Vocês buscam uma atualização que preserve as principais características da marca atual ou estão abertos a uma transformação mais significativa?",
+      "label": "Vocês buscam uma atualização que preserve as características da marca atual ou estão abertos a uma evolução mais significativa da identidade e da linguagem visual?",
       "required": true,
-      "showIf": {
-        "q": "tipo",
-        "equals": "redesign"
-      },
       "options": [
-        {
-          "value": "pontual",
-          "label": "Evolução pontual, preservando o reconhecimento atual"
-        },
-        {
-          "value": "significativa",
-          "label": "Transformação mais significativa"
-        },
-        {
-          "value": "entender",
-          "label": "Ainda precisamos entender o melhor caminho"
-        }
+        { "value": "ajuste", "label": "Ajuste ou refinamento da marca atual" },
+        { "value": "evolucao", "label": "Evolução que mantenha alguns elementos reconhecíveis" },
+        { "value": "mudanca", "label": "Mudança mais profunda, abertos a novos caminhos" }
       ]
     },
     {
-      "id": "quantidade",
-      "step": "marcas",
-      "type": "single",
-      "label": "O projeto pode envolver uma ou três marcas. Como vocês estão pensando hoje?",
-      "required": true,
-      "options": [
-        {
-          "value": "uma",
-          "label": "Uma marca"
-        },
-        {
-          "value": "tres",
-          "label": "Três marcas"
-        },
-        {
-          "value": "decidir",
-          "label": "Vamos decidir depois de ver os valores"
-        }
-      ],
-      "help": "Sem compromisso: a proposta vai considerar os dois cenários, com valores para cada um."
+      "id": "manter",
+      "step": "rebranding",
+      "type": "textarea",
+      "label": "O que vocês gostariam de manter ou deixar para trás?",
+      "placeholder": "Opcional"
     },
     {
       "id": "relacao",
       "step": "marcas",
       "type": "single",
-      "label": "Se forem três, como essas marcas se relacionariam?",
+      "label": "As outras marcas fazem parte do mesmo ecossistema da PLUVI? Seriam independentes, com identidades próprias, ou submarcas que compartilham elementos da marca principal?",
+      "help": "Isso ajuda a entender o que podemos construir de forma integrada.",
       "required": true,
-      "showIf": {
-        "q": "quantidade",
-        "in": [
-          "tres",
-          "decidir"
-        ]
-      },
       "options": [
-        {
-          "value": "independentes",
-          "label": "São marcas independentes"
-        },
-        {
-          "value": "ecossistema",
-          "label": "Fazem parte do mesmo ecossistema"
-        },
-        {
-          "value": "submarcas",
-          "label": "São submarcas de uma marca principal"
-        },
-        {
-          "value": "indefinido",
-          "label": "Ainda não temos essa definição"
-        }
+        { "value": "submarcas", "label": "Submarcas da PLUVI" },
+        { "value": "independentes", "label": "Marcas independentes" },
+        { "value": "nao-sabemos", "label": "Ainda não sabemos" }
       ]
     },
     {
-      "id": "relacao-detalhe",
+      "id": "marcas-lista",
       "step": "marcas",
       "type": "textarea",
-      "label": "Se quiser, conte quais seriam as três marcas e o que cada uma faz.",
-      "placeholder": "Opcional",
-      "showIf": {
-        "q": "quantidade",
-        "in": [
-          "tres",
-          "decidir"
-        ]
-      }
+      "label": "Quais seriam as outras marcas?",
+      "help": "Nome e uma frase sobre cada uma.",
+      "placeholder": "Opcional"
     },
     {
-      "id": "posicionamento",
+      "id": "consultoria",
       "step": "estrategia",
       "type": "single",
-      "label": "Vocês já possuem um posicionamento ou direcionamento estratégico definido?",
-      "required": true,
+      "label": "A consultoria já está desenvolvendo um posicionamento ou direcionamento estratégico que servirá de base para o trabalho visual?",
+      "help": "Pergunto porque isso ajuda a dimensionar a etapa de pesquisa e entender o quanto precisamos aprofundar a estratégia. Caso ainda não exista esse direcionamento, podemos conversar sobre como incorporá-lo ao projeto, inclusive com um parceiro especializado.",
       "options": [
-        {
-          "value": "sim",
-          "label": "Sim, já temos uma estratégia"
-        },
-        {
-          "value": "consultoria",
-          "label": "Estamos desenvolvendo com uma consultoria"
-        },
-        {
-          "value": "nao",
-          "label": "Ainda não temos"
-        },
-        {
-          "value": "apoio",
-          "label": "Gostaríamos de apoio nessa etapa"
-        }
+        { "value": "pronto", "label": "Sim, já está pronto" },
+        { "value": "andamento", "label": "Está em andamento" },
+        { "value": "outro-foco", "label": "Não, o foco da consultoria é outro" }
       ]
     },
     {
       "id": "guia",
       "step": "estrategia",
       "type": "single",
-      "label": "Vocês possuem um guia de marca ou materiais da identidade atual?",
-      "required": true,
+      "label": "Vocês têm algum guia ou manual da identidade atual?",
       "options": [
-        {
-          "value": "sim",
-          "label": "Sim"
-        },
-        {
-          "value": "nao",
-          "label": "Não"
-        },
-        {
-          "value": "parcialmente",
-          "label": "Parcialmente"
-        }
+        { "value": "sim", "label": "Sim" },
+        { "value": "nao", "label": "Não" }
       ]
     },
     {
-      "id": "referencias",
+      "id": "guia-link",
       "step": "estrategia",
       "type": "textarea",
-      "label": "Tem links de referência ou materiais existentes para compartilhar?",
-      "help": "Um link por linha: site, redes, pastas no Drive, referências que vocês admiram.",
-      "placeholder": "https://"
+      "label": "Se puder, compartilhe o link do guia ou dos materiais.",
+      "help": "Pode ser um link do Google Drive, Dropbox ou similar.",
+      "placeholder": "https://",
+      "showIf": { "q": "guia", "equals": "sim" }
     },
     {
       "id": "entregas",
       "step": "entregas",
-      "type": "multi",
-      "label": "O que vocês imaginam precisar ao final do projeto?",
-      "required": true,
+      "type": "single",
+      "label": "Além do logotipo e dos elementos visuais que venham a ser desenvolvidos (cores, tipografia, grafismos etc.), vocês gostariam de um guia de marca documentando a nova identidade ou seria suficiente uma apresentação final com os arquivos?",
       "options": [
-        {
-          "value": "logotipo",
-          "label": "Logotipo e suas versões"
-        },
-        {
-          "value": "identidade",
-          "label": "Identidade visual (cores, tipografia, elementos gráficos)"
-        },
-        {
-          "value": "guia",
-          "label": "Guia de marca"
-        },
-        {
-          "value": "aplicacoes",
-          "label": "Aplicações e exemplos de uso"
-        },
-        {
-          "value": "definir",
-          "label": "Ainda precisamos definir",
-          "exclusive": true
-        }
+        { "value": "guia", "label": "Guia de marca completo" },
+        { "value": "apresentacao", "label": "Apresentação final + arquivos" },
+        { "value": "entender", "label": "Gostaria de entender melhor a diferença" }
       ]
     },
     {
       "id": "prazo",
-      "step": "contato",
-      "type": "text",
-      "label": "Existe alguma previsão para conclusão ou lançamento?",
-      "placeholder": "Ex.: março de 2027, segundo semestre, sem data"
+      "step": "prazo",
+      "type": "single",
+      "label": "Existe alguma data prevista para a conclusão ou lançamento das novas marcas?",
+      "required": true,
+      "options": [
+        { "value": "fixa", "label": "Data fixa" },
+        { "value": "flexivel", "label": "Data flexível" },
+        { "value": "sem-data", "label": "Ainda sem data" }
+      ]
     },
     {
-      "id": "contato",
-      "step": "contato",
-      "type": "contact",
-      "label": "Para finalizar, como falo com você?",
-      "required": true,
-      "fields": [
-        {
-          "id": "nome",
-          "label": "Nome",
-          "type": "text",
-          "required": true,
-          "autocomplete": "name"
-        },
-        {
-          "id": "email",
-          "label": "E-mail",
-          "type": "email",
-          "required": true,
-          "autocomplete": "email"
-        },
-        {
-          "id": "empresa",
-          "label": "Empresa",
-          "type": "text",
-          "required": true,
-          "autocomplete": "organization"
-        },
-        {
-          "id": "whatsapp",
-          "label": "WhatsApp",
-          "type": "tel",
-          "mask": "phone-br",
-          "autocomplete": "tel-national"
-        }
-      ]
+      "id": "prazo-data",
+      "step": "prazo",
+      "type": "text",
+      "label": "Qual seria essa data ou período?",
+      "placeholder": "Ex.: março de 2027, segundo semestre",
+      "showIf": { "q": "prazo", "in": ["fixa", "flexivel"] }
+    },
+    {
+      "id": "mais",
+      "step": "prazo",
+      "type": "textarea",
+      "label": "Algo mais que eu deva saber?",
+      "placeholder": "Opcional"
     }
-  ],
-  "password": "BRIEFING_PASS_PLUVI_PMTM"
+  ]
 }
