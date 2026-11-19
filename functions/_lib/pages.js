@@ -2,7 +2,7 @@
    Reaproveita css/style.css e css/responsive.css do site (tokens,
    fontes, reset, cursor) e soma assets/briefing/briefing.css.         */
 
-export const ASSET_VERSION = '20261119b';
+export const ASSET_VERSION = '20261119c';
 
 export const esc = s =>
   String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
@@ -27,7 +27,7 @@ function layout({ title, lang = 'pt', body, scripts = '' }) {
 </head>
 <body class="bf-page">
   <header class="bf-top">
-    <span class="bf-brand">Mauricio Filho</span>
+    <a class="bf-brand" href="/" aria-label="Mauricio Filho, ir para o site"><span class="bf-brand-fish" aria-hidden="true">🐡</span><span>Mauricio Filho</span></a>
     <span class="bf-count" id="bf-count" aria-hidden="true"></span>
   </header>
   <div class="bf-bar" id="bf-bar" aria-hidden="true"></div>

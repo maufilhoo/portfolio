@@ -58,7 +58,7 @@ function initCopyEmail() {
   const btns = document.querySelectorAll('#copy-email, [data-copy-email]');
   btns.forEach(btn => {
     btn.addEventListener('click', () => {
-      navigator.clipboard.writeText('talkmauriciof@gmail.com')
+      navigator.clipboard.writeText('talk@mfilho.com')
         .then(() => {
           btn.textContent = getTranslation('nav_copied');
           const key = btn.dataset.i18n;
@@ -66,7 +66,7 @@ function initCopyEmail() {
             btn.textContent = key ? getTranslation(key) : btn.dataset.origText;
           }, 2000);
         })
-        .catch(() => { window.location.href = 'mailto:talkmauriciof@gmail.com'; });
+        .catch(() => { window.location.href = 'mailto:talk@mfilho.com'; });
     });
     if (!btn.dataset.i18n) btn.dataset.origText = btn.textContent;
   });
@@ -1665,13 +1665,13 @@ function initMobileNav() {
   closeBtn?.addEventListener('click', closeMenu);
 
   letsBtn?.addEventListener('click', () => {
-    navigator.clipboard.writeText('talkmauriciof@gmail.com')
+    navigator.clipboard.writeText('talk@mfilho.com')
       .then(() => {
         const orig = letsBtn.textContent;
         letsBtn.textContent = 'Copiado ✉️';
         setTimeout(() => { letsBtn.textContent = orig; closeMenu(); }, 1200);
       })
-      .catch(() => { closeMenu(); window.location.href = 'mailto:talkmauriciof@gmail.com'; });
+      .catch(() => { closeMenu(); window.location.href = 'mailto:talk@mfilho.com'; });
   });
 
   function updateLangBtn() {
