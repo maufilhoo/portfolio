@@ -42,7 +42,7 @@
       "type": "textarea",
       "label": "Identidade visual para o festival de boards da Colmeia. Isto é o que já sabemos:",
       "help": "Edite, complemente ou corrija o que precisar.",
-      "default": "- O ENXAME será um festival de boards, inspirado na dinâmica do Lord of the Boards.\n- O foco é a confraternização, não a competição.\n- A ideia é incentivar a comunidade a escalar em conjunto, compartilhar betas, dicas e experiências.\n- A identidade será uma expressão gráfica derivada da Colmeia, sem logo ou lettering próprio.\n- O evento terá dinâmicas de classificatórias, abertas a diferentes níveis.\n- Outras atrações e detalhes da programação serão definidos posteriormente.\n- A primeira comunicação está prevista para a primeira semana de dezembro de 2026."
+      "default": "- O ENXAME será um festival de boards, inspirado na dinâmica do Lord of the Boards.\n- O foco é a confraternização, não a competição.\n- A ideia é incentivar a comunidade a escalar em conjunto, compartilhar betas, dicas e experiências.\n- O evento terá dinâmicas de classificatórias, abertas a diferentes níveis.\n- Outras atrações e detalhes da programação serão definidos posteriormente.\n- A primeira comunicação está prevista para a primeira semana de dezembro de 2026."
     },
     {
       "id": "enxame-recorrencia",
@@ -61,6 +61,26 @@
         {
           "value": "indefinido",
           "label": "Ainda não sabemos"
+        }
+      ]
+    },
+    {
+      "id": "enxame-identidade",
+      "step": "enxame",
+      "type": "single",
+      "label": "Vocês imaginam uma identidade com logo ou lettering próprio, ou uma expressão gráfica derivada da Colmeia?",
+      "options": [
+        {
+          "value": "propria",
+          "label": "Logo ou lettering próprio"
+        },
+        {
+          "value": "derivada",
+          "label": "Expressão gráfica derivada da Colmeia"
+        },
+        {
+          "value": "recomendacao",
+          "label": "Gostaríamos de uma recomendação"
         }
       ]
     },
@@ -225,19 +245,19 @@
       "id": "favo-logo",
       "step": "favo",
       "type": "single",
-      "label": "Vocês imaginam um logotipo infantil próprio ou apenas uma adaptação da linguagem visual da Colmeia?",
+      "label": "Confirmando o que conversamos: a identidade infantil vai derivar da linguagem visual da Colmeia, certo?",
       "options": [
         {
-          "value": "proprio",
-          "label": "Logotipo infantil próprio"
+          "value": "derivada",
+          "label": "Sim, derivada da Colmeia"
         },
         {
-          "value": "adaptacao",
-          "label": "Adaptação da linguagem da Colmeia"
+          "value": "propria",
+          "label": "Na verdade, queremos um logotipo infantil próprio"
         },
         {
-          "value": "recomendacao",
-          "label": "Gostaríamos de uma recomendação"
+          "value": "conversar",
+          "label": "Gostaríamos de conversar sobre isso"
         }
       ]
     },
