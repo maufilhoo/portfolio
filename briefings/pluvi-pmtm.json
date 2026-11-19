@@ -9,7 +9,6 @@
   "progress": "steps",
   "recipientEmail": "talkmauriciof@gmail.com",
   "emailSubject": "Briefing {name}: PLUVI",
-  "password": "BRIEFING_PASS_PLUVI_PMTM",
   "success": {
     "title": "Obrigado, Isabelle.",
     "text": "A partir das suas respostas, envio os dois orçamentos: um para 1 marca e outro para 3 marcas.",
