@@ -1,0 +1,169 @@
+{
+  "$schema": "./schema.json",
+  "slug": "branding",
+  "name": "Branding",
+  "lang": "pt",
+  "title": "Vamos entender seu projeto?",
+  "intro": "As respostas ajudam a preparar uma proposta adequada ao momento e às necessidades da sua marca.",
+  "duration": "3 a 5 minutos",
+  "recipientEmail": "talkmauriciof@gmail.com",
+  "emailSubject": "Briefing {name}: {marca}",
+  "success": {
+    "title": "Obrigado.",
+    "text": "Recebi suas respostas. Retorno em breve com os próximos passos.",
+    "link": { "label": "Conhecer meu trabalho", "href": "/" }
+  },
+  "steps": [
+    { "id": "projeto", "title": "Sobre o projeto" },
+    { "id": "transformacao", "title": "Sobre a transformação" },
+    { "id": "marcas", "title": "Sobre as marcas" },
+    { "id": "estrategia", "title": "Estratégia e legado" },
+    { "id": "entregas", "title": "Entregas" },
+    { "id": "contato", "title": "Prazos e contato" }
+  ],
+  "questions": [
+    {
+      "id": "marca",
+      "step": "projeto",
+      "type": "text",
+      "label": "Qual é o nome da empresa ou marca?",
+      "placeholder": "Nome da empresa ou marca",
+      "required": true
+    },
+    {
+      "id": "tipo",
+      "step": "projeto",
+      "type": "single",
+      "label": "Que tipo de projeto vocês têm em mente?",
+      "required": true,
+      "options": [
+        { "value": "nova", "label": "Criação de uma nova marca" },
+        { "value": "redesign", "label": "Redesign de uma marca existente" },
+        { "value": "evolucao", "label": "Evolução da identidade visual" },
+        { "value": "outro", "label": "Outro", "other": true }
+      ]
+    },
+    {
+      "id": "objetivo",
+      "step": "projeto",
+      "type": "textarea",
+      "label": "O que vocês fazem e qual é o principal objetivo do projeto?",
+      "placeholder": "Conte com suas palavras",
+      "required": true
+    },
+    {
+      "id": "transformacao",
+      "step": "transformacao",
+      "type": "single",
+      "label": "Vocês buscam uma atualização que preserve as principais características da marca atual ou estão abertos a uma transformação mais significativa?",
+      "required": true,
+      "showIf": { "q": "tipo", "equals": "redesign" },
+      "options": [
+        { "value": "pontual", "label": "Evolução pontual, preservando o reconhecimento atual" },
+        { "value": "significativa", "label": "Transformação mais significativa" },
+        { "value": "entender", "label": "Ainda precisamos entender o melhor caminho" }
+      ]
+    },
+    {
+      "id": "quantidade",
+      "step": "marcas",
+      "type": "single",
+      "label": "O projeto envolve quantas marcas?",
+      "required": true,
+      "options": [
+        { "value": "uma", "label": "Uma" },
+        { "value": "duas", "label": "Duas" },
+        { "value": "tres-ou-mais", "label": "Três ou mais" }
+      ]
+    },
+    {
+      "id": "relacao",
+      "step": "marcas",
+      "type": "single",
+      "label": "Como essas marcas se relacionam?",
+      "required": true,
+      "showIf": { "q": "quantidade", "in": ["duas", "tres-ou-mais"] },
+      "options": [
+        { "value": "independentes", "label": "São marcas independentes" },
+        { "value": "ecossistema", "label": "Fazem parte do mesmo ecossistema" },
+        { "value": "submarcas", "label": "São submarcas de uma marca principal" },
+        { "value": "indefinido", "label": "Ainda não temos essa definição" }
+      ]
+    },
+    {
+      "id": "relacao-detalhe",
+      "step": "marcas",
+      "type": "textarea",
+      "label": "Se quiser, explique um pouco mais essa relação.",
+      "placeholder": "Opcional",
+      "showIf": { "q": "quantidade", "in": ["duas", "tres-ou-mais"] }
+    },
+    {
+      "id": "posicionamento",
+      "step": "estrategia",
+      "type": "single",
+      "label": "Vocês já possuem um posicionamento ou direcionamento estratégico definido?",
+      "required": true,
+      "options": [
+        { "value": "sim", "label": "Sim, já temos uma estratégia" },
+        { "value": "consultoria", "label": "Estamos desenvolvendo com uma consultoria" },
+        { "value": "nao", "label": "Ainda não temos" },
+        { "value": "apoio", "label": "Gostaríamos de apoio nessa etapa" }
+      ]
+    },
+    {
+      "id": "guia",
+      "step": "estrategia",
+      "type": "single",
+      "label": "Vocês possuem um guia de marca ou materiais da identidade atual?",
+      "required": true,
+      "options": [
+        { "value": "sim", "label": "Sim" },
+        { "value": "nao", "label": "Não" },
+        { "value": "parcialmente", "label": "Parcialmente" }
+      ]
+    },
+    {
+      "id": "referencias",
+      "step": "estrategia",
+      "type": "textarea",
+      "label": "Tem links de referência ou materiais existentes para compartilhar?",
+      "help": "Um link por linha: site, redes, pastas no Drive, referências que vocês admiram.",
+      "placeholder": "https://"
+    },
+    {
+      "id": "entregas",
+      "step": "entregas",
+      "type": "multi",
+      "label": "O que vocês imaginam precisar ao final do projeto?",
+      "required": true,
+      "options": [
+        { "value": "logotipo", "label": "Logotipo e suas versões" },
+        { "value": "identidade", "label": "Identidade visual (cores, tipografia, elementos gráficos)" },
+        { "value": "guia", "label": "Guia de marca" },
+        { "value": "aplicacoes", "label": "Aplicações e exemplos de uso" },
+        { "value": "definir", "label": "Ainda precisamos definir", "exclusive": true }
+      ]
+    },
+    {
+      "id": "prazo",
+      "step": "contato",
+      "type": "text",
+      "label": "Existe alguma previsão para conclusão ou lançamento?",
+      "placeholder": "Ex.: março de 2027, segundo semestre, sem data"
+    },
+    {
+      "id": "contato",
+      "step": "contato",
+      "type": "contact",
+      "label": "Para finalizar, como falo com você?",
+      "required": true,
+      "fields": [
+        { "id": "nome", "label": "Nome", "type": "text", "required": true, "autocomplete": "name" },
+        { "id": "email", "label": "E-mail", "type": "email", "required": true, "autocomplete": "email" },
+        { "id": "empresa", "label": "Empresa", "type": "text", "required": true, "autocomplete": "organization" },
+        { "id": "whatsapp", "label": "WhatsApp", "type": "tel", "mask": "phone-br", "autocomplete": "tel-national" }
+      ]
+    }
+  ]
+}

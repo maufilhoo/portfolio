@@ -1,0 +1,53 @@
+{
+  "$schema": "./schema.json",
+  "slug": "_exemplo",
+  "name": "Exemplo",
+  "lang": "pt",
+  "title": "Briefing de teste",
+  "intro": "Três perguntas para validar o motor. Novo briefing = novo arquivo.",
+  "duration": "1 minuto",
+  "recipientEmail": "talkmauriciof@gmail.com",
+  "emailSubject": "[teste] Briefing {name}: {nome}",
+  "minSeconds": 5,
+  "success": {
+    "title": "Enviado.",
+    "text": "O briefing de teste chegou na caixa de entrada.",
+    "link": { "label": "Conhecer meu trabalho", "href": "/" }
+  },
+  "steps": [
+    { "id": "voce", "title": "Sobre você" },
+    { "id": "cafe", "title": "Café" }
+  ],
+  "questions": [
+    {
+      "id": "nome",
+      "step": "voce",
+      "type": "text",
+      "label": "Qual é o seu nome?",
+      "required": true
+    },
+    {
+      "id": "gosta",
+      "step": "cafe",
+      "type": "single",
+      "label": "Você toma café?",
+      "required": true,
+      "options": [
+        { "value": "sim", "label": "Sim" },
+        { "value": "nao", "label": "Não" }
+      ]
+    },
+    {
+      "id": "como",
+      "step": "cafe",
+      "type": "single",
+      "label": "Como você prefere?",
+      "showIf": { "q": "gosta", "equals": "sim" },
+      "options": [
+        { "value": "espresso", "label": "Espresso" },
+        { "value": "coado", "label": "Coado" },
+        { "value": "outro", "label": "Outro", "other": true }
+      ]
+    }
+  ]
+}

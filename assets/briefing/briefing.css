@@ -1,0 +1,391 @@
+/* ─── Briefing ───────────────────────────────────────────────────────
+   Extensão do site: carrega depois de css/style.css e css/responsive.css
+   e usa os mesmos tokens (--bg, --text, --text-muted, --accent,
+   --gutter, --font-body, --transition). Tudo com prefixo .bf para não
+   tocar em nada do site.                                               */
+
+.bf-html {
+  --bf-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --bf-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --bf-line: #DFDEDE;
+  --bf-error: #B42318;
+  scroll-snap-type: none;
+  scroll-behavior: auto;
+}
+
+.bf-page {
+  min-height: 100svh;
+  overflow-x: hidden;
+}
+
+/* ─── Topo ──────────────────────────────────────────────────────── */
+.bf-top {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.35rem var(--gutter) 1rem;
+  background: var(--bg);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  color: var(--text);
+}
+.bf-count {
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.45;
+}
+
+.bf-bar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 11;
+  height: 2px;
+  background: var(--text);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.6s var(--bf-ease);
+}
+
+/* ─── Palco ─────────────────────────────────────────────────────── */
+.bf {
+  width: 100%;
+  max-width: 52rem;
+  min-height: 100svh;
+  margin: 0 auto;
+  padding: 6.5rem var(--gutter) 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: var(--font-body);
+  color: var(--text);
+}
+.bf:has(.bf-screen--review) { justify-content: flex-start; }
+
+.bf-screen {
+  width: 100%;
+  animation: bf-in 0.55s var(--bf-ease) both;
+}
+.bf-screen.is-leaving {
+  animation: none;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+@keyframes bf-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ─── Tipografia ────────────────────────────────────────────────── */
+.bf-eyebrow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin: 0 0 1.25rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.3;
+  color: var(--text-muted);
+}
+.bf-num {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+.bf-dot { opacity: 0.6; }
+
+.bf-title {
+  font-size: clamp(2.5rem, 9vw, 5rem);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  max-width: 14ch;
+  text-wrap: balance;
+}
+.bf-title--review { max-width: 18ch; }
+
+.bf-q {
+  font-size: clamp(1.75rem, 5.6vw, 3rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  max-width: 24ch;
+  text-wrap: balance;
+}
+.bf-title:focus,
+.bf-q:focus { outline: none; }
+
+.bf-lede {
+  margin-top: 1.5rem;
+  max-width: 34ch;
+  font-size: clamp(1.05rem, 2.4vw, 1.25rem);
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: var(--text-muted);
+}
+.bf-help {
+  margin-top: 1rem;
+  max-width: 44ch;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+/* ─── Campos ────────────────────────────────────────────────────── */
+.bf-field { margin-top: 2.5rem; }
+
+.bf-input {
+  display: block;
+  width: 100%;
+  padding: 0.55rem 0 0.7rem;
+  border: 0;
+  border-bottom: 1px solid var(--bf-line);
+  border-radius: 0;
+  background: transparent;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: clamp(1.25rem, 3.6vw, 1.75rem);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  transition: border-color 0.25s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.bf-input::placeholder { color: var(--text-muted); opacity: 0.55; }
+.bf-input:focus { outline: none; border-bottom-color: var(--text); }
+.bf-input[aria-invalid="true"] { border-bottom-color: var(--bf-error); }
+
+.bf-textarea {
+  resize: none;
+  overflow: hidden;
+  min-height: 3.2em;
+}
+
+.bf-input--other {
+  font-size: clamp(1.05rem, 2.6vw, 1.25rem);
+}
+.bf-input--field {
+  font-size: clamp(1.15rem, 3vw, 1.4rem);
+}
+
+.bf-row:not(:first-child) { margin-top: 1.75rem; }
+.bf-label {
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.bf-label-opt {
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+/* ─── Opções ─────────────────────────────────────────────────────
+   Linhas de texto, sem caixa. Selecionada ganha o amarelo do site. */
+.bf-opts {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  margin-left: -1rem;
+}
+.bf-opt {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  max-width: 100%;
+  min-height: 48px;
+  padding: 0.6rem 1.2rem 0.6rem 1rem;
+  border-radius: 100px;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: clamp(1.05rem, 2.8vw, 1.3rem);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  text-align: left;
+  transition: background 0.22s ease;
+}
+.bf-opt:hover { background: rgba(17, 17, 17, 0.04); }
+.bf-opt[aria-checked="true"] { background: var(--accent); }
+
+.bf-mark {
+  flex-shrink: 0;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1.5px rgba(17, 17, 17, 0.35);
+  transition: background 0.22s ease, box-shadow 0.22s ease, transform 0.35s var(--bf-spring);
+}
+.bf-mark--box { border-radius: 3px; }
+.bf-opt[aria-checked="true"] .bf-mark {
+  background: var(--text);
+  box-shadow: none;
+  transform: scale(1.1);
+}
+
+.bf-other { margin-top: 0.75rem; }
+.bf-other.is-open { animation: bf-in 0.4s var(--bf-ease) both; }
+
+/* ─── Ações ─────────────────────────────────────────────────────── */
+.bf-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+  margin-top: 2.75rem;
+}
+
+/* Pill do site (.lang-round / .nav-fish-wrap) */
+.bf-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  height: 54px;
+  padding: 0 1.6rem;
+  border: 1px solid var(--bf-line);
+  border-radius: 100px;
+  background: transparent;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: background var(--transition), border-color var(--transition);
+}
+.bf-btn:hover { background: var(--accent); border-color: rgba(17, 17, 17, 0.18); }
+.bf-btn .bf-arrow {
+  display: inline-block;
+  font-family: 'Glyphs', var(--font-body);
+  transition: transform 0.35s var(--bf-spring);
+}
+.bf-btn:hover .bf-arrow { transform: translateX(3px); }
+.bf-btn:disabled { opacity: 0.55; background: transparent; }
+.bf-btn[aria-busy="true"] .bf-arrow { animation: bf-pulse 1s ease-in-out infinite; }
+@keyframes bf-pulse { 50% { opacity: 0.2; } }
+
+/* Link de texto do site (.explore-cta / .nav-fish-link) */
+.bf-link {
+  padding: 0.5rem 0;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  opacity: 0.55;
+  transition: opacity var(--transition);
+}
+.bf-link:hover { opacity: 1; }
+
+.bf-hint {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  opacity: 0.8;
+}
+@media (pointer: coarse) { .bf-hint { display: none; } }
+
+/* ─── Erros ─────────────────────────────────────────────────────── */
+.bf-error {
+  margin-top: 0.65rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--bf-error);
+  animation: bf-in 0.3s var(--bf-ease) both;
+}
+.bf-opts + .bf-error { margin-top: 0.75rem; }
+.bf-error--send { margin-top: 2.5rem; max-width: 40ch; }
+
+/* ─── Revisão ───────────────────────────────────────────────────── */
+.bf-rv-step { margin-top: 3.5rem; }
+.bf-rv-step .bf-eyebrow { margin-bottom: 0.5rem; }
+.bf-rv-list { display: flex; flex-direction: column; }
+.bf-rv-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 1.5rem;
+  padding: 1rem 0;
+}
+.bf-rv-q {
+  grid-column: 1;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--text-muted);
+  max-width: 52ch;
+}
+.bf-rv-a {
+  grid-column: 1;
+  margin-top: 0.35rem;
+  font-size: clamp(1.05rem, 2.6vw, 1.25rem);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.015em;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.bf-rv-a.is-empty { color: var(--text-muted); opacity: 0.7; }
+.bf-rv-edit {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: start;
+}
+
+/* ─── Utilitários ───────────────────────────────────────────────── */
+.bf-sr,
+.bf-hp {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.bf-hp { left: -9999px; }
+
+/* Foco visível (o site não define um; aqui é necessário) */
+.bf-page :focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 3px;
+}
+.bf-page .bf-input:focus-visible,
+.bf-page [tabindex="-1"]:focus { outline: none; }
+.bf-page .bf-opt:focus-visible { outline-offset: 0; }
+
+/* ─── Mobile ────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .bf {
+    justify-content: flex-start;
+    padding-top: 5.75rem;
+    padding-bottom: calc(3rem + env(safe-area-inset-bottom));
+  }
+  .bf-top { padding-top: 1.1rem; }
+  .bf-field { margin-top: 2rem; }
+  .bf-actions { margin-top: 2.25rem; }
+  .bf-opts { margin-left: -0.75rem; }
+  .bf-opt { padding-left: 0.75rem; }
+}
+
+/* ─── Movimento reduzido ────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .bf-screen,
+  .bf-other.is-open,
+  .bf-error { animation: none; }
+  .bf-screen.is-leaving { transition: none; }
+  .bf-bar,
+  .bf-mark,
+  .bf-btn .bf-arrow { transition: none; }
+  .bf-btn[aria-busy="true"] .bf-arrow { animation: none; }
+}
