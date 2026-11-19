@@ -206,31 +206,25 @@ function initBioFade() {
 }
 
 /* ─── Feed items ─────────────────────────────────────────────────── */
+/* Cada mídia do loop, agrupada por case. No mobile o loop começa
+   sempre por Caixa, depois Enjoei, depois 99 e então as demais. */
+const F  = n => `assets/images/feed/${n}`;
+const CB = n => `assets/images/cases/caixa-branding/${n}`;
+const FEED_CAIXA  = [CB('5.webp'), CB('4.mp4'), CB('17.webp'), CB('8.webp'), CB('18.webp')];
+const FEED_ENJOEI = [F('3.webp'), F('4.webp'), F('5.webp'), F('6.gif'), F('7.webp'), F('8.gif')];
+const FEED_99     = [F('9.webp'), F('10.mp4'), F('11.webp'), F('12.gif')];
+const FEED_OTHERS = [F('1.webp'), F('2.webp'), F('13.webp'), F('14.webp'), F('15.webp'),
+  F('16.webp'), F('17.webp'), F('18.webp'), F('19.webp'), F('20.webp'), F('21.gif'),
+  F('22.webp'), F('23.webp')];
+
+// Desktop: a Caixa entra intercalada com os outros cases
 const FEED_ITEMS = [
-  'assets/images/feed/1.webp',
-  'assets/images/feed/2.webp',
-  'assets/images/feed/3.webp',
-  'assets/images/feed/4.webp',
-  'assets/images/feed/5.webp',
-  'assets/images/feed/6.gif',
-  'assets/images/feed/7.webp',
-  'assets/images/feed/8.gif',
-  'assets/images/feed/9.webp',
-  'assets/images/feed/10.mp4',
-  'assets/images/feed/11.webp',
-  'assets/images/feed/12.gif',
-  'assets/images/feed/13.webp',
-  'assets/images/feed/14.webp',
-  'assets/images/feed/15.webp',
-  'assets/images/feed/16.webp',
-  'assets/images/feed/17.webp',
-  'assets/images/feed/18.webp',
-  'assets/images/feed/19.webp',
-  'assets/images/feed/20.webp',
-  'assets/images/feed/21.gif',
-  'assets/images/feed/22.webp',
-  'assets/images/feed/23.webp',
+  F('1.webp'), F('2.webp'), FEED_CAIXA[0], ...FEED_ENJOEI, FEED_CAIXA[1],
+  ...FEED_99, FEED_CAIXA[2], F('13.webp'), F('14.webp'), F('15.webp'), F('16.webp'),
+  FEED_CAIXA[3], F('17.webp'), F('18.webp'), F('19.webp'), F('20.webp'),
+  FEED_CAIXA[4], F('21.gif'), F('22.webp'), F('23.webp'),
 ];
+const FEED_ITEMS_MOBILE = [...FEED_CAIXA, ...FEED_ENJOEI, ...FEED_99, ...FEED_OTHERS];
 
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
@@ -245,7 +239,8 @@ function initFeedShowcase() {
   const section = document.getElementById('work');
   if (!section) return;
 
-  const items = [...FEED_ITEMS];
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  const items = [...(isMobile ? FEED_ITEMS_MOBILE : FEED_ITEMS)];
   let idx = 0;
   let current = null;
   let timer = null;
@@ -298,6 +293,114 @@ function initFeedShowcase() {
 
 /* ─── Project data ───────────────────────────────────────────────── */
 const PROJECT_DATA = {
+  "caixa-branding": {
+    "client": "CAIXA",
+    "detail": {
+      "pt": "Quase todo brasileiro tem uma história com a Caixa. É nela que cai o FGTS de quem tem carteira assinada, que se financia a casa própria e se recebe o benefício social, e é ela que leva a agência barco até as comunidades ribeirinhas. Há 165 anos ela está nos momentos de conquista da vida, do primeiro emprego ao negócio próprio.\n\nCoube a nós evoluir a marca-mãe da Caixa, que estava havia quase três décadas sem atualização. Nesse meio-tempo, aplicativos de entrega e de transporte passaram a se apresentar como banco, e a categoria inteira começou a vender a mesma facilidade de um clique e a mesma promessa abstrata de futuro, até ficar difícil dizer para que serve um banco. O dinheiro ficou tão à mão que gastar quase deixou de parecer gasto, e essa conta passou a pesar no dia a dia das pessoas. Dali nasceu a pergunta que guiou toda a nossa estratégia, o que é ser um banco hoje.\n\nA Caixa está em quase tudo. As pessoas chegam até ela pelo saque, pelo benefício, pelo financiamento ou pelo direito, e foi assim que ela se tornou o banco da necessidade, indispensável e, ao mesmo tempo, não necessariamente desejável. Precisávamos aproximar um público mais jovem e mais digital sem perder a base fiel de sempre. E fazer isso numa marca de 165 anos, com um azul e um X que já moram no imaginário de quem cresceu com ela, sem romper com nada do que ela já é.\n\nParticipei do rebranding da CAIXA desde o início do projeto, contribuindo para a construção de sua nova identidade e sistema visual durante minha trajetória na Tátil, em 2025.\n\nAtuei como um dos principais designers do projeto em sua fase inicial, contribuindo para decisões criativas e participando das discussões de estratégia, linguagem verbal e identidade visual. Meu papel também envolveu a coordenação e o acompanhamento criativo de diferentes projetos da CAIXA que aconteciam simultaneamente, ajudando a conectar equipes, perspectivas e entregas para construir uma expressão de marca coerente e integrada.",
+      "en": "Almost every Brazilian has a Caixa story. It manages the FGTS, the severance fund of every worker with a formal job. It is where people finance a home of their own and collect social benefits, and it runs a branch that travels by boat to reach riverside communities. For 165 years, it has been there for life's milestones, from a first job to a business of one's own.\n\nOur task was to evolve Caixa's master brand, which had gone almost three decades without an update. In that time, delivery and ride-hailing apps started presenting themselves as banks, and the whole category began selling the same one-click convenience and the same abstract promise of the future, until it became hard to say what a bank is for. Money was so close at hand that spending hardly felt like spending anymore, and the bill started weighing on people's everyday lives. That is why our entire strategy started by asking what it means to be a bank today.\n\nCaixa is part of almost everything in people's lives. People come to it to withdraw money, collect a benefit, finance a home or claim what they are entitled to, and that is how it became the bank of necessity, indispensable but not necessarily desirable. We needed to win over a younger, more digital audience without losing Caixa's longtime loyal base. And we had to do it with a 165-year-old brand whose blue and X live in the memory of everyone who grew up with it, without breaking from anything it already was.\n\nI was part of the CAIXA rebrand from the very start of the project, helping build its new identity and visual system during my time at Tátil in 2025.\n\nI was one of the lead designers in the project's early phase, contributing to creative decisions and taking part in discussions on strategy, verbal identity and visual identity. My role also involved coordinating and creatively overseeing several CAIXA projects running at the same time, connecting teams, perspectives and deliverables to build a coherent, integrated brand expression."
+    },
+    "credits": [
+      [
+        {
+          "pt": "Direção Criativa",
+          "en": "Creative Direction"
+        },
+        "Beto Biscesto, Julia Liberati, Fred Gelli"
+      ],
+      [
+        {
+          "pt": "Estratégia",
+          "en": "Strategy"
+        },
+        "Amanda Gebara, Carolina Polli, Nina Pereira, Bianca Sili, Thalita Campbell"
+      ],
+      [
+        {
+          "pt": "Design",
+          "en": "Design"
+        },
+        "Carlos Teles, Rodrigo Gondim, João Costa, João Santos, Adson Rodrigues, Marcelo Siqueira, Dan Mesquita, Ted Oliver, Mauricio Filho, Carol Ohashi, Gustavo André, Lukas Arujo, Filipi Filippo, Namie Arakawa, Satsuki Arakaki, Isadora Scazufca, Rafaela Kreutz, Cássia Freire, Shay Reis"
+      ],
+      [
+        {
+          "pt": "Tipografia",
+          "en": "Typography"
+        },
+        "Cyla Costa, Aline Kaori, Eduilson Coan"
+      ],
+      [
+        {
+          "pt": "Iconografia",
+          "en": "Iconography"
+        },
+        "Samuel Furtado"
+      ],
+      [
+        {
+          "pt": "Motion",
+          "en": "Motion"
+        },
+        "Nat Okimoto, Marina Corbane, Giovane Alencar"
+      ],
+      [
+        {
+          "pt": "Ilustração",
+          "en": "Illustration"
+        },
+        "Renato Brito Mamede, Vitor Brito Pereira, Stella Bonici, Henrique Afonso, Thallison Diniz, Laura Nunes"
+      ],
+      [
+        {
+          "pt": "Fotografia",
+          "en": "Photography"
+        },
+        "Rapha Dutra"
+      ],
+      [
+        {
+          "pt": "Design de Produto",
+          "en": "Product Design"
+        },
+        "Paulo Ferreira, Caê Silva, Beatriz Padilha"
+      ],
+      [
+        {
+          "pt": "Identidade Verbal",
+          "en": "Verbal Identity"
+        },
+        "Giulia Accorsi, Elen Campos"
+      ],
+      [
+        {
+          "pt": "Negócios",
+          "en": "Business"
+        },
+        "Vanessa Clark, Natália Ramos, Bruna Araújo, Ulli Ferrari"
+      ],
+      [
+        {
+          "pt": "Produção",
+          "en": "Internal Production"
+        },
+        "Emanuel Zanoni, Valeria Forte, Paola Rodrigues"
+      ],
+      [
+        {
+          "pt": "Arte Final",
+          "en": "Final Art"
+        },
+        "Emannuel Zanoni, David Marques, André Gelabert, Paulo Camargo, Luiz Henrique Zanoni"
+      ],
+      [
+        {
+          "pt": "Cliente",
+          "en": "Client"
+        },
+        "Gerson Bordignon, Wolmar Aguiar, Willian Farias, Daniel Cruz, Raquel Ribeiro, Adriano Nascimento, Fábio Romeu, Erika Motta, Rones Lima, Santino da Silva e Sa"
+      ]
+    ],
+    "studio": "Tátil Design"
+  },
   "enjoei": {
     "client": "Enjoei",
     "detail": {
@@ -1605,7 +1708,8 @@ const CASE_STRIP_IMAGES = [
 
 function initMobileGateStrip() {
   const gate = document.querySelector('.mobile-gate');
-  if (!gate || window.innerWidth > 768) return;
+  // Aviso desativado no CSS: não baixa as imagens da faixa à toa.
+  if (!gate || window.innerWidth > 768 || getComputedStyle(gate).display === 'none') return;
   if (gate.querySelector('.mobile-gate-strip')) return;
 
   const sorteadas = [...CASE_STRIP_IMAGES];
@@ -1675,11 +1779,17 @@ function initMobileNav() {
   });
 
   function updateLangBtn() {
-    if (langBtn) langBtn.textContent = document.documentElement.lang === 'en' ? 'PT' : 'EN';
+    if (!langBtn) return;
+    const isEn = document.documentElement.lang === 'en';
+    langBtn.innerHTML =
+      `<span class="lang-opt${isEn ? '' : ' is-active'}">PT</span>` +
+      `<span class="lang-sep">/</span>` +
+      `<span class="lang-opt${isEn ? ' is-active' : ''}">EN</span>`;
   }
 
-  langBtn?.addEventListener('click', () => { mainLang?.click(); updateLangBtn(); });
-  mainLang?.addEventListener('click', updateLangBtn);
+  langBtn?.addEventListener('click', () => mainLang?.click());
+  // a troca de idioma é assíncrona: atualiza quando o <html lang> mudar
+  new MutationObserver(updateLangBtn).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
   updateLangBtn();
 
   overlay.querySelectorAll('.mobile-menu-link').forEach(link => {

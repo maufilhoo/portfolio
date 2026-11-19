@@ -184,18 +184,33 @@ export function initWelcome(armGather) {
     svg.style.zIndex         = '9995';
     svg.style.overflow       = 'visible';
 
-    const circle = document.createElementNS(ns, 'circle');
-    circle.setAttribute('cx', sz / 2);
-    circle.setAttribute('cy', sz / 2);
-    circle.setAttribute('r', r);
+    // botão em pílula (PT / EN): contorno arredondado em vez de círculo
+    const isPill = rect.width > rect.height + 4;
+    let circle;
+    if (isPill) {
+      circle = document.createElementNS(ns, 'rect');
+      circle.setAttribute('x', sz / 2 - rect.width / 2 + 0.5);
+      circle.setAttribute('y', sz / 2 - rect.height / 2 + 0.5);
+      circle.setAttribute('width', rect.width - 1);
+      circle.setAttribute('height', rect.height - 1);
+      circle.setAttribute('rx', (rect.height - 1) / 2);
+      circle.setAttribute('pathLength', circ);
+    } else {
+      circle = document.createElementNS(ns, 'circle');
+      circle.setAttribute('cx', sz / 2);
+      circle.setAttribute('cy', sz / 2);
+      circle.setAttribute('r', r);
+    }
     circle.setAttribute('fill', 'none');
     circle.setAttribute('stroke', '#DFDEDE');
     circle.setAttribute('stroke-width', '1');
     circle.setAttribute('stroke-linecap', 'round');
     circle.style.strokeDasharray  = circ;
     circle.style.strokeDashoffset = circ;
-    circle.style.transform        = 'rotate(-90deg)';
-    circle.style.transformOrigin  = `${sz / 2}px ${sz / 2}px`;
+    if (!isPill) {
+      circle.style.transform       = 'rotate(-90deg)';
+      circle.style.transformOrigin = `${sz / 2}px ${sz / 2}px`;
+    }
 
     svg.appendChild(circle);
     document.body.appendChild(svg);

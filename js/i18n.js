@@ -28,9 +28,11 @@ function applyTranslations() {
   const langRound = document.getElementById('lang-round');
   if (langRound) {
     const isEn = currentLang === 'en';
-    const flagEl = langRound.querySelector('.lang-flag');
-    if (flagEl) flagEl.textContent = isEn ? '🇺🇸' : '🇧🇷';
+    /* PT / EN — o idioma ativo fica em destaque */
+    langRound.querySelectorAll('.lang-opt').forEach(opt =>
+      opt.classList.toggle('is-active', opt.dataset.l === currentLang));
     langRound.dataset.lang = currentLang;
+    langRound.setAttribute('title', isEn ? 'Mudar para português' : 'Switch to English');
   }
 
   /* Pill support (about.html) */

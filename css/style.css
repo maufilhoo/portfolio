@@ -34,8 +34,8 @@
   --border:      #e0e0e0;
   --accent:      #F2F7B5;
 
-  --font-display: 'NeueMontreal', 'NotoEmoji', system-ui, sans-serif;
-  --font-body:    'GoogleSansFlex', 'NotoEmoji', system-ui, sans-serif;
+  --font-display: 'NeueMontreal', 'Glyphs', 'NotoEmoji', system-ui, sans-serif;
+  --font-body:    'GoogleSansFlex', 'Glyphs', 'NotoEmoji', system-ui, sans-serif;
   --font-main:    var(--font-body);
 
   --max-width:  1400px;
@@ -97,6 +97,13 @@
 }
 
 /* ─── Noto Emoji ────────────────────────────────────────────────── */
+/* Setas e símbolos (↗ ✕ ‹ ›) em fonte de texto do sistema — sem isso
+   caem na Noto Emoji e viram caixinha. Emoji de verdade seguem na Noto. */
+@font-face {
+  font-family: 'Glyphs';
+  src: local('Apple Symbols'), local('AppleSymbols'), local('Segoe UI Symbol'), local('Arial Unicode MS'), local('ArialUnicodeMS');
+  unicode-range: U+2190-21FF, U+2039-203A, U+2715;
+}
 @font-face {
   font-family: 'NotoEmoji';
   src: url('../assets/fonts/noto-emoji/NotoEmoji-VariableFont_wght.ttf') format('truetype');
@@ -184,6 +191,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   border: none;
   font-size: 1rem;
 }
+.is-scrolled .lang-round { width: auto; min-width: 38px; padding: 0 0.8rem; }
 .is-scrolled .nav-fish-wrap {
   height: 38px;
   border: none;
@@ -225,7 +233,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 }
 .site-header.is-footer .lang-round,
 .site-header.is-footer.is-scrolled .lang-round {
-  width: 54px; height: 54px;
+  width: auto; min-width: 54px; height: 54px; padding: 0 1.1rem;
   border: 1px solid #DFDEDE;
   font-size: 0.875rem;
 }
@@ -465,23 +473,31 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 54px;
+  gap: 0.3rem;
+  min-width: 54px;
   height: 54px;
-  border-radius: 50%;
+  border-radius: 100px;
   border: 1px solid #DFDEDE;
   background: transparent;
   cursor: pointer;
-  padding: 0;
+  padding: 0 1.1rem;
   transition: background var(--transition), border-color var(--transition);
 }
 .lang-round:hover { background: var(--accent); border-color: rgba(17,17,17,0.18); }
 
-.lang-flag {
-  font-family: 'NotoEmoji', sans-serif;
-  font-weight: 700;
-  font-size: 1.35rem;
+/* PT / EN — idioma ativo em destaque, o outro apagado */
+.lang-opt,
+.lang-sep {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   line-height: 1;
+  color: var(--text);
 }
+.lang-opt { opacity: 0.4; transition: opacity var(--transition); }
+.lang-opt.is-active { opacity: 1; }
+.lang-sep { opacity: 0.3; }
 
 /* ─── Hero ──────────────────────────────────────────────────────── */
 .hero-section {
@@ -1720,10 +1736,10 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 }
 
 /* ─── About page ─────────────────────────────────────────────────── */
-.page-about { background: var(--accent); }
-.page-about .site-header { background: var(--accent); }
+/* About mais leve: fundo branco como a Home; o lima fica só no footer */
+.page-about { background: var(--bg); }
+.page-about .site-header { background: var(--bg); }
 .page-about .site-header.is-scrolled { background: transparent; }
-.page-about .lang-round[data-lang="pt"] { background: #FCFBFA; }
 
 .about-main {
   padding: calc(72px + 4rem) var(--gutter) 0;
@@ -1758,15 +1774,16 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 .about-page-title {
   font-family: var(--font-body);
   font-weight: 700;
-  font-size: clamp(3.5rem, 8vw, 9rem);
-  line-height: 1;
-  letter-spacing: -0.03em;
+  font-size: clamp(3.5rem, 8vw, 7.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
   color: var(--text);
   margin-bottom: 0.75rem;
 }
 
 .about-page-sub {
-  font-size: clamp(0.85rem, 1.2vw, 1rem);
+  font-size: clamp(0.9rem, 1.2vw, 1.0625rem);
+  line-height: 1.55;
   color: var(--text);
   opacity: 0.55;
 }
@@ -1776,68 +1793,70 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
-  padding: 3rem 0;
-  border-top: 1px solid rgba(17,17,17,0.15);
+  padding: 5rem 0;
+  border-top: 1px solid rgba(17,17,17,0.08);
 }
 .about-row--last {
-  border-bottom: 1px solid rgba(17,17,17,0.15);
+  border-bottom: 1px solid rgba(17,17,17,0.08);
   margin-bottom: 5rem;
 }
 
 .about-row-label {
   font-family: var(--font-body);
   font-weight: 700;
-  font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+  font-size: clamp(0.9rem, 1.2vw, 1.0625rem);
+  line-height: 1.55;
   color: var(--text);
 }
 
 .about-row-content {
-  font-size: clamp(0.9rem, 1.2vw, 1.05rem);
-  line-height: 1.75;
+  font-size: clamp(0.9rem, 1.2vw, 1.0625rem);
+  line-height: 1.55;
   color: var(--text);
 }
-.about-row-content p { margin-bottom: 1rem; }
+.about-row-content p { margin-bottom: 1.25rem; }
+/* About me: só o primeiro parágrafo em preto, o resto em cinza */
+.about-row-content p + p { color: var(--text-muted); }
 .about-row-content p:last-child { margin-bottom: 0; }
 
-.about-plain-list { list-style: none; line-height: 2; }
+.about-plain-list { list-style: none; line-height: 1.55; }
 
 .about-exp-list { width: 100%; }
 .about-exp-entry {
   display: flex;
   justify-content: space-between;
-  font-size: clamp(0.875rem, 1.1vw, 1rem);
+  font-size: inherit;
   padding: 0.5rem 0;
   border-bottom: 1px solid rgba(17,17,17,0.1);
 }
 .about-exp-entry:last-child { border-bottom: none; }
 .about-exp-yr { opacity: 0.5; }
 
+/* Clientes como lista simples, sem blocos cinza */
 .about-clients-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0.5rem;
+  gap: 0 1.5rem;
 }
 .about-client-card {
-  background: rgba(17,17,17,0.07);
-  border-radius: 10px;
-  padding: 1.5rem 1rem;
   display: flex;
   align-items: center;
-  justify-content: center;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid rgba(17,17,17,0.08);
+  min-height: 44px;
   font-size: 0.875rem;
   font-weight: 500;
-  text-align: center;
-  min-height: 80px;
+  text-align: left;
 }
 
 .about-sub-label {
   font-weight: 700;
-  font-size: 0.7rem;
+  font-size: 0.6875rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   opacity: 0.45;
   margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .about-contacts {
@@ -1846,7 +1865,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   gap: 0.5rem;
 }
 .about-contacts a {
-  font-size: clamp(0.875rem, 1.1vw, 1rem);
+  font-size: inherit;
   font-weight: 500;
   text-decoration: underline;
   text-underline-offset: 3px;
