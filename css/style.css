@@ -2063,17 +2063,26 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
   letter-spacing: -0.02em;
   color: var(--text);
 }
+/* Texto corrido em duas colunas (fluxo contínuo, sem buracos entre
+   parágrafos). Sem linha viúva/órfã e sem palavra sozinha no fim. */
+.ab-lead { text-wrap: pretty; }
 .ab-cols {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem 24px;
+  column-count: 2;
+  column-gap: 40px;
+  column-fill: balance;
   margin-top: 40px;
 }
 .ab-cols p {
   font-size: 0.9375rem;
   line-height: 1.6;
   color: var(--text-muted);
+  text-wrap: pretty;
+  orphans: 3;
+  widows: 3;
+  hyphens: manual;
+  margin: 0 0 1.6em;
 }
+.ab-cols p:last-child { margin-bottom: 0; }
 
 .ab-tags { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
 .ab-tags li {

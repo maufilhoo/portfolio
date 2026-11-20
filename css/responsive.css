@@ -231,7 +231,7 @@
   .ab-row { grid-template-columns: 1fr; row-gap: 1.25rem; padding: 3rem 0; }
   .ab-label, .ab-content { grid-column: 1; }
   .ab-lead, .ab-mail { font-size: 1.25rem; }
-  .ab-cols { grid-template-columns: 1fr; margin-top: 1.5rem; }
+  .ab-cols { column-count: 1; margin-top: 1.5rem; }
   .ab-clients { grid-template-columns: repeat(2, 1fr); }
   .ab-line { flex-wrap: wrap; row-gap: 0.25rem; }
   .ab-meta { white-space: normal; }
