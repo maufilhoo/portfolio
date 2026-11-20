@@ -210,7 +210,7 @@ function initBioFade() {
    sempre por Caixa, depois Enjoei, depois 99 e então as demais. */
 const F  = n => `assets/images/feed/${n}`;
 const CB = n => `assets/images/cases/caixa-branding/${n}`;
-const FEED_CAIXA  = [CB('5.webp'), CB('4.mp4'), CB('17.webp'), CB('8.webp'), CB('18.webp')];
+const FEED_CAIXA  = [CB('4.mp4'), CB('23.mp4')];
 const FEED_ENJOEI = [F('3.webp'), F('4.webp'), F('5.webp'), F('6.gif'), F('7.webp'), F('8.gif')];
 const FEED_99     = [F('9.webp'), F('10.mp4'), F('11.webp'), F('12.gif')];
 const FEED_OTHERS = [F('1.webp'), F('2.webp'), F('13.webp'), F('14.webp'), F('15.webp'),
@@ -219,10 +219,10 @@ const FEED_OTHERS = [F('1.webp'), F('2.webp'), F('13.webp'), F('14.webp'), F('15
 
 // Desktop: a Caixa entra intercalada com os outros cases
 const FEED_ITEMS = [
-  F('1.webp'), F('2.webp'), FEED_CAIXA[0], ...FEED_ENJOEI, FEED_CAIXA[1],
-  ...FEED_99, FEED_CAIXA[2], F('13.webp'), F('14.webp'), F('15.webp'), F('16.webp'),
-  FEED_CAIXA[3], F('17.webp'), F('18.webp'), F('19.webp'), F('20.webp'),
-  FEED_CAIXA[4], F('21.gif'), F('22.webp'), F('23.webp'),
+  F('1.webp'), F('2.webp'), FEED_CAIXA[0], ...FEED_ENJOEI, ...FEED_99,
+  F('13.webp'), F('14.webp'), F('15.webp'), F('16.webp'), FEED_CAIXA[1],
+  F('17.webp'), F('18.webp'), F('19.webp'), F('20.webp'), F('21.gif'),
+  F('22.webp'), F('23.webp'),
 ];
 const FEED_ITEMS_MOBILE = [...FEED_CAIXA, ...FEED_ENJOEI, ...FEED_99, ...FEED_OTHERS];
 
