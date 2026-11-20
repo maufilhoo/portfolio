@@ -319,7 +319,7 @@ const PROJECT_DATA = {
           "pt": "Design",
           "en": "Design"
         },
-        "Carlos Teles, Rodrigo Gondim, João Costa, João Santos, Adson Rodrigues, Marcelo Siqueira, Dan Mesquita, Ted Oliver, Mauricio Filho, Carol Ohashi, Gustavo André, Lukas Arujo, Filipi Filippo, Namie Arakawa, Satsuki Arakaki, Isadora Scazufca, Rafaela Kreutz, Cássia Freire, Shay Reis"
+        "Mauricio Filho, Adson Rodrigues, Carlos Teles, Carol Ohashi, Cássia Freire, Dan Mesquita, Filipi Filippo, Gustavo André, Isadora Scazufca, João Costa, João Santos, Lukas Arujo, Marcelo Siqueira, Namie Arakawa, Rafaela Kreutz, Rodrigo Gondim, Satsuki Arakaki, Shay Reis, Ted Oliver"
       ],
       [
         {
@@ -413,7 +413,7 @@ const PROJECT_DATA = {
           "pt": "Design",
           "en": "Design"
         },
-        "Eduardo França, Gustavo André, Mauricio Filho, Mariana Hermeto"
+        "Mauricio Filho, Eduardo França, Gustavo André, Mariana Hermeto"
       ],
       [
         {
@@ -492,7 +492,7 @@ const PROJECT_DATA = {
           "pt": "Design",
           "en": "Design"
         },
-        "Camilla Mattos, Gustavo André, Eduardo França, Mauricio Filho, Mariana Hermeto"
+        "Mauricio Filho, Camilla Mattos, Eduardo França, Gustavo André, Mariana Hermeto"
       ],
       [
         {
@@ -540,7 +540,7 @@ const PROJECT_DATA = {
           "pt": "Design",
           "en": "Design"
         },
-        "Gustavo André, Eduardo França, Mauricio Filho, Lays Santos"
+        "Mauricio Filho, Eduardo França, Gustavo André, Lays Santos"
       ],
       [
         {
@@ -607,7 +607,7 @@ const PROJECT_DATA = {
           "pt": "Design",
           "en": "Design"
         },
-        "Cahue Abatipietro, Carolina Pinheiro, Gustavo Crivellari, Mauricio Filho"
+        "Mauricio Filho, Cahue Abatipietro, Carolina Pinheiro, Gustavo Crivellari"
       ],
       [
         {
@@ -732,7 +732,7 @@ const PROJECT_DATA = {
           "pt": "Design",
           "en": "Design"
         },
-        "Adson Rodrigues, Gabriel Kalani, Mauricio Filho"
+        "Mauricio Filho, Adson Rodrigues, Gabriel Kalani"
       ],
       [
         {
@@ -831,7 +831,7 @@ const PROJECT_DATA = {
           "pt": "Design",
           "en": "Design"
         },
-        "Camilla Mattos, Eduardo França, Gustavo André, Mauricio Filho, Priscila Czuka"
+        "Mauricio Filho, Camilla Mattos, Eduardo França, Gustavo André, Priscila Czuka"
       ],
       [
         {
@@ -1834,6 +1834,244 @@ function initCookieBar() {
 }
 
 /* ─── Init ───────────────────────────────────────────────────────── */
+
+/* ─── Mobile V3.2: lista de projetos e case em tela própria ──────────
+   Os dados vêm das linhas da tabela (.wt-row) e de PROJECT_DATA, então
+   um case novo aparece aqui sem mexer neste código.                  */
+const isMobileView = () => window.matchMedia('(max-width: 768px)').matches;
+
+function mobileProjects() {
+  return [...document.querySelectorAll('.wt-row[data-project]')].map(row => {
+    let media = [];
+    try { media = JSON.parse(row.dataset.images || '[]'); } catch (e) {}
+    const q = sel => (row.querySelector(sel)?.textContent || '').trim();
+    return {
+      slug: row.dataset.project,
+      name: q('.wt-name'), sector: q('.wt-sector'),
+      services: q('.wt-services'), year: q('.wt-year'),
+      media,
+    };
+  });
+}
+
+function mEl(tag, cls, text) {
+  const el = document.createElement(tag);
+  if (cls) el.className = cls;
+  if (text != null) el.textContent = text;
+  return el;
+}
+
+function mCover(p) {
+  const wrap = mEl('div', 'm-card-media');
+  const img = mEl('img');
+  img.src = mediaUrl(`assets/images/cases/${p.slug}.webp`);
+  img.alt = p.name; img.loading = 'lazy'; img.decoding = 'async';
+  wrap.appendChild(img);
+  return wrap;
+}
+
+function initMobileHome() {
+  const list = document.querySelector('.m-work-list');
+  if (!list) return;
+  const projects = mobileProjects();
+  const count = document.querySelector('.m-count');
+  if (count) count.textContent = projects.length;
+
+  projects.forEach((p, i) => {
+    const card = mEl('button', 'm-card');
+    card.type = 'button';
+    const media = mCover(p);
+    if (i === 0) {
+      const tag = mEl('span', 'm-tag', getTranslation('m_featured'));
+      tag.dataset.i18n = 'm_featured';
+      media.appendChild(tag);
+    }
+    card.appendChild(media);
+    const meta = mEl('div', 'm-card-meta');
+    meta.appendChild(mEl('span', 'm-card-name', p.name));
+    meta.appendChild(mEl('span', 'm-card-year', p.year));
+    card.appendChild(meta);
+    card.appendChild(mEl('div', 'm-card-services', p.services));
+    card.addEventListener('click', () => openMobileCase(p.slug, true));
+    list.appendChild(card);
+  });
+
+  const shell = mEl('div', 'm-case');
+  shell.id = 'm-case';
+  shell.setAttribute('role', 'dialog');
+  shell.setAttribute('aria-modal', 'true');
+  document.body.appendChild(shell);
+
+  window.addEventListener('popstate', () => {
+    const slug = (location.hash.match(/^#case-(.+)$/) || [])[1];
+    if (slug) openMobileCase(slug, false); else closeMobileCase(false);
+  });
+  const first = (location.hash.match(/^#case-(.+)$/) || [])[1];
+  if (first && isMobileView()) openMobileCase(first, false);
+}
+
+function closeMobileCase(push) {
+  const shell = document.getElementById('m-case');
+  if (!shell || !shell.classList.contains('is-open')) return;
+  shell.querySelectorAll('video').forEach(v => v.pause());
+  shell.classList.remove('is-open');
+  shell.innerHTML = '';
+  document.body.classList.remove('m-case-open');
+  if (push) history.back();
+}
+
+function openMobileCase(slug, push) {
+  const shell = document.getElementById('m-case');
+  const projects = mobileProjects();
+  const idx = projects.findIndex(p => p.slug === slug);
+  if (!shell || idx < 0) return;
+  const p = projects[idx];
+  const data = PROJECT_DATA[slug] || {};
+  const isEN = document.documentElement.lang === 'en';
+  const t = getTranslation;
+  if (push) history.pushState({ case: slug }, '', '#case-' + slug);
+
+  shell.querySelectorAll('video').forEach(v => v.pause());
+  shell.innerHTML = '';
+
+  // barra
+  const bar = mEl('div', 'm-case-bar');
+  const brand = mEl('span', 'mobile-brand');
+  brand.appendChild(mEl('span', 'mobile-logo', '🐡'));
+  brand.appendChild(mEl('span', 'mobile-brand-name', 'Mauricio Filho'));
+  bar.appendChild(brand);
+  const close = mEl('button', 'm-case-close', t('m_close'));
+  close.type = 'button';
+  close.addEventListener('click', () => closeMobileCase(true));
+  bar.appendChild(close);
+  shell.appendChild(bar);
+
+  // título + ficha
+  const head = mEl('div', 'm-case-head');
+  const pad = n => String(n).padStart(2, '0');
+  head.appendChild(mEl('p', 'm-case-crumb', `${t('m_work')}  /  ${pad(idx + 1)} ${t('m_of')} ${projects.length}`));
+  head.appendChild(mEl('h1', 'm-case-title', p.name));
+  const meta = mEl('div', 'm-case-meta');
+  const cell = (k, v) => { const c = mEl('div'); c.appendChild(mEl('span', 'm-case-k', k)); c.appendChild(mEl('span', 'm-case-v', v)); return c; };
+  const studio = data.studio || t('m_independent');
+  [[[t('m_sector'), p.sector], [t('m_year'), p.year]],
+   [[t('m_services'), p.services.replace(/ · /g, ', ')], [t('m_studio'), studio]]].forEach(pair => {
+    const row = mEl('div', 'm-case-meta-row');
+    pair.forEach(([k, v]) => row.appendChild(cell(k, v)));
+    meta.appendChild(row);
+  });
+  head.appendChild(meta);
+  shell.appendChild(head);
+
+  // mídia: sempre na largura toda, proporção original (sem corte)
+  const mediaNode = src => {
+    if (src.endsWith('.mp4')) {
+      const v = mEl('video');
+      v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'none';
+      v.setAttribute('playsinline', '');
+      v.dataset.src = mediaUrl(src);
+      return v;
+    }
+    const img = mEl('img');
+    img.src = mediaUrl(src); img.alt = ''; img.loading = 'lazy'; img.decoding = 'async';
+    return img;
+  };
+  const [heroSrc, ...rest] = p.media;
+  if (heroSrc) {
+    const hero = mEl('div', 'm-case-media');
+    hero.appendChild(mediaNode(heroSrc));
+    shell.appendChild(hero);
+  }
+
+  // visão geral: 1ª frase em destaque, resto recolhido
+  const detail = data.detail ? (typeof data.detail === 'object' ? (isEN ? data.detail.en : data.detail.pt) : data.detail) : '';
+  if (detail) {
+    const ov = mEl('div', 'm-case-ov');
+    ov.appendChild(mEl('p', 'm-label', t('m_overview')));
+    const paras = detail.split('\n\n');
+    const firstPara = paras.shift();
+    const cut = firstPara.search(/[.!?](\s|$)/);
+    const lead = cut > 0 ? firstPara.slice(0, cut + 1) : firstPara;
+    const restFirst = cut > 0 ? firstPara.slice(cut + 1).trim() : '';
+    ov.appendChild(mEl('p', 'm-case-lead', lead));
+    const body = mEl('div', 'm-case-body');
+    if (restFirst) body.appendChild(mEl('p', null, restFirst));
+    const more = mEl('div', 'm-case-more');
+    paras.forEach(tx => more.appendChild(mEl('p', null, tx)));
+    if (paras.length) {
+      more.hidden = true;
+      body.appendChild(more);
+      const btn = mEl('button', 'm-link-btn', t('m_readmore'));
+      btn.type = 'button';
+      btn.addEventListener('click', () => { more.hidden = !more.hidden; btn.textContent = t(more.hidden ? 'm_readmore' : 'm_readless'); });
+      body.appendChild(btn);
+    }
+    ov.appendChild(body);
+    shell.appendChild(ov);
+  }
+
+  if (rest.length) {
+    const gal = mEl('div', 'm-case-media');
+    rest.forEach(src => gal.appendChild(mediaNode(src)));
+    shell.appendChild(gal);
+  }
+
+  // ficha técnica: 3 linhas e o resto recolhido
+  if (data.credits && data.credits.length) {
+    const cr = mEl('div', 'm-case-credits');
+    cr.appendChild(mEl('p', 'm-label', t('m_credits')));
+    const rows = data.credits.map(([labelObj, ...values]) => {
+      const key = typeof labelObj === 'object' ? (isEN ? labelObj.en : labelObj.pt) : labelObj;
+      const vals = values.map(v => {
+        if (typeof v === 'object' && v.dir !== undefined) return `${isEN ? 'Direction' : 'Direção'}: ${v.dir}`;
+        return typeof v === 'object' ? (isEN ? v.en : v.pt) : v;
+      });
+      const r = mEl('div', 'm-case-credit');
+      r.appendChild(mEl('span', 'm-case-k', key));
+      r.appendChild(mEl('span', 'm-case-v', vals.join(' · ')));
+      return r;
+    });
+    rows.forEach((r, i) => { if (i > 2) r.hidden = true; cr.appendChild(r); });
+    const st = mEl('p', 'm-case-studio', (isEN ? 'Project developed at ' : 'Projeto desenvolvido na ') + studio);
+    if (data.studio) { st.hidden = rows.length > 3; cr.appendChild(st); }
+    if (rows.length > 3) {
+      const btn = mEl('button', 'm-link-btn', t('m_fullcredits'));
+      btn.type = 'button';
+      btn.addEventListener('click', () => {
+        const open = btn.dataset.open !== '1';
+        btn.dataset.open = open ? '1' : '';
+        rows.forEach((r, i) => { if (i > 2) r.hidden = !open; });
+        if (data.studio) st.hidden = !open;
+        btn.textContent = t(open ? 'm_lesscredits' : 'm_fullcredits');
+      });
+      cr.appendChild(btn);
+    }
+    shell.appendChild(cr);
+  }
+
+  // próximo projeto
+  const nextP = projects[(idx + 1) % projects.length];
+  const next = mEl('a', 'm-case-next');
+  next.href = '#case-' + nextP.slug;
+  next.appendChild(mEl('p', 'm-label', t('m_next')));
+  next.appendChild(mCover(nextP));
+  next.appendChild(mEl('p', 'm-case-next-name', nextP.name + ' →'));
+  next.addEventListener('click', e => { e.preventDefault(); history.replaceState({ case: nextP.slug }, '', '#case-' + nextP.slug); openMobileCase(nextP.slug, false); });
+  shell.appendChild(next);
+
+  // vídeos: carregam e tocam só quando aparecem
+  const io = new IntersectionObserver(entries => entries.forEach(en => {
+    const v = en.target;
+    if (en.isIntersecting) { if (!v.src) v.src = v.dataset.src; v.play().catch(() => {}); }
+    else v.pause();
+  }), { root: shell, rootMargin: '200px 0px' });
+  shell.querySelectorAll('video').forEach(v => io.observe(v));
+
+  shell.classList.add('is-open');
+  document.body.classList.add('m-case-open');
+  shell.scrollTop = 0;
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   window.scrollTo(0, 0);
   initOverlay();
@@ -1849,6 +2087,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initWorkTable();
   initFooterMeta();
   await initI18n();
+  initMobileHome();
   initWelcome(armGather);
   initReveal();
   initCopyEmail();

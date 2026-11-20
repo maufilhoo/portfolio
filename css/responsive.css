@@ -3,6 +3,8 @@
 .mobile-hero-row,
 .mobile-work-heading,
 .mobile-menu-overlay { display: none; }
+/* Blocos do mobile V3.2: escondidos no desktop */
+.m-only, .m-only-flex, .m-case { display: none; }
 
 /* ─── Tablet (≤ 1024px) ─────────────────────────────────────────── */
 @media (max-width: 1024px) {
@@ -395,4 +397,123 @@
 @media (max-width: 768px) {
   /* toque: cursor padrão (o cursor custom é só para desktop) */
   *, *::before, *::after { cursor: auto !important; }
+}
+
+
+/* ─── Mobile V3.2 (≤ 768px) ─────────────────────────────────────────
+   Home: intro + lista de projetos + abordagem. About enxuto.
+   Case abre em tela própria, imagens sempre na largura toda.       */
+@media (max-width: 768px) {
+  :root { --m-line: #e4e4e0; --m-stone: #f4f4f1; --m-muted: #6b6b6b; --m-gut: 24px; }
+  .m-only { display: block; }
+  .m-only-flex { display: flex; }
+  .ab-row--desk, .ab-desk { display: none !important; }
+
+  /* Header: peixe + nome à esquerda, Menu em pílula à direita */
+  .mobile-header-bar { padding: 0 var(--m-gut); }
+  .mobile-brand { display: inline-flex; align-items: center; gap: 10px; color: var(--text); text-decoration: none; }
+  .mobile-logo { font-size: 18px; }
+  .mobile-brand-name { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+  .mobile-menu-btn {
+    min-height: 36px; padding: 0 16px; margin-right: 0;
+    border: 1px solid #DFDEDE; border-radius: 999px;
+    font-size: 13px; font-weight: 500; letter-spacing: 0;
+  }
+
+  /* Home antiga some no mobile */
+  .hero-section, .bio-section, .feed-showcase,
+  .mobile-work-heading, .work-table-wrap { display: none !important; }
+
+  .m-home { padding-top: 56px; }
+  .m-intro { padding: 72px var(--m-gut) 72px; }
+  .m-eyebrow, .m-label { font-size: 13px; line-height: 1.4; color: var(--m-muted); }
+  .m-headline {
+    margin-top: 8px;
+    font-size: 44px; font-weight: 500; line-height: 0.96; letter-spacing: -0.03em;
+    color: var(--text);
+  }
+  .m-support { margin-top: 20px; font-size: 15px; line-height: 1.6; color: var(--m-muted); }
+  .m-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 14px; margin-top: 28px; }
+  .m-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 13px 20px 13px 22px; border-radius: 999px;
+    background: var(--text); color: #fff; text-decoration: none;
+    font-size: 14px; font-weight: 500;
+  }
+  .m-status { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; color: var(--text); }
+  .m-dot { width: 7px; height: 7px; border-radius: 50%; background: #33C759; flex-shrink: 0; }
+
+  .m-work { padding: 56px var(--m-gut) 24px; border-top: 1px solid var(--m-line); }
+  .m-work-head { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 8px; }
+  .m-work-head h2 { font-size: 24px; font-weight: 500; line-height: 1.25; letter-spacing: -0.02em; }
+  .m-count { font-size: 13px; }
+  .m-card { display: block; width: 100%; padding: 24px 0; text-align: left; color: var(--text); background: none; border: 0; }
+  .m-card-media { position: relative; aspect-ratio: 4 / 3; border-radius: 4px; overflow: hidden; background: var(--m-stone); }
+  .m-card-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .m-tag {
+    position: absolute; top: 16px; left: 16px;
+    padding: 6px 12px; border-radius: 999px; background: #fff;
+    font-size: 12px; line-height: 1.2;
+  }
+  .m-card-meta { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding-top: 16px; }
+  .m-card-name { font-size: 17px; font-weight: 500; line-height: 1.35; letter-spacing: -0.01em; }
+  .m-card-year, .m-card-services { font-size: 13px; color: var(--m-muted); }
+  .m-card-services { padding-top: 4px; line-height: 1.55; }
+
+  .m-approach { padding: 96px var(--m-gut) 112px; }
+  .m-approach-title { margin-top: 16px; font-size: 28px; font-weight: 500; line-height: 1.18; letter-spacing: -0.02em; }
+
+  /* ── Case em tela própria ── */
+  .m-case {
+    position: fixed; inset: 0; z-index: 8500;
+    background: var(--bg); overflow-y: auto; -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+  .m-case.is-open { display: block; }
+  body.m-case-open { overflow: hidden; }
+  .m-case-bar {
+    position: sticky; top: 0; z-index: 2;
+    display: flex; justify-content: space-between; align-items: center;
+    height: 64px; padding: 0 var(--m-gut); background: var(--bg);
+  }
+  .m-case-close {
+    min-height: 36px; padding: 0 16px; border: 1px solid #DFDEDE; border-radius: 999px;
+    background: none; font: inherit; font-size: 13px; font-weight: 500; color: var(--text);
+  }
+  .m-case-head { padding: 32px var(--m-gut) 32px; }
+  .m-case-crumb { font-size: 12px; color: var(--m-muted); }
+  .m-case-title { margin-top: 12px; font-size: 56px; font-weight: 500; line-height: 0.95; letter-spacing: -0.04em; }
+  .m-case-meta { margin-top: 28px; }
+  .m-case-meta-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding: 14px 0; border-top: 1px solid var(--m-line); }
+  .m-case-k { display: block; font-size: 11px; line-height: 1.4; color: var(--m-muted); }
+  .m-case-v { display: block; margin-top: 4px; font-size: 13px; line-height: 1.5; }
+  .m-case-media { display: flex; flex-direction: column; gap: 8px; }
+  .m-case-media img, .m-case-media video { display: block; width: 100%; height: auto; background: var(--m-stone); }
+  .m-case-media video:not([src]) { aspect-ratio: 16 / 9; }
+  .about-main { padding-left: var(--m-gut); padding-right: var(--m-gut); }
+  .m-case-ov { padding: 40px var(--m-gut); }
+  .m-case-lead { margin-top: 12px; font-size: 22px; font-weight: 500; line-height: 1.25; letter-spacing: -0.02em; }
+  .m-case-body p { margin-top: 16px; font-size: 15px; line-height: 1.6; color: var(--m-muted); }
+  .m-case-more[hidden] { display: none; }
+  .m-link-btn { margin-top: 16px; padding: 0; background: none; border: 0; font: inherit; font-size: 13px; font-weight: 500; color: var(--text); }
+  .m-case-credits { padding: 48px var(--m-gut) 24px; }
+  .m-case-credit { padding: 12px 0; border-bottom: 1px solid var(--m-line); }
+  .m-case-credit[hidden] { display: none; }
+  .m-case-studio { margin-top: 14px; font-size: 13px; color: var(--m-muted); }
+  .m-case-next { display: block; padding: 48px var(--m-gut) 96px; border-top: 1px solid var(--m-line); color: var(--text); text-decoration: none; }
+  .m-case-next .m-card-media { margin-top: 16px; }
+  .m-case-next-name { margin-top: 16px; font-size: 28px; font-weight: 500; line-height: 1.18; letter-spacing: -0.02em; }
+
+  /* ── About enxuto ── */
+  .about-page-sub { display: none; }
+  .about-hero-text .m-eyebrow { margin-bottom: 4px; }
+  .about-page-title { font-size: 44px; font-weight: 500; letter-spacing: -0.03em; line-height: 0.96; }
+  .about-photo-tall { aspect-ratio: 4 / 5; }
+  .m-about-intro { padding-bottom: 48px; }
+  .m-about-lead { font-size: 20px; font-weight: 500; line-height: 1.3; letter-spacing: -0.01em; }
+  .ab-row { padding: 40px 0; row-gap: 8px; }
+  .ab-line .ab-meta { flex-basis: 100%; }
+  .ab-clients { display: block; }
+  .ab-clients li { display: inline; padding: 0; border: 0; }
+  .ab-clients li:not(:last-child)::after { content: ", "; }
 }

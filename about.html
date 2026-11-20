@@ -15,8 +15,8 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://mfilho.com/assets/images/og-image.png" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐡</text></svg>">
-  <link rel="stylesheet" href="css/style.css?v=20261120a" />
-  <link rel="stylesheet" href="css/responsive.css?v=20261120a" />
+  <link rel="stylesheet" href="css/style.css?v=20261120b" />
+  <link rel="stylesheet" href="css/responsive.css?v=20261120b" />
 </head>
 <body class="page-about">
 
@@ -65,8 +65,8 @@
       </div>
     </div>
     <div class="mobile-header-bar">
-      <span class="mobile-logo">🐡</span>
-      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menu">Menu +</button>
+      <a href="index.html" class="mobile-brand"><span class="mobile-logo">🐡</span><span class="mobile-brand-name">Mauricio Filho</span></a>
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menu">Menu</button>
     </div>
   </header>
 
@@ -79,13 +79,20 @@
         <img class="about-photo-tall" src="assets/images/Foto_About.png" alt="Mauricio Filho">
       </div>
       <div class="about-hero-text">
+        <p class="m-eyebrow m-only" data-i18n="m_role">Brand Designer, São Paulo</p>
         <h1 class="about-page-title" data-i18n="about_page_title">About</h1>
         <p class="about-page-sub" data-i18n="about_page_sub">Senior Brand &amp; Visual Designer, São Paulo.</p>
       </div>
     </div>
 
+    <!-- Intro curta do mobile (V3.2) -->
+    <div class="m-about-intro m-only">
+      <p class="m-about-lead" data-i18n="m_about_lead">Brazilian designer and art director based in São Paulo, focused on branding and visual identity for brands of every size, in Brazil and abroad.</p>
+      <p class="m-support" data-i18n="m_about_support">Research and concept are my favorite parts of the process. After years at branding agencies, I went independent to stay close to the key decisions.</p>
+    </div>
+
     <!-- About me -->
-    <section class="ab-row">
+    <section class="ab-row ab-row--desk">
       <h2 class="ab-label" data-i18n="about_label_aboutme">About me</h2>
       <div class="ab-content">
         <p class="ab-lead" data-i18n="about_me_p1">Nice to meet you, I'm Mauricio Filho, a Brazilian multidisciplinary designer and art director based in São Paulo. With a focus on branding and visual identity, I've worked with brands of different sizes and industries across Brazil and internationally.</p>
@@ -99,7 +106,7 @@
     </section>
 
     <!-- Main Activities -->
-    <section class="ab-row">
+    <section class="ab-row ab-row--desk">
       <h2 class="ab-label" data-i18n="about_label_activities">Main Activities</h2>
       <div class="ab-content">
         <ul class="ab-tags">
@@ -129,17 +136,18 @@
       <h2 class="ab-label" data-i18n="about_label_experience">Experience</h2>
       <div class="ab-content">
           <div class="ab-line"><span class="ab-title" data-i18n="about_exp_independent">Independent</span><span class="ab-yr" data-i18n="about_exp_current">Current</span></div>
-          <p class="ab-sublabel" data-i18n="about_exp_freelance">Freelance collaborations</p>
+          <p class="ab-sublabel ab-desk" data-i18n="about_exp_freelance">Freelance collaborations</p>
           <div class="ab-line ab-line--sub"><span>Lysch · Senior Brand &amp; Digital Designer</span><span class="ab-yr">2026</span></div>
           <div class="ab-line ab-line--sub"><span>FutureBrand · Senior Brand Designer</span><span class="ab-yr">2026</span></div>
           <div class="ab-line ab-line--sub"><span>R/GA · Senior Digital Designer</span><span class="ab-yr">2026</span></div>
           <div class="ab-line ab-line--sub"><span>Marcas com Sal · Senior Brand Designer</span><span class="ab-yr">2026</span></div>
           <div class="ab-line ab-line--sub"><span>Arco Educação · Brand Designer Specialist</span><span class="ab-yr">2025</span></div>
           <div class="ab-line"><span class="ab-title">Tátil Design</span><span class="ab-yr">2021 – 25</span></div>
-          <div class="ab-line"><span class="ab-title">Marcas com Sal</span><span class="ab-yr">2021</span></div>
-          <div class="ab-line"><span class="ab-title">Pib Club</span><span class="ab-yr">2019 – 20</span></div>
-          <div class="ab-line"><span class="ab-title">Love Life Entertainment</span><span class="ab-yr">2018 – 19</span></div>
-          <div class="ab-line"><span class="ab-title">Topmind</span><span class="ab-yr">2017 – 18</span></div>
+          <div class="ab-line ab-desk"><span class="ab-title">Marcas com Sal</span><span class="ab-yr">2021</span></div>
+          <div class="ab-line ab-desk"><span class="ab-title">Pib Club</span><span class="ab-yr">2019 – 20</span></div>
+          <div class="ab-line ab-desk"><span class="ab-title">Love Life Entertainment</span><span class="ab-yr">2018 – 19</span></div>
+          <div class="ab-line ab-desk"><span class="ab-title">Topmind</span><span class="ab-yr">2017 – 18</span></div>
+          <div class="ab-line m-only-flex"><span class="ab-title">Marcas com Sal, Pib Club, Love Life, Topmind</span><span class="ab-yr">2017 – 21</span></div>
       </div>
     </section>
 
@@ -171,7 +179,7 @@
     </section>
 
     <!-- Education -->
-    <section class="ab-row">
+    <section class="ab-row ab-row--desk">
       <h2 class="ab-label" data-i18n="about_label_education">Education</h2>
       <div class="ab-content">
           <div class="ab-line"><span class="ab-title">Design, Mackenzie</span><span class="ab-yr">2015 – 18</span></div>
@@ -221,6 +229,7 @@
           <a href="https://api.whatsapp.com/send?phone=5511930780104" target="_blank" rel="noopener" class="footer-connect-link">WhatsApp</a>
           <a href="https://www.linkedin.com/in/mauriciodesignbr/" target="_blank" rel="noopener" class="footer-connect-link">Linkedin</a>
           <a href="https://www.behance.net/mauriciolpf" target="_blank" rel="noopener" class="footer-connect-link">Behance</a>
+          <a href="https://www.instagram.com/mfjobs/" target="_blank" rel="noopener" class="footer-connect-link">Instagram</a>
         </div>
       </div>
 
@@ -248,6 +257,6 @@
     </div>
   </div>
 
-  <script type="module" src="js/main.js?v=20261120a"></script>
+  <script type="module" src="js/main.js?v=20261120b"></script>
 </body>
 </html>

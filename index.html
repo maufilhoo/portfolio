@@ -15,8 +15,8 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://mfilho.com/assets/images/og-image.png" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐡</text></svg>">
-  <link rel="stylesheet" href="css/style.css?v=20261120a" />
-  <link rel="stylesheet" href="css/responsive.css?v=20261120a" />
+  <link rel="stylesheet" href="css/style.css?v=20261120b" />
+  <link rel="stylesheet" href="css/responsive.css?v=20261120b" />
   <script>if ('scrollRestoration' in history) history.scrollRestoration = 'manual';</script>
 </head>
 <body>
@@ -68,10 +68,32 @@
       </div>
     </div>
     <div class="mobile-header-bar">
-      <span class="mobile-logo">🐡</span>
-      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menu">Menu +</button>
+      <a href="index.html" class="mobile-brand"><span class="mobile-logo">🐡</span><span class="mobile-brand-name">Mauricio Filho</span></a>
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menu">Menu</button>
     </div>
   </header>
+
+  <!-- ─── Home mobile (V3.2) — só aparece até 768px ─────────────── -->
+  <section class="m-home m-only" aria-label="Intro">
+    <div class="m-intro">
+      <p class="m-eyebrow" data-i18n="m_role">Brand Designer, São Paulo</p>
+      <h1 class="m-headline" data-i18n-html="m_headline">The obvious<br>is already<br>taken.</h1>
+      <p class="m-support" data-i18n="m_support">I find what only your brand has and turn it into a system. Currently independent.</p>
+      <div class="m-cta">
+        <a class="m-btn" href="mailto:talk@mfilho.com"><span data-i18n="m_talk">Let’s talk</span> <span class="m-arrow">↗</span></a>
+        <span class="m-status"><span class="m-dot" aria-hidden="true"></span><span data-i18n="m_open">Open to the right projects</span></span>
+      </div>
+    </div>
+    <div class="m-work" id="m-work">
+      <div class="m-work-head"><h2 data-i18n="m_selected">Selected work</h2><span class="m-count"></span></div>
+      <div class="m-work-list"></div>
+    </div>
+    <div class="m-approach">
+      <p class="m-label" data-i18n="m_approach">Approach</p>
+      <h2 class="m-approach-title" data-i18n-html="m_approach_title">I start where most<br>people don’t look.</h2>
+      <p class="m-support" data-i18n="m_approach_text">History, origin, the detail nobody noticed. Then I turn it into living systems, beyond the static.</p>
+    </div>
+  </section>
 
   <!-- ─── Hero ────────────────────────────────────────────────────── -->
   <section class="hero-section" id="hero">
@@ -304,6 +326,7 @@
           <a href="https://api.whatsapp.com/send?phone=5511930780104" target="_blank" rel="noopener" class="footer-connect-link">WhatsApp</a>
           <a href="https://www.linkedin.com/in/mauriciodesignbr/" target="_blank" rel="noopener" class="footer-connect-link">Linkedin</a>
           <a href="https://www.behance.net/mauriciolpf" target="_blank" rel="noopener" class="footer-connect-link">Behance</a>
+          <a href="https://www.instagram.com/mfjobs/" target="_blank" rel="noopener" class="footer-connect-link">Instagram</a>
         </div>
       </div>
 
@@ -336,6 +359,6 @@
     </div>
   </div>
 
-  <script type="module" src="js/main.js?v=20261120a"></script>
+  <script type="module" src="js/main.js?v=20261120b"></script>
 </body>
 </html>
