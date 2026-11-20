@@ -615,3 +615,49 @@
   .mobile-menu-footer { justify-content: space-between; }
   .mobile-menu-time { font-size: 13px; color: #1a1a00; opacity: 0.6; }
 }
+
+/* ─── About mobile (Figma 276:456): enxuto, na ordem
+   intro · experiência · reconhecimento · atividades · clientes · contato */
+.m-only-inline { display: none; }
+@media (max-width: 768px) {
+  .about-main { display: flex; flex-direction: column; padding-left: 0; padding-right: 0; }
+  .about-hero, .m-about-intro { padding-left: 24px; padding-right: 24px; }
+  .about-hero { order: 0; padding-top: 72px; padding-bottom: 0; gap: 0; }
+  .about-hero-text .m-eyebrow { font-size: 13px; line-height: 1.4; color: #6b6b6b; margin: 0; }
+  .about-page-title { margin-top: 4px; }
+  .about-hero-photo { padding-top: 32px; }
+  .m-about-intro { order: 1; padding-top: 32px; padding-bottom: 48px; }
+  .m-about-lead { font-size: 20px; font-weight: 500; line-height: 1.3; letter-spacing: -0.01em; }
+  .m-about-intro .m-about-p { margin-top: 16px; font-size: 15px; line-height: 1.6; color: #6b6b6b; }
+  .ab-row--exp { order: 2; } .ab-row--rec { order: 3; } .ab-row--act { order: 4; }
+  .ab-row--cli { order: 5; } .ab-row--con { order: 6; }
+  .ab-row--exp, .ab-row--rec, .ab-row--act, .ab-row--cli, .ab-row--con {
+    display: block; padding: 40px 24px; border-top: 1px solid #e4e4e0; border-bottom: 0;
+  }
+  .ab-row--con { padding-bottom: 96px; }
+  .ab-row .ab-label { font-size: 13px; line-height: 1.4; color: #6b6b6b; padding-bottom: 8px; margin: 0; }
+  .ab-row .ab-line { padding: 14px 0; border-bottom: 1px solid #e4e4e0; align-items: baseline; }
+  .ab-row .ab-title { font-size: 17px; font-weight: 500; line-height: 1.35; letter-spacing: -0.01em; }
+  .ab-row .ab-yr { font-size: 13px; line-height: 1.4; color: #6b6b6b; white-space: nowrap; }
+  .ab-row .ab-line--sub { padding-left: 16px; }
+  .ab-row .ab-line--sub > span:first-child { font-size: 15px; line-height: 1.6; color: #6b6b6b; }
+  .ab-row .ab-line--sub .ab-yr { color: #111; }
+  .ab-row--rec .ab-line { flex-direction: column; gap: 2px; }
+  .ab-row--rec .ab-meta { font-size: 13px; line-height: 1.55; color: #6b6b6b; }
+  /* atividades: frentes em destaque, criação como texto corrido */
+  .ab-row--act .ab-focus li { font-size: 17px; }
+  .ab-row--act .ab-sublabel { padding-top: 16px; padding-bottom: 6px; font-size: 13px; color: #6b6b6b; }
+  .ab-row--act .ab-tags { display: block; }
+  .ab-row--act .ab-tags li { display: inline; padding: 0; background: none; border: 0; font-size: 15px; line-height: 1.6; color: #6b6b6b; }
+  .ab-row--act .ab-tags li:not(:last-child)::after { content: " · "; }
+  /* clientes em um parágrafo */
+  .ab-row--cli .ab-clients { display: block; padding-top: 6px; }
+  .ab-row--cli .ab-clients li { display: inline; padding: 0; border: 0; font-size: 17px; font-weight: 500; line-height: 1.4; letter-spacing: -0.01em; }
+  .ab-row--cli .ab-clients li:not(:last-child)::after { content: ", "; }
+  .ab-row--cli .ab-clients li:nth-last-child(2)::after { content: ", "; }
+  .m-only-inline { display: inline; }
+  /* contato */
+  .ab-row--con .ab-mail { display: inline-block; padding: 6px 0 2px; border-bottom: 2px solid #111; font-size: 22px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.25; text-decoration: none; }
+  .ab-row--con .ab-links { display: flex; flex-wrap: wrap; gap: 12px 24px; padding-top: 20px; }
+  .ab-row--con .ab-links a { font-size: 14px; font-weight: 500; padding-bottom: 2px; border-bottom: 1px solid #111; text-decoration: none; }
+}
