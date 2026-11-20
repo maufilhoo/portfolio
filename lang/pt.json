@@ -87,11 +87,11 @@
   "about_rec_bbdg": "Bienal Brasileira de Design Gráfico",
   "about_act_1": "Branding",
   "about_act_2": "Identidade Visual",
-  "about_act_3": "Embalagem",
-  "about_act_4": "Sinalização",
-  "about_act_5": "Campanhas",
-  "about_act_6": "Direção de Arte",
-  "about_act_7": "Ilustração",
+  "about_act_3": "Produto Digital",
+  "about_act_4": "Embalagem",
+  "about_act_5": "Sinalização",
+  "about_act_6": "Campanhas",
+  "about_act_7": "Direção de Arte",
   "about_course_1": "Brand Motion, Platô Studio (12h)",
   "about_course_2": "Criando Design Systems Escaláveis, Platô Studio (12h)",
   "about_course_3": "Ilustração para Marcas, Platô Studio (12,5h)",
@@ -137,5 +137,10 @@
   "m_about_p6": "Me interesso especialmente por projetos digitais em que o craft traduz a identidade da marca além do óbvio. Se você não tem medo de arriscar e gosta de desafiar o mercado, vai ser um prazer construir isso junto.",
   "about_course_4": "UI Design, Tera (11h)",
   "about_course_5": "Figma, Tera (5h)",
-  "about_hello": "Prazer em conhecer você."
+  "about_hello": "Prazer em conhecer você.",
+  "about_focus_1": "Direção Criativa",
+  "about_focus_2": "Auditoria de Marca",
+  "about_focus_3": "Consultoria de Marca",
+  "about_craft_label": "Criação",
+  "about_act_8": "Ilustração"
 }

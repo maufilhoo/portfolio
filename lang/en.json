@@ -87,11 +87,11 @@
   "about_rec_bbdg": "Brazilian Biennial of Graphic Design",
   "about_act_1": "Branding",
   "about_act_2": "Visual Identity",
-  "about_act_3": "Packaging",
-  "about_act_4": "Signage",
-  "about_act_5": "Campaigns",
-  "about_act_6": "Art Direction",
-  "about_act_7": "Illustration",
+  "about_act_3": "Digital Product",
+  "about_act_4": "Packaging",
+  "about_act_5": "Signage",
+  "about_act_6": "Campaigns",
+  "about_act_7": "Art Direction",
   "about_course_1": "Brand Motion, Platô Studio (12h)",
   "about_course_2": "Creating Scalable Design Systems, Platô Studio (12h)",
   "about_course_3": "Illustration for Brands, Platô Studio (12.5h)",
@@ -137,5 +137,10 @@
   "m_about_p6": "I’m especially drawn to digital projects where craft can take a brand’s identity beyond the obvious. If you’re not afraid to take risks and enjoy challenging the market, I’d love to build it together.",
   "about_course_4": "UI Design, Tera (11h)",
   "about_course_5": "Figma, Tera (5h)",
-  "about_hello": "Nice to meet you."
+  "about_hello": "Nice to meet you.",
+  "about_focus_1": "Creative Direction",
+  "about_focus_2": "Brand Audit",
+  "about_focus_3": "Brand Consulting",
+  "about_craft_label": "Craft",
+  "about_act_8": "Illustration"
 }
