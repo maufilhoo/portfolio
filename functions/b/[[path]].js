@@ -8,7 +8,7 @@ import {
   loadConfig, startToken, readStartToken, passwordFor, sessionValue, hasSession,
   cookieName, safeEqual, rateLimit, clientIp, json, html,
 } from '../_lib/server.js';
-import { briefingPage, passwordPage, notFoundPage, errorPage } from '../_lib/pages.js';
+import { briefingPage, passwordPage, notFoundPage, errorPage, setAssetVersion } from '../_lib/pages.js';
 import { buildEmail, sendEmail } from '../_lib/email.js';
 
 const MAX_BODY = 64 * 1024;
@@ -19,6 +19,7 @@ const notFound = () => html(notFoundPage(), 404);
 
 export async function onRequest(context) {
   const { request, env, params } = context;
+  setAssetVersion(env);
   const parts = Array.isArray(params.path) ? params.path : params.path ? [params.path] : [];
   const [slug, action] = parts;
 

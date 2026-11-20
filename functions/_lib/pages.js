@@ -2,7 +2,23 @@
    Reaproveita css/style.css e css/responsive.css do site (tokens,
    fontes, reset, cursor) e soma assets/briefing/briefing.css.         */
 
-export const ASSET_VERSION = '20261119i';
+export const ASSET_VERSION = '20261120a';
+
+/* Versão dos arquivos do briefing. Em produção usa o commit do deploy
+   (CF_PAGES_COMMIT_SHA), então muda sozinha a cada publicação. */
+let version = ASSET_VERSION;
+export const setAssetVersion = env => {
+  const sha = env && env.CF_PAGES_COMMIT_SHA;
+  version = sha ? sha.slice(0, 12) : ASSET_VERSION;
+};
+
+/* O Cloudflare guarda JS no navegador por 4h (regra da conta). Os módulos
+   se importam sem versão na URL, então um import map aponta cada um para a
+   URL com ?v=, e o navegador nunca mistura arquivos de versões diferentes. */
+const MODULES = ['engine', 'dom', 'logic', 'progress', 'intro', 'question', 'review', 'success'];
+const importMap = () => JSON.stringify({
+  imports: Object.fromEntries(MODULES.map(m => [`/assets/briefing/${m}.js`, `/assets/briefing/${m}.js?v=${version}`])),
+});
 
 export const esc = s =>
   String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
@@ -23,7 +39,7 @@ function layout({ title, lang = 'pt', body, scripts = '' }) {
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐡</text></svg>">
   <link rel="stylesheet" href="/css/style.css" />
   <link rel="stylesheet" href="/css/responsive.css" />
-  <link rel="stylesheet" href="/assets/briefing/briefing.css?v=${ASSET_VERSION}" />
+  <link rel="stylesheet" href="/assets/briefing/briefing.css?v=${version}" />
 </head>
 <body class="bf-page">
   <header class="bf-top">
@@ -46,7 +62,8 @@ export function briefingPage(pub, token) {
   </main>
   <p class="bf-sr" id="bf-live" aria-live="polite" aria-atomic="true"></p>
   <script type="application/json" id="bf-data">${safeJson({ config: pub, token })}</script>`,
-    scripts: `  <script type="module" src="/assets/briefing/engine.js?v=${ASSET_VERSION}"></script>
+    scripts: `  <script type="importmap">${importMap()}</script>
+  <script type="module" src="/assets/briefing/engine.js?v=${version}"></script>
   <script type="module">import { initCursor } from '/js/cursor.js'; initCursor();</script>`,
   });
 }
