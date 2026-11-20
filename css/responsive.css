@@ -576,3 +576,30 @@
   }
   .m-more[aria-expanded="true"] .m-more-arrow { transform: rotate(180deg); }
 }
+
+/* Let's Talk no mobile: mesmo padrão do web (texto bold + 📬),
+   com sublinhado e toque visível para mostrar que é clicável */
+@media (max-width: 768px) {
+  .m-talk {
+    position: relative; display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 0; font-size: 20px; font-weight: 700; letter-spacing: -0.01em;
+    color: var(--text); text-decoration: none; -webkit-tap-highlight-color: transparent;
+  }
+  .m-talk::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 2px; height: 2px;
+    background: currentColor; transform-origin: left; transform: scaleX(0.28);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .m-talk:hover::after, .m-talk:active::after, .m-talk:focus-visible::after { transform: scaleX(1); }
+  .m-talk .bio-emoji { display: inline-block; animation: m-mail 2.8s ease-in-out 2.4s infinite; }
+  .m-talk:active { opacity: 0.6; }
+  .mobile-menu-link .bio-emoji { font-size: 0.8em; }
+  .mobile-menu-link:active { opacity: 0.6; }
+}
+@keyframes m-mail {
+  0%, 70%, 100% { transform: translateY(0) rotate(0); }
+  76% { transform: translateY(-3px) rotate(-10deg); }
+  84% { transform: translateY(0) rotate(8deg); }
+  90% { transform: translateY(-1px) rotate(0); }
+}
+@media (prefers-reduced-motion: reduce) { .m-talk .bio-emoji { animation: none; } }

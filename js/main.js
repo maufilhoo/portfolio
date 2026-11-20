@@ -1,7 +1,7 @@
 import { initI18n, getTranslation } from './i18n.js';
 import { initFooterMeta } from './footer.js';
 import { initCursor } from './cursor.js';
-import { initWelcome } from './welcome.js?v=20261120f';
+import { initWelcome } from './welcome.js?v=20261120g';
 
 /* ─── Versão das mídias ──────────────────────────────────────────────
    Imagens e vídeos ficam 4h no cache do navegador. Sem uma versão na
@@ -1771,9 +1771,9 @@ function initMobileNav() {
   letsBtn?.addEventListener('click', () => {
     navigator.clipboard.writeText('talk@mfilho.com')
       .then(() => {
-        const orig = letsBtn.textContent;
-        letsBtn.textContent = 'Copiado ✉️';
-        setTimeout(() => { letsBtn.textContent = orig; closeMenu(); }, 1200);
+        const orig = letsBtn.innerHTML;
+        letsBtn.textContent = document.documentElement.lang === 'en' ? 'Copied ✉️' : 'Copiado ✉️';
+        setTimeout(() => { letsBtn.innerHTML = orig; closeMenu(); }, 1200);
       })
       .catch(() => { closeMenu(); window.location.href = 'mailto:talk@mfilho.com'; });
   });
