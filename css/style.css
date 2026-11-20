@@ -2157,3 +2157,30 @@ button { background: none; border: none; cursor: pointer; font: inherit; }
 }
 .ab-mail, .ab-links a { transition: opacity var(--transition); }
 .ab-mail:hover, .ab-links a:hover { opacity: 0.55; }
+
+/* ─── About · abertura desktop (Figma 274:1352) ─────────────────────
+   Título grande nas colunas 1–6, foto nas colunas 9–12, alinhada embaixo. */
+@media (min-width: 769px) {
+  .about-main { padding-top: 180px; }
+  .about-hero {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 24px;
+    padding-bottom: 72px;
+    align-items: end;
+  }
+  .about-hero-text { grid-column: 1 / span 6; grid-row: 1; align-self: start; padding-top: 0; }
+  .about-hero-photo { grid-column: 9 / span 4; grid-row: 1; }
+  .about-hero .about-photo-tall {
+    height: 520px; width: 100%; aspect-ratio: auto;
+    object-fit: cover; border-radius: 6px;
+  }
+  .about-page-sub { display: none; }
+}
+.about-hello {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: clamp(4rem, 10vw, 9rem);
+  line-height: 0.81;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}

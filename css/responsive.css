@@ -506,6 +506,7 @@
 
   /* ── About enxuto ── */
   .about-page-sub { display: none; }
+  .about-hello { display: none; }
   .about-hero-text .m-eyebrow { margin-bottom: 4px; }
   .about-page-title { font-size: 44px; font-weight: 500; letter-spacing: -0.03em; line-height: 0.96; }
   .about-photo-tall { aspect-ratio: 4 / 5; }
