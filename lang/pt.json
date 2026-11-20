@@ -92,9 +92,9 @@
   "about_act_5": "Campanhas",
   "about_act_6": "Direção de Arte",
   "about_act_7": "Ilustração",
-  "about_course_1": "Ilustração para Marcas, Platô Studio",
-  "about_course_2": "Sistematizando Marcas no Figma, Platô Studio",
-  "about_course_3": "UI Design, Tera",
+  "about_course_1": "Brand Motion, Platô Studio (12h)",
+  "about_course_2": "Criando Design Systems Escaláveis, Platô Studio (12h)",
+  "about_course_3": "Ilustração para Marcas, Platô Studio (12,5h)",
   "about_label_contact": "Contato",
   "about_exp_independent": "Independente",
   "about_exp_current": "Atual",
@@ -134,5 +134,7 @@
   "m_about_p3": "A partir disso, misturo sensibilidade e estratégia para construir sistemas que vivem além do estático. Transito com a mesma naturalidade entre o craft e a IA, do desenho de tipografia ao motion e a ferramentas generativas. Ideias ousadas, sempre com um motivo por trás.",
   "m_about_p4": "Há mais de 9 anos trabalho com agências e consultorias de branding. Fui Designer Sênior na Tátil Design e colaborei com R/GA, FutureBrand e Lysch, em marcas como Itaú, Caixa, Natura, Enjoei, 99 e Google.",
   "m_about_p5": "Ser independente foi uma escolha para ampliar meu repertório. Nesse caminho, transitei entre diferentes desafios e contextos, da execução à direção criativa de times e projetos. Conheço o processo de ponta a ponta, do briefing à produção de tipografia, do logo ao shooting fotográfico, e pra mim o visual final é só uma parte dele. O que mais me brilha os olhos é o legado: uma marca que continua fazendo sentido muito depois do lançamento.",
-  "m_about_p6": "Me interesso especialmente por projetos digitais em que o craft traduz a identidade da marca além do óbvio. Se você não tem medo de arriscar e gosta de desafiar o mercado, vai ser um prazer construir isso junto."
+  "m_about_p6": "Me interesso especialmente por projetos digitais em que o craft traduz a identidade da marca além do óbvio. Se você não tem medo de arriscar e gosta de desafiar o mercado, vai ser um prazer construir isso junto.",
+  "about_course_4": "UI Design, Tera (11h)",
+  "about_course_5": "Figma, Tera (5h)"
 }
