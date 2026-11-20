@@ -104,7 +104,7 @@
   "view_list": "Lista",
   "view_grid": "Grade",
   "m_role": "Brand Designer, São Paulo",
-  "m_headline": "Designer multidisciplinar focado em branding e produtos digitais.",
+  "m_headline": "Brand designer multidisciplinar focado em branding e produtos digitais.",
   "m_support": "Atualmente independente.<br>Ex-Senior Designer na Tátil Design.",
   "m_talk": "Vamos conversar",
   "m_open": "Em busca de clientes corajosos.",
@@ -145,5 +145,6 @@
   "about_act_8": "Ilustração",
   "m_about_btn": "Mais sobre mim",
   "m_viewall": "Ver todos os projetos",
-  "m_viewless": "Ver menos projetos"
+  "m_viewless": "Ver menos projetos",
+  "m_place": "São Paulo, Brasil"
 }

@@ -104,7 +104,7 @@
   "view_list": "List",
   "view_grid": "Grid",
   "m_role": "Brand Designer, São Paulo",
-  "m_headline": "Multidisciplinary designer focused on branding and digital products.",
+  "m_headline": "Multidisciplinary brand designer focused on branding and digital products.",
   "m_support": "Currently independent.<br>Formerly Senior Designer at Tátil Design.",
   "m_talk": "Let’s talk",
   "m_open": "Looking for brave clients.",
@@ -145,5 +145,6 @@
   "about_act_8": "Illustration",
   "m_about_btn": "More about me",
   "m_viewall": "View all projects",
-  "m_viewless": "Show fewer projects"
+  "m_viewless": "Show fewer projects",
+  "m_place": "São Paulo, Brasil"
 }
