@@ -608,3 +608,10 @@
 @media (max-width: 768px) {
   .about-hero .about-photo-tall { aspect-ratio: 1 / 1; width: 100%; height: auto; object-fit: cover; border-radius: 14px; }
 }
+
+/* Horário: sai do rodapé no mobile e aparece só no menu */
+@media (max-width: 768px) {
+  .site-footer .footer-top-bar { display: none; }
+  .mobile-menu-footer { justify-content: space-between; }
+  .mobile-menu-time { font-size: 13px; color: #1a1a00; opacity: 0.6; }
+}
