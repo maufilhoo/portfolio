@@ -143,5 +143,7 @@
   "about_focus_3": "Brand Consulting",
   "about_craft_label": "Craft",
   "about_act_8": "Illustration",
-  "m_about_btn": "More about me"
+  "m_about_btn": "More about me",
+  "m_viewall": "View all projects",
+  "m_viewless": "Show fewer projects"
 }

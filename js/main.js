@@ -1,7 +1,7 @@
 import { initI18n, getTranslation } from './i18n.js';
 import { initFooterMeta } from './footer.js';
 import { initCursor } from './cursor.js';
-import { initWelcome } from './welcome.js?v=20261120e';
+import { initWelcome } from './welcome.js?v=20261120f';
 
 /* ─── Versão das mídias ──────────────────────────────────────────────
    Imagens e vídeos ficam 4h no cache do navegador. Sem uma versão na
@@ -1870,6 +1870,8 @@ function mCover(p) {
   return wrap;
 }
 
+const M_HOME_LIMIT = 4;
+
 function initMobileHome() {
   const list = document.querySelector('.m-work-list');
   if (!list) return;
@@ -1893,8 +1895,28 @@ function initMobileHome() {
     card.appendChild(meta);
     card.appendChild(mEl('div', 'm-card-services', p.services));
     card.addEventListener('click', () => openMobileCase(p.slug, true));
+    if (i >= M_HOME_LIMIT) card.hidden = true;
     list.appendChild(card);
   });
+
+  // Só os 4 primeiros; a seta abre a lista toda
+  if (projects.length > M_HOME_LIMIT) {
+    const more = mEl('button', 'm-more');
+    more.type = 'button';
+    const label = mEl('span', null, getTranslation('m_viewall'));
+    const arrow = mEl('span', 'm-more-arrow', '↓');
+    arrow.setAttribute('aria-hidden', 'true');
+    more.append(label, arrow);
+    more.setAttribute('aria-expanded', 'false');
+    more.addEventListener('click', () => {
+      const open = more.getAttribute('aria-expanded') !== 'true';
+      more.setAttribute('aria-expanded', String(open));
+      list.querySelectorAll('.m-card').forEach((c, i) => { if (i >= M_HOME_LIMIT) c.hidden = !open; });
+      label.textContent = getTranslation(open ? 'm_viewless' : 'm_viewall');
+      if (!open) document.getElementById('m-work')?.scrollIntoView({ block: 'start' });
+    });
+    list.after(more);
+  }
 
   const shell = mEl('div', 'm-case');
   shell.id = 'm-case';
