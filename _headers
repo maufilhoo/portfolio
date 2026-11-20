@@ -1,0 +1,6 @@
+# Briefings (/b/*): os módulos JS se importam entre si sem versão na URL.
+# Sem isto, o navegador guarda cada um por 4h e pode misturar arquivos
+# novos e antigos depois de uma atualização. "no-cache" = sempre confere
+# com o servidor (resposta 304 rápida quando nada mudou).
+/assets/briefing/*
+  Cache-Control: no-cache
