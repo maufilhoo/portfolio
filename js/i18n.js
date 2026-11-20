@@ -1,4 +1,12 @@
-let currentLang = localStorage.getItem('site-lang') || 'en';
+/* Sempre abre em inglês. A troca para PT vale só nesta visita (aba),
+   para continuar em PT ao navegar entre Home e About.               */
+function readLang() {
+  try {
+    localStorage.removeItem('site-lang'); // escolha antiga, de quando ficava salva
+    return sessionStorage.getItem('site-lang') || 'en';
+  } catch (e) { return 'en'; }
+}
+let currentLang = readLang();
 let translations = {};
 
 async function loadTranslations(lang) {
@@ -43,7 +51,7 @@ function applyTranslations() {
 
 async function setLang(lang) {
   currentLang = lang;
-  localStorage.setItem('site-lang', lang);
+  try { sessionStorage.setItem('site-lang', lang); } catch (e) {}
   await loadTranslations(lang);
   applyTranslations();
 }
