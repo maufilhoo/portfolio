@@ -104,14 +104,14 @@
   "view_list": "List",
   "view_grid": "Grid",
   "m_role": "Brand Designer, São Paulo",
-  "m_headline": "The obvious<br>is already<br>taken.",
-  "m_support": "I find what only your brand has and turn it into a system. Currently independent.",
+  "m_headline": "Multidisciplinary designer focused on branding and digital products.",
+  "m_support": "Currently independent. Formerly Senior Designer at Tátil Design.",
   "m_talk": "Let’s talk",
   "m_open": "Open to the right projects",
   "m_selected": "Selected work",
   "m_approach": "Approach",
-  "m_approach_title": "I start where most<br>people don’t look.",
-  "m_approach_text": "History, origin, the detail nobody noticed. Then I turn it into living systems, beyond the static.",
+  "m_approach_title": "End to end, from<br>research to craft.",
+  "m_approach_text": "I lead projects on my own or with teams, from strategy and research to type, motion and photo shoots. Beautiful images are part of it, not the goal. What I’m after is a brand that still makes sense years from now.",
   "m_featured": "Featured",
   "m_work": "Work",
   "m_of": "of",
@@ -142,5 +142,6 @@
   "about_focus_2": "Brand Audit",
   "about_focus_3": "Brand Consulting",
   "about_craft_label": "Craft",
-  "about_act_8": "Illustration"
+  "about_act_8": "Illustration",
+  "m_about_btn": "More about me"
 }

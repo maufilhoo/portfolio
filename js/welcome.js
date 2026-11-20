@@ -10,7 +10,16 @@ export function initWelcome(armGather) {
   const tagline = document.querySelector('.welcome-tagline');
   const title   = document.querySelector('.hero-title');
 
-  // Skip on hash navigation or mobile — reveal immediately
+  // Mobile: loading próprio (peixe + contador), depois a intro entra
+  if (!window.location.hash && window.innerWidth <= 768) {
+    [header, stage, tagline, title].forEach(el => { if (el) el.style.opacity = '1'; });
+    runMobileLoader();
+    if (armGather) armGather();
+    document.dispatchEvent(new CustomEvent('welcome-done'));
+    return;
+  }
+
+  // Skip on hash navigation — reveal immediately
   if (window.location.hash || window.innerWidth <= 768) {
     [header, stage, tagline, title].forEach(el => { if (el) el.style.opacity = '1'; });
     if (armGather) armGather();
@@ -249,4 +258,55 @@ export function initWelcome(armGather) {
       document.dispatchEvent(new CustomEvent('welcome-done'));
     }, 700);
   }
+}
+
+/* ─── Loading do mobile ───────────────────────────────────────────── */
+function runMobileLoader() {
+  const intro = document.querySelector('.m-intro');
+  if (intro) intro.classList.add('wl-wait');
+
+  const ov = document.createElement('div');
+  ov.className = 'wl-m';
+  ov.setAttribute('aria-hidden', 'true');
+  const fish = document.createElement('div');
+  fish.className = 'wl-m-fish';
+  fish.textContent = '🐡';
+  const count = document.createElement('div');
+  count.className = 'wl-m-count';
+  count.textContent = '0%';
+  ov.append(fish, count);
+  document.body.appendChild(ov);
+  document.body.style.overflow = 'hidden';
+
+  const LOAD_MS = 1800;
+  const ease = t => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t);
+  const W = window.innerWidth;
+  const startX = 24, endX = W / 2;
+  let t0 = null;
+
+  const finish = () => {
+    ov.classList.add('is-out');
+    document.body.style.overflow = '';
+    if (intro) {
+      [...intro.children].forEach((el, i) => { el.style.transitionDelay = (0.08 * i) + 's'; });
+      requestAnimationFrame(() => intro.classList.remove('wl-wait'));
+    }
+    setTimeout(() => ov.remove(), 700);
+  };
+
+  requestAnimationFrame(function tick(ts) {
+    if (!t0) t0 = ts;
+    const raw = Math.min((ts - t0) / LOAD_MS, 1);
+    const p = ease(raw);
+    count.textContent = Math.round(p * 100) + '%';
+    fish.style.left = (startX + (endX - startX) * p) + 'px';
+    fish.style.top = `calc(47% + ${Math.sin(raw * Math.PI * 3.2) * 14 * (1 - p)}px)`;
+    if (raw < 1) requestAnimationFrame(tick);
+    else {
+      fish.style.transition = 'transform 0.35s ease';
+      fish.style.transform = 'translate(-50%, -50%) scaleX(1)';
+      setTimeout(finish, 420);
+    }
+  });
+  setTimeout(() => { if (document.body.contains(ov)) finish(); }, 4000);
 }

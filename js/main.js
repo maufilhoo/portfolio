@@ -1,7 +1,7 @@
 import { initI18n, getTranslation } from './i18n.js';
 import { initFooterMeta } from './footer.js';
 import { initCursor } from './cursor.js';
-import { initWelcome } from './welcome.js';
+import { initWelcome } from './welcome.js?v=20261120e';
 
 /* ─── Versão das mídias ──────────────────────────────────────────────
    Imagens e vídeos ficam 4h no cache do navegador. Sem uma versão na

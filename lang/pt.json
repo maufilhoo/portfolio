@@ -104,14 +104,14 @@
   "view_list": "Lista",
   "view_grid": "Grade",
   "m_role": "Brand Designer, São Paulo",
-  "m_headline": "O óbvio<br>já tem<br>dono.",
-  "m_support": "Encontro o que só a sua marca tem e transformo em sistema. Atualmente independente.",
+  "m_headline": "Designer multidisciplinar focado em branding e produtos digitais.",
+  "m_support": "Atualmente independente. Antes, Designer Sênior na Tátil Design.",
   "m_talk": "Vamos conversar",
   "m_open": "Aberto aos projetos certos",
   "m_selected": "Trabalhos selecionados",
   "m_approach": "Abordagem",
-  "m_approach_title": "Começo onde quase<br>ninguém olha.",
-  "m_approach_text": "História, origem, o detalhe que ninguém notou. Depois transformo isso em sistemas vivos, além do estático.",
+  "m_approach_title": "De ponta a ponta, da<br>pesquisa ao craft.",
+  "m_approach_text": "Conduzo projetos sozinho ou com times, da estratégia e pesquisa à tipografia, ao motion e ao shooting fotográfico. Imagens bonitas fazem parte, não são o objetivo. O que busco é uma marca que continue fazendo sentido daqui a muitos anos.",
   "m_featured": "Destaque",
   "m_work": "Trabalhos",
   "m_of": "de",
@@ -142,5 +142,6 @@
   "about_focus_2": "Auditoria de Marca",
   "about_focus_3": "Consultoria de Marca",
   "about_craft_label": "Criação",
-  "about_act_8": "Ilustração"
+  "about_act_8": "Ilustração",
+  "m_about_btn": "Mais sobre mim"
 }
