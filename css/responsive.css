@@ -603,3 +603,8 @@
   90% { transform: translateY(-1px) rotate(0); }
 }
 @media (prefers-reduced-motion: reduce) { .m-talk .bio-emoji { animation: none; } }
+
+/* About mobile: retrato quadrado (Figma 276:468) */
+@media (max-width: 768px) {
+  .about-hero .about-photo-tall { aspect-ratio: 1 / 1; width: 100%; height: auto; object-fit: cover; border-radius: 14px; }
+}

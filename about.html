@@ -76,7 +76,10 @@
     <!-- Hero: título grande à esquerda, foto à direita (desktop) -->
     <div class="about-hero">
       <div class="about-hero-photo">
-        <img class="about-photo-tall" src="assets/images/Foto_About.png" alt="Mauricio Filho">
+        <picture>
+          <source media="(max-width: 768px)" srcset="assets/images/about-mobile.webp">
+          <img class="about-photo-tall" src="assets/images/Foto_About.png" alt="Mauricio Filho">
+        </picture>
       </div>
       <div class="about-hero-text">
         <p class="m-eyebrow m-only" data-i18n="m_role">Brand Designer, São Paulo</p>
